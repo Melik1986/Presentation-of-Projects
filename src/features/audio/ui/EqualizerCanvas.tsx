@@ -59,9 +59,16 @@ export function EqualizerCanvas({
       aria-label="Audio equalizer visualization"
     >
       {bars.map(({ x, barHeight, barWidth }) => (
-        <rect key={x} x={x} width={barWidth} y={height - barHeight} height={barHeight} fill={barColor} rx={2} />
+        <rect
+          key={x}
+          x={x}
+          width={barWidth}
+          y={height - barHeight}
+          height={barHeight}
+          fill={barColor}
+          rx={2}
+        />
       ))}
     </svg>
   );
 }
-

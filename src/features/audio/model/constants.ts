@@ -15,4 +15,3 @@ export const LEVELS = Object.freeze({
   preview: 0.25,
   active: 0.55,
 });
-

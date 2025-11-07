@@ -13,4 +13,3 @@ export type StickyCardsProps = {
   cards?: StickyCardData[];
   className?: string;
 };
-

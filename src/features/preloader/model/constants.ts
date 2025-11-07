@@ -26,4 +26,3 @@ export const COMPANY_ICONS: readonly CompanyIcon[] = Object.freeze([
   { name: 'icon-ingrad', width: 149, height: 74 },
   { name: 'icon-snegiri', width: 189, height: 48 },
 ]);
-

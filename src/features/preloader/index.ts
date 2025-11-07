@@ -9,4 +9,3 @@ export { SpriteIcon } from './ui/SpriteIcon';
 export { useLoaderAnimation } from './model/useLoaderAnimation';
 export type { CompanyIcon, PreloaderConfig, SpriteIconProps } from './model/types';
 export { COMPANY_ICONS, SPRITE_PATH } from './model/constants';
-

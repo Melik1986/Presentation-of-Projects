@@ -38,4 +38,3 @@ export const features = {
   effects: true,
   stickyCards: true,
 } as const;
-

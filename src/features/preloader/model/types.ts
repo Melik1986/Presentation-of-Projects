@@ -34,4 +34,3 @@ export type SpriteIconProps = {
 export type LoaderProps = {
   className?: string;
 };
-

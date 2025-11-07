@@ -39,6 +39,7 @@ function selectTranscoding(media?: SoundCloudMedia | null): SoundCloudTranscodin
 
 export async function resolveSoundCloudTrack(trackUrl: string): Promise<SoundCloudResolvedTrack> {
   if (!CLIENT_ID) {
+    console.warn('SoundCloud: CLIENT_ID not configured, using fallback URL');
     return {
       streamUrl: trackUrl,
       artworkUrl: null,
@@ -46,29 +47,50 @@ export async function resolveSoundCloudTrack(trackUrl: string): Promise<SoundClo
       permalinkUrl: trackUrl,
     };
   }
+
   const cached = resolutionCache.get(trackUrl);
   if (cached) {
     return cached;
   }
-  const resolveUrl = `${RESOLVE_ENDPOINT}?url=${encodeURIComponent(trackUrl)}&client_id=${CLIENT_ID}`;
-  const trackData = await fetchJson<SoundCloudTrack>(resolveUrl);
-  const transcoding = selectTranscoding(trackData.media);
-  if (!transcoding) {
-    throw new Error('SoundCloud track has no available stream transcodings');
+
+  try {
+    const resolveUrl = `${RESOLVE_ENDPOINT}?url=${encodeURIComponent(trackUrl)}&client_id=${CLIENT_ID}`;
+    const trackData = await fetchJson<SoundCloudTrack>(resolveUrl);
+    const transcoding = selectTranscoding(trackData.media);
+
+    if (!transcoding) {
+      throw new Error('SoundCloud track has no available stream transcodings');
+    }
+
+    const streamInfoUrl = `${transcoding.url}?client_id=${CLIENT_ID}`;
+    const streamInfo = await fetchJson<SoundCloudStreamInfo>(streamInfoUrl);
+
+    const result: SoundCloudResolvedTrack = {
+      streamUrl: streamInfo.url,
+      artworkUrl: trackData.artwork_url ?? trackData.user?.avatar_url ?? null,
+      title: trackData.title ?? trackUrl,
+      permalinkUrl: trackData.permalink_url ?? trackUrl,
+    };
+
+    resolutionCache.set(trackUrl, result);
+    return result;
+  } catch (error) {
+    const errorMessage = error instanceof Error ? error.message : String(error);
+
+    if (errorMessage.includes('CORS') || errorMessage.includes('Failed to fetch')) {
+      console.warn(`SoundCloud: CORS error for ${trackUrl}, using fallback`);
+      return {
+        streamUrl: trackUrl,
+        artworkUrl: null,
+        title: trackUrl,
+        permalinkUrl: trackUrl,
+      };
+    }
+
+    throw error;
   }
-  const streamInfoUrl = `${transcoding.url}?client_id=${CLIENT_ID}`;
-  const streamInfo = await fetchJson<SoundCloudStreamInfo>(streamInfoUrl);
-  const result: SoundCloudResolvedTrack = {
-    streamUrl: streamInfo.url,
-    artworkUrl: trackData.artwork_url ?? trackData.user?.avatar_url ?? null,
-    title: trackData.title ?? trackUrl,
-    permalinkUrl: trackData.permalink_url ?? trackUrl,
-  };
-  resolutionCache.set(trackUrl, result);
-  return result;
 }
 
 export function clearSoundCloudCache(): void {
   resolutionCache.clear();
 }
-

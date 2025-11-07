@@ -142,4 +142,3 @@ export function useLoaderAnimation(config?: PreloaderConfig): LoaderAnimationRes
 
   return { isHidden, containerProps };
 }
-

@@ -211,4 +211,3 @@ export function setupWildyriftianAnimation(container: HTMLElement): (() => void)
     detachHover.forEach((detach) => detach());
   };
 }
-

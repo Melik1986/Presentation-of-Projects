@@ -86,4 +86,3 @@ export function StickyCards({ cards = defaultStickyCardsData, className }: Stick
     </div>
   );
 }
-

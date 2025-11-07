@@ -52,4 +52,3 @@ export const defaultFolderRows: FolderRow[] = [
  * Mobile breakpoint for responsive behavior
  */
 export const MOBILE_BREAKPOINT = 1000;
-

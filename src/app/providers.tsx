@@ -11,4 +11,3 @@ type ProvidersProps = {
 export function Providers({ children }: ProvidersProps) {
   return <AudioProvider>{children}</AudioProvider>;
 }
-

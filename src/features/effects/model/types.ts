@@ -22,4 +22,3 @@ export type MobileState = {
 export type WildyriftianProps = {
   className?: string;
 };
-

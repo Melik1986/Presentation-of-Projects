@@ -33,4 +33,3 @@ export const defaultStickyCardsData: StickyCardData[] = [
       'Interfaces should have personality. We embed small moments of play and irregularity to bring warmth, charm, and a human feel to the digital.',
   },
 ];
-

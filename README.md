@@ -13,15 +13,44 @@ Modern portfolio website built with Next.js 15, React 19, and TypeScript.
 
 ## 📁 Project Structure
 
-```
 starlight/
 ├── src/
-│   ├── app/          # Next.js App Router
-│   ├── shared/       # Shared utilities, UI, types
-│   ├── entities/     # Business entities
-│   ├── features/     # Feature modules
-│   └── widgets/      # Composed widgets
-```
+│ ├── app/ # Next.js App Router
+│ │ ├── layout.tsx
+│ │ ├── page.tsx
+│ │ ├── globals.css
+│ │ └── sticky/
+│ │ └── page.tsx
+│ │
+│ ├── shared/ # Shared слой
+│ │ ├── ui/ # UI компоненты
+│ │ ├── lib/ # Утилиты
+│ │ ├── config/ # Конфигурации
+│ │ └── types/ # Общие типы
+│ │
+│ ├── entities/ # Бизнес-сущности
+│ │ └── audio/ # (пока пусто)
+│ │
+│ ├── features/ # Фичи
+│ │ ├── preloader/
+│ │ │ ├── ui/
+│ │ │ ├── model/
+│ │ │ └── index.ts
+│ │ ├── effects/
+│ │ │ ├── ui/
+│ │ │ └── index.ts
+│ │ ├── sticky-cards/
+│ │ │ ├── ui/
+│ │ │ ├── model/
+│ │ │ └── index.ts
+│ │ └── audio/ # (последним)
+│ │ ├── ui/
+│ │ ├── model/
+│ │ ├── services/
+│ │ └── index.ts
+│ │
+│ └── widgets/ # Виджеты (композиция features)
+│ └── (пока пусто)
 
 ## 🛠️ Development
 
@@ -79,4 +108,3 @@ This project follows Feature-Sliced Design principles:
 ## 📝 License
 
 Private Project
-

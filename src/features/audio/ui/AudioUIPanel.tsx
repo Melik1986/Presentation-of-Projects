@@ -21,4 +21,3 @@ export function AudioUIPanel({ className = '' }: AudioUIPanelProps): ReactElemen
     </div>
   );
 }
-

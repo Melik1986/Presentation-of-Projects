@@ -92,4 +92,3 @@ export function GlobalPreloader() {
 
   return <Loader />;
 }
-

@@ -11,7 +11,9 @@ type PreloaderTrackProps = {
 
 const DEFAULT_CATALOG_ID = 'home';
 
-export function PreloaderTrack({ catalogId = DEFAULT_CATALOG_ID }: PreloaderTrackProps): ReactElement | null {
+export function PreloaderTrack({
+  catalogId = DEFAULT_CATALOG_ID,
+}: PreloaderTrackProps): ReactElement | null {
   const {
     actions: { setHome, enterCatalog, leaveCatalog, resume },
   } = useAudioDirector();
@@ -34,4 +36,3 @@ export function PreloaderTrack({ catalogId = DEFAULT_CATALOG_ID }: PreloaderTrac
 
   return null;
 }
-

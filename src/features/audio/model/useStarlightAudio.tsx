@@ -5,6 +5,7 @@ import {
   createContext,
   useCallback,
   useContext,
+  useEffect,
   useLayoutEffect,
   useMemo,
   useRef,
@@ -72,7 +73,6 @@ export function AudioProvider({ children, config }: AudioProviderProps): ReactEl
       try {
         await AudioDirector.setConfig(audioConfig);
         await AudioDirector.setHome();
-        await AudioDirector.resumeContext();
         if (!cancelled && mountedRef.current) {
           syncSnapshots();
           setIsReady(true);
@@ -89,6 +89,38 @@ export function AudioProvider({ children, config }: AudioProviderProps): ReactEl
       cancelled = true;
     };
   }, [audioConfig, syncSnapshots]);
+
+  useEffect(() => {
+    if (!isReady) {
+      return undefined;
+    }
+
+    let isResumed = false;
+
+    const handleUserGesture = async () => {
+      if (isResumed) {
+        return;
+      }
+
+      isResumed = true;
+      await AudioDirector.resumeContextOnUserGesture();
+      syncSnapshots();
+
+      document.removeEventListener('click', handleUserGesture);
+      document.removeEventListener('touchstart', handleUserGesture);
+      document.removeEventListener('keydown', handleUserGesture);
+    };
+
+    document.addEventListener('click', handleUserGesture, { once: true });
+    document.addEventListener('touchstart', handleUserGesture, { once: true });
+    document.addEventListener('keydown', handleUserGesture, { once: true });
+
+    return () => {
+      document.removeEventListener('click', handleUserGesture);
+      document.removeEventListener('touchstart', handleUserGesture);
+      document.removeEventListener('keydown', handleUserGesture);
+    };
+  }, [isReady, syncSnapshots]);
 
   const setHome = useCallback(async () => {
     await AudioDirector.setHome();
@@ -211,4 +243,3 @@ export function useAnalyserData(): UseAnalyserDataResult {
     [frame]
   );
 }
-

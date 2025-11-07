@@ -24,13 +24,19 @@ export default function StickyPage() {
   return (
     <>
       <ReactLenis root />
-      <section className="intro" style={{ height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <section
+        className="intro"
+        style={{ height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+      >
         <h1>The Foundations</h1>
       </section>
 
       <StickyCards />
 
-      <section className="outro" style={{ height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <section
+        className="outro"
+        style={{ height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+      >
         <h1>Ends in Form</h1>
       </section>
 
@@ -38,5 +44,3 @@ export default function StickyPage() {
     </>
   );
 }
-
-

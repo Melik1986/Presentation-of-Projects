@@ -22,10 +22,12 @@ app → widgets → features → entities → shared
 ```
 
 **✅ Allowed:**
+
 - `features/preloader` can import from `shared/ui`
 - `app/layout.tsx` can import from `features/preloader`
 
 **❌ Forbidden:**
+
 - `shared` cannot import from `features`
 - `entities` cannot import from `features`
 - Circular dependencies between same-level modules
@@ -33,26 +35,31 @@ app → widgets → features → entities → shared
 ## 📦 Layer Descriptions
 
 ### `app/` - Application Layer
+
 - Next.js routing (`page.tsx`, `layout.tsx`)
 - Global providers and wrappers
 - Route-specific logic
 
 ### `widgets/` - Widget Layer
+
 - Complex compositions from multiple features
 - Page sections
 - Interconnected feature groups
 
 ### `features/` - Feature Layer
+
 - Self-contained business features
 - User interaction scenarios
 - Each feature has: `ui/`, `model/`, `index.ts`
 
 ### `entities/` - Entity Layer
+
 - Business domain models
 - Core business logic
 - Data structures
 
 ### `shared/` - Shared Layer
+
 - Reusable utilities (`lib/`)
 - UI components (`ui/`)
 - API clients (`api/`)
@@ -84,4 +91,3 @@ import { GlobalPreloader } from '@/features/preloader/ui/GlobalPreloader';
 
 - [Feature-Sliced Design](https://feature-sliced.design/)
 - [Next.js App Router](https://nextjs.org/docs/app)
-

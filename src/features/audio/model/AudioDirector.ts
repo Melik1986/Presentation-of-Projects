@@ -94,11 +94,34 @@ class AudioDirector {
 
   async resumeContext(): Promise<void> {
     const ctx = this.ensureContext();
-    if (ctx && ctx.state === 'suspended') {
+    if (!ctx) {
+      return;
+    }
+
+    if (ctx.state === 'suspended') {
       try {
         await ctx.resume();
       } catch (error) {
         console.warn('AudioDirector: failed to resume AudioContext', error);
+      }
+    }
+  }
+
+  async resumeContextOnUserGesture(): Promise<void> {
+    if (!this.isBrowser) {
+      return;
+    }
+
+    const ctx = this.ensureContext();
+    if (!ctx) {
+      return;
+    }
+
+    if (ctx.state === 'suspended') {
+      try {
+        await ctx.resume();
+      } catch (error) {
+        console.warn('AudioDirector: failed to resume AudioContext on user gesture', error);
       }
     }
   }
@@ -183,6 +206,10 @@ class AudioDirector {
       audioElement.preload = 'auto';
       audioElement.src = resolved.streamUrl;
 
+      audioElement.addEventListener('error', (event) => {
+        console.warn(`AudioDirector: audio element error for track ${id}`, event);
+      });
+
       const mediaSource = context.createMediaElementSource(audioElement);
       const gainNode = context.createGain();
       gainNode.gain.value = 0;
@@ -200,7 +227,13 @@ class AudioDirector {
       this.tracks.set(id, bundle);
       return bundle;
     } catch (error) {
-      console.error(`AudioDirector: failed to prepare track ${trackUrl}`, error);
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      console.error(`AudioDirector: failed to prepare track ${trackUrl}`, errorMessage);
+
+      if (errorMessage.includes('CORS')) {
+        console.warn(`AudioDirector: CORS error for ${trackUrl}, track will be skipped`);
+      }
+
       return null;
     }
   }
@@ -391,4 +424,3 @@ const director = new AudioDirector();
 
 export type { AudioConfig, CatalogConfig, DirectorSettings, DirectorStateSnapshot, TrackBundle };
 export default director;
-
