@@ -44,7 +44,13 @@ export interface ExtendedCatalog {
   seo: CatalogSEO;
 }
 
+export interface HomepageContent {
+  title: string;
+  description: string;
+}
+
 export interface ExtendedAudioConfig {
   homeTrack: string;
+  homepage: HomepageContent;
   catalogs: ExtendedCatalog[];
 }

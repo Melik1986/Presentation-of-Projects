@@ -281,6 +281,10 @@ class AudioDirector {
     context: AudioContext
   ): Promise<TrackBundle | null> {
     try {
+      if (context.state === 'closed') {
+        throw new Error('AudioContext is closed');
+      }
+
       const containerId = this.createHiddenContainer(id);
       await adapter.initialize(containerId, url);
 

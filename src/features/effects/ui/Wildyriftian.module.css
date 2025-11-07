@@ -45,14 +45,30 @@
   line-height: 1;
 }
 
-.nav {
+.hero {
   position: absolute;
-  top: 0;
-  width: 100%;
-  padding: 2rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  max-width: 800px;
+  text-align: center;
+  z-index: 10;
+}
+
+.heroTitle {
+  font-size: 4rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+
+.heroDescription {
+  font-size: 1.1rem;
+  font-weight: 400;
+  text-transform: none;
+  line-height: 1.6;
+  opacity: 0.85;
 }
 
 .folders {
@@ -73,7 +89,7 @@
 .folder {
   position: relative;
   flex: 1;
-  height: 200px;
+  height: 300px;
   display: flex;
   flex-direction: column;
   cursor: pointer;
@@ -188,20 +204,29 @@
 }
 
 .row:nth-child(1) {
-  bottom: -13rem;
+  bottom: -18rem;
 }
 
 .row:nth-child(2) {
-  bottom: -7.5rem;
-}
-
-.row:nth-child(3) {
-  bottom: -2rem;
+  bottom: -9rem;
 }
 
 @media (max-width: 1000px) {
   .wildyriftian h1 {
     font-size: 2rem;
+  }
+
+  .heroTitle {
+    font-size: 2.5rem;
+  }
+
+  .heroDescription {
+    font-size: 0.95rem;
+  }
+
+  .hero {
+    top: 50%;
+    width: 85%;
   }
 
   .row {

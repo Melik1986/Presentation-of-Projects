@@ -1,5 +1,9 @@
 {
   "homeTrack": "https://www.youtube.com/watch?v=QHDRRxKlimY&list=RDQHDRRxKlimY&start_radio=1",
+  "homepage": {
+    "title": "Fullstack Developer",
+    "description": "Creating modern web experiences with cutting-edge technologies. Specializing in React, Next.js, and scalable backend architectures."
+  },
   "catalogs": [
     {
       "id": "nextjs",

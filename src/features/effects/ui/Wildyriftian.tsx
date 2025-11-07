@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useCallback, useEffect, useRef } from 'react';
 
 import { useAudioDirector } from '@/features/audio';
+import { getHomepageContent } from '@/shared/lib/catalog-loader';
 
 import styles from './Wildyriftian.module.css';
 import { setupWildyriftianAnimation } from '../model/animations';
@@ -19,6 +20,7 @@ export function Wildyriftian({ className }: WildyriftianProps) {
   } = useAudioDirector();
 
   const folderRows = generateFolderRows();
+  const homepage = getHomepageContent();
 
   const handleFolderHover = useCallback(
     (catalogId: string) => {
@@ -42,10 +44,10 @@ export function Wildyriftian({ className }: WildyriftianProps) {
 
   return (
     <div className={`${styles.wildyriftian} ${className || ''}`} ref={containerRef}>
-      <nav className={styles.nav}>
-        <p>Design Ledger</p>
-        <p>Experiment 0492</p>
-      </nav>
+      <div className={styles.hero}>
+        <h1 className={styles.heroTitle}>{homepage.title}</h1>
+        <p className={styles.heroDescription}>{homepage.description}</p>
+      </div>
 
       <div className={styles.folders}>
         {folderRows.map((row, rowIndex) => (

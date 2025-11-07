@@ -36,3 +36,11 @@ export function getCatalogCount(): number {
 export function getHomeTrack(): string {
   return config.homeTrack;
 }
+
+/**
+ * Get homepage content (title and description)
+ * @returns Homepage content
+ */
+export function getHomepageContent() {
+  return config.homepage;
+}
