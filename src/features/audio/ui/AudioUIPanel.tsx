@@ -1,9 +1,10 @@
 'use client';
 
-import type { ReactElement } from 'react';
 
 import { AudioControls } from './AudioControls';
 import { EqualizerCanvas } from './EqualizerCanvas';
+
+import type { ReactElement } from 'react';
 
 interface AudioUIPanelProps {
   className?: string;

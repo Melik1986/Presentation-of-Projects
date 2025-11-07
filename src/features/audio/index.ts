@@ -4,7 +4,7 @@
  */
 
 export { default as AudioDirector } from './model/AudioDirector';
-export { AudioProvider, useAudioDirector, useAnalyserData } from './model/useStarlightAudio';
+export { AudioProvider, useAudioDirector, useAnalyserData } from './model/hooks/useStarlightAudio';
 
 export { AudioControls } from './ui/AudioControls';
 export { EqualizerCanvas } from './ui/EqualizerCanvas';

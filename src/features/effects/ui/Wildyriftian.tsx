@@ -1,13 +1,15 @@
 'use client';
 
+import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useRef } from 'react';
 
+import styles from './Wildyriftian.module.css';
 import { setupWildyriftianAnimation } from '../model/animations';
 import { defaultFolderRows } from '../model/data';
+
 import type { WildyriftianProps } from '../model/types';
 
-import styles from './Wildyriftian.module.css';
 
 export function Wildyriftian({ className }: WildyriftianProps) {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -42,7 +44,7 @@ export function Wildyriftian({ className }: WildyriftianProps) {
                 <div className={`folder-preview ${styles.folderPreview}`}>
                   {folder.images.map((image) => (
                     <div className={`folder-preview-img ${styles.folderPreviewImg}`} key={image}>
-                      <img src={image} alt={folder.name} />
+                      <Image src={image} alt={folder.name} fill sizes="(max-width: 768px) 100vw, 33vw" />
                     </div>
                   ))}
                 </div>

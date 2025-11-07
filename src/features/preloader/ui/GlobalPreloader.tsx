@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 
+import { Loader } from './Loader';
 import {
   FALLBACK_TIMEOUT,
   PRELOADER_COMPLETE_EVENT,
@@ -9,7 +10,6 @@ import {
   SCROLL_LOCK_CLASS,
 } from '../model/constants';
 
-import { Loader } from './Loader';
 
 export function GlobalPreloader() {
   const [isVisible, setIsVisible] = useState(true);

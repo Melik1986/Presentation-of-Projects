@@ -1,6 +1,7 @@
 'use client';
 
 import { DEFAULT_SPRITE } from '../model/constants';
+
 import type { SpriteIconProps } from '../model/types';
 
 export function SpriteIcon({

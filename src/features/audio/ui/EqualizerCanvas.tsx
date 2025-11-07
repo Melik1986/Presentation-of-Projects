@@ -1,9 +1,10 @@
 'use client';
 
-import type { ReactElement } from 'react';
 import { useMemo } from 'react';
 
-import { useAnalyserData } from '../model/useStarlightAudio';
+import { useAnalyserData } from '../model/hooks/useStarlightAudio';
+
+import type { ReactElement } from 'react';
 
 type EqualizerCanvasProps = {
   width?: number;

@@ -2,8 +2,6 @@
 
 import { gsap } from 'gsap';
 
-import { clearSoundCloudCache, resolveSoundCloudTrack } from '../services/soundcloud';
-
 import {
   ANALYSER_FFT_SIZE,
   ANALYSER_RESOLUTION,
@@ -13,6 +11,8 @@ import {
   LEVELS,
   SETTINGS_STORAGE_KEY,
 } from './constants';
+import { clearSoundCloudCache, resolveSoundCloudTrack } from '../services/soundcloud';
+
 import type {
   AudioConfig,
   CatalogConfig,

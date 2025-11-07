@@ -1,9 +1,10 @@
 'use client';
 
-import type { ChangeEvent, ReactElement } from 'react';
 import { useCallback, useMemo } from 'react';
 
-import { useAudioDirector } from '../model/useStarlightAudio';
+import { useAudioDirector } from '../model/hooks/useStarlightAudio';
+
+import type { ChangeEvent, ReactElement } from 'react';
 
 const MUTE_ICON = '🔇';
 const VOLUME_ICON = '🔊';

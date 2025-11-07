@@ -1,6 +1,5 @@
 'use client';
 
-import type { ReactElement, ReactNode } from 'react';
 import {
   createContext,
   useCallback,
@@ -12,10 +11,12 @@ import {
   useState,
 } from 'react';
 
-import fallbackConfig from '../../../../content/catalogs.json';
+import fallbackConfig from '@/content/catalogs.json';
 
-import AudioDirector from './AudioDirector';
-import type { AudioConfig, AudioDirectorContextValue, CatalogConfig } from './types';
+import AudioDirector from '../AudioDirector';
+
+import type { AudioConfig, AudioDirectorContextValue, CatalogConfig } from '../types';
+import type { ReactElement, ReactNode } from 'react';
 
 const StarlightAudioContext = createContext<AudioDirectorContextValue | null>(null);
 
@@ -25,7 +26,10 @@ function normalizeConfig(config: AudioConfig | null | undefined): AudioConfig {
   }
 
   const catalogs: CatalogConfig[] = Array.isArray(config.catalogs)
-    ? config.catalogs.filter((item): item is CatalogConfig => Boolean(item?.id && item?.track))
+    ? config.catalogs.filter((item: unknown): item is CatalogConfig => {
+        const candidate = item as Partial<CatalogConfig>;
+        return Boolean(candidate?.id && candidate?.track);
+      })
     : [];
 
   return {

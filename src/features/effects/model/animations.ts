@@ -1,6 +1,7 @@
 import gsap from 'gsap';
 
 import { MOBILE_BREAKPOINT } from './data';
+
 import type { AnimationPhase, MobileState } from './types';
 
 /**

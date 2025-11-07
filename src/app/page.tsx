@@ -1,7 +1,8 @@
-import type { Metadata } from 'next';
 
 import { AudioUIPanel } from '@/features/audio';
 import { Wildyriftian } from '@/features/effects';
+
+import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Home',

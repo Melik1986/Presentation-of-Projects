@@ -1,9 +1,10 @@
 'use client';
 
-import type { ReactElement } from 'react';
 import { useCallback, useLayoutEffect } from 'react';
 
-import { useAudioDirector } from '../model/useStarlightAudio';
+import { useAudioDirector } from '../model/hooks/useStarlightAudio';
+
+import type { ReactElement } from 'react';
 
 type PreloaderTrackProps = {
   catalogId?: string;

@@ -3,12 +3,14 @@
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import Image from 'next/image';
 import { useRef } from 'react';
 
+import styles from './StickyCards.module.css';
 import { defaultStickyCardsData } from '../model/data';
+
 import type { StickyCardsProps } from '../model/types';
 
-import styles from './StickyCards.module.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -68,7 +70,7 @@ export function StickyCards({ cards = defaultStickyCardsData, className }: Stick
               <h1 className={styles.stickyCardHeader}>{cardData.title}</h1>
 
               <div className={styles.stickyCardImg}>
-                <img src={cardData.image} alt={cardData.title} />
+                <Image src={cardData.image} alt={cardData.title} fill sizes="(max-width: 768px) 100vw, 50vw" />
               </div>
 
               <div className={styles.stickyCardCopy}>

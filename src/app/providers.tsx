@@ -1,8 +1,9 @@
 'use client';
 
+import { AudioProvider } from '@/features/audio';
+
 import type { ReactNode } from 'react';
 
-import { AudioProvider } from '@/features/audio';
 
 type ProvidersProps = {
   children: ReactNode;

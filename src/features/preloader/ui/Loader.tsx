@@ -1,21 +1,24 @@
 'use client';
 
-import { COMPANY_ICONS, SPRITE_PATH } from '../model/constants';
-import { useLoaderAnimation } from '../model/useLoaderAnimation';
+import Image from 'next/image';
 
 import styles from './Loader.module.css';
 import { SpriteIcon } from './SpriteIcon';
+import { COMPANY_ICONS, SPRITE_PATH } from '../model/constants';
+import { useLoaderAnimation } from '../model/useLoaderAnimation';
+
 
 function PreloaderContent() {
   return (
     <div className={styles.preloaderWrapper}>
       <div className={styles.preloaderContent}>
-        <img
+        <Image
           src="/preloader-icons/logo.svg"
           alt="Brand logo"
           width={160}
           height={160}
           className={styles.preloaderLogo}
+          priority
         />
 
         {COMPANY_ICONS.map(({ name, width, height }) => (
