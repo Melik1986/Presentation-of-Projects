@@ -25,6 +25,7 @@ export function GlobalPreloader() {
       try {
         documentElement.classList.add(SCROLL_LOCK_CLASS);
         body.classList.add(SCROLL_LOCK_CLASS);
+        body.classList.add('preloader-active');
       } catch {
         // ignore
       }
@@ -34,6 +35,7 @@ export function GlobalPreloader() {
       try {
         documentElement.classList.remove(SCROLL_LOCK_CLASS);
         body.classList.remove(SCROLL_LOCK_CLASS);
+        body.classList.remove('preloader-active');
         documentElement.classList.add(READY_CLASS);
       } catch {
         // ignore
