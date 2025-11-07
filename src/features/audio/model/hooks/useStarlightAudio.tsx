@@ -12,6 +12,7 @@ import {
 } from 'react';
 
 import fallbackConfig from '@/content/catalogs.json';
+import { useMockAnalyser } from '@/shared/lib/mock-analyser';
 
 import AudioDirector from '../AudioDirector';
 
@@ -219,31 +220,10 @@ interface UseAnalyserDataResult {
 }
 
 export function useAnalyserData(): UseAnalyserDataResult {
-  const { getAnalyserData } = useAudioDirector();
-  const [frame, setFrame] = useState(0);
-  const bufferRef = useRef<Uint8Array>(new Uint8Array(0));
+  const { settings } = useAudioDirector();
 
-  useLayoutEffect(() => {
-    let animationFrame: number;
-
-    const update = () => {
-      const data = getAnalyserData();
-      if (data.length) {
-        bufferRef.current = new Uint8Array(data);
-        setFrame((prev) => (prev + 1) % Number.MAX_SAFE_INTEGER);
-      }
-      animationFrame = requestAnimationFrame(update);
-    };
-
-    update();
-    return () => cancelAnimationFrame(animationFrame);
-  }, [getAnalyserData]);
-
-  return useMemo(
-    () => ({
-      data: bufferRef.current,
-      frame,
-    }),
-    [frame]
-  );
+  return useMockAnalyser({
+    isMuted: settings.muted,
+    volume: settings.volume,
+  });
 }

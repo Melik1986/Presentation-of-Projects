@@ -1,4 +1,25 @@
 {
-  "homeTrack": null,
-  "catalogs": []
+  "homeTrack": "https://www.youtube.com/watch?v=QHDRRxKlimY&list=RDQHDRRxKlimY&start_radio=1",
+  "catalogs": [
+    {
+      "id": "nextjs",
+      "name": "Next.js Projects",
+      "track": "https://www.youtube.com/watch?v=NBtnfRAbe14&list=RDNBtnfRAbe14&start_radio=1"
+    },
+    {
+      "id": "threejs",
+      "name": "Three.js Experiments",
+      "track": "https://www.youtube.com/watch?v=hENgrbIMiy4&list=RDhENgrbIMiy4&start_radio=1"
+    },
+    {
+      "id": "gsap",
+      "name": "GSAP Motion Design",
+      "track": "https://www.youtube.com/watch?v=m4U232MuTG4"
+    },
+    {
+      "id": "business",
+      "name": "Business Web Apps",
+      "track": "https://soundcloud.com/cerclelive/solomun-theatre-antique-dorange-for-cercle"
+    }
+  ]
 }

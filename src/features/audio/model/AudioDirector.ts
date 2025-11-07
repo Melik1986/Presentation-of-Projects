@@ -340,43 +340,88 @@ class AudioDirector {
    * Plays track using platform adapter
    * @param track - Track bundle to play
    */
-  private playTrack(track: TrackBundle | null): void {
+  private async playTrack(track: TrackBundle | null): Promise<void> {
     if (!track?.adapter) {
       return;
     }
 
-    void track.adapter.play().catch((error: Error) => {
-      if (error.name !== 'AbortError') {
+    try {
+      await track.adapter.play();
+    } catch (error) {
+      const err = error as Error;
+      if (err.name !== 'AbortError') {
         console.warn('AudioDirector: play rejected', error);
+      }
+    }
+  }
+
+  /**
+   * Pauses track using platform adapter
+   * @param track - Track bundle to pause
+   */
+  private async pauseTrack(track: TrackBundle | null): Promise<void> {
+    if (!track?.adapter) {
+      return;
+    }
+
+    try {
+      await track.adapter.pause();
+    } catch (error) {
+      console.warn('AudioDirector: pause error', error);
+    }
+  }
+
+  /**
+   * Stops all tracks except specified one
+   * @param keepTrackId - Track ID to keep playing
+   */
+  private stopAllExcept(keepTrackId: string | null): void {
+    this.tracks.forEach((track) => {
+      if (track.id !== keepTrackId) {
+        gsap.killTweensOf(track);
+        track.level = 0;
+
+        if (track.adapter) {
+          void this.pauseTrack(track);
+          void track.adapter.setVolume(0).catch(() => {
+            // Ignore volume errors
+          });
+        }
       }
     });
   }
 
   /**
-   * Fades track volume with crossfade
+   * Fades track volume with crossfade using GSAP
    * @param track - Track bundle to fade
    * @param targetVolume - Target volume (0-1)
    */
   private fadeTrack(track: TrackBundle | null, targetVolume: number): void {
-    if (!track?.gain) {
+    if (!track?.adapter) {
       return;
     }
 
-    gsap.killTweensOf(track.gain.gain);
-    gsap.to(track.gain.gain, {
-      value: targetVolume,
+    gsap.killTweensOf(track);
+
+    gsap.to(track, {
+      level: targetVolume,
       duration: CROSSFADE_SECONDS,
       ease: 'sine.inOut',
+      onUpdate: () => {
+        if (track.adapter) {
+          void track.adapter.setVolume(track.level).catch(() => {
+            // Ignore volume errors
+          });
+        }
+      },
       onStart: () => {
         if (targetVolume > 0) {
-          this.playTrack(track);
+          void this.playTrack(track);
         }
       },
       onComplete: () => {
-        if (targetVolume <= 0.001 && track.adapter) {
-          void track.adapter.pause().catch(() => {
-            // Ignore pause errors
-          });
+        if (targetVolume <= 0.001) {
+          void this.pauseTrack(track);
         }
       },
     });
@@ -387,17 +432,14 @@ class AudioDirector {
    */
   async setHome(): Promise<void> {
     await this.resumeContext();
+    this.stopAllExcept('home');
+
     const homeTrack = await this.prepareTrack('home', this.config.homeTrack);
     if (!homeTrack) {
       return;
     }
 
     this.fadeTrack(homeTrack, LEVELS.home);
-    this.tracks.forEach((track) => {
-      if (track.id !== 'home') {
-        this.fadeTrack(track, 0);
-      }
-    });
     this.currentCatalogId = null;
     this.previewCatalogId = null;
   }
@@ -417,11 +459,18 @@ class AudioDirector {
       return;
     }
 
-    const track = await this.prepareTrack(catalog.id, catalog.track);
     const homeTrack = this.tracks.get('home') ?? null;
+    const track = await this.prepareTrack(catalog.id, catalog.track);
+
     if (!track || !homeTrack) {
       return;
     }
+
+    this.tracks.forEach((t) => {
+      if (t.id !== 'home' && t.id !== catalogId) {
+        this.fadeTrack(t, 0);
+      }
+    });
 
     this.previewCatalogId = catalogId;
     this.fadeTrack(homeTrack, LEVELS.homeHover);
@@ -438,20 +487,20 @@ class AudioDirector {
     }
 
     await this.resumeContext();
+    this.stopAllExcept(catalogId);
+
     const catalog = this.config.catalogs.find((item) => item.id === catalogId);
     if (!catalog) {
       return;
     }
 
     const track = await this.prepareTrack(catalog.id, catalog.track);
-    const homeTrack = this.tracks.get('home') ?? null;
-    if (!track || !homeTrack) {
+    if (!track) {
       return;
     }
 
     this.currentCatalogId = catalogId;
     this.previewCatalogId = null;
-    this.fadeTrack(homeTrack, 0);
     this.fadeTrack(track, LEVELS.active);
   }
 
@@ -460,17 +509,11 @@ class AudioDirector {
    */
   async leaveCatalog(): Promise<void> {
     await this.resumeContext();
+    this.stopAllExcept('home');
+
     const homeTrack = await this.prepareTrack('home', this.config.homeTrack);
     if (homeTrack) {
       this.fadeTrack(homeTrack, LEVELS.home);
-    }
-
-    if (this.currentCatalogId) {
-      this.fadeTrack(this.tracks.get(this.currentCatalogId) ?? null, 0);
-    }
-
-    if (this.previewCatalogId) {
-      this.fadeTrack(this.tracks.get(this.previewCatalogId) ?? null, 0);
     }
 
     this.currentCatalogId = null;

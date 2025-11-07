@@ -1,4 +1,4 @@
-export const CROSSFADE_SECONDS = 1.1;
+export const CROSSFADE_SECONDS = 0.7;
 export const SETTINGS_STORAGE_KEY = 'starlight-audio-settings';
 export const ANALYSER_FFT_SIZE = 256;
 export const ANALYSER_SMOOTHING = 0.8;

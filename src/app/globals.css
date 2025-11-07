@@ -138,3 +138,23 @@ html.preloader-ready {
     padding-right: 2rem;
   }
 }
+
+/* Audio UI Panel - Fixed position top right */
+.audio-panel-fixed {
+  position: fixed;
+  top: 2rem;
+  right: 2rem;
+  z-index: 1000;
+  max-width: 200px;
+  background: transparent;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* Equalizer color - matching slider blue */
+.audio-ui-panel__equalizer rect {
+  fill: #3b82f6;
+}
