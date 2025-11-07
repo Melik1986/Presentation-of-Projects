@@ -9,8 +9,8 @@
   position: relative;
   width: 100%;
   height: 100svh;
-  background-color: var(--fg, #000);
-  color: var(--bg, #fff);
+  background-color: var(--card-bg, var(--fg, #000));
+  color: var(--text-color, var(--bg, #fff));
   padding: 1.5rem;
   display: flex;
   gap: 3rem;
@@ -49,6 +49,7 @@
 
 .stickyCardHeader {
   width: 75%;
+  color: var(--accent-color, inherit);
 }
 
 .stickyCardImg img {

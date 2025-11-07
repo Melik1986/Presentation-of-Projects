@@ -1,10 +1,10 @@
-'use client';
+import { use } from 'react';
 
-import { ReactLenis } from 'lenis/react';
-import { use, useCallback, useLayoutEffect } from 'react';
+import { getCatalogById } from '@/shared/lib/catalog-loader';
 
-import { AudioUIPanel, useAudioDirector } from '@/features/audio';
-import { StickyCards } from '@/features/sticky-cards';
+import { CatalogPageClient } from './CatalogPageClient';
+
+import type { Metadata } from 'next';
 
 interface StickyPageProps {
   params: Promise<{ catalogId: string }>;
@@ -14,35 +14,32 @@ export default function StickyPage({ params }: StickyPageProps) {
   const unwrappedParams = use(params);
   const catalogId = unwrappedParams.catalogId;
 
-  const {
-    actions: { enterCatalog, leaveCatalog, setHome, resume },
-  } = useAudioDirector();
+  const catalog = getCatalogById(catalogId);
 
-  const manageScene = useCallback(() => {
-    void resume().then(() => enterCatalog(catalogId));
+  if (!catalog) {
+    return (
+      <div className="flex h-screen items-center justify-center">
+        <h1>Catalog not found</h1>
+      </div>
+    );
+  }
 
-    return () => {
-      void leaveCatalog().then(() => setHome());
-    };
-  }, [resume, enterCatalog, leaveCatalog, setHome, catalogId]);
-
-  useLayoutEffect(() => manageScene(), [manageScene]);
-
-  return (
-    <>
-      <ReactLenis root />
-      <section className="intro flex h-screen items-center justify-center">
-        <h1>The Foundations</h1>
-      </section>
-
-      <StickyCards />
-
-      <section className="outro flex h-screen items-center justify-center">
-        <h1>Ends in Form</h1>
-      </section>
-
-      <AudioUIPanel className="audio-panel-fixed" />
-    </>
-  );
+  return <CatalogPageClient catalog={catalog} catalogId={catalogId} />;
 }
 
+export async function generateMetadata({ params }: StickyPageProps): Promise<Metadata> {
+  const unwrappedParams = await params;
+  const catalog = getCatalogById(unwrappedParams.catalogId);
+
+  if (!catalog) {
+    return {
+      title: 'Catalog not found',
+    };
+  }
+
+  return {
+    title: catalog.seo.title,
+    description: catalog.seo.description,
+    keywords: catalog.seo.keywords,
+  };
+}

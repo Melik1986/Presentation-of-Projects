@@ -8,7 +8,7 @@ import { useAudioDirector } from '@/features/audio';
 
 import styles from './Wildyriftian.module.css';
 import { setupWildyriftianAnimation } from '../model/animations';
-import { defaultFolderRows } from '../model/data';
+import { generateFolderRows } from '../model/data';
 
 import type { WildyriftianProps } from '../model/types';
 
@@ -17,6 +17,8 @@ export function Wildyriftian({ className }: WildyriftianProps) {
   const {
     actions: { previewCatalog, setHome },
   } = useAudioDirector();
+
+  const folderRows = generateFolderRows();
 
   const handleFolderHover = useCallback(
     (catalogId: string) => {
@@ -46,7 +48,7 @@ export function Wildyriftian({ className }: WildyriftianProps) {
       </nav>
 
       <div className={styles.folders}>
-        {defaultFolderRows.map((row, rowIndex) => (
+        {folderRows.map((row, rowIndex) => (
           <div className={`row ${styles.row}`} key={rowIndex}>
             {row.map((folder) => (
               <Link

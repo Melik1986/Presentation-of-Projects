@@ -4,22 +4,222 @@
     {
       "id": "nextjs",
       "name": "Next.js Projects",
-      "track": "https://www.youtube.com/watch?v=NBtnfRAbe14&list=RDNBtnfRAbe14&start_radio=1"
+      "track": "https://www.youtube.com/watch?v=NBtnfRAbe14&list=RDNBtnfRAbe14&start_radio=1",
+      "folder": {
+        "displayName": "figures",
+        "variant": "variant-1",
+        "previewImages": [
+          "/img/catalog-1/preview-1.jpg",
+          "/img/catalog-1/preview-2.jpg",
+          "/img/catalog-1/preview-3.jpg"
+        ]
+      },
+      "theme": {
+        "backgroundColor": "#0a0a0a",
+        "cardBackground": "#1a1a1a",
+        "textColor": "#ffffff",
+        "accentColor": "#3b82f6"
+      },
+      "content": {
+        "introTitle": "Next.js Excellence",
+        "outroTitle": "Modern Web Development",
+        "cards": [
+          {
+            "index": "01",
+            "title": "Server Components",
+            "image": "/img/catalog-1/card-1.jpg",
+            "description": "Building performant applications with React Server Components. Leveraging server-side rendering for optimal user experience and SEO benefits."
+          },
+          {
+            "index": "02",
+            "title": "App Router",
+            "image": "/img/catalog-1/card-2.jpg",
+            "description": "Modern routing with file-based system. Nested layouts, loading states, and error boundaries for seamless navigation experiences."
+          },
+          {
+            "index": "03",
+            "title": "API Routes",
+            "image": "/img/catalog-1/card-3.jpg",
+            "description": "Full-stack capabilities with serverless functions. Build powerful APIs directly within your Next.js application structure."
+          },
+          {
+            "index": "04",
+            "title": "Optimization",
+            "image": "/img/catalog-1/card-4.jpg",
+            "description": "Automatic image optimization, font loading, and code splitting. Performance-first approach for exceptional Core Web Vitals scores."
+          }
+        ]
+      },
+      "seo": {
+        "title": "Next.js Projects | Modern React Applications",
+        "description": "Showcasing cutting-edge Next.js projects with Server Components, App Router, and performance optimization.",
+        "keywords": "nextjs, react, server components, app router, performance"
+      }
     },
     {
       "id": "threejs",
       "name": "Three.js Experiments",
-      "track": "https://www.youtube.com/watch?v=hENgrbIMiy4&list=RDhENgrbIMiy4&start_radio=1"
+      "track": "https://www.youtube.com/watch?v=hENgrbIMiy4&list=RDhENgrbIMiy4&start_radio=1",
+      "folder": {
+        "displayName": "persona",
+        "variant": "variant-2",
+        "previewImages": [
+          "/img/catalog-2/preview-1.jpg",
+          "/img/catalog-2/preview-2.jpg",
+          "/img/catalog-2/preview-3.jpg"
+        ]
+      },
+      "theme": {
+        "backgroundColor": "#0d0d1a",
+        "cardBackground": "#1a1a2e",
+        "textColor": "#e0e0ff",
+        "accentColor": "#6366f1"
+      },
+      "content": {
+        "introTitle": "3D Web Experiences",
+        "outroTitle": "Interactive Graphics",
+        "cards": [
+          {
+            "index": "01",
+            "title": "WebGL Shaders",
+            "image": "/img/catalog-2/card-1.jpg",
+            "description": "Custom GLSL shaders for stunning visual effects. Creating immersive 3D environments with advanced lighting and materials."
+          },
+          {
+            "index": "02",
+            "title": "Physics Simulations",
+            "image": "/img/catalog-2/card-2.jpg",
+            "description": "Realistic physics with Cannon.js integration. Bringing life to 3D scenes with gravity, collisions, and dynamic interactions."
+          },
+          {
+            "index": "03",
+            "title": "Model Loading",
+            "image": "/img/catalog-2/card-3.jpg",
+            "description": "GLTF model optimization and loading. Efficient 3D asset management for complex scenes and interactive experiences."
+          },
+          {
+            "index": "04",
+            "title": "Performance",
+            "image": "/img/catalog-2/card-4.jpg",
+            "description": "60FPS rendering with optimized geometries. Maintaining smooth performance across devices with level-of-detail techniques."
+          }
+        ]
+      },
+      "seo": {
+        "title": "Three.js Projects | 3D Web Graphics Portfolio",
+        "description": "Innovative Three.js experiments featuring WebGL shaders, physics simulations, and interactive 3D experiences.",
+        "keywords": "threejs, webgl, 3d graphics, shaders, physics simulation"
+      }
     },
     {
       "id": "gsap",
       "name": "GSAP Motion Design",
-      "track": "https://www.youtube.com/watch?v=m4U232MuTG4"
+      "track": "https://www.youtube.com/watch?v=m4U232MuTG4",
+      "folder": {
+        "displayName": "form",
+        "variant": "variant-2",
+        "previewImages": [
+          "/img/catalog-3/preview-1.jpg",
+          "/img/catalog-3/preview-2.jpg",
+          "/img/catalog-3/preview-3.jpg"
+        ]
+      },
+      "theme": {
+        "backgroundColor": "#1a0a14",
+        "cardBackground": "#2a1a24",
+        "textColor": "#ffebf0",
+        "accentColor": "#ec4899"
+      },
+      "content": {
+        "introTitle": "Animation Mastery",
+        "outroTitle": "Motion Excellence",
+        "cards": [
+          {
+            "index": "01",
+            "title": "ScrollTrigger",
+            "image": "/img/catalog-3/card-1.jpg",
+            "description": "Scroll-driven animations with precise control. Creating engaging narratives through parallax effects and timeline sequencing."
+          },
+          {
+            "index": "02",
+            "title": "Morphing",
+            "image": "/img/catalog-3/card-2.jpg",
+            "description": "Smooth shape transformations and SVG morphing. Fluid transitions between states with custom easing functions."
+          },
+          {
+            "index": "03",
+            "title": "Timeline",
+            "image": "/img/catalog-3/card-3.jpg",
+            "description": "Complex animation orchestration. Choreographing multiple elements with stagger effects and callback functions."
+          },
+          {
+            "index": "04",
+            "title": "Performance",
+            "image": "/img/catalog-3/card-4.jpg",
+            "description": "Hardware-accelerated animations. Optimized transforms and opacity changes for buttery-smooth motion at 60fps."
+          }
+        ]
+      },
+      "seo": {
+        "title": "GSAP Animation Projects | Motion Design Portfolio",
+        "description": "Professional GSAP animations featuring ScrollTrigger, morphing, and complex timeline orchestration.",
+        "keywords": "gsap, animation, scrolltrigger, motion design, svg"
+      }
     },
     {
       "id": "business",
       "name": "Business Web Apps",
-      "track": "https://soundcloud.com/cerclelive/solomun-theatre-antique-dorange-for-cercle"
+      "track": "https://soundcloud.com/cerclelive/solomun-theatre-antique-dorange-for-cercle",
+      "folder": {
+        "displayName": "chromatic",
+        "variant": "variant-3",
+        "previewImages": [
+          "/img/catalog-4/preview-1.jpg",
+          "/img/catalog-4/preview-2.jpg",
+          "/img/catalog-4/preview-3.jpg"
+        ]
+      },
+      "theme": {
+        "backgroundColor": "#0f1419",
+        "cardBackground": "#1f2937",
+        "textColor": "#f3f4f6",
+        "accentColor": "#10b981"
+      },
+      "content": {
+        "introTitle": "Enterprise Solutions",
+        "outroTitle": "Business Growth",
+        "cards": [
+          {
+            "index": "01",
+            "title": "Dashboard",
+            "image": "/img/catalog-4/card-1.jpg",
+            "description": "Real-time analytics dashboards. Data visualization with charts, metrics, and interactive filtering for business insights."
+          },
+          {
+            "index": "02",
+            "title": "Authentication",
+            "image": "/img/catalog-4/card-2.jpg",
+            "description": "Secure user management systems. Multi-factor authentication, role-based access control, and session handling."
+          },
+          {
+            "index": "03",
+            "title": "API Integration",
+            "image": "/img/catalog-4/card-3.jpg",
+            "description": "Seamless third-party integrations. RESTful APIs, webhooks, and data synchronization for business workflows."
+          },
+          {
+            "index": "04",
+            "title": "Scalability",
+            "image": "/img/catalog-4/card-4.jpg",
+            "description": "Cloud-ready architecture. Microservices, caching strategies, and database optimization for growing businesses."
+          }
+        ]
+      },
+      "seo": {
+        "title": "Business Web Applications | Enterprise Solutions Portfolio",
+        "description": "Professional business web applications with dashboards, authentication, API integrations, and scalable architecture.",
+        "keywords": "business apps, enterprise, dashboard, authentication, api integration"
+      }
     }
   ]
 }

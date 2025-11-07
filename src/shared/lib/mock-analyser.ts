@@ -80,7 +80,9 @@ function generateFrequencyData(
 export function useMockAnalyser(options: MockAnalyserOptions): MockAnalyserResult {
   const { isMuted, volume } = options;
   const [frame, setFrame] = useState(0);
-  const dataRef = useRef<Uint8Array<ArrayBuffer>>(new Uint8Array(BUFFER_SIZE) as Uint8Array<ArrayBuffer>);
+  const dataRef = useRef<Uint8Array<ArrayBuffer>>(
+    new Uint8Array(BUFFER_SIZE) as Uint8Array<ArrayBuffer>
+  );
   const phaseRef = useRef(0);
   const lastUpdateRef = useRef(0);
 
@@ -144,4 +146,3 @@ export function createMockAnalyser() {
     },
   };
 }
-
