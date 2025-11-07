@@ -46,6 +46,7 @@ export function CatalogPageClient({ catalog, catalogId }: CatalogPageClientProps
       <ReactLenis root />
       <div ref={catalogPageRef} className={styles.catalogPage}>
         <section className="intro flex h-screen items-center justify-center" />
+        <h1 className={styles.visuallyHidden}>{catalog.content.introTitle}</h1>
 
         <StickyCards cards={catalog.content.cards} />
 
