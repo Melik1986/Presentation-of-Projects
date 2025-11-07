@@ -1,23 +1,30 @@
 'use client';
 
 import { ReactLenis } from 'lenis/react';
-import { useCallback, useLayoutEffect } from 'react';
+import { use, useCallback, useLayoutEffect } from 'react';
 
 import { AudioUIPanel, useAudioDirector } from '@/features/audio';
 import { StickyCards } from '@/features/sticky-cards';
 
-export default function StickyPage() {
+interface StickyPageProps {
+  params: Promise<{ catalogId: string }>;
+}
+
+export default function StickyPage({ params }: StickyPageProps) {
+  const unwrappedParams = use(params);
+  const catalogId = unwrappedParams.catalogId;
+
   const {
     actions: { enterCatalog, leaveCatalog, setHome, resume },
   } = useAudioDirector();
 
   const manageScene = useCallback(() => {
-    void resume().then(() => enterCatalog('nextjs'));
+    void resume().then(() => enterCatalog(catalogId));
 
     return () => {
       void leaveCatalog().then(() => setHome());
     };
-  }, [resume, enterCatalog, leaveCatalog, setHome]);
+  }, [resume, enterCatalog, leaveCatalog, setHome, catalogId]);
 
   useLayoutEffect(() => manageScene(), [manageScene]);
 
@@ -38,3 +45,4 @@ export default function StickyPage() {
     </>
   );
 }
+

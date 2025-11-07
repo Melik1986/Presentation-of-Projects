@@ -2,7 +2,9 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { useEffect, useRef } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
+
+import { useAudioDirector } from '@/features/audio';
 
 import styles from './Wildyriftian.module.css';
 import { setupWildyriftianAnimation } from '../model/animations';
@@ -12,6 +14,20 @@ import type { WildyriftianProps } from '../model/types';
 
 export function Wildyriftian({ className }: WildyriftianProps) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const {
+    actions: { previewCatalog, setHome },
+  } = useAudioDirector();
+
+  const handleFolderHover = useCallback(
+    (catalogId: string) => {
+      void previewCatalog(catalogId);
+    },
+    [previewCatalog]
+  );
+
+  const handleFolderLeave = useCallback(() => {
+    void setHome();
+  }, [setHome]);
 
   useEffect(() => {
     const container = containerRef.current;
@@ -34,11 +50,13 @@ export function Wildyriftian({ className }: WildyriftianProps) {
           <div className={`row ${styles.row}`} key={rowIndex}>
             {row.map((folder) => (
               <Link
-                href="/sticky"
+                href={`/sticky/${folder.catalogId}`}
                 className={`folder ${styles.folder} ${
                   styles[folder.variant.replace('-', '') as 'variant1' | 'variant2' | 'variant3']
                 }`}
                 key={folder.index}
+                onMouseEnter={() => handleFolderHover(folder.catalogId)}
+                onMouseLeave={handleFolderLeave}
               >
                 <div className={`folder-preview ${styles.folderPreview}`}>
                   {folder.images.map((image) => (

@@ -409,7 +409,9 @@ class AudioDirector {
       ease: 'sine.inOut',
       onUpdate: () => {
         if (track.adapter) {
-          void track.adapter.setVolume(track.level).catch(() => {
+          const effectiveVolume = this.settings.muted ? 0 : this.settings.volume;
+          const finalVolume = track.level * effectiveVolume;
+          void track.adapter.setVolume(finalVolume).catch(() => {
             // Ignore volume errors
           });
         }
@@ -424,6 +426,22 @@ class AudioDirector {
           void this.pauseTrack(track);
         }
       },
+    });
+  }
+
+  /**
+   * Updates volume for all active tracks based on master volume
+   */
+  private updateAllTracksVolume(): void {
+    const effectiveVolume = this.settings.muted ? 0 : this.settings.volume;
+
+    this.tracks.forEach((track) => {
+      if (track.adapter && track.level > 0) {
+        const finalVolume = track.level * effectiveVolume;
+        void track.adapter.setVolume(finalVolume).catch(() => {
+          // Ignore volume errors
+        });
+      }
     });
   }
 
@@ -538,6 +556,7 @@ class AudioDirector {
       });
     }
 
+    this.updateAllTracksVolume();
     this.persistSettings();
   }
 
@@ -557,6 +576,7 @@ class AudioDirector {
         ease: 'sine.inOut',
       });
     }
+    this.updateAllTracksVolume();
     this.persistSettings();
   }
 

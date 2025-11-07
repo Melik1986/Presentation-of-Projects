@@ -9,6 +9,7 @@ export type FolderData = {
   index: string;
   name: string;
   images: string[];
+  catalogId: string;
 };
 
 export type FolderRow = FolderData[];
