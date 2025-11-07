@@ -4,7 +4,6 @@ import { AudioProvider } from '@/features/audio';
 
 import type { ReactNode } from 'react';
 
-
 type ProvidersProps = {
   children: ReactNode;
 };

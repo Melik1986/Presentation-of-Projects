@@ -10,7 +10,6 @@ import {
   SCROLL_LOCK_CLASS,
 } from '../model/constants';
 
-
 export function GlobalPreloader() {
   const [isVisible, setIsVisible] = useState(true);
 

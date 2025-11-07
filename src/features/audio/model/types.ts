@@ -21,6 +21,46 @@ export interface DirectorStateSnapshot {
   volume: number;
 }
 
+/**
+ * Platform types for audio adapters
+ */
+export type Platform = 'youtube' | 'soundcloud' | 'unknown';
+
+/**
+ * Platform adapter interface for managing audio playback
+ */
+export interface PlatformAdapter {
+  platform: Platform;
+  initialize(containerId: string, url: string): Promise<void>;
+  play(): Promise<void>;
+  pause(): Promise<void>;
+  setVolume(volume: number): Promise<void>;
+  getCurrentTime(): number;
+  getDuration(): number;
+  seekTo(seconds: number): Promise<void>;
+  destroy(): void;
+  onEnded(callback: () => void): void;
+  getElement(): HTMLElement | null;
+}
+
+/**
+ * Track bundle for managing audio tracks with platform adapters
+ */
+export interface TrackBundle {
+  id: string;
+  url: string;
+  platform: Platform;
+  adapter: PlatformAdapter | null;
+  element: HTMLElement | null;
+  source: MediaElementAudioSourceNode | null;
+  gain: GainNode | null;
+  level: number;
+}
+
+/**
+ * @deprecated Legacy SoundCloud API types - kept for backward compatibility
+ * These will be removed in future versions
+ */
 export interface SoundCloudFormat {
   protocol?: string | null;
   mime_type?: string | null;
@@ -59,13 +99,6 @@ export interface SoundCloudResolvedTrack {
   artworkUrl: string | null;
   title: string;
   permalinkUrl: string;
-}
-
-export interface TrackBundle extends SoundCloudResolvedTrack {
-  id: string;
-  audioElement: HTMLAudioElement;
-  mediaSource: MediaElementAudioSourceNode;
-  gainNode: GainNode;
 }
 
 export interface AudioDirectorActions {

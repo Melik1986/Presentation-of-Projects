@@ -9,7 +9,6 @@ import { useStickyCardsAnimation } from '../model/hooks/useStickyCardsAnimation'
 
 import type { StickyCardsProps } from '../model/types';
 
-
 export function StickyCards({ cards = defaultStickyCardsData, className }: StickyCardsProps) {
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -28,7 +27,12 @@ export function StickyCards({ cards = defaultStickyCardsData, className }: Stick
               <h1 className={styles.stickyCardHeader}>{cardData.title}</h1>
 
               <div className={styles.stickyCardImg}>
-                <Image src={cardData.image} alt={cardData.title} fill sizes="(max-width: 768px) 100vw, 50vw" />
+                <Image
+                  src={cardData.image}
+                  alt={cardData.title}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
               </div>
 
               <div className={styles.stickyCardCopy}>

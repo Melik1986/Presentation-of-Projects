@@ -1,6 +1,5 @@
 'use client';
 
-
 import { AudioControls } from './AudioControls';
 import { EqualizerCanvas } from './EqualizerCanvas';
 

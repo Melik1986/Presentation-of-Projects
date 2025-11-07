@@ -10,7 +10,6 @@ import { defaultFolderRows } from '../model/data';
 
 import type { WildyriftianProps } from '../model/types';
 
-
 export function Wildyriftian({ className }: WildyriftianProps) {
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -44,7 +43,12 @@ export function Wildyriftian({ className }: WildyriftianProps) {
                 <div className={`folder-preview ${styles.folderPreview}`}>
                   {folder.images.map((image) => (
                     <div className={`folder-preview-img ${styles.folderPreviewImg}`} key={image}>
-                      <Image src={image} alt={folder.name} fill sizes="(max-width: 768px) 100vw, 33vw" />
+                      <Image
+                        src={image}
+                        alt={folder.name}
+                        fill
+                        sizes="(max-width: 768px) 100vw, 33vw"
+                      />
                     </div>
                   ))}
                 </div>

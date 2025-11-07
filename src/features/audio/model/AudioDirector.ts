@@ -11,13 +11,17 @@ import {
   LEVELS,
   SETTINGS_STORAGE_KEY,
 } from './constants';
-import { clearSoundCloudCache, resolveSoundCloudTrack } from '../services/soundcloud';
+import { detectPlatform } from '../services/platform-detector';
+import { SoundCloudAdapter } from '../services/soundcloud-widget-adapter';
+import { YouTubeAdapter } from '../services/youtube-adapter';
 
 import type {
   AudioConfig,
   CatalogConfig,
   DirectorSettings,
   DirectorStateSnapshot,
+  Platform,
+  PlatformAdapter,
   TrackBundle,
 } from './types';
 
@@ -44,6 +48,9 @@ class AudioDirector {
     }
   }
 
+  /**
+   * Disposes all audio resources and cleans up
+   */
   dispose(): void {
     if (!this.isBrowser) {
       return;
@@ -60,7 +67,6 @@ class AudioDirector {
     this.context = null;
     this.masterGain = null;
     this.analyser = null;
-    clearSoundCloudCache();
   }
 
   private ensureContext(): AudioContext | null {
@@ -160,6 +166,10 @@ class AudioDirector {
     }
   }
 
+  /**
+   * Sets audio configuration and prepares all tracks
+   * @param config - Audio configuration with tracks
+   */
   async setConfig(config: AudioConfig): Promise<void> {
     if (!this.isBrowser) {
       return;
@@ -183,6 +193,48 @@ class AudioDirector {
     );
   }
 
+  /**
+   * Creates platform adapter based on URL
+   * @param platform - Platform type
+   * @returns Platform adapter instance
+   */
+  private createAdapter(platform: Platform): PlatformAdapter | null {
+    switch (platform) {
+      case 'youtube':
+        return new YouTubeAdapter();
+      case 'soundcloud':
+        return new SoundCloudAdapter();
+      default:
+        return null;
+    }
+  }
+
+  /**
+   * Creates hidden container for platform player
+   * @param id - Track ID
+   * @returns Container ID
+   */
+  private createHiddenContainer(id: string): string {
+    const containerId = `audio-player-${id}`;
+    let container = document.getElementById(containerId);
+
+    if (!container) {
+      container = document.createElement('div');
+      container.id = containerId;
+      container.style.cssText =
+        'position:fixed;top:-9999px;left:-9999px;width:0;height:0;opacity:0;pointer-events:none;overflow:hidden;';
+      document.body.appendChild(container);
+    }
+
+    return containerId;
+  }
+
+  /**
+   * Prepares track with platform adapter
+   * @param id - Track ID
+   * @param trackUrl - Track URL
+   * @returns Track bundle or null
+   */
   private async prepareTrack(id: string, trackUrl: string | null): Promise<TrackBundle | null> {
     if (!this.isBrowser || !trackUrl) {
       return null;
@@ -193,81 +245,125 @@ class AudioDirector {
       return existing;
     }
 
+    return await this.initializeTrack(id, trackUrl);
+  }
+
+  /**
+   * Initializes track with platform adapter
+   * @param id - Track ID
+   * @param trackUrl - Track URL
+   */
+  private async initializeTrack(id: string, trackUrl: string): Promise<TrackBundle | null> {
     const context = this.ensureContext();
     if (!context) {
       return null;
     }
 
+    const platform = detectPlatform(trackUrl);
+    const adapter = this.createAdapter(platform);
+
+    if (!adapter) {
+      console.error(`AudioDirector: unsupported platform for ${trackUrl}`);
+      return null;
+    }
+
+    return await this.setupTrackBundle(id, trackUrl, platform, adapter, context);
+  }
+
+  /**
+   * Sets up track bundle with adapter
+   */
+  private async setupTrackBundle(
+    id: string,
+    url: string,
+    platform: Platform,
+    adapter: PlatformAdapter,
+    context: AudioContext
+  ): Promise<TrackBundle | null> {
     try {
-      const resolved = await resolveSoundCloudTrack(trackUrl);
-      const audioElement = new Audio();
-      audioElement.loop = true;
-      audioElement.crossOrigin = 'anonymous';
-      audioElement.preload = 'auto';
-      audioElement.src = resolved.streamUrl;
+      const containerId = this.createHiddenContainer(id);
+      await adapter.initialize(containerId, url);
 
-      audioElement.addEventListener('error', (event) => {
-        console.warn(`AudioDirector: audio element error for track ${id}`, event);
-      });
-
-      const mediaSource = context.createMediaElementSource(audioElement);
-      const gainNode = context.createGain();
-      gainNode.gain.value = 0;
-      mediaSource.connect(gainNode);
-      gainNode.connect(this.masterGain!);
+      const gain = context.createGain();
+      gain.gain.value = 0;
+      gain.connect(this.masterGain!);
 
       const bundle: TrackBundle = {
         id,
-        ...resolved,
-        audioElement,
-        mediaSource,
-        gainNode,
+        url,
+        platform,
+        adapter,
+        element: adapter.getElement(),
+        source: null,
+        gain,
+        level: 0,
       };
 
       this.tracks.set(id, bundle);
       return bundle;
     } catch (error) {
-      const errorMessage = error instanceof Error ? error.message : String(error);
-      console.error(`AudioDirector: failed to prepare track ${trackUrl}`, errorMessage);
-
-      if (errorMessage.includes('CORS')) {
-        console.warn(`AudioDirector: CORS error for ${trackUrl}, track will be skipped`);
-      }
-
+      this.handleTrackError(id, url, error);
+      adapter.destroy();
       return null;
     }
   }
 
+  /**
+   * Handles track loading error
+   */
+  private handleTrackError(id: string, url: string, error: unknown): void {
+    const message = error instanceof Error ? error.message : String(error);
+    console.error(`AudioDirector: failed to prepare track ${id} from ${url}:`, message);
+  }
+
+  /**
+   * Detaches and destroys track resources
+   * @param track - Track bundle to detach
+   */
   private detachTrack(track: TrackBundle): void {
     try {
-      track.audioElement.pause();
-      track.audioElement.src = '';
-      track.mediaSource.disconnect();
-      track.gainNode.disconnect();
+      if (track.adapter) {
+        track.adapter.destroy();
+      }
+      if (track.source) {
+        track.source.disconnect();
+      }
+      if (track.gain) {
+        track.gain.disconnect();
+      }
     } catch (error) {
       console.warn('AudioDirector: detachTrack error', error);
     }
   }
 
+  /**
+   * Plays track using platform adapter
+   * @param track - Track bundle to play
+   */
   private playTrack(track: TrackBundle | null): void {
-    if (!track) {
+    if (!track?.adapter) {
       return;
     }
 
-    void track.audioElement.play().catch((error: Error) => {
+    void track.adapter.play().catch((error: Error) => {
       if (error.name !== 'AbortError') {
         console.warn('AudioDirector: play rejected', error);
       }
     });
   }
 
+  /**
+   * Fades track volume with crossfade
+   * @param track - Track bundle to fade
+   * @param targetVolume - Target volume (0-1)
+   */
   private fadeTrack(track: TrackBundle | null, targetVolume: number): void {
-    if (!track) {
+    if (!track?.gain) {
       return;
     }
 
-    gsap.killTweensOf(track.gainNode.gain);
-    gsap.to(track.gainNode.gain, {
+    gsap.killTweensOf(track.gain.gain);
+    gsap.to(track.gain.gain, {
       value: targetVolume,
       duration: CROSSFADE_SECONDS,
       ease: 'sine.inOut',
@@ -277,13 +373,18 @@ class AudioDirector {
         }
       },
       onComplete: () => {
-        if (targetVolume <= 0.001) {
-          track.audioElement.pause();
+        if (targetVolume <= 0.001 && track.adapter) {
+          void track.adapter.pause().catch(() => {
+            // Ignore pause errors
+          });
         }
       },
     });
   }
 
+  /**
+   * Sets home track as active
+   */
   async setHome(): Promise<void> {
     await this.resumeContext();
     const homeTrack = await this.prepareTrack('home', this.config.homeTrack);
@@ -301,6 +402,10 @@ class AudioDirector {
     this.previewCatalogId = null;
   }
 
+  /**
+   * Previews catalog track on hover
+   * @param catalogId - Catalog ID to preview
+   */
   async previewCatalog(catalogId: string | null): Promise<void> {
     if (!catalogId || catalogId === this.currentCatalogId) {
       return;
@@ -323,6 +428,10 @@ class AudioDirector {
     this.fadeTrack(track, LEVELS.preview);
   }
 
+  /**
+   * Enters catalog and plays its track
+   * @param catalogId - Catalog ID to enter
+   */
   async enterCatalog(catalogId: string | null): Promise<void> {
     if (!catalogId) {
       return;
@@ -346,6 +455,9 @@ class AudioDirector {
     this.fadeTrack(track, LEVELS.active);
   }
 
+  /**
+   * Leaves current catalog and returns to home
+   */
   async leaveCatalog(): Promise<void> {
     await this.resumeContext();
     const homeTrack = await this.prepareTrack('home', this.config.homeTrack);
@@ -365,6 +477,10 @@ class AudioDirector {
     this.previewCatalogId = null;
   }
 
+  /**
+   * Toggles mute state
+   * @param forcedValue - Optional forced mute value
+   */
   async toggleMute(forcedValue?: boolean): Promise<void> {
     await this.resumeContext();
     const muted = typeof forcedValue === 'boolean' ? forcedValue : !this.settings.muted;
@@ -382,6 +498,10 @@ class AudioDirector {
     this.persistSettings();
   }
 
+  /**
+   * Sets master volume
+   * @param value - Volume value (0-1)
+   */
   async setVolume(value: number): Promise<void> {
     await this.resumeContext();
     const clamped = Math.min(Math.max(value, 0), 1);
@@ -397,10 +517,18 @@ class AudioDirector {
     this.persistSettings();
   }
 
+  /**
+   * Gets current settings
+   * @returns Director settings
+   */
   getSettings(): DirectorSettings {
     return { ...this.settings };
   }
 
+  /**
+   * Gets current state snapshot
+   * @returns State snapshot
+   */
   getCurrentState(): DirectorStateSnapshot {
     return {
       activeCatalogId: this.currentCatalogId,
@@ -410,6 +538,10 @@ class AudioDirector {
     };
   }
 
+  /**
+   * Gets analyser frequency data for visualization
+   * @returns Frequency data array
+   */
   getAnalyserFrequencies(): Uint8Array {
     if (!this.analyser) {
       return EMPTY_BYTE_ARRAY;

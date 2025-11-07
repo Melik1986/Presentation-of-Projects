@@ -7,7 +7,6 @@ import { SpriteIcon } from './SpriteIcon';
 import { COMPANY_ICONS, SPRITE_PATH } from '../model/constants';
 import { useLoaderAnimation } from '../model/hooks/useLoaderAnimation';
 
-
 function PreloaderContent() {
   return (
     <div className={styles.preloaderWrapper}>

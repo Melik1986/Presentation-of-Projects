@@ -1,25 +1,4 @@
 {
-  "homeTrack": "https://soundcloud.com/user/home-ambient-track",
-  "catalogs": [
-    {
-      "id": "nextjs",
-      "name": "Next.js Projects",
-      "track": "https://soundcloud.com/user/ambient-nextjs"
-    },
-    {
-      "id": "threejs",
-      "name": "Three.js Experiments",
-      "track": "https://soundcloud.com/user/ambient-threejs"
-    },
-    {
-      "id": "gsap",
-      "name": "GSAP Motion Design",
-      "track": "https://soundcloud.com/user/ambient-gsap"
-    },
-    {
-      "id": "business",
-      "name": "Business Web Apps",
-      "track": "https://soundcloud.com/user/ambient-business"
-    }
-  ]
+  "homeTrack": null,
+  "catalogs": []
 }

@@ -13,4 +13,3 @@ export { PreloaderTrack } from './ui/PreloaderTrack';
 
 export type * from './model/types';
 export * from './model/constants';
-export * from './services/soundcloud';
