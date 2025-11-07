@@ -5,7 +5,7 @@ import Image from 'next/image';
 import styles from './Loader.module.css';
 import { SpriteIcon } from './SpriteIcon';
 import { COMPANY_ICONS, SPRITE_PATH } from '../model/constants';
-import { useLoaderAnimation } from '../model/useLoaderAnimation';
+import { useLoaderAnimation } from '../model/hooks/useLoaderAnimation';
 
 
 function PreloaderContent() {

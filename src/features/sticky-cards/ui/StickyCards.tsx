@@ -1,61 +1,19 @@
 'use client';
 
-import { useGSAP } from '@gsap/react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Image from 'next/image';
 import { useRef } from 'react';
 
 import styles from './StickyCards.module.css';
 import { defaultStickyCardsData } from '../model/data';
+import { useStickyCardsAnimation } from '../model/hooks/useStickyCardsAnimation';
 
 import type { StickyCardsProps } from '../model/types';
 
 
-gsap.registerPlugin(ScrollTrigger);
-
 export function StickyCards({ cards = defaultStickyCardsData, className }: StickyCardsProps) {
   const containerRef = useRef<HTMLDivElement>(null);
 
-  useGSAP(
-    () => {
-      const stickyCards = gsap.utils.toArray<HTMLElement>('.sticky-card');
-
-      stickyCards.forEach((card, index) => {
-        const isLastCard = index === stickyCards.length - 1;
-
-        if (!isLastCard) {
-          ScrollTrigger.create({
-            trigger: card,
-            start: 'top top',
-            endTrigger: stickyCards[stickyCards.length - 1],
-            end: 'top top',
-            pin: true,
-            pinSpacing: false,
-          });
-
-          ScrollTrigger.create({
-            trigger: stickyCards[index + 1],
-            start: 'top bottom',
-            end: 'top top',
-            onUpdate: (self) => {
-              const progress = self.progress;
-              const scale = 1 - progress * 0.25;
-              const rotation = (index % 2 === 0 ? 5 : -5) * progress;
-              const afterOpacity = progress;
-
-              gsap.set(card, {
-                scale,
-                rotation,
-                '--after-opacity': afterOpacity,
-              });
-            },
-          });
-        }
-      });
-    },
-    { scope: containerRef }
-  );
+  useStickyCardsAnimation(containerRef);
 
   return (
     <div className={`${styles.stickyCards} ${className || ''}`} ref={containerRef}>

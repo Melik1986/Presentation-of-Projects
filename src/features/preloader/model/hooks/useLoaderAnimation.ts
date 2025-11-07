@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState } from 'react';
 
-import type { LoaderAnimationResult, PreloaderConfig } from './types';
+import type { LoaderAnimationResult, PreloaderConfig } from '../types';
 
 function isAutomationBrowser(): boolean {
   try {
