@@ -1,0 +1,61 @@
+import type { Metadata } from 'next';
+import type { ReactNode } from 'react';
+
+import { GlobalPreloader } from '@/features/preloader';
+
+import { Providers } from './providers';
+import './globals.css';
+
+export const metadata: Metadata = {
+  title: {
+    template: '%s | Starlight',
+    default: 'Starlight - Portfolio',
+  },
+  description: 'Modern portfolio website with stunning animations and interactions',
+  keywords: ['portfolio', 'web design', 'animations', 'Next.js', 'React'],
+  authors: [{ name: 'Starlight' }],
+  creator: 'Starlight',
+  metadataBase: new URL('https://starlight.dev'),
+  openGraph: {
+    type: 'website',
+    locale: 'en_US',
+    url: 'https://starlight.dev',
+    title: 'Starlight - Portfolio',
+    description: 'Modern portfolio website with stunning animations and interactions',
+    siteName: 'Starlight',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Starlight - Portfolio',
+    description: 'Modern portfolio website with stunning animations and interactions',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+};
+
+type RootLayoutProps = {
+  children: ReactNode;
+};
+
+export default function RootLayout({ children }: RootLayoutProps) {
+  return (
+    <html lang="en">
+      <body>
+        <Providers>
+          <GlobalPreloader />
+          {children}
+        </Providers>
+      </body>
+    </html>
+  );
+}
+

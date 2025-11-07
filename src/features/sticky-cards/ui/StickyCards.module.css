@@ -1,0 +1,98 @@
+.stickyCards {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: var(--bg, #fff);
+}
+
+.stickyCard {
+  position: relative;
+  width: 100%;
+  height: 100svh;
+  background-color: var(--fg, #000);
+  color: var(--bg, #fff);
+  padding: 1.5rem;
+  display: flex;
+  gap: 3rem;
+  will-change: transform;
+}
+
+.stickyCard::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: var(--after-opacity, 0);
+  transition: opacity 0.1s ease;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.stickyCardIndex {
+  flex: 2;
+}
+
+.stickyCardContent {
+  flex: 4;
+  padding-top: 1.5rem;
+}
+
+.stickyCardContentWrapper {
+  width: 75%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.stickyCardHeader {
+  width: 75%;
+}
+
+.stickyCardImg img {
+  aspect-ratio: 5/3;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.stickyCardCopy {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.stickyCardCopyTitle {
+  flex: 2;
+}
+
+.stickyCardCopyDescription {
+  flex: 4;
+}
+
+.stickyCardCopyTitle p {
+  text-transform: uppercase;
+  font-weight: 650;
+}
+
+@media (max-width: 1000px) {
+  .stickyCard {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .stickyCardContentWrapper {
+    width: 100%;
+  }
+
+  .stickyCardCopy {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .stickyCardIndex {
+    flex: 1;
+  }
+}
+
