@@ -1,17 +1,29 @@
 .catalogPage {
+  min-height: 100vh;
   background-color: var(--page-bg);
   color: var(--text-color);
 }
 
-.visuallyHidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border-width: 0;
+.intro {
+  height: 25vh;
+  min-height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background-color: transparent;
+}
+
+.introTitle {
+  font-size: clamp(2rem, 5vw, 4rem);
+  font-weight: 600;
+  text-align: center;
+  line-height: 1.2;
+  color: var(--text-color);
+}
+
+.outro {
+  height: 100vh;
+  background-color: transparent;
 }
 
