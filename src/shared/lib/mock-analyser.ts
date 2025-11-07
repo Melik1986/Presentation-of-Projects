@@ -15,7 +15,7 @@ interface MockAnalyserOptions {
 }
 
 interface MockAnalyserResult {
-  data: Uint8Array;
+  data: Uint8Array<ArrayBuffer>;
   frame: number;
 }
 
@@ -35,8 +35,8 @@ function generateFrequencyData(
   volume: number,
   isMuted: boolean,
   beatPhase: number
-): Uint8Array {
-  const data = new Uint8Array(BUFFER_SIZE);
+): Uint8Array<ArrayBuffer> {
+  const data = new Uint8Array(BUFFER_SIZE) as Uint8Array<ArrayBuffer>;
 
   if (isMuted || volume <= 0.001) {
     return data;
@@ -80,7 +80,7 @@ function generateFrequencyData(
 export function useMockAnalyser(options: MockAnalyserOptions): MockAnalyserResult {
   const { isMuted, volume } = options;
   const [frame, setFrame] = useState(0);
-  const dataRef = useRef<Uint8Array>(new Uint8Array(BUFFER_SIZE));
+  const dataRef = useRef<Uint8Array<ArrayBuffer>>(new Uint8Array(BUFFER_SIZE) as Uint8Array<ArrayBuffer>);
   const phaseRef = useRef(0);
   const lastUpdateRef = useRef(0);
 
@@ -130,11 +130,11 @@ export function useMockAnalyser(options: MockAnalyserOptions): MockAnalyserResul
  * For use outside React components
  */
 export function createMockAnalyser() {
-  let data = new Uint8Array(BUFFER_SIZE);
+  let data = new Uint8Array(BUFFER_SIZE) as Uint8Array<ArrayBuffer>;
   let phase = 0;
 
   return {
-    getFrequencyData: (volume: number, isMuted: boolean): Uint8Array => {
+    getFrequencyData: (volume: number, isMuted: boolean): Uint8Array<ArrayBuffer> => {
       phase += Math.PI / 30;
       if (phase > Math.PI * 2) {
         phase -= Math.PI * 2;
