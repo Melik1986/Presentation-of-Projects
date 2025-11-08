@@ -39,21 +39,37 @@ export function Wildyriftian({ className }: WildyriftianProps) {
 
   // Mobile GSAP animations (triggered by React state)
   const { animatePreviewShow, animatePreviewHide } = useMobileGsapAnimation();
+  
+  // Track previous active folder to hide it when switching
+  const previousActiveFolderRef = useRef<string | null>(null);
 
   // Trigger GSAP animation when active folder changes (mobile only)
   useEffect(() => {
     // Check if touch device
     const isTouch = window.matchMedia('(pointer: coarse)').matches;
-    console.log('🔬 useEffect triggered:', { isTouch, activeFolderId });
+    console.log('🔬 useEffect triggered:', { isTouch, activeFolderId, previous: previousActiveFolderRef.current });
     
-    if (!isTouch || !activeFolderId) {
-      console.log('🔬 Skipping animation:', isTouch ? 'no active folder' : 'not touch device');
+    if (!isTouch) {
+      console.log('🔬 Not touch device, skipping');
       return;
     }
 
-    console.log('🔬 Calling animatePreviewShow for:', activeFolderId);
-    animatePreviewShow(activeFolderId);
-  }, [activeFolderId, animatePreviewShow]);
+    // Hide previous folder if exists and different from current
+    if (previousActiveFolderRef.current && previousActiveFolderRef.current !== activeFolderId) {
+      console.log('🔬 Hiding previous folder:', previousActiveFolderRef.current);
+      animatePreviewHide(previousActiveFolderRef.current);
+    }
+
+    // Show new folder if exists
+    if (activeFolderId) {
+      console.log('🔬 Showing new folder:', activeFolderId);
+      animatePreviewShow(activeFolderId);
+      previousActiveFolderRef.current = activeFolderId;
+    } else {
+      // Reset when no active folder
+      previousActiveFolderRef.current = null;
+    }
+  }, [activeFolderId, animatePreviewShow, animatePreviewHide]);
 
   // Native touch handlers with passive: false (fixes preventDefault error)
   const handleActivate = useCallback(
@@ -66,10 +82,17 @@ export function Wildyriftian({ className }: WildyriftianProps) {
   );
 
   const handleReset = useCallback(() => {
+    console.log('🔬 handleReset called, current active:', activeFolderId);
+    
     const isTouch = window.matchMedia('(pointer: coarse)').matches;
+    
+    // Hide current active folder before resetting state
     if (isTouch && activeFolderId) {
+      console.log('🔬 Hiding current folder before reset:', activeFolderId);
       animatePreviewHide(activeFolderId);
+      previousActiveFolderRef.current = null;
     }
+    
     resetActiveFolder();
   }, [activeFolderId, animatePreviewHide, resetActiveFolder]);
 
