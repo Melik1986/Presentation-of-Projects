@@ -2,8 +2,6 @@
 
 import { useEffect, useRef } from 'react';
 
-import { MOBILE_BREAKPOINT } from '../data';
-
 import type { RefObject } from 'react';
 
 type UseMobileTouchHandlersProps = {
@@ -33,9 +31,13 @@ export function useMobileTouchHandlers({
       return;
     }
 
-    const isMobile = window.innerWidth < MOBILE_BREAKPOINT;
-    if (!isMobile) {
-      return;
+    // Proper touch detection (Web standards)
+    const supportsHover = window.matchMedia('(hover: hover)').matches;
+    const isPointerCoarse = window.matchMedia('(pointer: coarse)').matches;
+    
+    // Only setup touch handlers on actual touch devices
+    if (supportsHover && !isPointerCoarse) {
+      return; // Desktop with hover, skip
     }
 
     const handleTouchStart = (e: TouchEvent) => {

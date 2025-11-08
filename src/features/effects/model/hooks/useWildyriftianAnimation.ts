@@ -2,13 +2,8 @@
 
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-import { MOBILE_BREAKPOINT } from '../data';
 
 import type { RefObject } from 'react';
-
-gsap.registerPlugin(ScrollTrigger);
 
 /**
  * Hook for setting up Wildyriftian hover animations (DESKTOP ONLY)
@@ -18,12 +13,13 @@ gsap.registerPlugin(ScrollTrigger);
 export function useWildyriftianAnimation(containerRef: RefObject<HTMLDivElement | null>): void {
   useGSAP(
     () => {
-      // Check if desktop (official GSAP way)
-      const isDesktop = ScrollTrigger.isTouch === 0;
-      const isMobile = window.innerWidth < MOBILE_BREAKPOINT;
-
-      // Only setup hover animations on desktop
-      if (!isDesktop || isMobile) {
+      // Proper touch detection (Web standards)
+      // https://developer.mozilla.org/en-US/docs/Web/CSS/@media/hover
+      const supportsHover = window.matchMedia('(hover: hover)').matches;
+      const isPointerCoarse = window.matchMedia('(pointer: coarse)').matches;
+      
+      // Only setup hover animations if device supports hover and NOT touch
+      if (!supportsHover || isPointerCoarse) {
         return;
       }
 
