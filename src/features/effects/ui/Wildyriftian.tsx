@@ -11,6 +11,7 @@ import styles from './Wildyriftian.module.css';
 import { generateFolderRows } from '../model/data';
 import {
   useFolderInteraction,
+  useHeroTextAnimation,
   useMobileGsapAnimation,
   useMobileTouchHandlers,
   useOutsideClick,
@@ -21,6 +22,7 @@ import type { WildyriftianProps } from '../model/types';
 
 export function Wildyriftian({ className }: WildyriftianProps) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const heroRef = useRef<HTMLDivElement>(null);
   const {
     actions: { previewCatalog, setHome },
   } = useAudioDirector();
@@ -96,6 +98,7 @@ export function Wildyriftian({ className }: WildyriftianProps) {
   });
 
   useWildyriftianAnimation(containerRef);
+  useHeroTextAnimation(heroRef);
 
   useOutsideClick({
     containerRef,
@@ -105,9 +108,9 @@ export function Wildyriftian({ className }: WildyriftianProps) {
 
   return (
     <div className={`${styles.wildyriftian} ${className || ''}`} ref={containerRef}>
-      <div className={styles.hero}>
-        <h1 className={styles.heroTitle}>{homepage.title}</h1>
-        <p className={styles.heroDescription}>{homepage.description}</p>
+      <div className={styles.hero} ref={heroRef}>
+        <h1 className={`${styles.heroTitle} hero-title`}>{homepage.title}</h1>
+        <p className={`${styles.heroDescription} hero-description`}>{homepage.description}</p>
       </div>
 
       <div className={styles.folders}>

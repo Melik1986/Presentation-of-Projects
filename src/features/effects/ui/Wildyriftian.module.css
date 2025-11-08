@@ -97,6 +97,19 @@
   opacity: 0.85;
 }
 
+/* GSAP SplitText chars */
+.heroTitle :global(.char),
+.heroDescription :global(.char) {
+  display: inline-block;
+  will-change: transform, opacity;
+}
+
+/* Preserve whitespace */
+:global(.hero-title),
+:global(.hero-description) {
+  white-space: normal;
+}
+
 .folders {
   width: 100%;
   height: 100svh;
