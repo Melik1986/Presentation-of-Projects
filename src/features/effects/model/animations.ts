@@ -156,6 +156,7 @@ export function bindHoverListeners(
 
 /**
  * Create resize handler for responsive behavior
+ * Industry pattern: clean transition between mobile/desktop modes
  */
 export function createResizeHandler(
   container: HTMLElement,
@@ -170,14 +171,29 @@ export function createResizeHandler(
     }
 
     mobileState.current = nextIsMobile;
-    setWrapperOffset(wrappers, mobileState.current);
+    
+    if (nextIsMobile) {
+      // Switching TO mobile: remove all GSAP inline styles
+      const previews = container.querySelectorAll('.folder-preview-img');
+      previews.forEach((preview) => {
+        (preview as HTMLElement).removeAttribute('style');
+      });
+      wrappers.forEach((wrapper) => {
+        wrapper.removeAttribute('style');
+      });
+    } else {
+      // Switching TO desktop: set initial GSAP state
+      setWrapperOffset(wrappers, false);
+      resetPreviews(container);
+    }
+    
     enableAllFolders(folders);
-    resetPreviews(container);
   };
 }
 
 /**
  * Setup Wildyriftian animation system
+ * Industry best practice: separate Desktop (GSAP) and Mobile (CSS) logic
  */
 export function setupWildyriftianAnimation(container: HTMLElement): (() => void) | undefined {
   const folders = Array.from(container.querySelectorAll('.folder'));
@@ -186,8 +202,26 @@ export function setupWildyriftianAnimation(container: HTMLElement): (() => void)
   }
 
   const wrappers = Array.from(container.querySelectorAll<HTMLElement>('.folder-wrapper'));
-  const mobileState = createMobileState();
+  const isMobile = window.innerWidth < MOBILE_BREAKPOINT;
 
+  // Mobile: Clear GSAP inline styles, use pure CSS
+  if (isMobile) {
+    const previews = container.querySelectorAll('.folder-preview-img');
+    
+    // Remove any GSAP inline styles that block CSS animations
+    previews.forEach((preview) => {
+      (preview as HTMLElement).removeAttribute('style');
+    });
+    wrappers.forEach((wrapper) => {
+      wrapper.removeAttribute('style');
+    });
+
+    // Mobile uses CSS animations only, no JS listeners needed
+    return undefined;
+  }
+
+  // Desktop: GSAP hover animations
+  const mobileState = createMobileState();
   setWrapperOffset(wrappers, mobileState.current);
 
   const detachHover = bindHoverListeners(folders, wrappers);

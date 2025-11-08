@@ -238,59 +238,53 @@
     margin-bottom: -0.5rem;
   }
 
+  /* Mobile: Force initial state, override any inline styles */
   .folderPreview {
-    opacity: 0;
+    opacity: 0 !important;
     pointer-events: none;
     transition: opacity 0.3s ease;
   }
 
+  .folderPreviewImg {
+    transform: translateY(0) rotate(0deg) !important;
+    opacity: 0;
+    transition: none;
+  }
+
+  /* Active state: show and animate */
   .folder.active .folderPreview {
-    opacity: 1;
+    opacity: 1 !important;
     pointer-events: auto;
   }
 
   .folder.active .folderPreviewImg {
-    animation: slideUpPreview 0.3s ease-out forwards;
+    animation: slideUpPreview 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
   }
 
   .folder.active .folderPreviewImg:nth-child(1) {
     animation-delay: 0s;
+    --preview-rotation: -15deg;
   }
 
   .folder.active .folderPreviewImg:nth-child(2) {
     animation-delay: 0.05s;
+    --preview-rotation: 0deg;
   }
 
   .folder.active .folderPreviewImg:nth-child(3) {
     animation-delay: 0.1s;
-  }
-
-  @keyframes slideUpPreview {
-    from {
-      transform: translateY(0) rotate(0deg);
-      opacity: 0;
-    }
-    to {
-      transform: translateY(-100%) rotate(var(--preview-rotation, -15deg));
-      opacity: 1;
-    }
-  }
-
-  .folderPreviewImg:nth-child(1) {
-    --preview-rotation: -15deg;
-  }
-
-  .folderPreviewImg:nth-child(2) {
-    --preview-rotation: 0deg;
-  }
-
-  .folderPreviewImg:nth-child(3) {
     --preview-rotation: 15deg;
   }
 
-  /* Reset animation when folder is not active */
-  .folderPreviewImg {
-    transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+  @keyframes slideUpPreview {
+    0% {
+      transform: translateY(0) rotate(0deg);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(-100%) rotate(var(--preview-rotation));
+      opacity: 1;
+    }
   }
 
   .folderName {
