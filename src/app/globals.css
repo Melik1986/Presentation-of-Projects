@@ -154,6 +154,14 @@ html.preloader-ready {
   transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+@media (max-width: 768px) {
+  .audio-panel-fixed {
+    height: 80px;
+    padding: 0.5rem;
+    width: 180px;
+  }
+}
+
 /* During preloader - position at bottom center */
 body.preloader-active .audio-panel-fixed {
   top: auto;
@@ -166,4 +174,27 @@ body.preloader-active .audio-panel-fixed {
 /* Equalizer color - matching slider blue */
 .audio-ui-panel__equalizer rect {
   fill: #3b82f6;
+}
+
+/* Mobile: compact audio panel (90px total height) */
+@media (max-width: 768px) {
+  .audio-ui-panel__equalizer {
+    width: 180px;
+    height: 55px;
+    padding-bottom: 1.5rem;
+  }
+  
+  .audio-controls {
+    gap: 0.25rem;
+    font-size: 0.75rem;
+  }
+  
+  .audio-controls__toggle {
+    font-size: 1rem;
+    padding: 0.25rem;
+  }
+  
+  .audio-controls__slider input {
+    height: 4px;
+  }
 }
