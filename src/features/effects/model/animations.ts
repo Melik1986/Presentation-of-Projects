@@ -116,6 +116,7 @@ export function createLeaveHandler(
 
 /**
  * Attach hover events to folder element
+ * Note: Touch events are handled by React component + CSS animations
  */
 export function attachHoverEvents(
   folder: Element,
@@ -126,6 +127,7 @@ export function attachHoverEvents(
   const handleEnter = createEnterHandler(folder, wrapper, folders, previewImages);
   const handleLeave = createLeaveHandler(wrapper, folders, previewImages);
 
+  // Desktop only: mouse events (GSAP animations)
   folder.addEventListener('mouseenter', handleEnter);
   folder.addEventListener('mouseleave', handleLeave);
 

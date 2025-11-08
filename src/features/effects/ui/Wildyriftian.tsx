@@ -27,6 +27,7 @@ export function Wildyriftian({ className }: WildyriftianProps) {
     handleFolderHover,
     handleFolderLeave,
     handleFolderClick,
+    handleFolderTouch,
     resetActiveFolder,
   } = useFolderInteraction({ previewCatalog, setHome });
 
@@ -56,6 +57,7 @@ export function Wildyriftian({ className }: WildyriftianProps) {
                 } ${activeFolderId === folder.catalogId ? 'active' : ''}`}
                 key={folder.index}
                 onClick={(e) => handleFolderClick(e, folder.catalogId)}
+                onTouchStart={(e) => handleFolderTouch(e, folder.catalogId)}
                 onMouseEnter={() => handleFolderHover(folder.catalogId)}
                 onMouseLeave={handleFolderLeave}
               >

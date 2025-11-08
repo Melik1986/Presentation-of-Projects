@@ -14,6 +14,7 @@ type UseFolderInteractionReturn = {
   handleFolderHover: (catalogId: string) => void;
   handleFolderLeave: () => void;
   handleFolderClick: (e: React.MouseEvent<HTMLAnchorElement>, catalogId: string) => void;
+  handleFolderTouch: (e: React.TouchEvent<HTMLAnchorElement>, catalogId: string) => void;
   resetActiveFolder: () => void;
 };
 
@@ -55,6 +56,26 @@ export function useFolderInteraction({
     [activeFolderId, previewCatalog]
   );
 
+  const handleFolderTouch = useCallback(
+    (e: React.TouchEvent<HTMLAnchorElement>, catalogId: string) => {
+      const isMobile = window.innerWidth < MOBILE_BREAKPOINT;
+      if (!isMobile) {
+        return;
+      }
+      
+      // If already active, allow navigation
+      if (activeFolderId === catalogId) {
+        return;
+      }
+      
+      // First touch: prevent navigation, activate folder
+      e.preventDefault();
+      setActiveFolderId(catalogId);
+      void previewCatalog(catalogId);
+    },
+    [activeFolderId, previewCatalog]
+  );
+
   const resetActiveFolder = useCallback(() => {
     setActiveFolderId(null);
     void setHome();
@@ -65,6 +86,7 @@ export function useFolderInteraction({
     handleFolderHover,
     handleFolderLeave,
     handleFolderClick,
+    handleFolderTouch,
     resetActiveFolder,
   };
 }
