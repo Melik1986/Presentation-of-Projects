@@ -158,12 +158,12 @@ export class SoundCloudAdapter implements PlatformAdapter {
           reject(new Error('SoundCloud widget error'));
         });
 
-        // Timeout fallback
+        // Timeout fallback (increased for slow connections)
         setTimeout(() => {
           if (!this.isReady) {
-            reject(new Error('SoundCloud widget initialization timeout'));
+            reject(new Error('SoundCloud widget initialization timeout (20s)'));
           }
-        }, 10000);
+        }, 20000);
       } catch (error) {
         reject(error);
       }
