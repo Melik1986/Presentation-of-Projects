@@ -16,12 +16,27 @@ export function useMobileGsapAnimation() {
       currentAnimationRef.current.kill();
     }
 
-    const folder = document.querySelector(`[href="/sticky/${folderId}"]`);
-    if (!folder) return;
+    // Try multiple selectors to find folder
+    let folder = document.querySelector(`[href="/sticky/${folderId}"]`);
+    
+    if (!folder) {
+      // Fallback: try by data attribute or class
+      folder = document.querySelector(`.folder[data-catalog="${folderId}"]`);
+    }
+    
+    if (!folder) {
+      console.warn(`useMobileGsapAnimation: folder not found for ${folderId}`);
+      return;
+    }
 
     const previewImages = gsap.utils.toArray<HTMLElement>(
       folder.querySelectorAll('.folder-preview-img')
     );
+    
+    if (previewImages.length === 0) {
+      console.warn(`useMobileGsapAnimation: no preview images found in folder ${folderId}`);
+      return;
+    }
 
     // Animate preview images with stagger (same as desktop)
     previewImages.forEach((img, i) => {
@@ -52,12 +67,25 @@ export function useMobileGsapAnimation() {
       currentAnimationRef.current.kill();
     }
 
-    const folder = document.querySelector(`[href="/sticky/${folderId}"]`);
-    if (!folder) return;
+    // Try multiple selectors to find folder
+    let folder = document.querySelector(`[href="/sticky/${folderId}"]`);
+    
+    if (!folder) {
+      folder = document.querySelector(`.folder[data-catalog="${folderId}"]`);
+    }
+    
+    if (!folder) {
+      console.warn(`useMobileGsapAnimation: folder not found for ${folderId}`);
+      return;
+    }
 
     const previewImages = gsap.utils.toArray<HTMLElement>(
       folder.querySelectorAll('.folder-preview-img')
     );
+    
+    if (previewImages.length === 0) {
+      return;
+    }
 
     // Reset to initial state
     previewImages.forEach((img, i) => {

@@ -40,30 +40,34 @@ export function Wildyriftian({ className }: WildyriftianProps) {
   // Mobile GSAP animations (triggered by React state)
   const { animatePreviewShow, animatePreviewHide } = useMobileGsapAnimation();
 
+  // Trigger GSAP animation when active folder changes (mobile only)
+  useEffect(() => {
+    // Check if touch device
+    const isTouch = window.matchMedia('(pointer: coarse)').matches;
+    if (!isTouch || !activeFolderId) {
+      return;
+    }
+
+    animatePreviewShow(activeFolderId);
+  }, [activeFolderId, animatePreviewShow]);
+
   // Native touch handlers with passive: false (fixes preventDefault error)
   const handleActivate = useCallback(
     (catalogId: string) => {
       setActiveFolderId(catalogId);
       void previewCatalog(catalogId);
-      // Trigger GSAP animation for mobile
-      animatePreviewShow(catalogId);
+      // GSAP animation triggered by useEffect above
     },
-    [setActiveFolderId, previewCatalog, animatePreviewShow]
+    [setActiveFolderId, previewCatalog]
   );
 
   const handleReset = useCallback(() => {
-    if (activeFolderId) {
+    const isTouch = window.matchMedia('(pointer: coarse)').matches;
+    if (isTouch && activeFolderId) {
       animatePreviewHide(activeFolderId);
     }
     resetActiveFolder();
   }, [activeFolderId, animatePreviewHide, resetActiveFolder]);
-
-  // Trigger GSAP animation when active folder changes
-  useEffect(() => {
-    if (activeFolderId) {
-      animatePreviewShow(activeFolderId);
-    }
-  }, [activeFolderId, animatePreviewShow]);
 
   useMobileTouchHandlers({
     containerRef,
@@ -92,6 +96,7 @@ export function Wildyriftian({ className }: WildyriftianProps) {
             {row.map((folder) => (
               <Link
                 href={`/sticky/${folder.catalogId}`}
+                data-catalog={folder.catalogId}
                 className={`folder ${styles.folder} ${
                   styles[folder.variant.replace('-', '') as 'variant1' | 'variant2' | 'variant3']
                 } ${activeFolderId === folder.catalogId ? 'active' : ''}`}
