@@ -44,10 +44,14 @@ export function Wildyriftian({ className }: WildyriftianProps) {
   useEffect(() => {
     // Check if touch device
     const isTouch = window.matchMedia('(pointer: coarse)').matches;
+    console.log('🔬 useEffect triggered:', { isTouch, activeFolderId });
+    
     if (!isTouch || !activeFolderId) {
+      console.log('🔬 Skipping animation:', isTouch ? 'no active folder' : 'not touch device');
       return;
     }
 
+    console.log('🔬 Calling animatePreviewShow for:', activeFolderId);
     animatePreviewShow(activeFolderId);
   }, [activeFolderId, animatePreviewShow]);
 

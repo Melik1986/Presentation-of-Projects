@@ -42,29 +42,40 @@ export function useMobileTouchHandlers({
 
     const handleTouchStart = (e: TouchEvent) => {
       const target = e.target as HTMLElement;
+      console.log('🔬 Touch detected on:', target.className || target.tagName);
+      
       const folder = target.closest('.folder') as HTMLAnchorElement;
       
       if (!folder) {
+        console.log('🔬 No folder found (bubbling issue?)');
         return;
       }
 
+      console.log('🔬 Folder found:', folder.getAttribute('href'));
+
       const href = folder.getAttribute('href');
       if (!href) {
+        console.log('🔬 No href attribute');
         return;
       }
 
       // Extract catalogId from href (/sticky/[catalogId])
       const catalogId = href.split('/').pop();
       if (!catalogId) {
+        console.log('🔬 Could not extract catalogId from href');
         return;
       }
 
+      console.log('🔬 CatalogId:', catalogId, '| Active:', activeFolderRef.current);
+
       // If already active, allow navigation
       if (activeFolderRef.current === catalogId) {
+        console.log('🔬 Already active, allowing navigation');
         return;
       }
 
       // First touch: prevent navigation, activate folder
+      console.log('🔬 Preventing navigation, activating folder');
       e.preventDefault();
       onActivate(catalogId);
     };

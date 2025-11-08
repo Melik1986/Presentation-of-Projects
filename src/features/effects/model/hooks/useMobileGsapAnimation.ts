@@ -11,21 +11,26 @@ export function useMobileGsapAnimation() {
   const currentAnimationRef = useRef<gsap.core.Tween | null>(null);
 
   const animatePreviewShow = useCallback((folderId: string) => {
+    console.log('🎬 animatePreviewShow called for:', folderId);
+    
     // Kill previous animation
     if (currentAnimationRef.current) {
       currentAnimationRef.current.kill();
+      console.log('🎬 Killed previous animation');
     }
 
     // Try multiple selectors to find folder
     let folder = document.querySelector(`[href="/sticky/${folderId}"]`);
+    console.log('🎬 querySelector by href:', folder ? 'found' : 'not found');
     
     if (!folder) {
       // Fallback: try by data attribute or class
       folder = document.querySelector(`.folder[data-catalog="${folderId}"]`);
+      console.log('🎬 querySelector by data-catalog:', folder ? 'found' : 'not found');
     }
     
     if (!folder) {
-      console.warn(`useMobileGsapAnimation: folder not found for ${folderId}`);
+      console.warn(`🎬 FAILED: folder not found for ${folderId}`);
       return;
     }
 
@@ -33,10 +38,14 @@ export function useMobileGsapAnimation() {
       folder.querySelectorAll('.folder-preview-img')
     );
     
+    console.log('🎬 Found preview images:', previewImages.length);
+    
     if (previewImages.length === 0) {
-      console.warn(`useMobileGsapAnimation: no preview images found in folder ${folderId}`);
+      console.warn(`🎬 FAILED: no preview images found in folder ${folderId}`);
       return;
     }
+
+    console.log('🎬 Starting GSAP animation...');
 
     // Animate preview images with stagger (same as desktop)
     previewImages.forEach((img, i) => {
