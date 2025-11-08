@@ -238,53 +238,16 @@
     margin-bottom: -0.5rem;
   }
 
-  /* Mobile: Force initial state, override any inline styles */
+  /* Mobile: Show preview container when active (GSAP handles animations) */
   .folderPreview {
-    opacity: 0 !important;
+    opacity: 0;
     pointer-events: none;
     transition: opacity 0.3s ease;
   }
 
-  .folderPreviewImg {
-    transform: translateY(0) rotate(0deg);
-    opacity: 0;
-    transition: none;
-  }
-
-  /* Active state: show and animate */
   .folder.active .folderPreview {
-    opacity: 1 !important;
+    opacity: 1;
     pointer-events: auto;
-  }
-
-  .folder.active .folderPreviewImg {
-    animation: slideUpPreview 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards !important;
-  }
-
-  .folder.active .folderPreviewImg:nth-child(1) {
-    animation-delay: 0s;
-    --preview-rotation: -15deg;
-  }
-
-  .folder.active .folderPreviewImg:nth-child(2) {
-    animation-delay: 0.05s;
-    --preview-rotation: 0deg;
-  }
-
-  .folder.active .folderPreviewImg:nth-child(3) {
-    animation-delay: 0.1s;
-    --preview-rotation: 15deg;
-  }
-
-  @keyframes slideUpPreview {
-    0% {
-      transform: translateY(0) rotate(0deg);
-      opacity: 0;
-    }
-    100% {
-      transform: translateY(-100%) rotate(var(--preview-rotation));
-      opacity: 1;
-    }
   }
 
   .folderName {
