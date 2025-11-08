@@ -33,4 +33,3 @@ export function getPreviewRotation(index: number): number {
   if (index === 1) return random(-10, 10);
   return random(10, 20);
 }
-

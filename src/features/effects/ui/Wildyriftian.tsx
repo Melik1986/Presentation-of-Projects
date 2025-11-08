@@ -39,7 +39,7 @@ export function Wildyriftian({ className }: WildyriftianProps) {
 
   // Mobile GSAP animations (triggered by React state)
   const { animatePreviewShow, animatePreviewHide } = useMobileGsapAnimation();
-  
+
   // Track previous active folder to hide it when switching
   const previousActiveFolderRef = useRef<string | null>(null);
 
@@ -47,7 +47,7 @@ export function Wildyriftian({ className }: WildyriftianProps) {
   useEffect(() => {
     // Check if touch device
     const isTouch = window.matchMedia('(pointer: coarse)').matches;
-    
+
     if (!isTouch) {
       return;
     }
@@ -79,13 +79,13 @@ export function Wildyriftian({ className }: WildyriftianProps) {
 
   const handleReset = useCallback(() => {
     const isTouch = window.matchMedia('(pointer: coarse)').matches;
-    
+
     // Hide current active folder before resetting state
     if (isTouch && activeFolderId) {
       animatePreviewHide(activeFolderId);
       previousActiveFolderRef.current = null;
     }
-    
+
     resetActiveFolder();
   }, [activeFolderId, animatePreviewHide, resetActiveFolder]);
 

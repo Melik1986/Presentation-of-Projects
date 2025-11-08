@@ -1,24 +1,13 @@
 /* eslint-disable no-console */
 /**
- * Simple structured logger inspired by Pino
- * Recommended by Next.js: https://nextjs.org/docs/13/pages/building-your-application/deploying/production-checklist#logging
+ * Simple structured logger
  */
 
 type LogLevel = 'trace' | 'debug' | 'info' | 'warn' | 'error' | 'fatal';
 
-interface LogEntry {
-  level: number;
-  time: number;
-  msg?: string;
-  pid?: number;
-  hostname?: string;
-  [key: string]: unknown;
-}
-
 interface LoggerOptions {
   level?: LogLevel;
   enabled?: boolean;
-  base?: Record<string, unknown>;
 }
 
 interface ChildBindings {
@@ -34,46 +23,35 @@ const LEVELS: Record<LogLevel, number> = {
   fatal: 60,
 };
 
-const isBrowser = typeof window !== 'undefined';
-
 class Logger {
   private minLevel: number;
   private enabled: boolean;
-  private _bindings: ChildBindings;
+  private context: string;
 
-  constructor(options: LoggerOptions = {}, bindings: ChildBindings = {}) {
+  constructor(options: LoggerOptions = {}, context = '') {
     this.minLevel = LEVELS[options.level ?? 'info'];
     this.enabled = options.enabled ?? process.env.NODE_ENV !== 'production';
-    this._bindings = {
-      ...options.base,
-      ...bindings,
-    };
+    this.context = context;
   }
 
-  /**
-   * Create child logger with additional bindings
-   * @param bindings - Context to add to all child logs
-   */
   child(bindings: ChildBindings): Logger {
-    return new Logger(
-      { level: this.levelName, enabled: this.enabled },
-      { ...this._bindings, ...bindings }
-    );
+    const contextParts = this.context ? [this.context] : [];
+    Object.entries(bindings).forEach(([key, value]) => {
+      contextParts.push(`${key}=${value}`);
+    });
+    return new Logger({ level: this.levelName, enabled: this.enabled }, contextParts.join(' '));
   }
 
-  /**
-   * Get current bindings
-   */
   bindings(): ChildBindings {
-    return { ...this._bindings };
+    return { context: this.context };
   }
 
-  /**
-   * Update bindings dynamically
-   * @param bindings - New bindings to merge
-   */
   setBindings(bindings: ChildBindings): void {
-    Object.assign(this._bindings, bindings);
+    const parts = this.context ? [this.context] : [];
+    Object.entries(bindings).forEach(([key, value]) => {
+      parts.push(`${key}=${value}`);
+    });
+    this.context = parts.join(' ');
   }
 
   private get levelName(): LogLevel {
@@ -85,129 +63,73 @@ class Logger {
     return this.enabled && level >= this.minLevel;
   }
 
-  private write(level: LogLevel, msgOrObj: string | object, ...args: unknown[]): void {
+  private log(level: LogLevel, ...parts: unknown[]): void {
     if (!this.shouldLog(LEVELS[level])) return;
 
-    const entry: LogEntry = {
-      level: LEVELS[level],
-      time: Date.now(),
-      ...this._bindings,
-    };
+    const consoleMethod =
+      level === 'fatal' || level === 'error' ? 'error' : level === 'warn' ? 'warn' : 'log';
+    const emoji = { trace: '🔍', debug: '🐛', info: 'ℹ️', warn: '⚠️', error: '❌', fatal: '💀' }[
+      level
+    ];
+    const timeStr = new Date().toISOString().split('T')[1]?.slice(0, -1);
 
-    // Handle different input styles (Pino-compatible)
-    if (typeof msgOrObj === 'string') {
-      entry.msg = msgOrObj;
-      if (args.length > 0) {
-        entry.data = args;
-      }
-    } else {
-      Object.assign(entry, msgOrObj);
-      if (typeof args[0] === 'string') {
-        entry.msg = args[0];
-        if (args.length > 1) {
-          entry.data = args.slice(1);
-        }
-      }
-    }
+    const prefix = `${emoji} [${timeStr}]${this.context ? ` [${this.context}]` : ''}`;
 
-    // Browser: pretty console output
-    if (isBrowser) {
-      this.browserLog(level, entry);
-    } else {
-      // Server: JSON output (Pino-style)
-      console.log(JSON.stringify(entry));
-    }
+    console[consoleMethod](prefix, ...parts);
   }
 
-  private browserLog(level: LogLevel, entry: LogEntry): void {
-    const consoleMethod = level === 'fatal' || level === 'error' ? 'error' : level === 'warn' ? 'warn' : 'log';
-    const emoji = { trace: '🔍', debug: '🐛', info: 'ℹ️', warn: '⚠️', error: '❌', fatal: '💀' }[level];
-    
-    const { msg, level: _level, time, data, ...context } = entry;
-    const timeStr = new Date(time).toISOString().split('T')[1]?.slice(0, -1);
-    
-    console[consoleMethod](
-      `${emoji} [${timeStr}]`,
-      msg ?? '',
-      Object.keys(context).length > 0 ? context : '',
-      data ?? ''
-    );
+  trace(...args: unknown[]): void {
+    this.log('trace', ...args);
   }
 
-  // Log methods (Pino API)
-  trace(msgOrObj: string | object, ...args: unknown[]): void {
-    this.write('trace', msgOrObj, ...args);
+  debug(...args: unknown[]): void {
+    this.log('debug', ...args);
   }
 
-  debug(msgOrObj: string | object, ...args: unknown[]): void {
-    this.write('debug', msgOrObj, ...args);
+  info(...args: unknown[]): void {
+    this.log('info', ...args);
   }
 
-  info(msgOrObj: string | object, ...args: unknown[]): void {
-    this.write('info', msgOrObj, ...args);
+  warn(...args: unknown[]): void {
+    this.log('warn', ...args);
   }
 
-  warn(msgOrObj: string | object, ...args: unknown[]): void {
-    this.write('warn', msgOrObj, ...args);
+  error(...args: unknown[]): void {
+    this.log('error', ...args);
   }
 
-  error(msgOrObj: string | object | Error, ...args: unknown[]): void {
-    if (msgOrObj instanceof Error) {
-      this.write('error', { err: { message: msgOrObj.message, stack: msgOrObj.stack } }, ...args);
-    } else {
-      this.write('error', msgOrObj, ...args);
-    }
+  fatal(...args: unknown[]): void {
+    this.log('fatal', ...args);
   }
 
-  fatal(msgOrObj: string | object | Error, ...args: unknown[]): void {
-    if (msgOrObj instanceof Error) {
-      this.write('fatal', { err: { message: msgOrObj.message, stack: msgOrObj.stack } }, ...args);
-    } else {
-      this.write('fatal', msgOrObj, ...args);
-    }
-  }
-
-  // Timing utilities
   time(label: string): void {
     if (this.enabled) {
-      console.time(label);
+      console.time(`${this.context ? `[${this.context}] ` : ''}${label}`);
     }
   }
 
   timeEnd(label: string): void {
     if (this.enabled) {
-      console.timeEnd(label);
+      console.timeEnd(`${this.context ? `[${this.context}] ` : ''}${label}`);
     }
   }
 }
 
 /**
- * Create logger instance (Pino-style API)
+ * Create logger instance
  * @param options - Logger configuration
- * @returns Logger instance
- * 
+ *
  * @example
  * ```typescript
- * // Basic usage
  * const logger = createLogger();
  * logger.info('hello world');
- * 
- * // With context
- * const logger = createLogger({ base: { service: 'api' } });
- * 
- * // Child logger
- * const requestLogger = logger.child({ requestId: 'req-123' });
- * requestLogger.info('processing request');
- * 
- * // Multiple styles (Pino-compatible)
- * logger.info({ userId: 123 }, 'user logged in');
- * logger.error(new Error('Failed'), 'operation failed');
+ *
+ * const audioLogger = logger.child({ module: 'AudioDirector' });
+ * audioLogger.error(error, 'Failed to load', { trackId: '123' });
  * ```
  */
 export function createLogger(options: LoggerOptions = {}): Logger {
   return new Logger(options);
 }
 
-// Default logger instance
 export const logger = createLogger();
-

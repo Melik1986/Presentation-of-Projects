@@ -86,7 +86,7 @@ export function AudioProvider({ children, config }: AudioProviderProps): ReactEl
           setIsReady(true);
         }
       } catch (error) {
-        logger.error(error instanceof Error ? error : new Error(String(error)), 'Failed to initialize AudioProvider');
+        logger.error('Failed to initialize AudioProvider:', error);
       }
     };
 

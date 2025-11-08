@@ -19,7 +19,7 @@ export function useWildyriftianAnimation(containerRef: RefObject<HTMLDivElement 
       // https://developer.mozilla.org/en-US/docs/Web/CSS/@media/hover
       const hasHoverSupport = supportsHover();
       const isPointerCoarse = window.matchMedia('(pointer: coarse)').matches;
-      
+
       // Only setup hover animations if device supports hover and NOT touch
       if (!hasHoverSupport || isPointerCoarse) {
         return;
@@ -42,32 +42,34 @@ export function useWildyriftianAnimation(containerRef: RefObject<HTMLDivElement 
         // Create timeline (paused) for this folder
         const tl = gsap.timeline({ paused: true });
 
-        // Animate wrapper
+        // Animate wrapper (15% higher than before)
         tl.to(
           wrapper,
           {
-            y: 0,
-            duration: 0.25,
-            ease: 'back.out(1.7)',
+            y: -3.75,
+            duration: 0.4,
+            ease: 'back.out(1.5)',
           },
           0
         );
 
-        // Animate preview images with stagger
-        previewImages.forEach((img, i) => {
-          const rotation = getPreviewRotation(i);
-
-          tl.to(
-            img,
-            {
-              y: '-100%',
-              rotation: rotation,
-              duration: 0.25,
-              ease: 'back.out(1.7)',
+        // Animate preview images with premium wave stagger (higher + bigger)
+        tl.to(
+          previewImages,
+          {
+            y: '-125%',
+            scale: 1.18,
+            rotation: (i) => getPreviewRotation(i),
+            duration: 0.55,
+            ease: 'back.out(1.7)',
+            stagger: {
+              amount: -0.2,
+              from: 'center',
+              ease: 'power2.inOut',
             },
-            i * 0.025 // stagger
-          );
-        });
+          },
+          0.1
+        );
 
         // Disable sibling folders on hover
         const handleEnter = () => {
@@ -89,9 +91,9 @@ export function useWildyriftianAnimation(containerRef: RefObject<HTMLDivElement 
         folder.addEventListener('mouseleave', handleLeave);
       });
     },
-    { 
+    {
       scope: containerRef,
-      dependencies: [] // Explicitly prevent re-runs (Point #2 fix)
+      dependencies: [], // Explicitly prevent re-runs (Point #2 fix)
     }
   );
 }

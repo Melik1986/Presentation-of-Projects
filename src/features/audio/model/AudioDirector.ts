@@ -112,7 +112,7 @@ class AudioDirector {
       try {
         await ctx.resume();
       } catch (error) {
-        logger.warn(error instanceof Error ? error : { error }, 'Failed to resume AudioContext');
+        logger.warn('Failed to resume AudioContext:', error);
       }
     }
   }
@@ -131,7 +131,7 @@ class AudioDirector {
       try {
         await ctx.resume();
       } catch (error) {
-        logger.warn(error instanceof Error ? error : { error }, 'Failed to resume AudioContext on user gesture');
+        logger.warn('Failed to resume AudioContext on user gesture:', error);
       }
     }
   }
@@ -157,7 +157,7 @@ class AudioDirector {
         };
       }
     } catch (error) {
-      logger.warn(error instanceof Error ? error : { error }, 'Could not load settings');
+      logger.warn('Could not load settings:', error);
       this.settings = { ...DEFAULT_SETTINGS };
     }
   }
@@ -166,7 +166,7 @@ class AudioDirector {
     try {
       window.localStorage.setItem(SETTINGS_STORAGE_KEY, JSON.stringify(this.settings));
     } catch (error) {
-      logger.warn(error instanceof Error ? error : { error }, 'Could not persist settings');
+      logger.warn('Could not persist settings:', error);
     }
   }
 
@@ -320,10 +320,7 @@ class AudioDirector {
    * Handles track loading error
    */
   private handleTrackError(id: string, url: string, error: unknown): void {
-    logger.error(error instanceof Error ? error : new Error(String(error)), 'Failed to prepare track', {
-      trackId: id,
-      url,
-    });
+    logger.error('Failed to prepare track:', { trackId: id, url }, error);
   }
 
   /**
@@ -342,7 +339,7 @@ class AudioDirector {
         track.gain.disconnect();
       }
     } catch (error) {
-      logger.warn(error instanceof Error ? error : { error }, 'Detach track error', { trackId: track.id });
+      logger.warn('Detach track error:', { trackId: track.id }, error);
     }
   }
 
@@ -360,7 +357,7 @@ class AudioDirector {
     } catch (error) {
       const err = error as Error;
       if (err.name !== 'AbortError') {
-        logger.warn(error instanceof Error ? error : { error }, 'Play rejected', { trackId: track.id });
+        logger.warn('Play rejected:', { trackId: track.id }, error);
       }
     }
   }
@@ -377,7 +374,7 @@ class AudioDirector {
     try {
       await track.adapter.pause();
     } catch (error) {
-      logger.warn(error instanceof Error ? error : { error }, 'Pause error', { trackId: track.id });
+      logger.warn('Pause error:', { trackId: track.id }, error);
     }
   }
 

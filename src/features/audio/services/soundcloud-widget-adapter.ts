@@ -248,7 +248,7 @@ export class SoundCloudAdapter implements PlatformAdapter {
         this.widget.unbind(window.SC.Widget.Events.FINISH);
         this.widget.unbind(window.SC.Widget.Events.ERROR);
       } catch (error) {
-        logger.error(error instanceof Error ? error : { error }, 'Error unbinding SoundCloud widget', { trackUrl: this.trackUrl });
+        logger.error('Error unbinding SoundCloud widget:', { trackUrl: this.trackUrl }, error);
       }
       this.widget = null;
     }

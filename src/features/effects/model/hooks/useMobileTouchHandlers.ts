@@ -22,7 +22,7 @@ export function useMobileTouchHandlers({
   onActivate,
 }: UseMobileTouchHandlersProps): void {
   const activeFolderRef = useRef(activeFolderId);
-  
+
   useEffect(() => {
     activeFolderRef.current = activeFolderId;
   }, [activeFolderId]);
@@ -36,7 +36,7 @@ export function useMobileTouchHandlers({
     // Proper touch detection (Web standards)
     const hasHoverSupport = supportsHover();
     const isPointerCoarse = window.matchMedia('(pointer: coarse)').matches;
-    
+
     // Only setup touch handlers on actual touch devices
     if (hasHoverSupport && !isPointerCoarse) {
       return; // Desktop with hover, skip
@@ -45,7 +45,7 @@ export function useMobileTouchHandlers({
     const handleTouchStart = (e: TouchEvent) => {
       const target = e.target as HTMLElement;
       const folder = target.closest('.folder') as HTMLAnchorElement;
-      
+
       if (!folder) {
         return;
       }

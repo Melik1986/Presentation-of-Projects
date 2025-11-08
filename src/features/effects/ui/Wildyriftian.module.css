@@ -47,13 +47,39 @@
 
 .hero {
   position: absolute;
-  top: 50%;
+  top: 20%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 90%;
   max-width: 800px;
   text-align: center;
   z-index: 10;
+}
+
+@media (max-width: 1304px) {
+  .hero {
+    width: 90%;
+  }
+}
+
+@media (max-width: 1024px) {
+  .hero {
+    width: 90%;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    top: 40%;
+    width: 85%;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    top: 30%;
+    width: 85%;
+  }
 }
 
 .heroTitle {
@@ -117,8 +143,8 @@
 .folderPreviewImg {
   position: absolute;
   top: 50%;
-  width: 8rem;
-  height: 12rem;
+  width: 10rem;
+  height: 14rem;
 }
 
 .folderPreviewImg:nth-child(1) {
@@ -134,6 +160,22 @@
 .folderPreviewImg:nth-child(3) {
   left: 80%;
   transform-origin: top right;
+}
+
+@media (max-width: 768px) {
+  .folderPreviewImg {
+    top: 68%;
+    width: 8rem;
+    height: 12rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .folderPreviewImg {
+    top: 72%;
+    width: 6rem;
+    height: 10rem;
+  }
 }
 
 .folderWrapper {
@@ -222,11 +264,6 @@
 
   .heroDescription {
     font-size: 0.95rem;
-  }
-
-  .hero {
-    top: 50%;
-    width: 85%;
   }
 
   .row {

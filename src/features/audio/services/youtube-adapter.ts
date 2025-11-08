@@ -135,7 +135,10 @@ export class YouTubeAdapter implements PlatformAdapter {
               }
             },
             onError: (event: YT.OnErrorEvent) => {
-              logger.error({ errorCode: event.data, videoId: this.videoId }, 'YouTube player error');
+              logger.error('YouTube player error:', {
+                errorCode: event.data,
+                videoId: this.videoId,
+              });
               reject(new Error(`YouTube player error: ${event.data}`));
             },
           },
@@ -221,7 +224,7 @@ export class YouTubeAdapter implements PlatformAdapter {
       try {
         this.player.destroy();
       } catch (error) {
-        logger.error(error instanceof Error ? error : { error }, 'Error destroying YouTube player', { videoId: this.videoId });
+        logger.error('Error destroying YouTube player:', { videoId: this.videoId }, error);
       }
       this.player = null;
     }

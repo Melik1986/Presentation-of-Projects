@@ -103,19 +103,19 @@ console.log(requestLogger.bindings());
 ```typescript
 // С базовым контекстом
 const apiLogger = createLogger({
-  base: { service: 'api', version: '1.0.0' }
+  base: { service: 'api', version: '1.0.0' },
 });
 apiLogger.info('API started'); // Включает service и version
 
 // Минимальный уровень
 const prodLogger = createLogger({
-  level: 'warn' // Логирует только warn, error, fatal
+  level: 'warn', // Логирует только warn, error, fatal
 });
 
 // Принудительное включение
 const debugLogger = createLogger({
   enabled: true,
-  level: 'trace'
+  level: 'trace',
 });
 ```
 
@@ -165,12 +165,12 @@ const logger = createLogger().child({ module: 'AudioDirector' });
 class AudioDirector {
   async loadTrack(id: string, url: string) {
     logger.time(`load-track-${id}`);
-    
+
     try {
       logger.debug({ trackId: id, url }, 'Loading track');
-      
+
       const track = await this.fetchTrack(url);
-      
+
       logger.info({ trackId: id, duration: track.duration }, 'Track loaded successfully');
       return track;
     } catch (error) {
@@ -202,11 +202,11 @@ const logger = createLogger().child({ hook: 'useWildyriftianAnimation' });
 export const useWildyriftianAnimation = () => {
   useEffect(() => {
     logger.debug('Initializing animation');
-    
+
     try {
       const timeline = gsap.timeline();
       logger.info('Animation created');
-      
+
       return () => {
         logger.debug('Cleaning up animation');
         timeline.kill();
@@ -225,17 +225,17 @@ export const useWildyriftianAnimation = () => {
 import { createLogger } from '@/shared/lib';
 
 export async function GET(request: Request) {
-  const requestLogger = logger.child({ 
+  const requestLogger = logger.child({
     path: request.url,
-    method: 'GET'
+    method: 'GET',
   });
-  
+
   requestLogger.info('Fetching catalogs');
-  
+
   try {
     const data = await fetchCatalogs();
     requestLogger.info({ count: data.length }, 'Catalogs fetched');
-    
+
     return Response.json(data);
   } catch (error) {
     requestLogger.error(error, 'Failed to fetch catalogs');
@@ -268,14 +268,14 @@ export async function GET(request: Request) {
 
 ## 🎚️ Log Levels
 
-| Level | Value | Когда использовать |
-|-------|-------|-------------------|
-| `trace` | 10 | Детальная отладка (очень verbose) |
-| `debug` | 20 | Информация для разработки |
-| `info` | 30 | Обычные события (по умолчанию) |
-| `warn` | 40 | Предупреждения |
-| `error` | 50 | Ошибки |
-| `fatal` | 60 | Критические ошибки |
+| Level   | Value | Когда использовать                |
+| ------- | ----- | --------------------------------- |
+| `trace` | 10    | Детальная отладка (очень verbose) |
+| `debug` | 20    | Информация для разработки         |
+| `info`  | 30    | Обычные события (по умолчанию)    |
+| `warn`  | 40    | Предупреждения                    |
+| `error` | 50    | Ошибки                            |
+| `fatal` | 60    | Критические ошибки                |
 
 ---
 
@@ -291,12 +291,14 @@ NODE_ENV=production  # Автоматически отключает логи
 ## 🎯 Best Practices
 
 ✅ **DO:**
+
 - Используйте child логгеры для контекста
 - Логируйте структурированные данные (объекты)
 - Используйте правильные уровни
 - Добавляйте полезные метаданные
 
 ❌ **DON'T:**
+
 - Не логируйте чувствительные данные (пароли, токены)
 - Не спамьте в циклах без debounce
 - Не используйте `console.log` напрямую
@@ -312,5 +314,4 @@ NODE_ENV=production  # Автоматически отключает логи
 
 ---
 
-*Создано на основе Pino API | Zero dependencies | TypeScript ready*
-
+_Создано на основе Pino API | Zero dependencies | TypeScript ready_
