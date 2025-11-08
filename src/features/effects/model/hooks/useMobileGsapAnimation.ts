@@ -5,6 +5,8 @@ import { useCallback, useRef } from 'react';
 
 import { createLogger } from '@/shared/lib';
 
+import { getPreviewRotation } from '../utils';
+
 const logger = createLogger().child({ hook: 'useMobileGsapAnimation' });
 
 /**
@@ -73,12 +75,7 @@ export function useMobileGsapAnimation() {
 
     // Animate preview images with stagger (same as desktop)
     previewImages.forEach((img, i) => {
-      const rotation =
-        i === 0
-          ? gsap.utils.random(-20, -10)
-          : i === 1
-          ? gsap.utils.random(-10, 10)
-          : gsap.utils.random(10, 20);
+      const rotation = getPreviewRotation(i);
 
       const anim = gsap.to(img, {
         y: '-100%',

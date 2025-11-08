@@ -2,6 +2,8 @@
 
 import { useEffect, useRef } from 'react';
 
+import { supportsHover } from '../utils';
+
 import type { RefObject } from 'react';
 
 type UseMobileTouchHandlersProps = {
@@ -32,11 +34,11 @@ export function useMobileTouchHandlers({
     }
 
     // Proper touch detection (Web standards)
-    const supportsHover = window.matchMedia('(hover: hover)').matches;
+    const hasHoverSupport = supportsHover();
     const isPointerCoarse = window.matchMedia('(pointer: coarse)').matches;
     
     // Only setup touch handlers on actual touch devices
-    if (supportsHover && !isPointerCoarse) {
+    if (hasHoverSupport && !isPointerCoarse) {
       return; // Desktop with hover, skip
     }
 

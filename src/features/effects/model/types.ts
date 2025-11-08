@@ -14,12 +14,6 @@ export type FolderData = {
 
 export type FolderRow = FolderData[];
 
-export type AnimationPhase = 'enter' | 'leave';
-
-export type MobileState = {
-  current: boolean;
-};
-
 export type WildyriftianProps = {
   className?: string;
 };

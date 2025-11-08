@@ -2,7 +2,7 @@
 
 import { useCallback, useState } from 'react';
 
-import { MOBILE_BREAKPOINT } from '../data';
+import { isTouchDevice } from '../utils';
 
 type UseFolderInteractionProps = {
   previewCatalog: (catalogId: string) => void;
@@ -42,7 +42,7 @@ export function useFolderInteraction({
 
   const handleFolderClick = useCallback(
     (e: React.MouseEvent<HTMLAnchorElement>, catalogId: string) => {
-      const isMobile = window.innerWidth < MOBILE_BREAKPOINT;
+      const isMobile = isTouchDevice();
       if (!isMobile) {
         return;
       }

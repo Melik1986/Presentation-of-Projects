@@ -32,8 +32,3 @@ export function generateFolderRows(): FolderRow[] {
 
   return rows;
 }
-
-/**
- * Mobile breakpoint for responsive behavior
- */
-export const MOBILE_BREAKPOINT = 1000;

@@ -3,6 +3,8 @@
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 
+import { getPreviewRotation, supportsHover } from '../utils';
+
 import type { RefObject } from 'react';
 
 /**
@@ -15,11 +17,11 @@ export function useWildyriftianAnimation(containerRef: RefObject<HTMLDivElement 
     () => {
       // Proper touch detection (Web standards)
       // https://developer.mozilla.org/en-US/docs/Web/CSS/@media/hover
-      const supportsHover = window.matchMedia('(hover: hover)').matches;
+      const hasHoverSupport = supportsHover();
       const isPointerCoarse = window.matchMedia('(pointer: coarse)').matches;
       
       // Only setup hover animations if device supports hover and NOT touch
-      if (!supportsHover || isPointerCoarse) {
+      if (!hasHoverSupport || isPointerCoarse) {
         return;
       }
 
@@ -53,7 +55,7 @@ export function useWildyriftianAnimation(containerRef: RefObject<HTMLDivElement 
 
         // Animate preview images with stagger
         previewImages.forEach((img, i) => {
-          const rotation = i === 0 ? gsap.utils.random(-20, -10) : i === 1 ? gsap.utils.random(-10, 10) : gsap.utils.random(10, 20);
+          const rotation = getPreviewRotation(i);
 
           tl.to(
             img,
