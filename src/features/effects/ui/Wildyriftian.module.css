@@ -238,16 +238,10 @@
     margin-bottom: -0.5rem;
   }
 
-  /* Mobile: Show preview container when active (GSAP handles animations) */
+  /* Mobile: GSAP handles ALL animations (opacity, transform) */
+  /* Only pointer-events in CSS, animations via GSAP */
   .folderPreview {
-    opacity: 0;
     pointer-events: none;
-    transition: opacity 0.3s ease;
-  }
-
-  .folder.active .folderPreview {
-    opacity: 1;
-    pointer-events: auto;
   }
 
   .folderName {
