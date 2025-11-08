@@ -7,7 +7,7 @@ import type { CompanyIcon } from './types';
 export const SCROLL_LOCK_CLASS = 'preload-lock';
 export const READY_CLASS = 'preloader-ready';
 export const PRELOADER_COMPLETE_EVENT = 'preloader:complete';
-export const FALLBACK_TIMEOUT = 17000;
+export const FALLBACK_TIMEOUT = 9000;
 
 export const SPRITE_PATH = '/preloader-icons/sprite-preloader.svg';
 export const DEFAULT_SPRITE = '/preloader-icons/sprite-preloader.svg';

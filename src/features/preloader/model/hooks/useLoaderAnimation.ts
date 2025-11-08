@@ -25,31 +25,6 @@ function triggerPreloaderComplete(target?: Document | EventTarget): void {
   }
 }
 
-function waitForAppReady(): Promise<void> {
-  try {
-    const appWindow = window as Window & { __app_ready__?: boolean };
-    if (appWindow && appWindow.__app_ready__) {
-      return Promise.resolve();
-    }
-  } catch {
-    // ignore
-  }
-
-  return new Promise((resolve) => {
-    const handleReady = () => resolve();
-
-    try {
-      document.addEventListener('app:ready', handleReady, { once: true });
-    } catch {
-      resolve();
-    }
-
-    if (isAutomationBrowser()) {
-      setTimeout(resolve, 0);
-    }
-  });
-}
-
 function toMilliseconds(value: string): number {
   const numberValue = parseFloat(value);
   if (Number.isNaN(numberValue)) {
@@ -72,9 +47,7 @@ function setupProgressListeners(element: Element): (() => void) | undefined {
 
     try {
       const target = (element as HTMLElement).ownerDocument ?? document;
-      void waitForAppReady().then(() => {
-        triggerPreloaderComplete(target);
-      });
+      triggerPreloaderComplete(target);
     } catch {
       // ignore
     }
@@ -97,7 +70,7 @@ function setupProgressListeners(element: Element): (() => void) | undefined {
 
     const maxDuration = Math.max(0, ...durations);
     const maxDelay = Math.max(0, ...delays);
-    const fallback = Math.max(maxDuration + maxDelay + 800, 4000);
+    const fallback = maxDuration + maxDelay + 200;
 
     timerId = window.setTimeout(complete, fallback);
   }

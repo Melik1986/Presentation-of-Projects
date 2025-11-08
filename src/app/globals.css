@@ -138,7 +138,7 @@ html.preloader-ready {
   }
 }
 
-/* Audio UI Panel - Dynamic positioning based on preloader state */
+/* Audio UI Panel - Always top-right with slide-in animation */
 .audio-panel-fixed {
   position: fixed;
   top: 2rem;
@@ -151,7 +151,18 @@ html.preloader-ready {
   padding: 1rem;
   border-radius: 0.5rem;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: slideInFromRight 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+@keyframes slideInFromRight {
+  0% {
+    opacity: 0;
+    transform: translateX(100px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 @media (max-width: 768px) {
@@ -160,15 +171,6 @@ html.preloader-ready {
     padding: 0.5rem;
     width: 180px;
   }
-}
-
-/* During preloader - position at bottom center */
-body.preloader-active .audio-panel-fixed {
-  top: auto;
-  bottom: 2rem;
-  left: 50%;
-  right: auto;
-  transform: translateX(-50%);
 }
 
 /* Equalizer color - matching slider blue */

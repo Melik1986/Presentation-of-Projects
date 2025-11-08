@@ -8,7 +8,7 @@
   height: 25vh;
   min-height: 200px;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: center;
   padding: 2rem;
   background-color: transparent;
