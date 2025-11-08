@@ -1,3 +1,5 @@
+'use client';
+
 import { useCallback, useState } from 'react';
 
 import { MOBILE_BREAKPOINT } from '../data';
