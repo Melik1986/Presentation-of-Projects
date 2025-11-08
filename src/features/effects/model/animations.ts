@@ -221,8 +221,8 @@ export function setupWildyriftianAnimation(container: HTMLElement): (() => void)
   }
 
   // Desktop: GSAP hover animations
-  const mobileState = createMobileState();
-  setWrapperOffset(wrappers, mobileState.current);
+  const mobileState = { current: false }; // Desktop is NOT mobile
+  setWrapperOffset(wrappers, false); // Desktop offset: y = 25
 
   const detachHover = bindHoverListeners(folders, wrappers);
   const handleResize = createResizeHandler(container, wrappers, folders, mobileState);
