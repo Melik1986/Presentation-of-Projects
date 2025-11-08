@@ -18,15 +18,10 @@ export function useWildyriftianAnimation(containerRef: RefObject<HTMLDivElement 
       const supportsHover = window.matchMedia('(hover: hover)').matches;
       const isPointerCoarse = window.matchMedia('(pointer: coarse)').matches;
       
-      console.log('🎬 useGSAP running:', { supportsHover, isPointerCoarse });
-      
       // Only setup hover animations if device supports hover and NOT touch
       if (!supportsHover || isPointerCoarse) {
-        console.log('🎬 Skipping GSAP setup (touch device or no hover)');
         return;
       }
-      
-      console.log('🎬 Setting up GSAP hover animations (desktop)');
 
       const folders = gsap.utils.toArray<HTMLElement>('.folder');
       const wrappers = gsap.utils.toArray<HTMLElement>('.folder-wrapper');

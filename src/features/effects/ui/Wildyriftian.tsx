@@ -47,22 +47,18 @@ export function Wildyriftian({ className }: WildyriftianProps) {
   useEffect(() => {
     // Check if touch device
     const isTouch = window.matchMedia('(pointer: coarse)').matches;
-    console.log('🔬 useEffect triggered:', { isTouch, activeFolderId, previous: previousActiveFolderRef.current });
     
     if (!isTouch) {
-      console.log('🔬 Not touch device, skipping');
       return;
     }
 
     // Hide previous folder if exists and different from current
     if (previousActiveFolderRef.current && previousActiveFolderRef.current !== activeFolderId) {
-      console.log('🔬 Hiding previous folder:', previousActiveFolderRef.current);
       animatePreviewHide(previousActiveFolderRef.current);
     }
 
     // Show new folder if exists
     if (activeFolderId) {
-      console.log('🔬 Showing new folder:', activeFolderId);
       animatePreviewShow(activeFolderId);
       previousActiveFolderRef.current = activeFolderId;
     } else {
@@ -82,13 +78,10 @@ export function Wildyriftian({ className }: WildyriftianProps) {
   );
 
   const handleReset = useCallback(() => {
-    console.log('🔬 handleReset called, current active:', activeFolderId);
-    
     const isTouch = window.matchMedia('(pointer: coarse)').matches;
     
     // Hide current active folder before resetting state
     if (isTouch && activeFolderId) {
-      console.log('🔬 Hiding current folder before reset:', activeFolderId);
       animatePreviewHide(activeFolderId);
       previousActiveFolderRef.current = null;
     }
