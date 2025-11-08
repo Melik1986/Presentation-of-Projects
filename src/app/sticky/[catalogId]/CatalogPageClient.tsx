@@ -50,8 +50,6 @@ export function CatalogPageClient({ catalog, catalogId }: CatalogPageClientProps
         </section>
 
         <StickyCards cards={catalog.content.cards} />
-
-        <section className={styles.outro} />
       </div>
 
       <AudioUIPanel className="audio-panel-fixed" />

@@ -34,11 +34,15 @@
 
 .stickyCardIndex {
   flex: 2;
+  position: relative;
+  z-index: 3;
 }
 
 .stickyCardContent {
   flex: 4;
   padding-top: 1.5rem;
+  position: relative;
+  z-index: 3;
 }
 
 .stickyCardContentWrapper {
@@ -51,18 +55,27 @@
 .stickyCardHeader {
   width: 75%;
   color: var(--accent-color, inherit);
+  position: relative;
+  z-index: 3;
+}
+
+.stickyCardImg {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 5/3;
+  overflow: hidden;
+  z-index: 1;
 }
 
 .stickyCardImg img {
-  aspect-ratio: 5/3;
-  width: 100%;
-  height: auto;
   object-fit: cover;
 }
 
 .stickyCardCopy {
   display: flex;
   gap: 1.5rem;
+  position: relative;
+  z-index: 3;
 }
 
 .stickyCardCopyTitle {

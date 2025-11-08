@@ -24,7 +24,6 @@ export interface CatalogCard {
 
 export interface CatalogContent {
   introTitle: string;
-  outroTitle: string;
   cards: CatalogCard[];
 }
 
