@@ -35,12 +35,14 @@ public/
 ### Требования к изображениям
 
 **Preview изображения** (для Wildyriftian эффекта на главной):
+
 - Формат: JPG, PNG, WebP
 - Рекомендуемый размер: **800x1200px** (портретная ориентация)
 - Соотношение сторон: **2:3**
 - Оптимальный размер файла: **< 500KB**
 
 **Card изображения** (для страницы каталога):
+
 - Формат: JPG, PNG, WebP
 - Рекомендуемый размер: **1200x800px** (альбомная ориентация)
 - Соотношение сторон: **3:2**
@@ -56,41 +58,45 @@ public/
 
 ```json
 {
-  "id": "nextjs",                    // Уникальный ID (используется в URL)
-  "name": "Next.js Projects",        // Название каталога
+  "id": "nextjs", // Уникальный ID (используется в URL)
+  "name": "Next.js Projects", // Название каталога
   "track": "https://youtube.com/...", // YouTube/SoundCloud трек (опционально)
-  
+
   "folder": {
-    "displayName": "figures",        // Название папки на главной
-    "variant": "variant-1",          // Цвет папки (variant-1/2/3)
-    "previewImages": [               // Изображения для Wildyriftian эффекта
+    "displayName": "figures", // Название папки на главной
+    "variant": "variant-1", // Цвет папки (variant-1/2/3)
+    "previewImages": [
+      // Изображения для Wildyriftian эффекта
       "/img/catalog-1/preview-1.jpg",
       "/img/catalog-1/preview-2.jpg",
       "/img/catalog-1/preview-3.jpg"
     ]
   },
-  
-  "theme": {                         // Цветовая схема страницы каталога
+
+  "theme": {
+    // Цветовая схема страницы каталога
     "backgroundColor": "#0a0a0a",
     "cardBackground": "#1a1a1a",
     "textColor": "#ffffff",
     "accentColor": "#3b82f6"
   },
-  
+
   "content": {
-    "introTitle": "Next.js Excellence",      // SEO заголовок (скрыт визуально)
-    "cards": [                               // Sticky карточки
+    "introTitle": "Next.js Excellence", // SEO заголовок (скрыт визуально)
+    "cards": [
+      // Sticky карточки
       {
-        "index": "01",                       // Номер карточки
-        "title": "Server Components",        // Заголовок
-        "image": "/img/catalog-1/card-1.jpg",// Изображение
-        "description": "Building performant..."  // Описание
+        "index": "01", // Номер карточки
+        "title": "Server Components", // Заголовок
+        "image": "/img/catalog-1/card-1.jpg", // Изображение
+        "description": "Building performant..." // Описание
       }
       // ... 3 остальные карточки
     ]
   },
-  
-  "seo": {                           // SEO метаданные
+
+  "seo": {
+    // SEO метаданные
     "title": "Next.js Projects | ...",
     "description": "Showcasing...",
     "keywords": "nextjs, react, ..."
@@ -140,12 +146,14 @@ public/
 ```
 
 **Готовые палитры:**
+
 - Темная: `#0a0a0a`, `#1a1a1a`, `#ffffff`, `#3b82f6`
 - Фиолетовая: `#0d0d1a`, `#1a1a2e`, `#e0e0ff`, `#6366f1`
 - Розовая: `#1a0a14`, `#2a1a24`, `#ffebf0`, `#ec4899`
 - Зеленая: `#0f1419`, `#1f2937`, `#f3f4f6`, `#10b981`
 
 **Иерархия фонов:**
+
 - ✅ `backgroundColor` → Фон ВСЕЙ страницы каталога (включая intro/outro секции)
 - ✅ `cardBackground` → Фон каждой sticky карточки
 - ❌ Секции intro/outro → transparent (наследуют backgroundColor)
@@ -187,6 +195,7 @@ public/
 ### Автоматическая работа анимации:
 
 **Вам НЕ нужно менять код!** GSAP автоматически:
+
 - Определяет количество карточек
 - Создаёт нужное число ScrollTriggers
 - Применяет pin к всем, кроме последней
@@ -199,6 +208,7 @@ public/
 ## 🎵 Аудио треки (опционально)
 
 ### Поддерживаемые платформы:
+
 - YouTube: `https://youtube.com/watch?v=VIDEO_ID`
 - SoundCloud: `https://soundcloud.com/artist/track-name`
 
@@ -226,14 +236,18 @@ public/
       "/img/catalog-5/preview-3.jpg"
     ]
   },
-  "theme": { /* ... */ },
+  "theme": {
+    /* ... */
+  },
   "content": {
     "introTitle": "Your SEO Title",
     "cards": [
       /* 4 карточки */
     ]
   },
-  "seo": { /* ... */ }
+  "seo": {
+    /* ... */
+  }
 }
 ```
 
@@ -276,16 +290,19 @@ public/
 ## 🆘 Решение проблем
 
 ### Изображения не отображаются
+
 - Проверьте пути в `catalogs.json` (должны начинаться с `/img/`)
 - Убедитесь, что файлы находятся в `public/img/catalog-X/`
 - Перезапустите dev сервер
 
 ### Изображения слишком большие
+
 - Используйте WebP формат для лучшего сжатия
 - Оптимизируйте через [Squoosh](https://squoosh.app/)
 - Уменьшите разрешение до рекомендуемых размеров
 
 ### Текст не обновляется
+
 - Очистите кэш браузера (`Ctrl+Shift+R`)
 - Проверьте синтаксис JSON (используйте [JSONLint](https://jsonlint.com/))
 - Перезапустите dev сервер
@@ -295,6 +312,7 @@ public/
 ## 📞 Поддержка
 
 Если у вас возникли вопросы:
+
 1. Проверьте [документацию Next.js](https://nextjs.org/docs)
 2. Изучите примеры в `content/catalogs.json`
 3. Посмотрите структуру в `public/img/`
@@ -303,5 +321,4 @@ public/
 
 **Готово!** Ваш шаблон готов к кастомизации 🎉
 
-*Последнее обновление: Ноябрь 2024*
-
+_Последнее обновление: Ноябрь 2024_

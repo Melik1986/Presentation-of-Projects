@@ -17,7 +17,6 @@
   will-change: transform;
 }
 
-
 .stickyCard::after {
   content: '';
   position: absolute;

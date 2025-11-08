@@ -2,14 +2,14 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { useCallback, useEffect, useRef } from 'react';
+import { useRef } from 'react';
 
 import { useAudioDirector } from '@/features/audio';
 import { getHomepageContent } from '@/shared/lib/catalog-loader';
 
 import styles from './Wildyriftian.module.css';
-import { setupWildyriftianAnimation } from '../model/animations';
 import { generateFolderRows } from '../model/data';
+import { useFolderInteraction, useOutsideClick, useWildyriftianAnimation } from '../model/hooks';
 
 import type { WildyriftianProps } from '../model/types';
 
@@ -22,25 +22,21 @@ export function Wildyriftian({ className }: WildyriftianProps) {
   const folderRows = generateFolderRows();
   const homepage = getHomepageContent();
 
-  const handleFolderHover = useCallback(
-    (catalogId: string) => {
-      void previewCatalog(catalogId);
-    },
-    [previewCatalog]
-  );
+  const {
+    activeFolderId,
+    handleFolderHover,
+    handleFolderLeave,
+    handleFolderClick,
+    resetActiveFolder,
+  } = useFolderInteraction({ previewCatalog, setHome });
 
-  const handleFolderLeave = useCallback(() => {
-    void setHome();
-  }, [setHome]);
+  useWildyriftianAnimation(containerRef);
 
-  useEffect(() => {
-    const container = containerRef.current;
-    if (!container) {
-      return undefined;
-    }
-
-    return setupWildyriftianAnimation(container);
-  }, []);
+  useOutsideClick({
+    containerRef,
+    isActive: !!activeFolderId,
+    onOutsideClick: resetActiveFolder,
+  });
 
   return (
     <div className={`${styles.wildyriftian} ${className || ''}`} ref={containerRef}>
@@ -57,8 +53,9 @@ export function Wildyriftian({ className }: WildyriftianProps) {
                 href={`/sticky/${folder.catalogId}`}
                 className={`folder ${styles.folder} ${
                   styles[folder.variant.replace('-', '') as 'variant1' | 'variant2' | 'variant3']
-                }`}
+                } ${activeFolderId === folder.catalogId ? 'active' : ''}`}
                 key={folder.index}
+                onClick={(e) => handleFolderClick(e, folder.catalogId)}
                 onMouseEnter={() => handleFolderHover(folder.catalogId)}
                 onMouseLeave={handleFolderLeave}
               >

@@ -82,14 +82,9 @@ export function createEnterHandler(
   folder: Element,
   wrapper: HTMLElement,
   folders: Element[],
-  previewImages: Element[],
-  mobileState: MobileState
+  previewImages: Element[]
 ): () => void {
   return () => {
-    if (mobileState.current) {
-      return;
-    }
-
     disableSiblingFolders(folders, folder);
     gsap.to(wrapper, {
       y: 0,
@@ -106,14 +101,9 @@ export function createEnterHandler(
 export function createLeaveHandler(
   wrapper: HTMLElement,
   folders: Element[],
-  previewImages: Element[],
-  mobileState: MobileState
+  previewImages: Element[]
 ): () => void {
   return () => {
-    if (mobileState.current) {
-      return;
-    }
-
     enableAllFolders(folders);
     gsap.to(wrapper, {
       y: 25,
@@ -130,12 +120,11 @@ export function createLeaveHandler(
 export function attachHoverEvents(
   folder: Element,
   wrapper: HTMLElement,
-  folders: Element[],
-  mobileState: MobileState
+  folders: Element[]
 ): () => void {
   const previewImages = Array.from(folder.querySelectorAll('.folder-preview-img'));
-  const handleEnter = createEnterHandler(folder, wrapper, folders, previewImages, mobileState);
-  const handleLeave = createLeaveHandler(wrapper, folders, previewImages, mobileState);
+  const handleEnter = createEnterHandler(folder, wrapper, folders, previewImages);
+  const handleLeave = createLeaveHandler(wrapper, folders, previewImages);
 
   folder.addEventListener('mouseenter', handleEnter);
   folder.addEventListener('mouseleave', handleLeave);
@@ -158,12 +147,9 @@ export function createMobileState(): MobileState {
  */
 export function bindHoverListeners(
   folders: Element[],
-  wrappers: HTMLElement[],
-  mobileState: MobileState
+  wrappers: HTMLElement[]
 ): (() => void)[] {
-  return folders.map((folder, index) =>
-    attachHoverEvents(folder, wrappers[index]!, folders, mobileState)
-  );
+  return folders.map((folder, index) => attachHoverEvents(folder, wrappers[index]!, folders));
 }
 
 /**
@@ -202,7 +188,7 @@ export function setupWildyriftianAnimation(container: HTMLElement): (() => void)
 
   setWrapperOffset(wrappers, mobileState.current);
 
-  const detachHover = bindHoverListeners(folders, wrappers, mobileState);
+  const detachHover = bindHoverListeners(folders, wrappers);
   const handleResize = createResizeHandler(container, wrappers, folders, mobileState);
 
   window.addEventListener('resize', handleResize);
