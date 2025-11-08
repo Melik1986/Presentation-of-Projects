@@ -3,9 +3,13 @@
  * Manages YouTube player for background audio playback
  */
 
+import { createLogger } from '@/shared/lib';
+
 import { extractYouTubeVideoId } from './platform-detector';
 
 import type { Platform } from './platform-detector';
+
+const logger = createLogger().child({ adapter: 'YouTubeAdapter' });
 
 // YouTube IFrame API types
 declare global {
@@ -131,7 +135,7 @@ export class YouTubeAdapter implements PlatformAdapter {
               }
             },
             onError: (event: YT.OnErrorEvent) => {
-              console.error('YouTube player error:', event.data);
+              logger.error({ errorCode: event.data, videoId: this.videoId }, 'YouTube player error');
               reject(new Error(`YouTube player error: ${event.data}`));
             },
           },
@@ -217,7 +221,7 @@ export class YouTubeAdapter implements PlatformAdapter {
       try {
         this.player.destroy();
       } catch (error) {
-        console.error('Error destroying YouTube player:', error);
+        logger.error(error instanceof Error ? error : { error }, 'Error destroying YouTube player', { videoId: this.videoId });
       }
       this.player = null;
     }

@@ -3,6 +3,10 @@
 import gsap from 'gsap';
 import { useCallback, useRef } from 'react';
 
+import { createLogger } from '@/shared/lib';
+
+const logger = createLogger().child({ hook: 'useMobileGsapAnimation' });
+
 /**
  * Mobile GSAP animations (triggered by React state)
  * Pattern: React handles logic, GSAP handles animations
@@ -42,7 +46,7 @@ export function useMobileGsapAnimation() {
     }
     
     if (!folder) {
-      console.warn(`useMobileGsapAnimation: folder not found for ${folderId}`);
+      logger.warn('Folder not found', { folderId });
       return;
     }
 
@@ -51,7 +55,7 @@ export function useMobileGsapAnimation() {
     );
     
     if (previewImages.length === 0) {
-      console.warn(`useMobileGsapAnimation: no preview images found in folder ${folderId}`);
+      logger.warn('No preview images found in folder', { folderId });
       return;
     }
 
@@ -105,7 +109,7 @@ export function useMobileGsapAnimation() {
     }
     
     if (!folder) {
-      console.warn(`useMobileGsapAnimation: folder not found for ${folderId}`);
+      logger.warn('Folder not found for hide animation', { folderId });
       return;
     }
 

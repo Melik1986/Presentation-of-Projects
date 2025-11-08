@@ -12,12 +12,15 @@ import {
 } from 'react';
 
 import fallbackConfig from '@/content/catalogs.json';
+import { createLogger } from '@/shared/lib';
 import { useMockAnalyser } from '@/shared/lib/mock-analyser';
 
 import AudioDirector from '../AudioDirector';
 
 import type { AudioConfig, AudioDirectorContextValue, CatalogConfig } from '../types';
 import type { ReactElement, ReactNode } from 'react';
+
+const logger = createLogger().child({ hook: 'useStarlightAudio' });
 
 const StarlightAudioContext = createContext<AudioDirectorContextValue | null>(null);
 
@@ -83,7 +86,7 @@ export function AudioProvider({ children, config }: AudioProviderProps): ReactEl
           setIsReady(true);
         }
       } catch (error) {
-        console.error('AudioProvider: failed to initialize', error);
+        logger.error(error instanceof Error ? error : new Error(String(error)), 'Failed to initialize AudioProvider');
       }
     };
 

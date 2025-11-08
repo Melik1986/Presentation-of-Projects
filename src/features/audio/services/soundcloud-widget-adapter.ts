@@ -3,10 +3,14 @@
  * Manages SoundCloud widget for background audio playback
  */
 
+import { createLogger } from '@/shared/lib';
+
 import { extractSoundCloudTrackUrl } from './platform-detector';
 
 import type { Platform } from './platform-detector';
 import type { PlatformAdapter } from './youtube-adapter';
+
+const logger = createLogger().child({ adapter: 'SoundCloudAdapter' });
 
 // SoundCloud Widget API types
 declare global {
@@ -244,7 +248,7 @@ export class SoundCloudAdapter implements PlatformAdapter {
         this.widget.unbind(window.SC.Widget.Events.FINISH);
         this.widget.unbind(window.SC.Widget.Events.ERROR);
       } catch (error) {
-        console.error('Error unbinding SoundCloud widget:', error);
+        logger.error(error instanceof Error ? error : { error }, 'Error unbinding SoundCloud widget', { trackUrl: this.trackUrl });
       }
       this.widget = null;
     }

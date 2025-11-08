@@ -2,6 +2,8 @@
 
 import { gsap } from 'gsap';
 
+import { createLogger } from '@/shared/lib';
+
 import {
   ANALYSER_FFT_SIZE,
   ANALYSER_RESOLUTION,
@@ -24,6 +26,8 @@ import type {
   PlatformAdapter,
   TrackBundle,
 } from './types';
+
+const logger = createLogger().child({ module: 'AudioDirector' });
 
 const EMPTY_BYTE_ARRAY = new Uint8Array(0);
 
@@ -80,7 +84,7 @@ class AudioDirector {
       };
       const AudioContextCtor = window.AudioContext ?? extendedWindow.webkitAudioContext;
       if (!AudioContextCtor) {
-        console.warn('AudioDirector: AudioContext is not supported in this environment');
+        logger.warn('AudioContext is not supported in this environment');
         return null;
       }
       this.context = new AudioContextCtor();
@@ -108,7 +112,7 @@ class AudioDirector {
       try {
         await ctx.resume();
       } catch (error) {
-        console.warn('AudioDirector: failed to resume AudioContext', error);
+        logger.warn(error instanceof Error ? error : { error }, 'Failed to resume AudioContext');
       }
     }
   }
@@ -127,7 +131,7 @@ class AudioDirector {
       try {
         await ctx.resume();
       } catch (error) {
-        console.warn('AudioDirector: failed to resume AudioContext on user gesture', error);
+        logger.warn(error instanceof Error ? error : { error }, 'Failed to resume AudioContext on user gesture');
       }
     }
   }
@@ -153,7 +157,7 @@ class AudioDirector {
         };
       }
     } catch (error) {
-      console.warn('AudioDirector: could not load settings', error);
+      logger.warn(error instanceof Error ? error : { error }, 'Could not load settings');
       this.settings = { ...DEFAULT_SETTINGS };
     }
   }
@@ -162,7 +166,7 @@ class AudioDirector {
     try {
       window.localStorage.setItem(SETTINGS_STORAGE_KEY, JSON.stringify(this.settings));
     } catch (error) {
-      console.warn('AudioDirector: could not persist settings', error);
+      logger.warn(error instanceof Error ? error : { error }, 'Could not persist settings');
     }
   }
 
@@ -263,7 +267,7 @@ class AudioDirector {
     const adapter = this.createAdapter(platform);
 
     if (!adapter) {
-      console.error(`AudioDirector: unsupported platform for ${trackUrl}`);
+      logger.error({ trackUrl }, 'Unsupported platform');
       return null;
     }
 
@@ -316,8 +320,10 @@ class AudioDirector {
    * Handles track loading error
    */
   private handleTrackError(id: string, url: string, error: unknown): void {
-    const message = error instanceof Error ? error.message : String(error);
-    console.error(`AudioDirector: failed to prepare track ${id} from ${url}:`, message);
+    logger.error(error instanceof Error ? error : new Error(String(error)), 'Failed to prepare track', {
+      trackId: id,
+      url,
+    });
   }
 
   /**
@@ -336,7 +342,7 @@ class AudioDirector {
         track.gain.disconnect();
       }
     } catch (error) {
-      console.warn('AudioDirector: detachTrack error', error);
+      logger.warn(error instanceof Error ? error : { error }, 'Detach track error', { trackId: track.id });
     }
   }
 
@@ -354,7 +360,7 @@ class AudioDirector {
     } catch (error) {
       const err = error as Error;
       if (err.name !== 'AbortError') {
-        console.warn('AudioDirector: play rejected', error);
+        logger.warn(error instanceof Error ? error : { error }, 'Play rejected', { trackId: track.id });
       }
     }
   }
@@ -371,7 +377,7 @@ class AudioDirector {
     try {
       await track.adapter.pause();
     } catch (error) {
-      console.warn('AudioDirector: pause error', error);
+      logger.warn(error instanceof Error ? error : { error }, 'Pause error', { trackId: track.id });
     }
   }
 
