@@ -2,14 +2,19 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { useRef } from 'react';
+import { useCallback, useRef } from 'react';
 
 import { useAudioDirector } from '@/features/audio';
 import { getHomepageContent } from '@/shared/lib/catalog-loader';
 
 import styles from './Wildyriftian.module.css';
 import { generateFolderRows } from '../model/data';
-import { useFolderInteraction, useOutsideClick, useWildyriftianAnimation } from '../model/hooks';
+import {
+  useFolderInteraction,
+  useMobileTouchHandlers,
+  useOutsideClick,
+  useWildyriftianAnimation,
+} from '../model/hooks';
 
 import type { WildyriftianProps } from '../model/types';
 
@@ -24,12 +29,27 @@ export function Wildyriftian({ className }: WildyriftianProps) {
 
   const {
     activeFolderId,
+    setActiveFolderId,
     handleFolderHover,
     handleFolderLeave,
     handleFolderClick,
-    handleFolderTouch,
     resetActiveFolder,
   } = useFolderInteraction({ previewCatalog, setHome });
+
+  // Native touch handlers with passive: false (fixes preventDefault error)
+  const handleActivate = useCallback(
+    (catalogId: string) => {
+      setActiveFolderId(catalogId);
+      void previewCatalog(catalogId);
+    },
+    [setActiveFolderId, previewCatalog]
+  );
+
+  useMobileTouchHandlers({
+    containerRef,
+    activeFolderId,
+    onActivate: handleActivate,
+  });
 
   useWildyriftianAnimation(containerRef);
 
@@ -57,7 +77,6 @@ export function Wildyriftian({ className }: WildyriftianProps) {
                 } ${activeFolderId === folder.catalogId ? 'active' : ''}`}
                 key={folder.index}
                 onClick={(e) => handleFolderClick(e, folder.catalogId)}
-                onTouchStart={(e) => handleFolderTouch(e, folder.catalogId)}
                 onMouseEnter={() => handleFolderHover(folder.catalogId)}
                 onMouseLeave={handleFolderLeave}
               >
