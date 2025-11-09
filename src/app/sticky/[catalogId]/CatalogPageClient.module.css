@@ -20,4 +20,11 @@
   text-align: center;
   line-height: 1.2;
   color: var(--text-color);
+  will-change: transform, opacity;
+}
+
+/* SplitText lines */
+.introTitle :global(.line) {
+  display: inline-block;
+  will-change: transform, opacity;
 }

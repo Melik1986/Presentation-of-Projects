@@ -4,7 +4,7 @@ import { ReactLenis } from 'lenis/react';
 import { useCallback, useLayoutEffect, useRef } from 'react';
 
 import { AudioUIPanel, useAudioDirector } from '@/features/audio';
-import { StickyCards } from '@/features/sticky-cards';
+import { StickyCards, useCatalogTitleAnimation } from '@/features/sticky-cards';
 
 import styles from './CatalogPageClient.module.css';
 
@@ -17,6 +17,7 @@ interface CatalogPageClientProps {
 
 export function CatalogPageClient({ catalog, catalogId }: CatalogPageClientProps) {
   const catalogPageRef = useRef<HTMLDivElement>(null);
+  const titleRef = useRef<HTMLHeadingElement>(null);
   const {
     actions: { enterCatalog, leaveCatalog, setHome, resume },
   } = useAudioDirector();
@@ -41,12 +42,16 @@ export function CatalogPageClient({ catalog, catalogId }: CatalogPageClientProps
 
   useLayoutEffect(() => manageScene(), [manageScene]);
 
+  useCatalogTitleAnimation(titleRef, catalogPageRef);
+
   return (
     <>
       <ReactLenis root />
       <div ref={catalogPageRef} className={styles.catalogPage}>
         <section className={styles.intro}>
-          <h1 className={styles.introTitle}>{catalog.content.introTitle}</h1>
+          <h1 className={`${styles.introTitle} catalog-title`} ref={titleRef}>
+            {catalog.content.introTitle}
+          </h1>
         </section>
 
         <StickyCards cards={catalog.content.cards} />
