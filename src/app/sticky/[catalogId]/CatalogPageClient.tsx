@@ -38,6 +38,10 @@ export function CatalogPageClient({ catalog, catalogId }: CatalogPageClientProps
       element.style.setProperty('--text-color', catalog.theme.textColor);
       element.style.setProperty('--accent-color', catalog.theme.accentColor);
       element.style.setProperty('--title-gradient', catalog.theme.titleGradient);
+
+      if (catalog.theme.pageBackground) {
+        element.style.setProperty('--page-bg-gradient', catalog.theme.pageBackground);
+      }
     }
   }, [catalog.theme]);
 

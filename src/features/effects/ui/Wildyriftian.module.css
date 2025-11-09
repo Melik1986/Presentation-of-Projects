@@ -248,25 +248,25 @@
 .folderIndex,
 .folderIndex::after,
 .folderName {
-  transition: background-color 250ms ease;
+  transition: background 250ms ease;
 }
 
 .variant1 .folderIndex,
 .variant1 .folderIndex::after,
 .variant1 .folderName {
-  background-color: var(--variant-1);
+  background: var(--folder-gradient, var(--variant-1));
 }
 
 .variant2 .folderIndex,
 .variant2 .folderIndex::after,
 .variant2 .folderName {
-  background-color: var(--variant-2);
+  background: var(--folder-gradient, var(--variant-2));
 }
 
 .variant3 .folderIndex,
 .variant3 .folderIndex::after,
 .variant3 .folderName {
-  background-color: var(--variant-3);
+  background: var(--folder-gradient, var(--variant-3));
 }
 
 .disabled .folderIndex,
@@ -323,12 +323,12 @@
   .row:nth-child(2) .variant2 .folderIndex,
   .row:nth-child(2) .variant2 .folderIndex::after,
   .row:nth-child(2) .variant2 .folderName {
-    background-color: var(--variant-3);
+    background: var(--folder-gradient, var(--variant-3));
   }
 
   .row:nth-child(2) .variant3 .folderIndex,
   .row:nth-child(2) .variant3 .folderIndex::after,
   .row:nth-child(2) .variant3 .folderName {
-    background-color: var(--variant-2);
+    background: var(--folder-gradient, var(--variant-2));
   }
 }

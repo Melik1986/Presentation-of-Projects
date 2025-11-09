@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { useCallback, useEffect, useLayoutEffect, useRef } from 'react';
 
 import { useAudioDirector } from '@/features/audio';
-import { getHomepageContent } from '@/shared/lib/catalog-loader';
+import { getAllCatalogs, getHomepageContent } from '@/shared/lib/catalog-loader';
 
 import styles from './Wildyriftian.module.css';
 import { generateFolderRows } from '../model/data';
@@ -37,6 +37,27 @@ export function Wildyriftian({ className }: WildyriftianProps) {
       container.style.setProperty('--home-bg-gradient', homepage.backgroundGradient);
     }
   }, [homepage.backgroundGradient]);
+
+  // Apply folder gradients from catalogs
+  useLayoutEffect(() => {
+    const container = containerRef.current;
+    if (!container) {
+      return;
+    }
+
+    const catalogs = getAllCatalogs();
+    catalogs.forEach((catalog) => {
+      const folders = container.querySelectorAll(`[data-catalog="${catalog.id}"]`);
+      folders.forEach((folder) => {
+        if (catalog.theme.folderGradient) {
+          (folder as HTMLElement).style.setProperty(
+            '--folder-gradient',
+            catalog.theme.folderGradient
+          );
+        }
+      });
+    });
+  }, []);
 
   const {
     activeFolderId,

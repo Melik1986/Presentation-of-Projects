@@ -14,6 +14,8 @@ export interface CatalogTheme {
   textColor: string;
   accentColor: string;
   titleGradient: string;
+  folderGradient?: string;
+  pageBackground?: string;
 }
 
 export interface CatalogCard {
