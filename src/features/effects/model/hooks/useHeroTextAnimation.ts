@@ -70,22 +70,11 @@ export function useHeroTextAnimation(heroRef: RefObject<HTMLDivElement | null>):
       };
 
       // Wait for preloader to complete before starting
-      const abortController = new AbortController();
-      const { signal } = abortController;
+      document.addEventListener(PRELOADER_COMPLETE_EVENT, startAnimations, { once: true });
 
-      const startAnimationsWithCheck = () => {
-        if (signal.aborted) return;
-        startAnimations();
-      };
-
-      document.addEventListener(PRELOADER_COMPLETE_EVENT, startAnimationsWithCheck, {
-        once: true,
-        signal,
-      });
-
-      // Cleanup on unmount
+      // Cleanup on unmount (useGSAP сам управляет cleanup)
       return () => {
-        abortController.abort();
+        document.removeEventListener(PRELOADER_COMPLETE_EVENT, startAnimations);
         splitTitle.revert();
         splitDescription.revert();
       };

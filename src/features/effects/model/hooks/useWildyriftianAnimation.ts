@@ -23,13 +23,9 @@ export function useWildyriftianAnimation(containerRef: RefObject<HTMLDivElement 
       const folders = gsap.utils.toArray<HTMLElement>('.folder');
       const wrappers = gsap.utils.toArray<HTMLElement>('.folder-wrapper');
 
-      const abortController = new AbortController();
-      const { signal } = abortController;
-
       // Initial reveal: folders slide up from bottom (drawer effect)
       // Triggered after preloader completes
       const revealFolders = () => {
-        if (signal.aborted) return;
         gsap.from(folders, {
           y: 100,
           opacity: 0,
@@ -40,10 +36,7 @@ export function useWildyriftianAnimation(containerRef: RefObject<HTMLDivElement 
         });
       };
 
-      document.addEventListener(PRELOADER_COMPLETE_EVENT, revealFolders, {
-        once: true,
-        signal,
-      });
+      document.addEventListener(PRELOADER_COMPLETE_EVENT, revealFolders, { once: true });
 
       // Proper touch detection (Web standards)
       // https://developer.mozilla.org/en-US/docs/Web/CSS/@media/hover
@@ -52,21 +45,20 @@ export function useWildyriftianAnimation(containerRef: RefObject<HTMLDivElement 
 
       // Only setup hover animations if device supports hover and NOT touch
       if (!hasHoverSupport || isPointerCoarse) {
-        // Mobile: only cleanup event listener
+        // Mobile: only cleanup event listener (useGSAP сам управляет cleanup)
         return () => {
-          abortController.abort();
+          document.removeEventListener(PRELOADER_COMPLETE_EVENT, revealFolders);
         };
       }
 
       // Set initial state for desktop
       gsap.set(wrappers, { y: 25 });
 
-      // WeakMap для хранения таймлайнов и обработчиков (автоматическая очистка при удалении из DOM)
+      // WeakMap для хранения таймлайнов (автоматическая очистка при удалении из DOM)
       const folderTimelines = new WeakMap<HTMLElement, gsap.core.Timeline>();
-      const folderHandlers = new WeakMap<
-        HTMLElement,
-        { enter: () => void; leave: () => void }
-      >();
+
+      // Массив обработчиков для cleanup
+      const handlers: Array<{ folder: HTMLElement; enter: () => void; leave: () => void }> = [];
 
       folders.forEach((folder, index) => {
         const wrapper = wrappers[index];
@@ -110,7 +102,6 @@ export function useWildyriftianAnimation(containerRef: RefObject<HTMLDivElement 
 
         // Disable sibling folders on hover
         const handleEnter = () => {
-          if (signal.aborted) return;
           folders.forEach((f) => {
             if (f !== folder) {
               f.classList.add('disabled');
@@ -120,23 +111,26 @@ export function useWildyriftianAnimation(containerRef: RefObject<HTMLDivElement 
         };
 
         const handleLeave = () => {
-          if (signal.aborted) return;
           folders.forEach((f) => f.classList.remove('disabled'));
           tl.reverse();
         };
 
-        // Сохраняем в WeakMap для автоматической очистки
+        // Сохраняем в WeakMap для автоматической очистки таймлайнов
         folderTimelines.set(folder, tl);
-        folderHandlers.set(folder, { enter: handleEnter, leave: handleLeave });
+        handlers.push({ folder, enter: handleEnter, leave: handleLeave });
 
-        // Desktop: mouse events с signal для группового управления
-        folder.addEventListener('mouseenter', handleEnter, { signal });
-        folder.addEventListener('mouseleave', handleLeave, { signal });
+        // Desktop: mouse events (useGSAP сам управляет cleanup через возвращаемую функцию)
+        folder.addEventListener('mouseenter', handleEnter);
+        folder.addEventListener('mouseleave', handleLeave);
       });
 
-      // Desktop: cleanup через AbortController
+      // Desktop: cleanup (useGSAP сам вызовет эту функцию при размонтировании)
       return () => {
-        abortController.abort();
+        document.removeEventListener(PRELOADER_COMPLETE_EVENT, revealFolders);
+        handlers.forEach(({ folder, enter, leave }) => {
+          folder.removeEventListener('mouseenter', enter);
+          folder.removeEventListener('mouseleave', leave);
+        });
       };
     },
     {
