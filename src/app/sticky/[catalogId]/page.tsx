@@ -1,8 +1,8 @@
-import { use } from 'react';
 import { after } from 'next/server';
+import { use } from 'react';
 
-import { getCatalogById } from '@/shared/lib/catalog-loader';
 import { createLogger } from '@/shared/lib';
+import { getCatalogById } from '@/shared/lib/catalog-loader';
 
 import { CatalogPageClient } from './CatalogPageClient';
 
