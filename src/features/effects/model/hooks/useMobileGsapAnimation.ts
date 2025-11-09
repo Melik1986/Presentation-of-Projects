@@ -17,6 +17,9 @@ export function useMobileGsapAnimation() {
   const currentAnimationRef = useRef<gsap.core.Tween | null>(null);
   const initializedRef = useRef(false);
 
+  // Map для кэширования найденных элементов (с проверкой валидности через document.contains)
+  const folderCacheRef = useRef(new Map<string, HTMLElement>());
+
   // Set initial state via GSAP (not CSS)
   const initializePreviewState = useCallback(() => {
     if (initializedRef.current) return;
@@ -31,6 +34,35 @@ export function useMobileGsapAnimation() {
     initializedRef.current = true;
   }, []);
 
+  const findFolder = useCallback((folderId: string): HTMLElement | null => {
+    const folderCache = folderCacheRef.current;
+
+    // Проверяем кэш и валидность элемента
+    const cached = folderCache.get(folderId);
+    if (cached && document.contains(cached)) {
+      return cached;
+    }
+
+    // Если элемент удален из DOM, удаляем из кэша
+    if (cached) {
+      folderCache.delete(folderId);
+    }
+
+    // Ищем элемент
+    let folder = document.querySelector<HTMLElement>(`[href="/sticky/${folderId}"]`);
+
+    if (!folder) {
+      folder = document.querySelector<HTMLElement>(`.folder[data-catalog="${folderId}"]`);
+    }
+
+    // Сохраняем в кэш если нашли
+    if (folder) {
+      folderCache.set(folderId, folder);
+    }
+
+    return folder;
+  }, []);
+
   const animatePreviewShow = useCallback(
     (folderId: string) => {
       initializePreviewState();
@@ -40,13 +72,8 @@ export function useMobileGsapAnimation() {
         currentAnimationRef.current.kill();
       }
 
-      // Try multiple selectors to find folder
-      let folder = document.querySelector(`[href="/sticky/${folderId}"]`);
-
-      if (!folder) {
-        // Fallback: try by data attribute
-        folder = document.querySelector(`.folder[data-catalog="${folderId}"]`);
-      }
+      // Используем кэшированную функцию поиска
+      const folder = findFolder(folderId);
 
       if (!folder) {
         logger.warn('Folder not found', { folderId });
@@ -90,26 +117,23 @@ export function useMobileGsapAnimation() {
 
       currentAnimationRef.current = anim;
     },
-    [initializePreviewState]
+    [initializePreviewState, findFolder]
   );
 
-  const animatePreviewHide = useCallback((folderId: string) => {
-    // Kill previous animation
-    if (currentAnimationRef.current) {
-      currentAnimationRef.current.kill();
-    }
+  const animatePreviewHide = useCallback(
+    (folderId: string) => {
+      // Kill previous animation
+      if (currentAnimationRef.current) {
+        currentAnimationRef.current.kill();
+      }
 
-    // Try multiple selectors to find folder
-    let folder = document.querySelector(`[href="/sticky/${folderId}"]`);
+      // Используем кэшированную функцию поиска
+      const folder = findFolder(folderId);
 
-    if (!folder) {
-      folder = document.querySelector(`.folder[data-catalog="${folderId}"]`);
-    }
-
-    if (!folder) {
-      logger.warn('Folder not found for hide animation', { folderId });
-      return;
-    }
+      if (!folder) {
+        logger.warn('Folder not found for hide animation', { folderId });
+        return;
+      }
 
     const previewImages = gsap.utils.toArray<HTMLElement>(
       folder.querySelectorAll('.folder-preview-img')
@@ -146,7 +170,7 @@ export function useMobileGsapAnimation() {
     });
 
     currentAnimationRef.current = anim;
-  }, []);
+  }, [findFolder]);
 
   return {
     animatePreviewShow,

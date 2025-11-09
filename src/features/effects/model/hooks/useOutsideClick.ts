@@ -38,13 +38,23 @@ export function useOutsideClick({
     if (!container) {
       return;
     }
+
+    const abortController = new AbortController();
+    const { signal } = abortController;
+
     const handleClick = (e: MouseEvent) => {
+      if (signal.aborted) return;
+
       const target = e.target as HTMLElement;
       if (!target.closest('.folder') && isActiveRef.current) {
         onOutsideClickRef.current();
       }
     };
-    container.addEventListener('click', handleClick);
-    return () => container.removeEventListener('click', handleClick);
+
+    container.addEventListener('click', handleClick, { signal });
+
+    return () => {
+      abortController.abort();
+    };
   }, [containerRef]);
 }

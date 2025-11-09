@@ -113,18 +113,18 @@ export function GlobalPreloader() {
       }
     };
 
-    const cleanupCompleteListener = () => {
-      document.removeEventListener(PRELOADER_COMPLETE_EVENT, handleComplete);
-    };
+    const abortController = new AbortController();
+    const { signal } = abortController;
 
     document.addEventListener(PRELOADER_COMPLETE_EVENT, handleComplete, {
       once: true,
+      signal,
     });
 
     const fallbackTimer = setTimeout(handleComplete, FALLBACK_TIMEOUT);
 
     return () => {
-      cleanupCompleteListener();
+      abortController.abort();
       clearTimeout(fallbackTimer);
     };
   }, []);

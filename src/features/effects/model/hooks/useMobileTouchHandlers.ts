@@ -48,7 +48,12 @@ export function useMobileTouchHandlers({
       return; // Desktop with hover, skip
     }
 
+    const abortController = new AbortController();
+    const { signal } = abortController;
+
     const handleTouchStart = (e: TouchEvent) => {
+      if (signal.aborted) return;
+
       const target = e.target as HTMLElement;
       const folder = target.closest('.folder') as HTMLAnchorElement;
 
@@ -77,11 +82,14 @@ export function useMobileTouchHandlers({
       onActivateRef.current(catalogId);
     };
 
-    // Add native listener with passive: false
-    container.addEventListener('touchstart', handleTouchStart, { passive: false });
+    // Add native listener with passive: false and signal for group management
+    container.addEventListener('touchstart', handleTouchStart, {
+      passive: false,
+      signal,
+    });
 
     return () => {
-      container.removeEventListener('touchstart', handleTouchStart);
+      abortController.abort();
     };
   }, [containerRef]);
 }

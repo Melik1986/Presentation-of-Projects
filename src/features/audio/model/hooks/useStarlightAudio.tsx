@@ -115,9 +115,11 @@ export function AudioProvider({ children, config }: AudioProviderProps): ReactEl
     }
 
     let isResumed = false;
+    const abortController = new AbortController();
+    const { signal } = abortController;
 
     const handleUserGesture = async () => {
-      if (isResumed) {
+      if (isResumed || signal.aborted) {
         return;
       }
 
@@ -125,19 +127,27 @@ export function AudioProvider({ children, config }: AudioProviderProps): ReactEl
       await AudioDirector.resumeContextOnUserGesture();
       syncSnapshotsRef.current();
 
-      document.removeEventListener('click', handleUserGesture);
-      document.removeEventListener('touchstart', handleUserGesture);
-      document.removeEventListener('keydown', handleUserGesture);
+      // Автоматически удалятся через AbortController
+      abortController.abort();
     };
 
-    document.addEventListener('click', handleUserGesture, { once: true });
-    document.addEventListener('touchstart', handleUserGesture, { once: true });
-    document.addEventListener('keydown', handleUserGesture, { once: true });
+    // Все слушатели используют один signal для группового управления
+    document.addEventListener('click', handleUserGesture, {
+      once: true,
+      signal,
+    });
+    document.addEventListener('touchstart', handleUserGesture, {
+      once: true,
+      signal,
+    });
+    document.addEventListener('keydown', handleUserGesture, {
+      once: true,
+      signal,
+    });
 
     return () => {
-      document.removeEventListener('click', handleUserGesture);
-      document.removeEventListener('touchstart', handleUserGesture);
-      document.removeEventListener('keydown', handleUserGesture);
+      // Один вызов abort() удалит все слушатели автоматически
+      abortController.abort();
     };
   }, [isReady]);
 

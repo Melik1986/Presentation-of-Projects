@@ -37,9 +37,11 @@ function toMilliseconds(value: string): number {
 function setupProgressListeners(element: Element): (() => void) | undefined {
   let done = false;
   let timerId: number | null = null;
+  const abortController = new AbortController();
+  const { signal } = abortController;
 
   const complete = () => {
-    if (done) {
+    if (done || signal.aborted) {
       return;
     }
 
@@ -57,7 +59,10 @@ function setupProgressListeners(element: Element): (() => void) | undefined {
     complete();
   };
 
-  element.addEventListener('animationend', handleAnimationEnd, { once: true });
+  element.addEventListener('animationend', handleAnimationEnd, {
+    once: true,
+    signal,
+  });
 
   if (typeof window !== 'undefined') {
     const computedStyle = window.getComputedStyle(element);
@@ -76,7 +81,7 @@ function setupProgressListeners(element: Element): (() => void) | undefined {
   }
 
   return () => {
-    element.removeEventListener('animationend', handleAnimationEnd);
+    abortController.abort();
 
     if (timerId && typeof window !== 'undefined') {
       window.clearTimeout(timerId);

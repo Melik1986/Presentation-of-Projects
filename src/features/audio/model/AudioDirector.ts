@@ -42,13 +42,20 @@ class AudioDirector {
   private currentCatalogId: string | null = null;
   private previewCatalogId: string | null = null;
   private settings: DirectorSettings = { ...DEFAULT_SETTINGS };
+  private visibilityAbortController: AbortController | null = null;
+  private createdContainers = new Set<HTMLElement>();
 
   constructor() {
     this.isBrowser = typeof window !== 'undefined';
 
     if (this.isBrowser) {
       this.loadSettings();
-      document.addEventListener('visibilitychange', this.handleVisibilityChange, false);
+
+      // Использование AbortController для управления слушателем
+      this.visibilityAbortController = new AbortController();
+      document.addEventListener('visibilitychange', this.handleVisibilityChange, {
+        signal: this.visibilityAbortController.signal,
+      });
     }
   }
 
@@ -60,7 +67,21 @@ class AudioDirector {
       return;
     }
 
-    document.removeEventListener('visibilitychange', this.handleVisibilityChange, false);
+    // Автоматическое удаление слушателя через AbortController
+    if (this.visibilityAbortController) {
+      this.visibilityAbortController.abort();
+      this.visibilityAbortController = null;
+    }
+
+    // Удаление всех созданных контейнеров
+    this.createdContainers.forEach((container) => {
+      try {
+        container.remove();
+      } catch (error) {
+        logger.warn('Failed to remove container:', error);
+      }
+    });
+    this.createdContainers.clear();
 
     this.tracks.forEach((track) => {
       this.detachTrack(track);
@@ -220,7 +241,7 @@ class AudioDirector {
    */
   private createHiddenContainer(id: string): string {
     const containerId = `audio-player-${id}`;
-    let container = document.getElementById(containerId);
+    let container = document.getElementById(containerId) as HTMLElement | null;
 
     if (!container) {
       container = document.createElement('div');
@@ -228,6 +249,9 @@ class AudioDirector {
       container.style.cssText =
         'position:fixed;top:-9999px;left:-9999px;width:0;height:0;opacity:0;pointer-events:none;overflow:hidden;';
       document.body.appendChild(container);
+
+      // Сохраняем ссылку для последующего удаления
+      this.createdContainers.add(container);
     }
 
     return containerId;

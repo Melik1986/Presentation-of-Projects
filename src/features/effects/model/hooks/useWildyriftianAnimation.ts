@@ -17,12 +17,19 @@ import type { RefObject } from 'react';
 export function useWildyriftianAnimation(containerRef: RefObject<HTMLDivElement | null>): void {
   useGSAP(
     () => {
+      const container = containerRef.current;
+      if (!container) return;
+
       const folders = gsap.utils.toArray<HTMLElement>('.folder');
       const wrappers = gsap.utils.toArray<HTMLElement>('.folder-wrapper');
+
+      const abortController = new AbortController();
+      const { signal } = abortController;
 
       // Initial reveal: folders slide up from bottom (drawer effect)
       // Triggered after preloader completes
       const revealFolders = () => {
+        if (signal.aborted) return;
         gsap.from(folders, {
           y: 100,
           opacity: 0,
@@ -33,7 +40,10 @@ export function useWildyriftianAnimation(containerRef: RefObject<HTMLDivElement 
         });
       };
 
-      document.addEventListener(PRELOADER_COMPLETE_EVENT, revealFolders, { once: true });
+      document.addEventListener(PRELOADER_COMPLETE_EVENT, revealFolders, {
+        once: true,
+        signal,
+      });
 
       // Proper touch detection (Web standards)
       // https://developer.mozilla.org/en-US/docs/Web/CSS/@media/hover
@@ -44,12 +54,19 @@ export function useWildyriftianAnimation(containerRef: RefObject<HTMLDivElement 
       if (!hasHoverSupport || isPointerCoarse) {
         // Mobile: only cleanup event listener
         return () => {
-          document.removeEventListener(PRELOADER_COMPLETE_EVENT, revealFolders);
+          abortController.abort();
         };
       }
 
       // Set initial state for desktop
       gsap.set(wrappers, { y: 25 });
+
+      // WeakMap для хранения таймлайнов и обработчиков (автоматическая очистка при удалении из DOM)
+      const folderTimelines = new WeakMap<HTMLElement, gsap.core.Timeline>();
+      const folderHandlers = new WeakMap<
+        HTMLElement,
+        { enter: () => void; leave: () => void }
+      >();
 
       folders.forEach((folder, index) => {
         const wrapper = wrappers[index];
@@ -93,6 +110,7 @@ export function useWildyriftianAnimation(containerRef: RefObject<HTMLDivElement 
 
         // Disable sibling folders on hover
         const handleEnter = () => {
+          if (signal.aborted) return;
           folders.forEach((f) => {
             if (f !== folder) {
               f.classList.add('disabled');
@@ -102,18 +120,23 @@ export function useWildyriftianAnimation(containerRef: RefObject<HTMLDivElement 
         };
 
         const handleLeave = () => {
+          if (signal.aborted) return;
           folders.forEach((f) => f.classList.remove('disabled'));
           tl.reverse();
         };
 
-        // Desktop: mouse events
-        folder.addEventListener('mouseenter', handleEnter);
-        folder.addEventListener('mouseleave', handleLeave);
+        // Сохраняем в WeakMap для автоматической очистки
+        folderTimelines.set(folder, tl);
+        folderHandlers.set(folder, { enter: handleEnter, leave: handleLeave });
+
+        // Desktop: mouse events с signal для группового управления
+        folder.addEventListener('mouseenter', handleEnter, { signal });
+        folder.addEventListener('mouseleave', handleLeave, { signal });
       });
 
-      // Desktop: cleanup event listener
+      // Desktop: cleanup через AbortController
       return () => {
-        document.removeEventListener(PRELOADER_COMPLETE_EVENT, revealFolders);
+        abortController.abort();
       };
     },
     {

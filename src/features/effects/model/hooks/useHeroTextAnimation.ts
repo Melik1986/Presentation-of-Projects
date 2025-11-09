@@ -70,11 +70,22 @@ export function useHeroTextAnimation(heroRef: RefObject<HTMLDivElement | null>):
       };
 
       // Wait for preloader to complete before starting
-      document.addEventListener(PRELOADER_COMPLETE_EVENT, startAnimations, { once: true });
+      const abortController = new AbortController();
+      const { signal } = abortController;
+
+      const startAnimationsWithCheck = () => {
+        if (signal.aborted) return;
+        startAnimations();
+      };
+
+      document.addEventListener(PRELOADER_COMPLETE_EVENT, startAnimationsWithCheck, {
+        once: true,
+        signal,
+      });
 
       // Cleanup on unmount
       return () => {
-        document.removeEventListener(PRELOADER_COMPLETE_EVENT, startAnimations);
+        abortController.abort();
         splitTitle.revert();
         splitDescription.revert();
       };
