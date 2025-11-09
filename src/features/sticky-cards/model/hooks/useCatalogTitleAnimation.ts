@@ -43,7 +43,7 @@ export function useCatalogTitleAnimation(
       // Parallax: title moves slower on scroll (goes under cards)
       // Start when first card reaches 20% from top (ensures it's not triggered on load)
       const firstCard = containerRef.current?.querySelector('.sticky-card');
-      
+
       if (firstCard) {
         gsap.to(title, {
           y: 200,
@@ -75,4 +75,3 @@ export function useCatalogTitleAnimation(
     }
   );
 }
-

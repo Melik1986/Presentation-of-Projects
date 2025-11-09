@@ -5,4 +5,3 @@
 
 export { SmileyLoader } from './SmileyLoader';
 export type { SmileyLoaderProps } from './types';
-
