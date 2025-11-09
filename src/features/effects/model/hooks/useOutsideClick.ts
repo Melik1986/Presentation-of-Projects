@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 
 import type { RefObject } from 'react';
 
@@ -21,6 +21,18 @@ export function useOutsideClick({
   isActive,
   onOutsideClick,
 }: UseOutsideClickProps): void {
+  const isActiveRef = useRef(isActive);
+  const onOutsideClickRef = useRef(onOutsideClick);
+
+  // Обновляем refs при изменении значений
+  useEffect(() => {
+    isActiveRef.current = isActive;
+  }, [isActive]);
+
+  useEffect(() => {
+    onOutsideClickRef.current = onOutsideClick;
+  }, [onOutsideClick]);
+
   useEffect(() => {
     const container = containerRef.current;
     if (!container) {
@@ -28,11 +40,11 @@ export function useOutsideClick({
     }
     const handleClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
-      if (!target.closest('.folder') && isActive) {
-        onOutsideClick();
+      if (!target.closest('.folder') && isActiveRef.current) {
+        onOutsideClickRef.current();
       }
     };
     container.addEventListener('click', handleClick);
     return () => container.removeEventListener('click', handleClick);
-  }, [containerRef, isActive, onOutsideClick]);
+  }, [containerRef]);
 }

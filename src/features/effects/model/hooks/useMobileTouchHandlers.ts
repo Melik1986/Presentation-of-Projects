@@ -22,10 +22,16 @@ export function useMobileTouchHandlers({
   onActivate,
 }: UseMobileTouchHandlersProps): void {
   const activeFolderRef = useRef(activeFolderId);
+  const onActivateRef = useRef(onActivate);
 
+  // Обновляем refs при изменении значений
   useEffect(() => {
     activeFolderRef.current = activeFolderId;
   }, [activeFolderId]);
+
+  useEffect(() => {
+    onActivateRef.current = onActivate;
+  }, [onActivate]);
 
   useEffect(() => {
     const container = containerRef.current;
@@ -68,7 +74,7 @@ export function useMobileTouchHandlers({
 
       // First touch: prevent navigation, activate folder
       e.preventDefault();
-      onActivate(catalogId);
+      onActivateRef.current(catalogId);
     };
 
     // Add native listener with passive: false
@@ -77,5 +83,5 @@ export function useMobileTouchHandlers({
     return () => {
       container.removeEventListener('touchstart', handleTouchStart);
     };
-  }, [containerRef, onActivate]);
+  }, [containerRef]);
 }

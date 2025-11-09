@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useMemo } from 'react';
 
 import { useAudioDirector } from '../model/hooks/useStarlightAudio';
 
@@ -19,12 +19,6 @@ export function AudioControls(): ReactElement {
     actions: { toggleMute, setVolume },
   } = useAudioDirector();
 
-  const [isMounted, setIsMounted] = useState(false);
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
   const icon = useMemo(() => (muted || volume <= 0.001 ? MUTE_ICON : VOLUME_ICON), [muted, volume]);
   const percent = useMemo(() => (muted ? 0 : formatVolume(volume)), [muted, volume]);
 
@@ -41,20 +35,6 @@ export function AudioControls(): ReactElement {
     },
     [setVolume]
   );
-
-  if (!isMounted) {
-    return (
-      <div className="audio-controls" role="group" aria-label="Audio settings">
-        <button type="button" className="audio-controls__toggle" aria-label="Mute sound">
-          {VOLUME_ICON}
-        </button>
-        <label className="audio-controls__slider" aria-label="Volume">
-          <span className="sr-only">Volume</span>
-          <input type="range" min={0} max={100} step={1} value={100} readOnly />
-        </label>
-      </div>
-    );
-  }
 
   return (
     <div className="audio-controls" role="group" aria-label="Audio settings">

@@ -73,6 +73,17 @@ export function Wildyriftian({ className }: WildyriftianProps) {
 
   // Track previous active folder to hide it when switching
   const previousActiveFolderRef = useRef<string | null>(null);
+  const animatePreviewShowRef = useRef(animatePreviewShow);
+  const animatePreviewHideRef = useRef(animatePreviewHide);
+
+  // Обновляем refs при изменении функций
+  useEffect(() => {
+    animatePreviewShowRef.current = animatePreviewShow;
+  }, [animatePreviewShow]);
+
+  useEffect(() => {
+    animatePreviewHideRef.current = animatePreviewHide;
+  }, [animatePreviewHide]);
 
   // Trigger GSAP animation when active folder changes (mobile only)
   useEffect(() => {
@@ -85,18 +96,18 @@ export function Wildyriftian({ className }: WildyriftianProps) {
 
     // Hide previous folder if exists and different from current
     if (previousActiveFolderRef.current && previousActiveFolderRef.current !== activeFolderId) {
-      animatePreviewHide(previousActiveFolderRef.current);
+      animatePreviewHideRef.current(previousActiveFolderRef.current);
     }
 
     // Show new folder if exists
     if (activeFolderId) {
-      animatePreviewShow(activeFolderId);
+      animatePreviewShowRef.current(activeFolderId);
       previousActiveFolderRef.current = activeFolderId;
     } else {
       // Reset when no active folder
       previousActiveFolderRef.current = null;
     }
-  }, [activeFolderId, animatePreviewShow, animatePreviewHide]);
+  }, [activeFolderId]);
 
   // Native touch handlers with passive: false (fixes preventDefault error)
   const handleActivate = useCallback(

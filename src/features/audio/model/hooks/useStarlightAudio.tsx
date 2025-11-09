@@ -55,11 +55,22 @@ export function AudioProvider({ children, config }: AudioProviderProps): ReactEl
   const [stateSnapshot, setStateSnapshot] = useState(AudioDirector.getCurrentState());
   const [settingsSnapshot, setSettingsSnapshot] = useState(AudioDirector.getSettings());
   const mountedRef = useRef(true);
-
-  const syncSnapshots = useCallback(() => {
+  const syncSnapshotsRef = useRef(() => {
     setStateSnapshot(AudioDirector.getCurrentState());
     setSettingsSnapshot(AudioDirector.getSettings());
+  });
+
+  const syncSnapshots = useCallback(() => {
+    syncSnapshotsRef.current();
   }, []);
+
+  // Обновляем ref при изменении функции
+  useLayoutEffect(() => {
+    syncSnapshotsRef.current = () => {
+      setStateSnapshot(AudioDirector.getCurrentState());
+      setSettingsSnapshot(AudioDirector.getSettings());
+    };
+  });
 
   useLayoutEffect(() => {
     mountedRef.current = true;
@@ -82,7 +93,7 @@ export function AudioProvider({ children, config }: AudioProviderProps): ReactEl
         await AudioDirector.setConfig(audioConfig);
         await AudioDirector.setHome();
         if (!cancelled && mountedRef.current) {
-          syncSnapshots();
+          syncSnapshotsRef.current();
           setIsReady(true);
         }
       } catch (error) {
@@ -96,7 +107,7 @@ export function AudioProvider({ children, config }: AudioProviderProps): ReactEl
     return () => {
       cancelled = true;
     };
-  }, [audioConfig, syncSnapshots]);
+  }, [audioConfig]);
 
   useEffect(() => {
     if (!isReady) {
@@ -112,7 +123,7 @@ export function AudioProvider({ children, config }: AudioProviderProps): ReactEl
 
       isResumed = true;
       await AudioDirector.resumeContextOnUserGesture();
-      syncSnapshots();
+      syncSnapshotsRef.current();
 
       document.removeEventListener('click', handleUserGesture);
       document.removeEventListener('touchstart', handleUserGesture);
@@ -128,7 +139,7 @@ export function AudioProvider({ children, config }: AudioProviderProps): ReactEl
       document.removeEventListener('touchstart', handleUserGesture);
       document.removeEventListener('keydown', handleUserGesture);
     };
-  }, [isReady, syncSnapshots]);
+  }, [isReady]);
 
   const setHome = useCallback(async () => {
     await AudioDirector.setHome();
