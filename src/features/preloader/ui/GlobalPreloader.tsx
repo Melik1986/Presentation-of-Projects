@@ -10,12 +10,31 @@ import {
   SCROLL_LOCK_CLASS,
 } from '../model/constants';
 
+const PRELOADER_SHOWN_KEY = 'starlight:preloader:shown';
+
 export function GlobalPreloader() {
   const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
     if (typeof document === 'undefined') {
       return undefined;
+    }
+
+    // Check if already shown this session (production only)
+    if (process.env.NODE_ENV === 'production') {
+      const wasShown = window.sessionStorage.getItem(PRELOADER_SHOWN_KEY);
+      if (wasShown) {
+        setIsVisible(false);
+        // Dispatch complete event immediately for animations
+        setTimeout(() => {
+          try {
+            document.dispatchEvent(new CustomEvent(PRELOADER_COMPLETE_EVENT));
+          } catch {
+            // ignore
+          }
+        }, 0);
+        return undefined;
+      }
     }
 
     const { documentElement, body } = document;
@@ -50,6 +69,16 @@ export function GlobalPreloader() {
       }
 
       isCompleted = true;
+
+      // Mark as shown for this session (production only)
+      if (process.env.NODE_ENV === 'production') {
+        try {
+          window.sessionStorage.setItem(PRELOADER_SHOWN_KEY, 'true');
+        } catch {
+          // ignore
+        }
+      }
+
       setIsVisible(false);
       unlockScroll();
 

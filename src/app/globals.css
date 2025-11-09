@@ -185,17 +185,17 @@ html.preloader-ready {
     height: 55px;
     padding-bottom: 1.5rem;
   }
-  
+
   .audio-controls {
     gap: 0.25rem;
     font-size: 0.75rem;
   }
-  
+
   .audio-controls__toggle {
     font-size: 1rem;
     padding: 0.25rem;
   }
-  
+
   .audio-controls__slider input {
     height: 4px;
   }

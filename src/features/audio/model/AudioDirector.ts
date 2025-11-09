@@ -321,13 +321,13 @@ class AudioDirector {
    */
   private handleTrackError(id: string, url: string, error: unknown): void {
     const errorMsg = error instanceof Error ? error.message : String(error);
-    
+
     // Silent fail for SoundCloud timeout in dev (CORS/localhost issues)
     if (errorMsg.includes('SoundCloud') && errorMsg.includes('timeout')) {
       logger.warn('SoundCloud track skipped (timeout - normal in localhost):', { trackId: id });
       return;
     }
-    
+
     logger.error('Failed to prepare track:', { trackId: id, url }, error);
   }
 
