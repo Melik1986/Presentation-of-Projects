@@ -5,12 +5,46 @@ import type { ExtendedAudioConfig, ExtendedCatalog } from '@/shared/types/catalo
 const config = catalogsData as ExtendedAudioConfig;
 
 /**
+ * Validates catalog ID format
+ * Allows only alphanumeric characters and hyphens
+ * @param catalogId - Catalog identifier to validate
+ * @returns true if valid
+ */
+function isValidCatalogId(catalogId: string): boolean {
+  if (!catalogId || typeof catalogId !== 'string') {
+    return false;
+  }
+
+  // Only allow alphanumeric and hyphens, length 1-50
+  const validPattern = /^[a-zA-Z0-9-]{1,50}$/;
+  return validPattern.test(catalogId);
+}
+
+/**
+ * Sanitizes catalog ID by removing potentially dangerous characters
+ * @param catalogId - Raw catalog identifier
+ * @returns Sanitized catalog ID
+ */
+function sanitizeCatalogId(catalogId: string): string {
+  return catalogId
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9-]/g, '');
+}
+
+/**
  * Get catalog by ID
  * @param catalogId - Catalog identifier
  * @returns Catalog data or null if not found
  */
 export function getCatalogById(catalogId: string): ExtendedCatalog | null {
-  return config.catalogs.find((cat) => cat.id === catalogId) ?? null;
+  // Validate and sanitize input
+  if (!isValidCatalogId(catalogId)) {
+    return null;
+  }
+
+  const sanitizedId = sanitizeCatalogId(catalogId);
+  return config.catalogs.find((cat) => cat.id === sanitizedId) ?? null;
 }
 
 /**

@@ -90,11 +90,13 @@ export class SoundCloudAdapter implements PlatformAdapter {
 
       script.onload = () => {
         window.SC_LOADING = false;
+        logger.info('SoundCloud Widget API loaded successfully');
         resolve();
       };
 
       script.onerror = () => {
         window.SC_LOADING = false;
+        logger.error('Failed to load SoundCloud Widget API');
         reject(new Error('Failed to load SoundCloud Widget API'));
       };
 

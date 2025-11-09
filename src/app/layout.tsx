@@ -41,6 +41,12 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
+  verification: {
+    // Placeholder для верификации (заполнить при необходимости)
+  },
+  other: {
+    'X-UA-Compatible': 'IE=edge',
+  },
 };
 
 type RootLayoutProps = {

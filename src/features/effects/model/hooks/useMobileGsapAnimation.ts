@@ -135,42 +135,44 @@ export function useMobileGsapAnimation() {
         return;
       }
 
-    const previewImages = gsap.utils.toArray<HTMLElement>(
-      folder.querySelectorAll('.folder-preview-img')
-    );
+      const previewImages = gsap.utils.toArray<HTMLElement>(
+        folder.querySelectorAll('.folder-preview-img')
+      );
 
-    if (previewImages.length === 0) {
-      return;
-    }
+      if (previewImages.length === 0) {
+        return;
+      }
 
-    // Get preview container
-    const previewContainer = folder.querySelector('.folder-preview') as HTMLElement;
+      // Get preview container
+      const previewContainer = folder.querySelector('.folder-preview') as HTMLElement;
 
-    // Hide preview container (GSAP, not CSS)
-    if (previewContainer) {
-      gsap.to(previewContainer, {
+      // Hide preview container (GSAP, not CSS)
+      if (previewContainer) {
+        gsap.to(previewContainer, {
+          opacity: 0,
+          duration: 0.3,
+          ease: 'power2.in',
+        });
+      }
+
+      // Reset preview images with reverse wave stagger
+      const anim = gsap.to(previewImages, {
+        y: '0%',
+        rotation: 0,
         opacity: 0,
-        duration: 0.3,
-        ease: 'power2.in',
-      });
-    }
-
-    // Reset preview images with reverse wave stagger
-    const anim = gsap.to(previewImages, {
-      y: '0%',
-      rotation: 0,
-      opacity: 0,
-      duration: 0.4,
-      ease: 'power2.inOut',
-      stagger: {
-        amount: -0.15,
-        from: 'edges',
+        duration: 0.4,
         ease: 'power2.inOut',
-      },
-    });
+        stagger: {
+          amount: -0.15,
+          from: 'edges',
+          ease: 'power2.inOut',
+        },
+      });
 
-    currentAnimationRef.current = anim;
-  }, [findFolder]);
+      currentAnimationRef.current = anim;
+    },
+    [findFolder]
+  );
 
   return {
     animatePreviewShow,

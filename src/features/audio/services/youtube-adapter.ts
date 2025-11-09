@@ -73,7 +73,11 @@ export class YouTubeAdapter implements PlatformAdapter {
       const tag = document.createElement('script');
       tag.src = 'https://www.youtube.com/iframe_api';
       tag.async = true;
-      tag.onerror = () => reject(new Error('Failed to load YouTube IFrame API'));
+
+      tag.onerror = () => {
+        logger.error('Failed to load YouTube IFrame API');
+        reject(new Error('Failed to load YouTube IFrame API'));
+      };
 
       window.onYouTubeIframeAPIReady = () => {
         (window as Window & { YT_LOADING?: boolean }).YT_LOADING = false;
@@ -81,7 +85,11 @@ export class YouTubeAdapter implements PlatformAdapter {
       };
 
       const firstScriptTag = document.getElementsByTagName('script')[0];
-      firstScriptTag?.parentNode?.insertBefore(tag, firstScriptTag);
+      if (firstScriptTag?.parentNode) {
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+      } else {
+        document.head.appendChild(tag);
+      }
     });
   }
 

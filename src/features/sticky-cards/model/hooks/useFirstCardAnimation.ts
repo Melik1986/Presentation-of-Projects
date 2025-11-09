@@ -12,9 +12,7 @@ import type { RefObject } from 'react';
  * - Blur эффект (blur(10px) -> blur(0px))
  * - Задержка 0.6s для синхронизации с заголовком
  */
-export function useFirstCardAnimation(
-  containerRef: RefObject<HTMLDivElement | null>
-): void {
+export function useFirstCardAnimation(containerRef: RefObject<HTMLDivElement | null>): void {
   useGSAP(
     () => {
       const firstCard = containerRef.current?.querySelector('.sticky-card');
@@ -46,4 +44,3 @@ export function useFirstCardAnimation(
     }
   );
 }
-
