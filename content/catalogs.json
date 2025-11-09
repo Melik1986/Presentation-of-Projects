@@ -22,7 +22,8 @@
         "backgroundColor": "#0a0a0a",
         "cardBackground": "#1a1a1a",
         "textColor": "#ffffff",
-        "accentColor": "#3b82f6"
+        "accentColor": "#3b82f6",
+        "titleGradient": "linear-gradient(135deg, #3b82f6 0%, #8b5cf6 50%, #ec4899 100%)"
       },
       "content": {
         "introTitle": "Next.js Excellence",
@@ -76,7 +77,8 @@
         "backgroundColor": "#0d0d1a",
         "cardBackground": "#1a1a2e",
         "textColor": "#e0e0ff",
-        "accentColor": "#6366f1"
+        "accentColor": "#6366f1",
+        "titleGradient": "linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a78bfa 100%)"
       },
       "content": {
         "introTitle": "3D Web Experiences",
@@ -130,7 +132,8 @@
         "backgroundColor": "#1a0a14",
         "cardBackground": "#2a1a24",
         "textColor": "#ffebf0",
-        "accentColor": "#ec4899"
+        "accentColor": "#ec4899",
+        "titleGradient": "linear-gradient(135deg, #ec4899 0%, #f472b6 50%, #fbbf24 100%)"
       },
       "content": {
         "introTitle": "Animation Mastery",
@@ -184,7 +187,8 @@
         "backgroundColor": "#0f1419",
         "cardBackground": "#1f2937",
         "textColor": "#f3f4f6",
-        "accentColor": "#10b981"
+        "accentColor": "#10b981",
+        "titleGradient": "linear-gradient(135deg, #10b981 0%, #22d3ee 50%, #3b82f6 100%)"
       },
       "content": {
         "introTitle": "Enterprise Solutions",

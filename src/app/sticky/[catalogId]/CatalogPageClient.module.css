@@ -19,7 +19,10 @@
   font-weight: 600;
   text-align: center;
   line-height: 1.2;
-  color: var(--text-color);
+  background: var(--title-gradient, var(--text-color));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   will-change: transform, opacity;
 }
 
@@ -27,4 +30,8 @@
 .introTitle :global(.line) {
   display: inline-block;
   will-change: transform, opacity;
+  background: inherit;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }

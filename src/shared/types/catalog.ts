@@ -13,6 +13,7 @@ export interface CatalogTheme {
   cardBackground: string;
   textColor: string;
   accentColor: string;
+  titleGradient: string;
 }
 
 export interface CatalogCard {

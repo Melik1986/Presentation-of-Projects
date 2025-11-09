@@ -37,6 +37,7 @@ export function CatalogPageClient({ catalog, catalogId }: CatalogPageClientProps
       element.style.setProperty('--card-bg', catalog.theme.cardBackground);
       element.style.setProperty('--text-color', catalog.theme.textColor);
       element.style.setProperty('--accent-color', catalog.theme.accentColor);
+      element.style.setProperty('--title-gradient', catalog.theme.titleGradient);
     }
   }, [catalog.theme]);
 
