@@ -193,6 +193,7 @@ export function AudioProvider({ children, config }: AudioProviderProps): ReactEl
     [syncSnapshots]
   );
 
+  const resume = useCallback(() => AudioDirector.resumeContext(), []);
   const getAnalyserData = useCallback(() => AudioDirector.getAnalyserFrequencies(), []);
 
   const value = useMemo<AudioDirectorContextValue>(
@@ -208,7 +209,7 @@ export function AudioProvider({ children, config }: AudioProviderProps): ReactEl
         leaveCatalog,
         toggleMute,
         setVolume,
-        resume: () => AudioDirector.resumeContext(),
+        resume,
       },
       getAnalyserData,
     }),
@@ -223,6 +224,7 @@ export function AudioProvider({ children, config }: AudioProviderProps): ReactEl
       leaveCatalog,
       toggleMute,
       setVolume,
+      resume,
       getAnalyserData,
     ]
   );

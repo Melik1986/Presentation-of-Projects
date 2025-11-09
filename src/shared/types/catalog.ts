@@ -15,6 +15,7 @@ export interface CatalogTheme {
   accentColor: string;
   titleGradient: string;
   folderGradient?: string;
+  folderTextColor?: string;
   pageBackground?: string;
 }
 

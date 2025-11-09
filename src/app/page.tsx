@@ -1,5 +1,4 @@
-import { AudioUIPanel } from '@/features/audio';
-import { Wildyriftian } from '@/features/effects';
+import { HomePageClient } from './home/HomePageClient';
 
 import type { Metadata } from 'next';
 
@@ -8,10 +7,5 @@ export const metadata: Metadata = {
 };
 
 export default function HomePage() {
-  return (
-    <>
-      <Wildyriftian />
-      <AudioUIPanel className="audio-panel-fixed" />
-    </>
-  );
+  return <HomePageClient />;
 }

@@ -52,6 +52,7 @@
   font-weight: 400;
   transition: color 250ms ease;
   line-height: 1;
+  padding-top: 1rem;
 }
 
 .wildyriftian p {
@@ -243,6 +244,10 @@
   align-items: flex-start;
   padding: 0 0.25rem;
   padding-left: 2rem;
+}
+
+.folderName h1 {
+  color: var(--folder-text-color, #ffffff);
 }
 
 .folderIndex,

@@ -11,7 +11,7 @@ export const DEFAULT_SETTINGS = Object.freeze({
 
 export const LEVELS = Object.freeze({
   home: 0.55,
-  homeHover: 0.35,
-  preview: 0.25,
+  homeHover: 0.20,
+  preview: 0.30,
   active: 0.55,
 });

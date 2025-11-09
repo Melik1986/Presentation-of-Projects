@@ -1,7 +1,7 @@
 'use client';
 
 import { ReactLenis } from 'lenis/react';
-import { useCallback, useLayoutEffect, useRef } from 'react';
+import { useEffect, useLayoutEffect, useRef } from 'react';
 
 import { AudioUIPanel, useAudioDirector } from '@/features/audio';
 import { StickyCards, useCatalogTitleAnimation } from '@/features/sticky-cards';
@@ -22,14 +22,7 @@ export function CatalogPageClient({ catalog, catalogId }: CatalogPageClientProps
     actions: { enterCatalog, leaveCatalog, setHome, resume },
   } = useAudioDirector();
 
-  const manageScene = useCallback(() => {
-    void resume().then(() => enterCatalog(catalogId));
-
-    return () => {
-      void leaveCatalog().then(() => setHome());
-    };
-  }, [resume, enterCatalog, leaveCatalog, setHome, catalogId]);
-
+  // Apply theme CSS variables
   useLayoutEffect(() => {
     const element = catalogPageRef.current;
     if (element) {
@@ -45,7 +38,11 @@ export function CatalogPageClient({ catalog, catalogId }: CatalogPageClientProps
     }
   }, [catalog.theme]);
 
-  useLayoutEffect(() => manageScene(), [manageScene]);
+  // Manage audio scene (only depend on catalogId to avoid infinite loop)
+  useLayoutEffect(() => {
+    void resume().then(() => enterCatalog(catalogId));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [catalogId]);
 
   useCatalogTitleAnimation(titleRef, catalogPageRef);
 

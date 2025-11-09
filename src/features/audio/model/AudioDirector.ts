@@ -99,7 +99,10 @@ class AudioDirector {
       return null;
     }
 
-    if (!this.context) {
+    // Check if context is closed or needs recreation
+    const needsRecreation = !this.context || this.context.state === 'closed';
+
+    if (needsRecreation) {
       const extendedWindow = window as typeof window & {
         webkitAudioContext?: typeof AudioContext;
       };
@@ -108,6 +111,17 @@ class AudioDirector {
         logger.warn('AudioContext is not supported in this environment');
         return null;
       }
+
+      // Clean up old context if it exists
+      if (this.context && this.context.state !== 'closed') {
+        try {
+          void this.context.close();
+        } catch (error) {
+          // Ignore close errors
+        }
+      }
+
+      // Create new context and audio graph
       this.context = new AudioContextCtor();
       this.masterGain = this.context.createGain();
       this.masterGain.gain.value = this.settings.muted ? 0 : this.settings.volume;
@@ -313,12 +327,17 @@ class AudioDirector {
         throw new Error('AudioContext is closed');
       }
 
+      // Ensure masterGain is from the same context
+      if (!this.masterGain || this.masterGain.context !== context) {
+        throw new Error('Audio graph context mismatch');
+      }
+
       const containerId = this.createHiddenContainer(id);
       await adapter.initialize(containerId, url);
 
       const gain = context.createGain();
       gain.gain.value = 0;
-      gain.connect(this.masterGain!);
+      gain.connect(this.masterGain);
 
       const bundle: TrackBundle = {
         id,
@@ -389,7 +408,7 @@ class AudioDirector {
     } catch (error) {
       const err = error as Error;
       if (err.name !== 'AbortError') {
-        logger.warn('Play rejected:', { trackId: track.id }, error);
+        logger.error('playTrack rejected:', { trackId: track.id, error: err.message });
       }
     }
   }
@@ -543,16 +562,33 @@ class AudioDirector {
       return;
     }
 
+    // Skip if already on this catalog
+    if (this.currentCatalogId === catalogId) {
+      return;
+    }
+
     await this.resumeContext();
+
+    // Force resume if still suspended
+    if (this.context?.state === 'suspended') {
+      try {
+        await this.context.resume();
+      } catch (error) {
+        logger.error('Failed to force-resume AudioContext', error);
+      }
+    }
+
     this.stopAllExcept(catalogId);
 
     const catalog = this.config.catalogs.find((item) => item.id === catalogId);
     if (!catalog) {
+      logger.error('enterCatalog: catalog not found', { catalogId });
       return;
     }
 
     const track = await this.prepareTrack(catalog.id, catalog.track);
     if (!track) {
+      logger.error('enterCatalog: track preparation failed', { catalogId, url: catalog.track });
       return;
     }
 
@@ -562,17 +598,9 @@ class AudioDirector {
   }
 
   /**
-   * Leaves current catalog and returns to home
+   * Leaves current catalog (stops catalog tracks, does NOT start home)
    */
   async leaveCatalog(): Promise<void> {
-    await this.resumeContext();
-    this.stopAllExcept('home');
-
-    const homeTrack = await this.prepareTrack('home', this.config.homeTrack);
-    if (homeTrack) {
-      this.fadeTrack(homeTrack, LEVELS.home);
-    }
-
     this.currentCatalogId = null;
     this.previewCatalogId = null;
   }

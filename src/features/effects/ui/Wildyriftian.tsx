@@ -38,7 +38,7 @@ export function Wildyriftian({ className }: WildyriftianProps) {
     }
   }, [homepage.backgroundGradient]);
 
-  // Apply folder gradients from catalogs
+  // Apply folder gradients and text colors from catalogs
   useLayoutEffect(() => {
     const container = containerRef.current;
     if (!container) {
@@ -53,6 +53,12 @@ export function Wildyriftian({ className }: WildyriftianProps) {
           (folder as HTMLElement).style.setProperty(
             '--folder-gradient',
             catalog.theme.folderGradient
+          );
+        }
+        if (catalog.theme.folderTextColor) {
+          (folder as HTMLElement).style.setProperty(
+            '--folder-text-color',
+            catalog.theme.folderTextColor
           );
         }
       });

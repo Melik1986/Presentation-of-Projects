@@ -27,6 +27,7 @@
         "accentColor": "#3b82f6",
         "titleGradient": "linear-gradient(135deg, #3b82f6 0%, #8b5cf6 50%, #ec4899 100%)",
         "folderGradient": "#1A2332",
+        "folderTextColor": "#F4F3EF",
         "pageBackground": "radial-gradient(circle 800px at 0% 0%, rgba(10,15,30,0.9) 0%, transparent 50%), radial-gradient(circle 800px at 100% 0%, rgba(26,35,50,0.9) 0%, transparent 50%), radial-gradient(circle 800px at 0% 100%, rgba(42,54,71,0.9) 0%, transparent 50%), radial-gradient(circle 800px at 100% 100%, rgba(58,74,93,0.9) 0%, transparent 50%)"
       },
       "content": {
@@ -84,6 +85,7 @@
         "accentColor": "#6366f1",
         "titleGradient": "linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a78bfa 100%)",
         "folderGradient": "#482E34",
+        "folderTextColor": "#F4F3EF",
         "pageBackground": "radial-gradient(circle 800px at 0% 0%, rgba(62,45,63,0.9) 0%, transparent 50%), radial-gradient(circle 800px at 100% 0%, rgba(45,37,51,0.9) 0%, transparent 50%), radial-gradient(circle 800px at 0% 100%, rgba(42,32,47,0.9) 0%, transparent 50%), radial-gradient(circle 800px at 100% 100%, rgba(72,46,52,0.9) 0%, transparent 50%)"
       },
       "content": {
@@ -141,6 +143,7 @@
         "accentColor": "#ec4899",
         "titleGradient": "linear-gradient(135deg, #ec4899 0%, #f472b6 50%, #fbbf24 100%)",
         "folderGradient": "#00483C",
+        "folderTextColor": "#F4F3EF",
         "pageBackground": "radial-gradient(circle 800px at 0% 0%, rgba(1,91,79,0.7) 0%, transparent 50%), radial-gradient(circle 800px at 100% 0%, rgba(20,108,96,0.7) 0%, transparent 50%), radial-gradient(circle 800px at 0% 100%, rgba(2,45,36,0.7) 0%, transparent 50%), radial-gradient(circle 800px at 100% 100%, rgba(0,72,60,0.7) 0%, transparent 50%)"
       },
       "content": {
@@ -198,6 +201,7 @@
         "accentColor": "#10b981",
         "titleGradient": "linear-gradient(135deg, #10b981 0%, #22d3ee 50%, #3b82f6 100%)",
         "folderGradient": "#1A2830",
+        "folderTextColor": "#F4F3EF",
         "pageBackground": "radial-gradient(circle 800px at 0% 0%, rgba(10,24,32,0.9) 0%, transparent 50%), radial-gradient(circle 800px at 100% 0%, rgba(26,40,48,0.9) 0%, transparent 50%), radial-gradient(circle 800px at 0% 100%, rgba(42,56,64,0.9) 0%, transparent 50%), radial-gradient(circle 800px at 100% 100%, rgba(58,72,80,0.9) 0%, transparent 50%)"
       },
       "content": {

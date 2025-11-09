@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useMemo } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { useAudioDirector } from '../model/hooks/useStarlightAudio';
 
@@ -19,8 +19,25 @@ export function AudioControls(): ReactElement {
     actions: { toggleMute, setVolume },
   } = useAudioDirector();
 
-  const icon = useMemo(() => (muted || volume <= 0.001 ? MUTE_ICON : VOLUME_ICON), [muted, volume]);
-  const percent = useMemo(() => (muted ? 0 : formatVolume(volume)), [muted, volume]);
+  // Prevent hydration mismatch by deferring client-specific rendering
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // Server-safe defaults (always show unmuted state on server)
+  const displayMuted = mounted ? muted : false;
+  const displayVolume = mounted ? volume : 0.55;
+
+  const icon = useMemo(
+    () => (displayMuted || displayVolume <= 0.001 ? MUTE_ICON : VOLUME_ICON),
+    [displayMuted, displayVolume]
+  );
+  const percent = useMemo(() => (displayMuted ? 0 : formatVolume(displayVolume)), [
+    displayMuted,
+    displayVolume,
+  ]);
 
   const handleToggle = useCallback(() => {
     void toggleMute();
@@ -41,7 +58,7 @@ export function AudioControls(): ReactElement {
       <button
         type="button"
         className="audio-controls__toggle"
-        aria-label={muted ? 'Unmute sound' : 'Mute sound'}
+        aria-label={displayMuted ? 'Unmute sound' : 'Mute sound'}
         onClick={handleToggle}
       >
         {icon}
