@@ -5,6 +5,7 @@ import { useRef } from 'react';
 
 import styles from './StickyCards.module.css';
 import { defaultStickyCardsData } from '../model/data';
+import { useFirstCardAnimation } from '../model/hooks/useFirstCardAnimation';
 import { useStickyCardsAnimation } from '../model/hooks/useStickyCardsAnimation';
 
 import type { StickyCardsProps } from '../model/types';
@@ -13,6 +14,7 @@ export function StickyCards({ cards = defaultStickyCardsData, className }: Stick
   const containerRef = useRef<HTMLDivElement>(null);
 
   useStickyCardsAnimation(containerRef);
+  useFirstCardAnimation(containerRef);
 
   return (
     <div className={`${styles.stickyCards} ${className || ''}`} ref={containerRef}>
