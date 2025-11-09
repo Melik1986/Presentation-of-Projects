@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { useCallback, useEffect, useRef } from 'react';
+import { useCallback, useEffect, useLayoutEffect, useRef } from 'react';
 
 import { useAudioDirector } from '@/features/audio';
 import { getHomepageContent } from '@/shared/lib/catalog-loader';
@@ -29,6 +29,14 @@ export function Wildyriftian({ className }: WildyriftianProps) {
 
   const folderRows = generateFolderRows();
   const homepage = getHomepageContent();
+
+  // Apply background gradient from config
+  useLayoutEffect(() => {
+    const container = containerRef.current;
+    if (container && homepage.backgroundGradient) {
+      container.style.setProperty('--home-bg-gradient', homepage.backgroundGradient);
+    }
+  }, [homepage.backgroundGradient]);
 
   const {
     activeFolderId,

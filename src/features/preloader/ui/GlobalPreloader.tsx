@@ -1,6 +1,8 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useLayoutEffect, useState } from 'react';
+
+import { getHomepageContent } from '@/shared/lib/catalog-loader';
 
 import { Loader } from './Loader';
 import {
@@ -14,6 +16,17 @@ const PRELOADER_SHOWN_KEY = 'starlight:preloader:shown';
 
 export function GlobalPreloader() {
   const [isVisible, setIsVisible] = useState(true);
+  const homepage = getHomepageContent();
+
+  // Apply preloader gradient from config
+  useLayoutEffect(() => {
+    if (homepage.preloaderGradient && typeof document !== 'undefined') {
+      document.documentElement.style.setProperty(
+        '--preloader-gradient',
+        homepage.preloaderGradient
+      );
+    }
+  }, [homepage.preloaderGradient]);
 
   useEffect(() => {
     if (typeof document === 'undefined') {
