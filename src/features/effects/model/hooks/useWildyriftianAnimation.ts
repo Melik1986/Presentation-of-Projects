@@ -15,6 +15,20 @@ import type { RefObject } from 'react';
 export function useWildyriftianAnimation(containerRef: RefObject<HTMLDivElement | null>): void {
   useGSAP(
     () => {
+      const folders = gsap.utils.toArray<HTMLElement>('.folder');
+      const wrappers = gsap.utils.toArray<HTMLElement>('.folder-wrapper');
+
+      // Initial reveal: folders slide up from bottom (drawer effect)
+      // Works on ALL devices (desktop + mobile)
+      gsap.from(folders, {
+        y: 100,
+        opacity: 0,
+        duration: 0.6,
+        ease: 'power2.out',
+        stagger: 0.15,
+        delay: 2.5,
+      });
+
       // Proper touch detection (Web standards)
       // https://developer.mozilla.org/en-US/docs/Web/CSS/@media/hover
       const hasHoverSupport = supportsHover();
@@ -24,9 +38,6 @@ export function useWildyriftianAnimation(containerRef: RefObject<HTMLDivElement 
       if (!hasHoverSupport || isPointerCoarse) {
         return;
       }
-
-      const folders = gsap.utils.toArray<HTMLElement>('.folder');
-      const wrappers = gsap.utils.toArray<HTMLElement>('.folder-wrapper');
 
       // Set initial state for desktop
       gsap.set(wrappers, { y: 25 });

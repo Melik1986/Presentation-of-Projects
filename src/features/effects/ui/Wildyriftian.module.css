@@ -134,6 +134,7 @@
   cursor: pointer;
   text-decoration: none;
   color: inherit;
+  will-change: transform, opacity;
 }
 
 .row:nth-child(2) .folder:nth-child(1) {
