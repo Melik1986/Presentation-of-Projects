@@ -1,0 +1,119 @@
+.wrapper {
+  display: inline-block;
+  --color-1: hsl(193, 90%, 50%);
+  --color-2: hsl(223, 90%, 50%);
+}
+
+.smiley {
+  display: block;
+  will-change: transform;
+}
+
+/* Eyes animations */
+.smileyEye1,
+.smileyEye2,
+.smileyMouth1,
+.smileyMouth2 {
+  animation-duration: 3s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+.smileyEye1,
+.smileyEye2 {
+  transform-origin: 64px 64px;
+}
+
+.smileyEye1 {
+  animation-name: eye1;
+}
+
+.smileyEye2 {
+  animation-name: eye2;
+}
+
+.smileyMouth1 {
+  animation-name: mouth1;
+}
+
+.smileyMouth2 {
+  animation-name: mouth2;
+  opacity: 0;
+}
+
+/* Eye 1 animation - rotate from left, scale down at end */
+@keyframes eye1 {
+  from {
+    transform: rotate(-260deg) translate(0, -56px);
+  }
+  50%,
+  60% {
+    animation-timing-function: cubic-bezier(0.17, 0, 0.58, 1);
+    transform: rotate(-40deg) translate(0, -56px) scale(1);
+  }
+  to {
+    transform: rotate(225deg) translate(0, -56px) scale(0.35);
+  }
+}
+
+/* Eye 2 animation - rotate from left, blink at 52.5%, scale down */
+@keyframes eye2 {
+  from {
+    transform: rotate(-260deg) translate(0, -56px);
+  }
+  50% {
+    transform: rotate(40deg) translate(0, -56px) rotate(-40deg) scale(1);
+  }
+  52.5% {
+    transform: rotate(40deg) translate(0, -56px) rotate(-40deg) scale(1, 0);
+  }
+  55%,
+  70% {
+    animation-timing-function: cubic-bezier(0, 0, 0.28, 1);
+    transform: rotate(40deg) translate(0, -56px) rotate(-40deg) scale(1);
+  }
+  to {
+    transform: rotate(150deg) translate(0, -56px) scale(0.4);
+  }
+}
+
+/* Mouth 1 animation - draw smile, then hide */
+@keyframes mouth1 {
+  from {
+    animation-timing-function: ease-in;
+    stroke-dasharray: 0 351.86;
+    stroke-dashoffset: 0;
+  }
+  25% {
+    animation-timing-function: ease-out;
+    stroke-dasharray: 175.93 351.86;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    animation-timing-function: steps(1, start);
+    stroke-dasharray: 175.93 351.86;
+    stroke-dashoffset: -175.93;
+    opacity: 1;
+  }
+  75%,
+  to {
+    opacity: 0;
+  }
+}
+
+/* Mouth 2 animation - appear and rotate */
+@keyframes mouth2 {
+  from {
+    animation-timing-function: steps(1, end);
+    opacity: 0;
+  }
+  50% {
+    animation-timing-function: ease-in-out;
+    opacity: 1;
+    stroke-dashoffset: 0;
+  }
+  to {
+    stroke-dashoffset: -351.86;
+  }
+}
+
