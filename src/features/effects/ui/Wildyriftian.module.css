@@ -105,8 +105,11 @@
 }
 
 /* Preserve whitespace */
-:global(.hero-title),
-:global(.hero-description) {
+.heroTitle {
+  white-space: normal;
+}
+
+.heroDescription {
   white-space: normal;
 }
 
