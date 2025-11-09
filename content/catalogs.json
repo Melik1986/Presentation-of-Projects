@@ -6,8 +6,8 @@
   },
   "catalogs": [
     {
-      "id": "nextjs",
-      "name": "Next.js Projects",
+      "id": "web-apps",
+      "name": "Web Applications",
       "track": "https://www.youtube.com/watch?v=NBtnfRAbe14&list=RDNBtnfRAbe14&start_radio=1",
       "folder": {
         "displayName": "figures",
@@ -26,43 +26,43 @@
         "titleGradient": "linear-gradient(135deg, #3b82f6 0%, #8b5cf6 50%, #ec4899 100%)"
       },
       "content": {
-        "introTitle": "Next.js Excellence",
+        "introTitle": "Production Web Apps",
         "cards": [
           {
             "index": "01",
-            "title": "Server Components",
+            "title": "E-commerce Platform",
             "image": "/img/catalog-1/card-1.jpg",
-            "description": "Building performant applications with React Server Components. Leveraging server-side rendering for optimal user experience and SEO benefits."
+            "description": "Full-featured online store with shopping cart, secure checkout, and payment integration. Product catalog management, inventory tracking, and order processing system."
           },
           {
             "index": "02",
-            "title": "App Router",
+            "title": "Analytics Dashboard",
             "image": "/img/catalog-1/card-2.jpg",
-            "description": "Modern routing with file-based system. Nested layouts, loading states, and error boundaries for seamless navigation experiences."
+            "description": "Real-time business intelligence platform with interactive charts and data visualization. Custom metrics, filtering, and export capabilities for data-driven decisions."
           },
           {
             "index": "03",
-            "title": "API Routes",
+            "title": "CRM System",
             "image": "/img/catalog-1/card-3.jpg",
-            "description": "Full-stack capabilities with serverless functions. Build powerful APIs directly within your Next.js application structure."
+            "description": "Customer relationship management with lead tracking and sales funnel visualization. Contact management, activity timeline, and pipeline automation tools."
           },
           {
             "index": "04",
-            "title": "Optimization",
+            "title": "Landing Pages",
             "image": "/img/catalog-1/card-4.jpg",
-            "description": "Automatic image optimization, font loading, and code splitting. Performance-first approach for exceptional Core Web Vitals scores."
+            "description": "High-conversion landing pages with A/B testing and analytics integration. Responsive design, form validation, and lead capture optimization."
           }
         ]
       },
       "seo": {
-        "title": "Next.js Projects | Modern React Applications",
-        "description": "Showcasing cutting-edge Next.js projects with Server Components, App Router, and performance optimization.",
-        "keywords": "nextjs, react, server components, app router, performance"
+        "title": "Web Applications Portfolio | Production-Ready Projects",
+        "description": "Professional web applications including e-commerce platforms, analytics dashboards, CRM systems, and conversion-optimized landing pages.",
+        "keywords": "web applications, e-commerce, dashboard, crm, landing pages, fullstack"
       }
     },
     {
-      "id": "threejs",
-      "name": "Three.js Experiments",
+      "id": "figma-design",
+      "name": "Figma Design",
       "track": "https://www.youtube.com/watch?v=hENgrbIMiy4&list=RDhENgrbIMiy4&start_radio=1",
       "folder": {
         "displayName": "persona",
@@ -81,43 +81,43 @@
         "titleGradient": "linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a78bfa 100%)"
       },
       "content": {
-        "introTitle": "3D Web Experiences",
+        "introTitle": "UI/UX Design Systems",
         "cards": [
           {
             "index": "01",
-            "title": "WebGL Shaders",
+            "title": "UI Kit Components",
             "image": "/img/catalog-2/card-1.jpg",
-            "description": "Custom GLSL shaders for stunning visual effects. Creating immersive 3D environments with advanced lighting and materials."
+            "description": "Comprehensive component library with buttons, forms, cards, and navigation elements. Consistent design tokens for colors, typography, and spacing."
           },
           {
             "index": "02",
-            "title": "Physics Simulations",
+            "title": "Landing Page Designs",
             "image": "/img/catalog-2/card-2.jpg",
-            "description": "Realistic physics with Cannon.js integration. Bringing life to 3D scenes with gravity, collisions, and dynamic interactions."
+            "description": "Modern landing page layouts with hero sections, feature showcases, and effective CTAs. Mobile-first responsive design patterns."
           },
           {
             "index": "03",
-            "title": "Model Loading",
+            "title": "Mobile App Interfaces",
             "image": "/img/catalog-2/card-3.jpg",
-            "description": "GLTF model optimization and loading. Efficient 3D asset management for complex scenes and interactive experiences."
+            "description": "iOS and Android app designs following platform guidelines. Touch-optimized interfaces with intuitive navigation and gesture support."
           },
           {
             "index": "04",
-            "title": "Performance",
+            "title": "Design System Documentation",
             "image": "/img/catalog-2/card-4.jpg",
-            "description": "60FPS rendering with optimized geometries. Maintaining smooth performance across devices with level-of-detail techniques."
+            "description": "Complete design system with style guides, component documentation, and usage guidelines. Design tokens, accessibility standards, and best practices."
           }
         ]
       },
       "seo": {
-        "title": "Three.js Projects | 3D Web Graphics Portfolio",
-        "description": "Innovative Three.js experiments featuring WebGL shaders, physics simulations, and interactive 3D experiences.",
-        "keywords": "threejs, webgl, 3d graphics, shaders, physics simulation"
+        "title": "Figma Design Portfolio | UI/UX Design Systems",
+        "description": "Professional UI/UX designs including component libraries, landing pages, mobile interfaces, and comprehensive design systems.",
+        "keywords": "figma, ui design, ux design, design system, component library, mobile design"
       }
     },
     {
-      "id": "gsap",
-      "name": "GSAP Motion Design",
+      "id": "ai-tools",
+      "name": "AI-Generated Content",
       "track": "https://www.youtube.com/watch?v=m4U232MuTG4",
       "folder": {
         "displayName": "form",
@@ -136,43 +136,43 @@
         "titleGradient": "linear-gradient(135deg, #ec4899 0%, #f472b6 50%, #fbbf24 100%)"
       },
       "content": {
-        "introTitle": "Animation Mastery",
+        "introTitle": "AI Creative Studio",
         "cards": [
           {
             "index": "01",
-            "title": "ScrollTrigger",
+            "title": "AI Photography",
             "image": "/img/catalog-3/card-1.jpg",
-            "description": "Scroll-driven animations with precise control. Creating engaging narratives through parallax effects and timeline sequencing."
+            "description": "Photorealistic images generated with Midjourney and DALL-E. Creative concepts, product photography, and artistic compositions powered by artificial intelligence."
           },
           {
             "index": "02",
-            "title": "Morphing",
+            "title": "Video Generation",
             "image": "/img/catalog-3/card-2.jpg",
-            "description": "Smooth shape transformations and SVG morphing. Fluid transitions between states with custom easing functions."
+            "description": "AI-powered video content creation with RunwayML and Pika. Motion graphics, video transitions, and cinematic effects generated through neural networks."
           },
           {
             "index": "03",
-            "title": "Timeline",
+            "title": "Design Assets",
             "image": "/img/catalog-3/card-3.jpg",
-            "description": "Complex animation orchestration. Choreographing multiple elements with stagger effects and callback functions."
+            "description": "AI-generated logos, icons, and illustrations for branding projects. Scalable vector graphics and unique design elements created with generative AI tools."
           },
           {
             "index": "04",
-            "title": "Performance",
+            "title": "Code Generation",
             "image": "/img/catalog-3/card-4.jpg",
-            "description": "Hardware-accelerated animations. Optimized transforms and opacity changes for buttery-smooth motion at 60fps."
+            "description": "AI-assisted development with code completion, refactoring, and documentation. Automation of repetitive tasks and intelligent code suggestions."
           }
         ]
       },
       "seo": {
-        "title": "GSAP Animation Projects | Motion Design Portfolio",
-        "description": "Professional GSAP animations featuring ScrollTrigger, morphing, and complex timeline orchestration.",
-        "keywords": "gsap, animation, scrolltrigger, motion design, svg"
+        "title": "AI-Generated Content Portfolio | Creative AI Tools",
+        "description": "AI-powered creative work including photography, video generation, design assets, and code automation using cutting-edge AI tools.",
+        "keywords": "ai tools, midjourney, dall-e, runway, ai photography, ai video, generative ai"
       }
     },
     {
-      "id": "business",
-      "name": "Business Web Apps",
+      "id": "backend-api",
+      "name": "Backend & API",
       "track": "https://soundcloud.com/cerclelive/solomun-theatre-antique-dorange-for-cercle",
       "folder": {
         "displayName": "chromatic",
@@ -191,38 +191,38 @@
         "titleGradient": "linear-gradient(135deg, #10b981 0%, #22d3ee 50%, #3b82f6 100%)"
       },
       "content": {
-        "introTitle": "Enterprise Solutions",
+        "introTitle": "Server Architecture",
         "cards": [
           {
             "index": "01",
-            "title": "Dashboard",
+            "title": "REST API Design",
             "image": "/img/catalog-4/card-1.jpg",
-            "description": "Real-time analytics dashboards. Data visualization with charts, metrics, and interactive filtering for business insights."
+            "description": "RESTful endpoint architecture with OpenAPI/Swagger documentation. Versioning, authentication, rate limiting, and proper HTTP status code implementation."
           },
           {
             "index": "02",
-            "title": "Authentication",
+            "title": "GraphQL Services",
             "image": "/img/catalog-4/card-2.jpg",
-            "description": "Secure user management systems. Multi-factor authentication, role-based access control, and session handling."
+            "description": "Scalable GraphQL APIs with schema design and resolvers. Apollo Server implementation with type-safe queries, mutations, and subscriptions."
           },
           {
             "index": "03",
-            "title": "API Integration",
+            "title": "Microservices Architecture",
             "image": "/img/catalog-4/card-3.jpg",
-            "description": "Seamless third-party integrations. RESTful APIs, webhooks, and data synchronization for business workflows."
+            "description": "Docker containerization and Kubernetes orchestration. Service-oriented architecture with message queues, event-driven communication, and service mesh."
           },
           {
             "index": "04",
-            "title": "Scalability",
+            "title": "Database Design",
             "image": "/img/catalog-4/card-4.jpg",
-            "description": "Cloud-ready architecture. Microservices, caching strategies, and database optimization for growing businesses."
+            "description": "PostgreSQL and MongoDB schema optimization. Query performance tuning, indexing strategies, replication, and backup solutions for high availability."
           }
         ]
       },
       "seo": {
-        "title": "Business Web Applications | Enterprise Solutions Portfolio",
-        "description": "Professional business web applications with dashboards, authentication, API integrations, and scalable architecture.",
-        "keywords": "business apps, enterprise, dashboard, authentication, api integration"
+        "title": "Backend & API Portfolio | Server Architecture Projects",
+        "description": "Backend development expertise including REST APIs, GraphQL services, microservices architecture, and optimized database design.",
+        "keywords": "backend, rest api, graphql, microservices, docker, kubernetes, postgresql, mongodb"
       }
     }
   ]

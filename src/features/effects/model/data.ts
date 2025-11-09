@@ -20,7 +20,7 @@ export function generateFolderRows(): FolderRow[] {
         row.push({
           variant: catalog.folder.variant,
           index: String(i + j + 1).padStart(2, '0'),
-          name: catalog.folder.displayName,
+          name: catalog.name,
           images: catalog.folder.previewImages,
           catalogId: catalog.id,
         });
