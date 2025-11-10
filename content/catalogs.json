@@ -15,9 +15,9 @@
         "displayName": "figures",
         "variant": "variant-1",
         "previewImages": [
-          "/img/catalog-1/preview-1.jpg",
-          "/img/catalog-1/preview-2.jpg",
-          "/img/catalog-1/preview-3.jpg"
+          "/img/catalog-1/preview-1.png",
+          "/img/catalog-1/preview-2.png",
+          "/img/catalog-1/preview-3.png"
         ]
       },
       "theme": {
