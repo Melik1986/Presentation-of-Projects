@@ -21,15 +21,19 @@ export function useWildyriftianAnimation(containerRef: RefObject<HTMLDivElement 
       const folders = gsap.utils.toArray<HTMLElement>('.folder');
       const wrappers = gsap.utils.toArray<HTMLElement>('.folder-wrapper');
 
+      // Hide initially through GSAP (not CSS)
+      gsap.set(folders, { opacity: 0, y: 100 });
+
       // Initial reveal: folders slide up from bottom (drawer effect)
-        gsap.from(folders, {
-          y: 100,
-          opacity: 0,
-          duration: 0.6,
-          ease: 'power2.out',
-          stagger: 0.15,
-        delay: 0.5,
-        });
+      // Starts after hero text (~1.7s + 2.0s text duration = 3.7s)
+      gsap.to(folders, {
+        y: 0,
+        opacity: 1,
+        duration: 0.6,
+        ease: 'power2.out',
+        stagger: 0.15,
+        delay: 3.7,
+      });
 
       // Proper touch detection (Web standards)
       // https://developer.mozilla.org/en-US/docs/Web/CSS/@media/hover

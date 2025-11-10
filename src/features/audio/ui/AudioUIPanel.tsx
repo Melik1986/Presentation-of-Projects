@@ -1,5 +1,8 @@
 'use client';
 
+import { useRef } from 'react';
+
+import { useAudioPanelAnimation } from '../model/hooks/useAudioPanelAnimation';
 import { AudioControls } from './AudioControls';
 import { EqualizerCanvas } from './EqualizerCanvas';
 
@@ -10,8 +13,13 @@ interface AudioUIPanelProps {
 }
 
 export function AudioUIPanel({ className = '' }: AudioUIPanelProps): ReactElement {
+  const panelRef = useRef<HTMLDivElement>(null);
+
+  useAudioPanelAnimation(panelRef);
+
   return (
     <div
+      ref={panelRef}
       className={`audio-ui-panel ${className}`}
       role="complementary"
       aria-label="Audio controls and visualizer"
