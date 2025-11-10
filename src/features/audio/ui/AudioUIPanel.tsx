@@ -2,9 +2,9 @@
 
 import { useRef } from 'react';
 
-import { useAudioPanelAnimation } from '../model/hooks/useAudioPanelAnimation';
 import { AudioControls } from './AudioControls';
 import { EqualizerCanvas } from './EqualizerCanvas';
+import { useAudioPanelAnimation } from '../model/hooks/useAudioPanelAnimation';
 
 import type { ReactElement } from 'react';
 
