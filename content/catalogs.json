@@ -1,17 +1,17 @@
 {
   "homeTrack": "https://www.youtube.com/watch?v=QHDRRxKlimY&list=RDQHDRRxKlimY&start_radio=1",
   "homepage": {
-    "title": "Fullstack Developer",
-    "description": "Creating modern web experiences with cutting-edge technologies. Specializing in React, Next.js, and scalable backend architectures.",
+    "title": "Your Name Here",
+    "description": "Replace with your professional title and specialization. Describe your expertise, services, and unique value proposition.",
     "backgroundGradient": "radial-gradient(circle 800px at 0% 0%, rgba(26,26,26,0.8) 0%, transparent 50%), radial-gradient(circle 800px at 100% 0%, rgba(84,84,84,0.8) 0%, transparent 50%), radial-gradient(circle 800px at 0% 100%, rgba(40,40,40,0.8) 0%, transparent 50%), radial-gradient(circle 800px at 100% 100%, rgba(63,62,63,0.8) 0%, transparent 50%)"
   },
   "catalogs": [
     {
-      "id": "web-apps",
-      "name": "Web Applications",
+      "id": "web-development",
+      "name": "Web Development",
       "track": "https://www.youtube.com/watch?v=NBtnfRAbe14&list=RDNBtnfRAbe14&start_radio=1",
       "folder": {
-        "displayName": "figures",
+        "displayName": "web dev",
         "variant": "variant-1",
         "previewImages": [
           "/img/catalog-1/preview-1.png",
@@ -25,217 +25,333 @@
         "textColor": "#ffffff",
         "accentColor": "#3b82f6",
         "titleGradient": "linear-gradient(135deg, #3b82f6 0%, #8b5cf6 50%, #ec4899 100%)",
-        "folderGradient": "#1A2332",
-        "folderTextColor": "#F4F3EF",
+        "folderGradient": "#C7D5E0",
+        "folderTextColor": "#2d3748",
         "pageBackground": "radial-gradient(circle 800px at 0% 0%, rgba(10,15,30,0.9) 0%, transparent 50%), radial-gradient(circle 800px at 100% 0%, rgba(26,35,50,0.9) 0%, transparent 50%), radial-gradient(circle 800px at 0% 100%, rgba(42,54,71,0.9) 0%, transparent 50%), radial-gradient(circle 800px at 100% 100%, rgba(58,74,93,0.9) 0%, transparent 50%)"
       },
       "content": {
-        "introTitle": "Production Web Apps",
+        "introTitle": "Web Development Portfolio",
         "cards": [
           {
             "index": "01",
-            "title": "E-commerce Platform",
-            "image": "/img/catalog-1/card-1.jpg",
-            "description": "Full-featured online store with shopping cart, secure checkout, and payment integration. Product catalog management, inventory tracking, and order processing system."
+            "title": "E-Commerce Platform",
+            "image": "/img/catalog-1/card-1.png",
+            "description": "Replace with your online store project. Showcase shopping cart, payment integration, product management, and checkout features. Built with React, Next.js, and modern backend."
           },
           {
             "index": "02",
-            "title": "Analytics Dashboard",
-            "image": "/img/catalog-1/card-2.jpg",
-            "description": "Real-time business intelligence platform with interactive charts and data visualization. Custom metrics, filtering, and export capabilities for data-driven decisions."
+            "title": "SaaS Dashboard",
+            "image": "/img/catalog-1/card-2.png",
+            "description": "Replace with your web application. Highlight real-time analytics, user management, API integrations, and data visualization. Focus on scalability and performance."
           },
           {
             "index": "03",
-            "title": "CRM System",
-            "image": "/img/catalog-1/card-3.jpg",
-            "description": "Customer relationship management with lead tracking and sales funnel visualization. Contact management, activity timeline, and pipeline automation tools."
+            "title": "Corporate Website",
+            "image": "/img/catalog-1/card-3.png",
+            "description": "Replace with your business website. Display responsive design, CMS integration, SEO optimization, and content management. Emphasize modern UI and fast loading."
           },
           {
             "index": "04",
-            "title": "Landing Pages",
-            "image": "/img/catalog-1/card-4.jpg",
-            "description": "High-conversion landing pages with A/B testing and analytics integration. Responsive design, form validation, and lead capture optimization."
+            "title": "Landing Page",
+            "image": "/img/catalog-1/card-4.png",
+            "description": "Replace with your high-converting landing page. Show A/B testing results, conversion metrics, lead capture forms, and marketing integrations."
           }
         ]
       },
       "seo": {
-        "title": "Web Applications Portfolio | Production-Ready Projects",
-        "description": "Professional web applications including e-commerce platforms, analytics dashboards, CRM systems, and conversion-optimized landing pages.",
-        "keywords": "web applications, e-commerce, dashboard, crm, landing pages, fullstack"
+        "title": "Web Development Portfolio | Template",
+        "description": "Showcase your web development projects - e-commerce platforms, SaaS applications, corporate websites, and landing pages.",
+        "keywords": "web development, react, nextjs, frontend, backend, fullstack"
       }
     },
     {
-      "id": "figma-design",
-      "name": "Figma Design",
+      "id": "ui-ux-design",
+      "name": "UI/UX Design",
       "track": "https://www.youtube.com/watch?v=hENgrbIMiy4&list=RDhENgrbIMiy4&start_radio=1",
       "folder": {
-        "displayName": "persona",
+        "displayName": "design",
         "variant": "variant-2",
         "previewImages": [
-          "/img/catalog-2/preview-1.jpg",
-          "/img/catalog-2/preview-2.jpg",
-          "/img/catalog-2/preview-3.jpg"
+          "/img/catalog-2/preview-1.png",
+          "/img/catalog-2/preview-2.png",
+          "/img/catalog-2/preview-3.png"
         ]
       },
       "theme": {
         "backgroundColor": "#0d0d1a",
         "cardBackground": "#1a1a2e",
         "textColor": "#e0e0ff",
-        "accentColor": "#6366f1",
-        "titleGradient": "linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a78bfa 100%)",
-        "folderGradient": "#482E34",
-        "folderTextColor": "#F4F3EF",
+        "accentColor": "#ec4899",
+        "titleGradient": "linear-gradient(135deg, #ec4899 0%, #f472b6 50%, #fbbf24 100%)",
+        "folderGradient": "#E8D4D9",
+        "folderTextColor": "#4a2c31",
         "pageBackground": "radial-gradient(circle 800px at 0% 0%, rgba(62,45,63,0.9) 0%, transparent 50%), radial-gradient(circle 800px at 100% 0%, rgba(45,37,51,0.9) 0%, transparent 50%), radial-gradient(circle 800px at 0% 100%, rgba(42,32,47,0.9) 0%, transparent 50%), radial-gradient(circle 800px at 100% 100%, rgba(72,46,52,0.9) 0%, transparent 50%)"
       },
       "content": {
-        "introTitle": "UI/UX Design Systems",
+        "introTitle": "UI/UX Design Showcase",
         "cards": [
           {
             "index": "01",
-            "title": "UI Kit Components",
-            "image": "/img/catalog-2/card-1.jpg",
-            "description": "Comprehensive component library with buttons, forms, cards, and navigation elements. Consistent design tokens for colors, typography, and spacing."
+            "title": "Mobile App Design",
+            "image": "/img/catalog-2/card-1.png",
+            "description": "Replace with your mobile app mockups. Showcase user flows, wireframes, interactive prototypes, and usability testing results. Emphasize user-centered design."
           },
           {
             "index": "02",
-            "title": "Landing Page Designs",
-            "image": "/img/catalog-2/card-2.jpg",
-            "description": "Modern landing page layouts with hero sections, feature showcases, and effective CTAs. Mobile-first responsive design patterns."
+            "title": "Website Redesign",
+            "image": "/img/catalog-2/card-2.png",
+            "description": "Replace with your redesign case study. Display before/after comparison, user research findings, design system implementation, and metrics improvement."
           },
           {
             "index": "03",
-            "title": "Mobile App Interfaces",
-            "image": "/img/catalog-2/card-3.jpg",
-            "description": "iOS and Android app designs following platform guidelines. Touch-optimized interfaces with intuitive navigation and gesture support."
+            "title": "Design System",
+            "image": "/img/catalog-2/card-3.png",
+            "description": "Replace with your component library. Show buttons, forms, typography scale, color palette, spacing system, and design tokens documentation."
           },
           {
             "index": "04",
-            "title": "Design System Documentation",
-            "image": "/img/catalog-2/card-4.jpg",
-            "description": "Complete design system with style guides, component documentation, and usage guidelines. Design tokens, accessibility standards, and best practices."
+            "title": "Brand Identity",
+            "image": "/img/catalog-2/card-4.png",
+            "description": "Replace with your branding project. Present logo variations, brand guidelines, color psychology, typography choices, and visual language."
           }
         ]
       },
       "seo": {
-        "title": "Figma Design Portfolio | UI/UX Design Systems",
-        "description": "Professional UI/UX designs including component libraries, landing pages, mobile interfaces, and comprehensive design systems.",
-        "keywords": "figma, ui design, ux design, design system, component library, mobile design"
+        "title": "UI/UX Design Portfolio | Template",
+        "description": "Display your design projects - mobile apps, website redesigns, design systems, and brand identity work.",
+        "keywords": "ui design, ux design, figma, user experience, product design"
       }
     },
     {
-      "id": "ai-tools",
-      "name": "AI-Generated Content",
+      "id": "photography",
+      "name": "Photography",
       "track": "https://www.youtube.com/watch?v=m4U232MuTG4",
       "folder": {
-        "displayName": "form",
-        "variant": "variant-2",
+        "displayName": "photos",
+        "variant": "variant-3",
         "previewImages": [
-          "/img/catalog-3/preview-1.jpg",
-          "/img/catalog-3/preview-2.jpg",
-          "/img/catalog-3/preview-3.jpg"
+          "/img/catalog-3/preview-1.png",
+          "/img/catalog-3/preview-2.png",
+          "/img/catalog-3/preview-3.png"
         ]
       },
       "theme": {
         "backgroundColor": "#1a0a14",
         "cardBackground": "#2a1a24",
         "textColor": "#ffebf0",
-        "accentColor": "#ec4899",
-        "titleGradient": "linear-gradient(135deg, #ec4899 0%, #f472b6 50%, #fbbf24 100%)",
-        "folderGradient": "#00483C",
-        "folderTextColor": "#F4F3EF",
+        "accentColor": "#10b981",
+        "titleGradient": "linear-gradient(135deg, #10b981 0%, #22d3ee 50%, #3b82f6 100%)",
+        "folderGradient": "#D4E8D9",
+        "folderTextColor": "#2d4a37",
         "pageBackground": "radial-gradient(circle 800px at 0% 0%, rgba(1,91,79,0.7) 0%, transparent 50%), radial-gradient(circle 800px at 100% 0%, rgba(20,108,96,0.7) 0%, transparent 50%), radial-gradient(circle 800px at 0% 100%, rgba(2,45,36,0.7) 0%, transparent 50%), radial-gradient(circle 800px at 100% 100%, rgba(0,72,60,0.7) 0%, transparent 50%)"
       },
       "content": {
-        "introTitle": "AI Creative Studio",
+        "introTitle": "Photography Portfolio",
         "cards": [
           {
             "index": "01",
-            "title": "AI Photography",
-            "image": "/img/catalog-3/card-1.jpg",
-            "description": "Photorealistic images generated with Midjourney and DALL-E. Creative concepts, product photography, and artistic compositions powered by artificial intelligence."
+            "title": "Portrait Photography",
+            "image": "/img/catalog-3/card-1.png",
+            "description": "Replace with your portrait sessions. Showcase your work with people, studio lighting techniques, natural light mastery, and post-processing style."
           },
           {
             "index": "02",
-            "title": "Video Generation",
-            "image": "/img/catalog-3/card-2.jpg",
-            "description": "AI-powered video content creation with RunwayML and Pika. Motion graphics, video transitions, and cinematic effects generated through neural networks."
+            "title": "Product Photography",
+            "image": "/img/catalog-3/card-2.png",
+            "description": "Replace with your commercial shoots. Display studio setups, product shots for e-commerce, lifestyle photography, and professional retouching."
           },
           {
             "index": "03",
-            "title": "Design Assets",
-            "image": "/img/catalog-3/card-3.jpg",
-            "description": "AI-generated logos, icons, and illustrations for branding projects. Scalable vector graphics and unique design elements created with generative AI tools."
+            "title": "Landscape Photography",
+            "image": "/img/catalog-3/card-3.png",
+            "description": "Replace with your nature photography. Present scenic views, travel destinations, outdoor adventures, and golden hour captures."
           },
           {
             "index": "04",
-            "title": "Code Generation",
-            "image": "/img/catalog-3/card-4.jpg",
-            "description": "AI-assisted development with code completion, refactoring, and documentation. Automation of repetitive tasks and intelligent code suggestions."
+            "title": "Event Photography",
+            "image": "/img/catalog-3/card-4.png",
+            "description": "Replace with your event coverage. Show weddings, corporate events, concerts, candid moments, and storytelling through images."
           }
         ]
       },
       "seo": {
-        "title": "AI-Generated Content Portfolio | Creative AI Tools",
-        "description": "AI-powered creative work including photography, video generation, design assets, and code automation using cutting-edge AI tools.",
-        "keywords": "ai tools, midjourney, dall-e, runway, ai photography, ai video, generative ai"
+        "title": "Photography Portfolio | Template",
+        "description": "Display your photography work - portraits, products, landscapes, and events. Professional portfolio template.",
+        "keywords": "photography, portraits, commercial, landscape, event photography"
       }
     },
     {
-      "id": "backend-api",
-      "name": "Backend & API",
+      "id": "3d-art",
+      "name": "3D Art & Animation",
       "track": "https://soundcloud.com/cerclelive/solomun-theatre-antique-dorange-for-cercle",
       "folder": {
-        "displayName": "chromatic",
-        "variant": "variant-3",
+        "displayName": "3D art",
+        "variant": "variant-1",
         "previewImages": [
-          "/img/catalog-4/preview-1.jpg",
-          "/img/catalog-4/preview-2.jpg",
-          "/img/catalog-4/preview-3.jpg"
+          "/img/catalog-4/preview-1.png",
+          "/img/catalog-4/preview-2.png",
+          "/img/catalog-4/preview-3.png"
         ]
       },
       "theme": {
         "backgroundColor": "#0f1419",
         "cardBackground": "#1f2937",
         "textColor": "#f3f4f6",
-        "accentColor": "#10b981",
-        "titleGradient": "linear-gradient(135deg, #10b981 0%, #22d3ee 50%, #3b82f6 100%)",
-        "folderGradient": "#1A2830",
-        "folderTextColor": "#F4F3EF",
+        "accentColor": "#8b5cf6",
+        "titleGradient": "linear-gradient(135deg, #8b5cf6 0%, #a78bfa 50%, #6366f1 100%)",
+        "folderGradient": "#E0D4E8",
+        "folderTextColor": "#4a3750",
         "pageBackground": "radial-gradient(circle 800px at 0% 0%, rgba(10,24,32,0.9) 0%, transparent 50%), radial-gradient(circle 800px at 100% 0%, rgba(26,40,48,0.9) 0%, transparent 50%), radial-gradient(circle 800px at 0% 100%, rgba(42,56,64,0.9) 0%, transparent 50%), radial-gradient(circle 800px at 100% 100%, rgba(58,72,80,0.9) 0%, transparent 50%)"
       },
       "content": {
-        "introTitle": "Server Architecture",
+        "introTitle": "3D Art Portfolio",
         "cards": [
           {
             "index": "01",
-            "title": "REST API Design",
-            "image": "/img/catalog-4/card-1.jpg",
-            "description": "RESTful endpoint architecture with OpenAPI/Swagger documentation. Versioning, authentication, rate limiting, and proper HTTP status code implementation."
+            "title": "Character Design",
+            "image": "/img/catalog-4/card-1.png",
+            "description": "Replace with your 3D characters. Showcase modeling workflow, topology, rigging setup, character animation, and texture painting techniques."
           },
           {
             "index": "02",
-            "title": "GraphQL Services",
-            "image": "/img/catalog-4/card-2.jpg",
-            "description": "Scalable GraphQL APIs with schema design and resolvers. Apollo Server implementation with type-safe queries, mutations, and subscriptions."
+            "title": "Product Visualization",
+            "image": "/img/catalog-4/card-2.png",
+            "description": "Replace with your 3D product renders. Display photorealistic materials, studio lighting setups, HDRI environments, and composition."
           },
           {
             "index": "03",
-            "title": "Microservices Architecture",
-            "image": "/img/catalog-4/card-3.jpg",
-            "description": "Docker containerization and Kubernetes orchestration. Service-oriented architecture with message queues, event-driven communication, and service mesh."
+            "title": "Environment Art",
+            "image": "/img/catalog-4/card-3.png",
+            "description": "Replace with your 3D environments. Present architectural visualization, game-ready assets, scene composition, and atmosphere creation."
           },
           {
             "index": "04",
-            "title": "Database Design",
-            "image": "/img/catalog-4/card-4.jpg",
-            "description": "PostgreSQL and MongoDB schema optimization. Query performance tuning, indexing strategies, replication, and backup solutions for high availability."
+            "title": "Motion Graphics",
+            "image": "/img/catalog-4/card-4.png",
+            "description": "Replace with your animation projects. Show logo animations, kinetic typography, explainer videos, VFX work, and motion design."
           }
         ]
       },
       "seo": {
-        "title": "Backend & API Portfolio | Server Architecture Projects",
-        "description": "Backend development expertise including REST APIs, GraphQL services, microservices architecture, and optimized database design.",
-        "keywords": "backend, rest api, graphql, microservices, docker, kubernetes, postgresql, mongodb"
+        "title": "3D Art & Animation Portfolio | Template",
+        "description": "Showcase 3D modeling, character design, product visualization, environments, and motion graphics projects.",
+        "keywords": "3d art, 3d modeling, blender, cinema4d, animation, motion graphics"
+      }
+    },
+    {
+      "id": "mobile-apps",
+      "name": "Mobile Apps",
+      "track": "https://www.youtube.com/watch?v=QHDRRxKlimY&list=RDQHDRRxKlimY&start_radio=1",
+      "folder": {
+        "displayName": "mobile",
+        "variant": "variant-2",
+        "previewImages": [
+          "/img/catalog-5/preview-1.png",
+          "/img/catalog-5/preview-2.png",
+          "/img/catalog-5/preview-3.png"
+        ]
+      },
+      "theme": {
+        "backgroundColor": "#1a0a00",
+        "cardBackground": "#2a1a10",
+        "textColor": "#fff5eb",
+        "accentColor": "#f59e0b",
+        "titleGradient": "linear-gradient(135deg, #f59e0b 0%, #ef4444 50%, #ec4899 100%)",
+        "folderGradient": "#E8DDD4",
+        "folderTextColor": "#4a3a2d",
+        "pageBackground": "radial-gradient(circle 800px at 0% 0%, rgba(58,32,16,0.9) 0%, transparent 50%), radial-gradient(circle 800px at 100% 0%, rgba(42,24,10,0.9) 0%, transparent 50%), radial-gradient(circle 800px at 0% 100%, rgba(26,10,0,0.9) 0%, transparent 50%), radial-gradient(circle 800px at 100% 100%, rgba(58,32,16,0.9) 0%, transparent 50%)"
+      },
+      "content": {
+        "introTitle": "Mobile App Development",
+        "cards": [
+          {
+            "index": "01",
+            "title": "iOS App",
+            "image": "/img/catalog-5/card-1.png",
+            "description": "Replace with your iOS application. Showcase Swift/SwiftUI development, App Store features, user reviews, and iOS-specific functionality."
+          },
+          {
+            "index": "02",
+            "title": "Android App",
+            "image": "/img/catalog-5/card-2.png",
+            "description": "Replace with your Android project. Display Kotlin/Jetpack Compose code, Google Play metrics, Material Design implementation, and performance."
+          },
+          {
+            "index": "03",
+            "title": "Cross-Platform App",
+            "image": "/img/catalog-5/card-3.png",
+            "description": "Replace with your React Native or Flutter app. Show code reusability, platform-specific features, deployment pipeline, and shared business logic."
+          },
+          {
+            "index": "04",
+            "title": "App Prototype",
+            "image": "/img/catalog-5/card-4.png",
+            "description": "Replace with your app concept. Present user flows, interactive prototype, market research, competitive analysis, and validation results."
+          }
+        ]
+      },
+      "seo": {
+        "title": "Mobile App Development Portfolio | Template",
+        "description": "Display your mobile app projects - iOS, Android, cross-platform apps, and prototypes. Native and hybrid development.",
+        "keywords": "mobile development, ios, android, react native, flutter, swift, kotlin"
+      }
+    },
+    {
+      "id": "video-production",
+      "name": "Video Production",
+      "track": "https://www.youtube.com/watch?v=NBtnfRAbe14&list=RDNBtnfRAbe14&start_radio=1",
+      "folder": {
+        "displayName": "video",
+        "variant": "variant-3",
+        "previewImages": [
+          "/img/catalog-6/preview-1.png",
+          "/img/catalog-6/preview-2.png",
+          "/img/catalog-6/preview-3.png"
+        ]
+      },
+      "theme": {
+        "backgroundColor": "#1a0505",
+        "cardBackground": "#2a1010",
+        "textColor": "#ffebeb",
+        "accentColor": "#ef4444",
+        "titleGradient": "linear-gradient(135deg, #ef4444 0%, #f97316 50%, #fbbf24 100%)",
+        "folderGradient": "#E8D4D4",
+        "folderTextColor": "#4a2d2d",
+        "pageBackground": "radial-gradient(circle 800px at 0% 0%, rgba(58,16,16,0.9) 0%, transparent 50%), radial-gradient(circle 800px at 100% 0%, rgba(42,10,10,0.9) 0%, transparent 50%), radial-gradient(circle 800px at 0% 100%, rgba(26,5,5,0.9) 0%, transparent 50%), radial-gradient(circle 800px at 100% 100%, rgba(58,16,16,0.9) 0%, transparent 50%)"
+      },
+      "content": {
+        "introTitle": "Video Production Showcase",
+        "cards": [
+          {
+            "index": "01",
+            "title": "Commercial Video",
+            "image": "/img/catalog-6/card-1.png",
+            "description": "Replace with your brand video. Showcase storytelling approach, cinematography style, color grading, client testimonials, and campaign results."
+          },
+          {
+            "index": "02",
+            "title": "Music Video",
+            "image": "/img/catalog-6/card-2.png",
+            "description": "Replace with your music video project. Display creative direction, editing rhythm, visual effects, performance capture, and artistic vision."
+          },
+          {
+            "index": "03",
+            "title": "Documentary",
+            "image": "/img/catalog-6/card-3.png",
+            "description": "Replace with your documentary work. Present interview techniques, b-roll footage, narrative structure, sound design, and storytelling impact."
+          },
+          {
+            "index": "04",
+            "title": "YouTube Content",
+            "image": "/img/catalog-6/card-4.png",
+            "description": "Replace with your video content series. Show channel growth metrics, engagement rates, content strategy, thumbnail design, and audience retention."
+          }
+        ]
+      },
+      "seo": {
+        "title": "Video Production Portfolio | Template",
+        "description": "Showcase video production work - commercials, music videos, documentaries, and YouTube content. Professional videography portfolio.",
+        "keywords": "video production, videography, cinematography, editing, youtube, content creation"
       }
     }
   ]

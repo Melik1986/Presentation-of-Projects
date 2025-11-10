@@ -102,33 +102,61 @@ This project follows Feature-Sliced Design principles:
 - **features/** - Self-contained feature modules
 - **widgets/** - Complex UI compositions
 
-## 🎨 Content Management
+## 🎯 Quick Start for Your Portfolio
 
-This template is designed for **easy customization**:
+This template is ready to showcase your work! Follow these steps:
 
-### Quick Content Update
+### 1. Choose Your Category
 
-1. **Replace images** in `public/img/catalog-X/`
-   - 3 preview images (800x1200px) for Wildyriftian effect
-   - 4 card images (1200x800px) for catalog pages
+The template includes 6 pre-configured categories:
 
-2. **Edit text** in `content/catalogs.json`
-   - Change titles, descriptions, colors
-   - Update SEO metadata
-   - Customize audio tracks
+- **Web Development** - E-commerce, SaaS, Websites, Landing Pages
+- **UI/UX Design** - Mobile Apps, Redesigns, Design Systems, Branding
+- **Photography** - Portraits, Products, Landscapes, Events
+- **3D Art & Animation** - Characters, Products, Environments, Motion Graphics
+- **Mobile Apps** - iOS, Android, Cross-Platform, Prototypes
+- **Video Production** - Commercials, Music Videos, Documentaries, YouTube
 
-3. **Restart** dev server → Done! 🎉
+### 2. Replace Images
 
-**Full Guide:** [docs/QUICK_START.md](docs/QUICK_START.md)
-**Detailed Docs:** [docs/CONTENT_MANAGEMENT.md](docs/CONTENT_MANAGEMENT.md)
+Navigate to `public/img/catalog-X/` and replace placeholder images with your work:
+
+- `preview-1.png`, `preview-2.png`, `preview-3.png` (800x1200px) - for main page folders
+- `card-1.png`, `card-2.png`, `card-3.png`, `card-4.png` (1200x800px) - for catalog pages
+
+### 3. Update Content
+
+Edit `content/catalogs.json`:
+
+- Replace `"Your Name Here"` with your name in homepage section
+- Update project titles and descriptions for each card
+- Customize colors in `theme` section (optional)
+- Add your own audio tracks (optional, or set to `null`)
+
+### 4. Deploy
+
+```bash
+# Build for production
+bun run build
+
+# Deploy to Vercel (recommended)
+vercel deploy
+```
+
+**That's it!** Your portfolio is ready to impress! 🎉
+
+**Full Guide:** [docs/CONTENT_MANAGEMENT.md](docs/CONTENT_MANAGEMENT.md)
 
 ---
 
 ## 🎯 Perfect For
 
 - 📸 **Photographers** - showcase your portfolio
-- 🎨 **Artists & Designers** - present your work
-- 💻 **Developers** - highlight your projects
+- 🎨 **UI/UX Designers** - present your design work
+- 💻 **Web Developers** - highlight your projects
+- 🎭 **3D Artists** - display your 3D work and animations
+- 📱 **Mobile Developers** - showcase your apps
+- 🎬 **Video Producers** - present your video projects
 - 🏢 **Agencies** - demonstrate case studies
 - 🎓 **Students** - build impressive portfolio
 

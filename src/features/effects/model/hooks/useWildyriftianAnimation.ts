@@ -22,14 +22,14 @@ export function useWildyriftianAnimation(containerRef: RefObject<HTMLDivElement 
       const wrappers = gsap.utils.toArray<HTMLElement>('.folder-wrapper');
 
       // Initial reveal: folders slide up from bottom (drawer effect)
-      gsap.from(folders, {
-        y: 100,
-        opacity: 0,
-        duration: 0.6,
-        ease: 'power2.out',
-        stagger: 0.15,
+        gsap.from(folders, {
+          y: 100,
+          opacity: 0,
+          duration: 0.6,
+          ease: 'power2.out',
+          stagger: 0.15,
         delay: 0.5,
-      });
+        });
 
       // Proper touch detection (Web standards)
       // https://developer.mozilla.org/en-US/docs/Web/CSS/@media/hover

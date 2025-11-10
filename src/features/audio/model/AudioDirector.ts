@@ -116,7 +116,7 @@ class AudioDirector {
       if (this.context && this.context.state !== 'closed') {
         try {
           void this.context.close();
-        } catch (error) {
+        } catch {
           // Ignore close errors
         }
       }
