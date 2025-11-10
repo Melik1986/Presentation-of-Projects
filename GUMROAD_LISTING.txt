@@ -1,0 +1,281 @@
+===========================================
+STARLIGHT - GUMROAD LISTING
+===========================================
+
+=== PRODUCT TITLE ===
+Starlight - Animated Portfolio Template | Next.js 15 + React 19 + GSAP
+
+=== SHORT DESCRIPTION (160 chars max) ===
+Visual project presentation system with animated folders, sticky cards, and audio. JSON-based content management. Ready to deploy.
+
+=== FULL DESCRIPTION ===
+
+# Starlight — Visual Project Presentation System
+
+We invest time, attention, and context into our work.
+
+But typical freelance platforms and portfolio services often erase individuality —
+everything becomes identical cards with brief descriptions.
+
+I wanted to show projects differently:
+in motion, with story, with atmosphere, with your signature.
+
+That's how Starlight was born.
+
+---
+
+## What is Starlight?
+
+Starlight isn't just a template.
+It's a presentation structure where each project gets its own space, accents, and rhythm.
+
+- **Folder catalogs** gently guide the viewer
+- **Sticky cards** create an immersive effect
+- **Audio** supports the scene's mood
+- **Content** edited through simple JSON files
+- **Easy deployment** on Vercel
+
+The goal of Starlight is to give creative people a place where work "resonates".
+
+---
+
+## What's Included
+
+✅ **Complete Next.js 15 + React 19 project**
+   Full source code with all features
+
+✅ **6 pre-configured category templates:**
+   - Web Development (E-commerce, SaaS, Websites)
+   - UI/UX Design (Mobile Apps, Redesigns, Systems)
+   - Photography (Portraits, Products, Landscapes)
+   - 3D Art & Animation (Characters, Motion Graphics)
+   - Mobile Apps (iOS, Android, Cross-Platform)
+   - Video Production (Commercials, Music Videos)
+
+✅ **GSAP-powered animations**
+   Sticky cards, smooth folder transitions, text reveals
+
+✅ **Audio integration**
+   YouTube and SoundCloud support with visualizer
+
+✅ **JSON-based content management**
+   No database needed - edit one file
+
+✅ **Fully responsive**
+   Mobile shows 4 folders, desktop shows 6
+
+✅ **Complete bilingual documentation**
+   English + Russian step-by-step guides
+
+✅ **Security hardened**
+   CSP headers, input validation, XSS protection
+
+✅ **Ready to deploy**
+   Works on Vercel free tier
+
+---
+
+## Perfect For
+
+- Freelancers moving to the next level
+- UI/UX designers and web developers
+- 3D artists and motion designers
+- Photographers, videographers, musicians
+- Creative independent specialists
+
+Starlight helps you not just show work — but show your approach.
+
+---
+
+## Technical Stack
+
+- Next.js 15 (App Router)
+- React 19
+- TypeScript (Strict Mode)
+- GSAP + Lenis animations
+- CSS Modules
+- Feature-Sliced Design architecture
+
+---
+
+## Requirements
+
+- Basic JSON editing skills
+- Code editor (VS Code recommended)
+- Node.js 18+ or Bun 1.0+
+- Vercel account (free tier works)
+
+**No coding knowledge required** - just edit JSON and replace images!
+
+---
+
+## What You Get
+
+1. **Complete source code** - Full Next.js project with all features
+2. **Bilingual documentation** - English + Russian guides  
+3. **Quick start guide** - 5-minute setup instructions
+4. **6 category templates** - Ready for your projects
+5. **Deployment guide** - Step-by-step Vercel setup
+6. **Free updates** - Bug fixes and improvements
+
+---
+
+## 5-Minute Setup
+
+1. Install dependencies (`bun install`)
+2. Replace 42 placeholder images with your work
+3. Edit `catalogs.json` with your project details
+4. Deploy to Vercel (`vercel deploy`)
+
+**That's it!** Your portfolio is live.
+
+---
+
+## Support
+
+- **Comprehensive documentation** - included
+- **Email support** - setup questions answered
+- **Free updates** - bug fixes included
+
+---
+
+=== РУССКОЕ ОПИСАНИЕ ===
+
+# Starlight — Система визуальной презентации проектов
+
+Мы вкладываем в свою работу время, внимание и контекст.
+
+Но обычные фриланс-платформы и портфолио-сервисы часто стирают индивидуальность —
+всё превращается в одинаковые карточки с кратким описанием.
+
+Мне хотелось показать проекты иначе:
+в движении, с историей, с атмосферой, с вашим почерком.
+
+Так появился Starlight.
+
+---
+
+## Что такое Starlight?
+
+Starlight — это не просто шаблон.
+Это структура подачи, в которой каждая работа получает своё пространство, акценты и ритм.
+
+- **Папки-каталоги** помогают мягко вводить зрителя
+- **Sticky-карточки** создают эффект погружения
+- **Аудио** поддерживает настроение сцены
+- **Контент** редактируется через понятные JSON-файлы
+- **Лёгкий деплой** на Vercel
+
+Цель Starlight — дать творческому человеку место, где работа "звучит".
+
+---
+
+## Что включено
+
+✅ **Полный проект Next.js 15 + React 19**
+   Исходный код со всеми функциями
+
+✅ **6 готовых шаблонов категорий:**
+   - Веб-разработка (E-commerce, SaaS, Сайты)
+   - UI/UX Дизайн (Мобильные приложения, Редизайны, Системы)
+   - Фотография (Портреты, Продукты, Пейзажи)
+   - 3D Арт & Анимация (Персонажи, Моушн)
+   - Мобильные приложения (iOS, Android, Cross-platform)
+   - Видеопродакшн (Реклама, Музыкальные клипы)
+
+✅ **GSAP анимации**
+   Sticky-карточки, плавные переходы, появление текста
+
+✅ **Интеграция аудио**
+   Поддержка YouTube и SoundCloud с визуализатором
+
+✅ **Управление через JSON**
+   Без базы данных - редактируйте один файл
+
+✅ **Адаптивный дизайн**
+   Мобайл - 4 папки, десктоп - 6 папок
+
+✅ **Полная билингвальная документация**
+   Английские + Русские пошаговые руководства
+
+✅ **Усиленная безопасность**
+   CSP заголовки, валидация входных данных, защита от XSS
+
+✅ **Готов к деплою**
+   Работает на бесплатном Vercel
+
+---
+
+## Для кого
+
+- Фрилансеры, выходящие на новый уровень
+- UI/UX дизайнеры и веб-разработчики
+- 3D-художники и motion-дизайнеры
+- Фотографы, видеографы, музыканты
+- Творческие самостоятельные специалисты
+
+Starlight помогает не просто показать работу — показать подход.
+
+---
+
+## Что вы получаете
+
+1. **Полный исходный код** - Проект Next.js со всеми функциями
+2. **Билингвальная документация** - Английские + Русские гайды
+3. **Руководство быстрого старта** - Инструкция на 5 минут
+4. **6 шаблонов категорий** - Готовы для ваших проектов
+5. **Руководство по деплою** - Пошаговая настройка Vercel
+6. **Бесплатные обновления** - Исправления багов и улучшения
+
+---
+
+## Настройка за 5 минут
+
+1. Установите зависимости (`bun install`)
+2. Замените 42 placeholder изображения на ваши работы
+3. Отредактируйте `catalogs.json` с деталями проектов
+4. Задеплойте на Vercel (`vercel deploy`)
+
+**Готово!** Ваше портфолио онлайн.
+
+---
+
+=== TAGS ===
+portfolio, nextjs, react, template, animation, gsap, web-development, design, photography, 3d-art, developer-tools, creative, typescript, vercel
+
+=== SUGGESTED PRICE ===
+$49 USD
+
+=== CATEGORY ===
+Design > Templates > Websites
+
+=== COVER IMAGE REQUIREMENTS ===
+- Size: 1600x900px minimum (16:9 aspect ratio)
+- Content: Main page showing 6 colorful folders
+- Style: Clean screenshot, professional look
+- Optional text overlay: "Starlight Portfolio Template"
+- Background: White or light gray
+
+=== PREVIEW IMAGES (4-6 recommended) ===
+1. Main page - all 6 folders visible
+2. Catalog page - sticky cards animation
+3. Mobile view - responsive layout (4 folders)
+4. Code editor - showing catalogs.json file
+5. Audio panel - showing controls and visualizer
+6. Color customization - theme section example
+
+=== FILE DELIVERY ===
+- ZIP archive with complete project
+- Include: source code, documentation, placeholder images
+- Size: ~5-10 MB (after removing node_modules)
+
+=== SUPPORT EMAIL ===
+[your-email@example.com]
+
+=== LICENSE ===
+Single commercial use.
+Buyer can use for one portfolio website.
+Cannot resell or redistribute template.
+
+===========================================
+
