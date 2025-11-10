@@ -311,6 +311,11 @@
     bottom: 0 !important;
   }
 
+  /* Hide 3rd row on mobile (folders 5-6) - show max 4 folders */
+  .row:nth-child(3) {
+    display: none;
+  }
+
   .folder {
     margin-bottom: -0.5rem;
   }
