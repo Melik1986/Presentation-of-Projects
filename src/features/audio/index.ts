@@ -9,7 +9,6 @@ export { AudioProvider, useAudioDirector, useAnalyserData } from './model/hooks/
 export { AudioControls } from './ui/AudioControls';
 export { EqualizerCanvas } from './ui/EqualizerCanvas';
 export { AudioUIPanel } from './ui/AudioUIPanel';
-export { PreloaderTrack } from './ui/PreloaderTrack';
 
 export type * from './model/types';
 export * from './model/constants';

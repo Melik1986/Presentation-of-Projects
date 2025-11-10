@@ -182,6 +182,7 @@ export function Wildyriftian({ className }: WildyriftianProps) {
                         alt={folder.name}
                         fill
                         sizes="(max-width: 768px) 100vw, 33vw"
+                        priority={folder.index === '01' && image === folder.images[0]}
                       />
                     </div>
                   ))}

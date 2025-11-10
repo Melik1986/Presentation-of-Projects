@@ -3,8 +3,6 @@
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 
-import { PRELOADER_COMPLETE_EVENT } from '@/features/preloader';
-
 import { getPreviewRotation, supportsHover } from '../utils';
 
 import type { RefObject } from 'react';
@@ -24,19 +22,14 @@ export function useWildyriftianAnimation(containerRef: RefObject<HTMLDivElement 
       const wrappers = gsap.utils.toArray<HTMLElement>('.folder-wrapper');
 
       // Initial reveal: folders slide up from bottom (drawer effect)
-      // Triggered after preloader completes
-      const revealFolders = () => {
-        gsap.from(folders, {
-          y: 100,
-          opacity: 0,
-          duration: 0.6,
-          ease: 'power2.out',
-          stagger: 0.15,
-          delay: 1.5,
-        });
-      };
-
-      document.addEventListener(PRELOADER_COMPLETE_EVENT, revealFolders, { once: true });
+      gsap.from(folders, {
+        y: 100,
+        opacity: 0,
+        duration: 0.6,
+        ease: 'power2.out',
+        stagger: 0.15,
+        delay: 0.5,
+      });
 
       // Proper touch detection (Web standards)
       // https://developer.mozilla.org/en-US/docs/Web/CSS/@media/hover
@@ -45,10 +38,8 @@ export function useWildyriftianAnimation(containerRef: RefObject<HTMLDivElement 
 
       // Only setup hover animations if device supports hover and NOT touch
       if (!hasHoverSupport || isPointerCoarse) {
-        // Mobile: only cleanup event listener (useGSAP сам управляет cleanup)
-        return () => {
-          document.removeEventListener(PRELOADER_COMPLETE_EVENT, revealFolders);
-        };
+        // Mobile: no hover animations needed
+        return;
       }
 
       // Set initial state for desktop
@@ -126,7 +117,6 @@ export function useWildyriftianAnimation(containerRef: RefObject<HTMLDivElement 
 
       // Desktop: cleanup (useGSAP сам вызовет эту функцию при размонтировании)
       return () => {
-        document.removeEventListener(PRELOADER_COMPLETE_EVENT, revealFolders);
         handlers.forEach(({ folder, enter, leave }) => {
           folder.removeEventListener('mouseenter', enter);
           folder.removeEventListener('mouseleave', leave);

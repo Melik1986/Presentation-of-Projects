@@ -1,5 +1,3 @@
-import { GlobalPreloader } from '@/features/preloader';
-
 import { Providers } from './providers';
 
 import type { Metadata } from 'next';
@@ -57,10 +55,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en" data-scroll-behavior="smooth">
       <body>
-        <Providers>
-          <GlobalPreloader />
-          {children}
-        </Providers>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

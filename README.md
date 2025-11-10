@@ -32,10 +32,6 @@ starlight/
 │ │ └── audio/ # (пока пусто)
 │ │
 │ ├── features/ # Фичи
-│ │ ├── preloader/
-│ │ │ ├── ui/
-│ │ │ ├── model/
-│ │ │ └── index.ts
 │ │ ├── effects/
 │ │ │ ├── ui/
 │ │ │ └── index.ts
@@ -89,7 +85,6 @@ bun run type-check
 
 - ✨ Sticky Cards Animation
 - 🎨 Wildyriftian Effects
-- ⏳ Global Preloader
 - 🎵 Audio Player with Visualizer
 - 🎯 Feature-Sliced Design Architecture
 - 📱 Fully Responsive

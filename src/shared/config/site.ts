@@ -34,7 +34,6 @@ export const navConfig = {
  */
 export const features = {
   audio: true,
-  preloader: true,
   effects: true,
   stickyCards: true,
 } as const;

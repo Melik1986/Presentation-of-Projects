@@ -97,17 +97,6 @@ html {
   }
 }
 
-/* Preloader Lock Scroll */
-html.preload-lock,
-body.preload-lock {
-  overflow: hidden;
-  height: 100vh;
-}
-
-html.preloader-ready {
-  overflow: visible;
-}
-
 /* Utility Classes */
 .sr-only {
   position: absolute;

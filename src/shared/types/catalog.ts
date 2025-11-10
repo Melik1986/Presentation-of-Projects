@@ -51,7 +51,6 @@ export interface HomepageContent {
   title: string;
   description: string;
   backgroundGradient?: string;
-  preloaderGradient?: string;
 }
 
 export interface ExtendedAudioConfig {
