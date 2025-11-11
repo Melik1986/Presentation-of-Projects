@@ -1,7 +1,7 @@
 'use client';
 
 import { ReactLenis } from 'lenis/react';
-import { useEffect, useLayoutEffect, useRef } from 'react';
+import { useLayoutEffect, useRef } from 'react';
 
 import { AudioUIPanel, useAudioDirector } from '@/features/audio';
 import { StickyCards, useCatalogTitleAnimation } from '@/features/sticky-cards';
@@ -19,7 +19,7 @@ export function CatalogPageClient({ catalog, catalogId }: CatalogPageClientProps
   const catalogPageRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
   const {
-    actions: { enterCatalog, leaveCatalog, setHome, resume },
+    actions: { enterCatalog, resume },
   } = useAudioDirector();
 
   // Apply theme CSS variables
