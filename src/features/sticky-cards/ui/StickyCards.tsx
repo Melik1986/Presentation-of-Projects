@@ -39,10 +39,17 @@ export function StickyCards({ cards = defaultStickyCardsData, className }: Stick
 
               <div className={styles.stickyCardCopy}>
                 <div className={styles.stickyCardCopyTitle}>
-                  <p>(About the state)</p>
+                  <p>(Overview)</p>
                 </div>
                 <div className={styles.stickyCardCopyDescription}>
-                  <p>{cardData.description}</p>
+                  <a
+                    href={cardData.liveLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.viewLiveLink}
+                  >
+                    View Live →
+                  </a>
                 </div>
               </div>
             </div>

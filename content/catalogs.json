@@ -36,7 +36,7 @@
             "index": "01",
             "title": "E-Commerce Platform",
             "image": "/img/catalog-1/card-1.png",
-            "description": "Replace with your online store project. Showcase shopping cart, payment integration, product management, and checkout features. Built with React, Next.js, and modern backend."
+            "liveLink": "https://www.example.com/ecommerce"
           },
           {
             "index": "02",
@@ -48,7 +48,7 @@
             "index": "03",
             "title": "Corporate Website",
             "image": "/img/catalog-1/card-3.png",
-            "description": "Replace with your business website. Display responsive design, CMS integration, SEO optimization, and content management. Emphasize modern UI and fast loading."
+            "liveLink": "https://www.example.com/corporate"
           },
           {
             "index": "04",
@@ -94,7 +94,7 @@
             "index": "01",
             "title": "Mobile App Design",
             "image": "/img/catalog-2/card-1.png",
-            "description": "Replace with your mobile app mockups. Showcase user flows, wireframes, interactive prototypes, and usability testing results. Emphasize user-centered design."
+            "liveLink": "https://www.example.com/mobile-app"
           },
           {
             "index": "02",
@@ -106,13 +106,13 @@
             "index": "03",
             "title": "Design System",
             "image": "/img/catalog-2/card-3.png",
-            "description": "Replace with your component library. Show buttons, forms, typography scale, color palette, spacing system, and design tokens documentation."
+            "liveLink": "https://www.example.com/design-system"
           },
           {
             "index": "04",
             "title": "Brand Identity",
             "image": "/img/catalog-2/card-4.png",
-            "description": "Replace with your branding project. Present logo variations, brand guidelines, color psychology, typography choices, and visual language."
+            "liveLink": "https://www.example.com/brand"
           }
         ]
       },
@@ -152,25 +152,25 @@
             "index": "01",
             "title": "Portrait Photography",
             "image": "/img/catalog-3/card-1.png",
-            "description": "Replace with your portrait sessions. Showcase your work with people, studio lighting techniques, natural light mastery, and post-processing style."
+            "liveLink": "https://www.example.com/portrait"
           },
           {
             "index": "02",
             "title": "Product Photography",
             "image": "/img/catalog-3/card-2.png",
-            "description": "Replace with your commercial shoots. Display studio setups, product shots for e-commerce, lifestyle photography, and professional retouching."
+            "liveLink": "https://www.example.com/product"
           },
           {
             "index": "03",
             "title": "Landscape Photography",
             "image": "/img/catalog-3/card-3.png",
-            "description": "Replace with your nature photography. Present scenic views, travel destinations, outdoor adventures, and golden hour captures."
+            "liveLink": "https://www.example.com/landscape"
           },
           {
             "index": "04",
             "title": "Event Photography",
             "image": "/img/catalog-3/card-4.png",
-            "description": "Replace with your event coverage. Show weddings, corporate events, concerts, candid moments, and storytelling through images."
+            "liveLink": "https://www.example.com/event"
           }
         ]
       },
@@ -210,25 +210,25 @@
             "index": "01",
             "title": "Character Design",
             "image": "/img/catalog-4/card-1.png",
-            "description": "Replace with your 3D characters. Showcase modeling workflow, topology, rigging setup, character animation, and texture painting techniques."
+            "liveLink": "https://www.example.com/character"
           },
           {
             "index": "02",
             "title": "Product Visualization",
             "image": "/img/catalog-4/card-2.png",
-            "description": "Replace with your 3D product renders. Display photorealistic materials, studio lighting setups, HDRI environments, and composition."
+            "liveLink": "https://www.example.com/product-3d"
           },
           {
             "index": "03",
             "title": "Environment Art",
             "image": "/img/catalog-4/card-3.png",
-            "description": "Replace with your 3D environments. Present architectural visualization, game-ready assets, scene composition, and atmosphere creation."
+            "liveLink": "https://www.example.com/environment"
           },
           {
             "index": "04",
             "title": "Motion Graphics",
             "image": "/img/catalog-4/card-4.png",
-            "description": "Replace with your animation projects. Show logo animations, kinetic typography, explainer videos, VFX work, and motion design."
+            "liveLink": "https://www.example.com/motion"
           }
         ]
       },
@@ -268,25 +268,25 @@
             "index": "01",
             "title": "iOS App",
             "image": "/img/catalog-5/card-1.png",
-            "description": "Replace with your iOS application. Showcase Swift/SwiftUI development, App Store features, user reviews, and iOS-specific functionality."
+            "liveLink": "https://www.example.com/ios"
           },
           {
             "index": "02",
             "title": "Android App",
             "image": "/img/catalog-5/card-2.png",
-            "description": "Replace with your Android project. Display Kotlin/Jetpack Compose code, Google Play metrics, Material Design implementation, and performance."
+            "liveLink": "https://www.example.com/android"
           },
           {
             "index": "03",
             "title": "Cross-Platform App",
             "image": "/img/catalog-5/card-3.png",
-            "description": "Replace with your React Native or Flutter app. Show code reusability, platform-specific features, deployment pipeline, and shared business logic."
+            "liveLink": "https://www.example.com/cross-platform"
           },
           {
             "index": "04",
             "title": "App Prototype",
             "image": "/img/catalog-5/card-4.png",
-            "description": "Replace with your app concept. Present user flows, interactive prototype, market research, competitive analysis, and validation results."
+            "liveLink": "https://www.example.com/prototype"
           }
         ]
       },
@@ -326,25 +326,25 @@
             "index": "01",
             "title": "Commercial Video",
             "image": "/img/catalog-6/card-1.png",
-            "description": "Replace with your brand video. Showcase storytelling approach, cinematography style, color grading, client testimonials, and campaign results."
+            "liveLink": "https://www.example.com/commercial"
           },
           {
             "index": "02",
             "title": "Music Video",
             "image": "/img/catalog-6/card-2.png",
-            "description": "Replace with your music video project. Display creative direction, editing rhythm, visual effects, performance capture, and artistic vision."
+            "liveLink": "https://www.example.com/music-video"
           },
           {
             "index": "03",
             "title": "Documentary",
             "image": "/img/catalog-6/card-3.png",
-            "description": "Replace with your documentary work. Present interview techniques, b-roll footage, narrative structure, sound design, and storytelling impact."
+            "liveLink": "https://www.example.com/documentary"
           },
           {
             "index": "04",
             "title": "YouTube Content",
             "image": "/img/catalog-6/card-4.png",
-            "description": "Replace with your video content series. Show channel growth metrics, engagement rates, content strategy, thumbnail design, and audience retention."
+            "liveLink": "https://www.example.com/youtube"
           }
         ]
       },

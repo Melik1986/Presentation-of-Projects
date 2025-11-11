@@ -23,7 +23,7 @@ export interface CatalogCard {
   index: string;
   title: string;
   image: string;
-  description: string;
+  liveLink: string;
 }
 
 export interface CatalogContent {
