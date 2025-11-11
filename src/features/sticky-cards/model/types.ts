@@ -6,7 +6,8 @@ export type StickyCardData = {
   index: string;
   title: string;
   image: string;
-  liveLink: string;
+  description: string;
+  link: string;
 };
 
 export type StickyCardsProps = {
