@@ -1,7 +1,9 @@
 'use client';
 
 import Image from 'next/image';
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
+
+import { ScrollingBadge } from '@/shared/ui';
 
 import { AIPhotoGallery } from './AIPhotoGallery';
 import { DeviceGallery } from './DeviceGallery';
@@ -12,15 +14,57 @@ import { useStickyCardsAnimation } from '../model/hooks/useStickyCardsAnimation'
 
 import type { StickyCardsProps } from '../model/types';
 
+/**
+ * Hook to detect if screen width is below 1024px
+ */
+function useIsMobile(): boolean {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') {
+      return;
+    }
+
+    const mediaQuery = window.matchMedia('(max-width: 1024px)');
+    setIsMobile(mediaQuery.matches);
+
+    const handleChange = (e: MediaQueryListEvent) => {
+      setIsMobile(e.matches);
+    };
+
+    mediaQuery.addEventListener('change', handleChange);
+    return () => {
+      mediaQuery.removeEventListener('change', handleChange);
+    };
+  }, []);
+
+  return isMobile;
+}
+
 export function StickyCards({
   cards = defaultStickyCardsData,
   className,
   catalogId,
 }: StickyCardsProps) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const isMobile = useIsMobile();
 
   useStickyCardsAnimation(containerRef);
   useFirstCardAnimation(containerRef);
+
+  // AI Tools list for scrolling badges
+  const aiTools = [
+    'SORA AI',
+    'Recraft',
+    'KREA',
+    'FLORA',
+    'Weavy AI',
+    'Midjourney',
+    'DALL-E 3',
+    'Stable Diffusion',
+    'RunwayML',
+    'Pika Labs',
+  ];
 
   return (
     <div className={`${styles.stickyCards} ${className || ''}`} ref={containerRef}>
@@ -28,6 +72,42 @@ export function StickyCards({
         <div className={`sticky-card ${styles.stickyCard}`} key={cardData.index}>
           <div className={styles.stickyCardIndex}>
             <h1>{cardData.index}</h1>
+
+            {/* AI Tools badges for ai-tools catalog, card 01 */}
+            {catalogId === 'ai-tools' && cardData.index === '01' && (
+              <div className={styles.aiToolsBadges}>
+                <ScrollingBadge
+                  items={aiTools}
+                  direction={isMobile ? 'horizontal' : 'vertical'}
+                  speed={12}
+                  className={styles.badge1}
+                />
+                <ScrollingBadge
+                  items={aiTools}
+                  direction={isMobile ? 'horizontal' : 'vertical'}
+                  speed={14}
+                  className={styles.badge2}
+                />
+              </div>
+            )}
+
+            {/* AI Tools badges for ai-tools catalog, card 02 */}
+            {catalogId === 'ai-tools' && cardData.index === '02' && (
+              <div className={styles.aiToolsBadges}>
+                <ScrollingBadge
+                  items={aiTools}
+                  direction={isMobile ? 'horizontal' : 'vertical'}
+                  speed={12}
+                  className={styles.badge1}
+                />
+                <ScrollingBadge
+                  items={aiTools}
+                  direction={isMobile ? 'horizontal' : 'vertical'}
+                  speed={14}
+                  className={styles.badge2}
+                />
+              </div>
+            )}
           </div>
 
           <div className={styles.stickyCardContent}>
@@ -46,7 +126,7 @@ export function StickyCards({
                   />
                 ) : catalogId === 'ai-tools' ? (
                   <AIPhotoGallery
-                    images={[
+                    items={[
                       '/img/catalog-2/ai-photo-1.webp',
                       '/img/catalog-2/ai-photo-2.webp',
                       '/img/catalog-2/ai-photo-3.webp',
@@ -67,6 +147,24 @@ export function StickyCards({
                     />
                   </div>
                 )
+              ) : cardData.index === '02' && catalogId === 'ai-tools' ? (
+                <AIPhotoGallery
+                  items={[
+                    '/img/catalog-2/video-1.mp4',
+                    '/img/catalog-2/video-2.MP4',
+                    '/img/catalog-2/video-3.mp4',
+                    '/img/catalog-2/video-4.mp4',
+                    '/img/catalog-2/video-5.MP4',
+                    '/img/catalog-2/video-6.MP4',
+                    '/img/catalog-2/video-7.MP4',
+                    '/img/catalog-2/video-8.MP4',
+                  ]}
+                  layout="vertical"
+                  aspectRatio="landscape"
+                  animationDirection="horizontal"
+                  columns={2}
+                  itemType="video"
+                />
               ) : (
                 <div className={styles.stickyCardImg}>
                   <Image

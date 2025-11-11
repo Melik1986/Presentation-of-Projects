@@ -38,4 +38,3 @@
 - [ ] ESLint shows no errors
 - [ ] Tested locally
 - [ ] Branch strategy is correct ✅
-

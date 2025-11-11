@@ -1,0 +1,143 @@
+.scrollingBadge {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--accent-color, #3b82f6);
+  border-radius: 0.5rem;
+}
+
+/* Vertical */
+.scrollingBadge.vertical {
+  width: 70px;
+  height: 100%;
+}
+
+/* Horizontal */
+.scrollingBadge.horizontal {
+  width: 100%;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Track (container for moving text) */
+.track {
+  display: flex;
+  will-change: transform;
+}
+
+.scrollingBadge.vertical .track {
+  flex-direction: column;
+  gap: 2rem;
+  align-items: center;
+}
+
+.scrollingBadge.horizontal .track {
+  flex-direction: row;
+  gap: 2rem;
+  padding: 0 1rem;
+  align-items: center;
+}
+
+/* Text (moving) */
+.text {
+  flex-shrink: 0;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--accent-color, #3b82f6);
+  white-space: nowrap;
+}
+
+.scrollingBadge.vertical .text {
+  writing-mode: vertical-lr;
+  transform: rotate(180deg);
+}
+
+.scrollingBadge.horizontal .text {
+  writing-mode: horizontal-tb;
+  transform: none;
+}
+
+/* Blur fades (waterfall effect) */
+.fadeTop,
+.fadeBottom {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 80px;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.fadeTop {
+  top: 0;
+  background: linear-gradient(to bottom, var(--card-bg, #2a1a24) 0%, transparent 100%);
+}
+
+.fadeBottom {
+  bottom: 0;
+  background: linear-gradient(to top, var(--card-bg, #2a1a24) 0%, transparent 100%);
+}
+
+/* Horizontal badges - mobile styles */
+.scrollingBadge.horizontal .fadeTop {
+  width: 60px;
+  height: 100%;
+  left: 0;
+  right: auto;
+  top: 0;
+  bottom: 0;
+  background: linear-gradient(to right, var(--card-bg, #2a1a24) 0%, transparent 100%);
+}
+
+.scrollingBadge.horizontal .fadeBottom {
+  width: 60px;
+  height: 100%;
+  left: auto;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: linear-gradient(to left, var(--card-bg, #2a1a24) 0%, transparent 100%);
+}
+
+/* Mobile - vertical badges become horizontal (legacy support) */
+@media (max-width: 1024px) {
+  .scrollingBadge.vertical {
+    width: 100%;
+    height: 50px;
+  }
+
+  .scrollingBadge.vertical .track {
+    flex-direction: row;
+    gap: 2rem;
+    padding: 0 1rem;
+  }
+
+  .scrollingBadge.vertical .text {
+    writing-mode: horizontal-tb;
+    transform: none;
+    font-size: 0.7rem;
+  }
+
+  .scrollingBadge.vertical .fadeTop {
+    width: 60px;
+    height: 100%;
+    left: 0;
+    right: auto;
+    top: 0;
+    bottom: 0;
+    background: linear-gradient(to right, var(--card-bg, #2a1a24) 0%, transparent 100%);
+  }
+
+  .scrollingBadge.vertical .fadeBottom {
+    width: 60px;
+    height: 100%;
+    left: auto;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: linear-gradient(to left, var(--card-bg, #2a1a24) 0%, transparent 100%);
+  }
+}

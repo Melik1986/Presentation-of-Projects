@@ -9,9 +9,7 @@ import type { RefObject } from 'react';
 
 gsap.registerPlugin(Flip, Draggable);
 
-export function useDeviceGalleryAnimation(
-  galleryRef: RefObject<HTMLDivElement | null>
-): void {
+export function useDeviceGalleryAnimation(galleryRef: RefObject<HTMLDivElement | null>): void {
   useGSAP(
     () => {
       const gallery = galleryRef.current;
@@ -101,4 +99,3 @@ export function useDeviceGalleryAnimation(
     { scope: galleryRef }
   );
 }
-

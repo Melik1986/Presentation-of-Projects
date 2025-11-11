@@ -3,78 +3,100 @@
 import Image from 'next/image';
 import { useRef } from 'react';
 
+import { OptimizedVideo } from '@/shared/ui';
+
 import styles from './AIPhotoGallery.module.css';
 import { useAIPhotoGalleryAnimation } from '../model/hooks/useAIPhotoGalleryAnimation';
 
 interface AIPhotoGalleryProps {
-  images: string[]; // 8 images total
+  items: string[];
+  layout?: 'vertical' | 'horizontal';
+  aspectRatio?: 'portrait' | 'landscape';
+  animationDirection?: 'vertical' | 'horizontal';
+  columns?: number;
+  itemType?: 'image' | 'video';
+  images?: string[];
 }
 
-export function AIPhotoGallery({ images }: AIPhotoGalleryProps) {
+export function AIPhotoGallery({
+  items,
+  layout = 'vertical',
+  aspectRatio = 'portrait',
+  animationDirection = 'vertical',
+  columns = 2,
+  itemType = 'image',
+  images,
+}: AIPhotoGalleryProps) {
   const galleryRef = useRef<HTMLDivElement>(null);
+  const itemsToUse = items || images || [];
 
-  useAIPhotoGalleryAnimation(galleryRef);
+  useAIPhotoGalleryAnimation(galleryRef, {
+    layout,
+    animationDirection,
+    columns,
+  });
 
-  // Split images into 2 columns (4 images each)
-  const column1 = images.slice(0, 4);
-  const column2 = images.slice(4, 8);
+  const isHorizontal = layout === 'horizontal';
+  const isLandscape = aspectRatio === 'landscape';
+  const isHorizontalAnimation = animationDirection === 'horizontal';
+
+  let rowsArray: string[][];
+  if (isHorizontalAnimation && isLandscape) {
+    const itemsPerRow = Math.ceil(itemsToUse.length / columns);
+    rowsArray = Array.from({ length: columns }, (_, i) => {
+      const start = i * itemsPerRow;
+      const end = start + itemsPerRow;
+      return itemsToUse.slice(start, end);
+    });
+  } else {
+    const itemsPerColumn = Math.ceil(itemsToUse.length / columns);
+    rowsArray = Array.from({ length: columns }, (_, i) => {
+      const start = i * itemsPerColumn;
+      const end = start + itemsPerColumn;
+      return itemsToUse.slice(start, end);
+    });
+  }
 
   return (
-    <div ref={galleryRef} className={styles.aiPhotoGallery} data-ai-gallery>
-      {/* Blur overlay top */}
+    <div
+      ref={galleryRef}
+      className={`${styles.aiPhotoGallery} ${isHorizontal ? styles.horizontal : ''} ${isLandscape ? styles.landscape : ''}`}
+      data-ai-gallery
+    >
+      {/* Blur overlay top/left */}
       <div className={styles.blurOverlayTop} />
 
       <div className={styles.columnsWrapper}>
-        {/* Column 1 */}
-        <div className={styles.column} data-column="1">
-          {/* Render images twice for infinite scroll */}
-          {[...column1, ...column1].map((src, idx) => (
-            <a
-              key={idx}
-              href={src}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.photoWrapper}
-              data-photo
-            >
-              <Image
-                src={src}
-                alt={`AI Photo ${idx + 1}`}
-                fill
-                sizes="(max-width: 768px) 50vw, 300px"
-                className={styles.photo}
-              />
-            </a>
-          ))}
-        </div>
-
-        {/* Column 2 */}
-        <div className={styles.column} data-column="2">
-          {/* Render images twice for infinite scroll */}
-          {[...column2, ...column2].map((src, idx) => (
-            <a
-              key={idx}
-              href={src}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.photoWrapper}
-              data-photo
-            >
-              <Image
-                src={src}
-                alt={`AI Photo ${idx + 5}`}
-                fill
-                sizes="(max-width: 768px) 50vw, 300px"
-                className={styles.photo}
-              />
-            </a>
-          ))}
-        </div>
+        {rowsArray.map((rowItems, rowIndex) => (
+          <div key={rowIndex} className={styles.column} data-column={rowIndex + 1}>
+            {(itemType === 'video' ? rowItems : [...rowItems, ...rowItems]).map((src, idx) => (
+              <a
+                key={idx}
+                href={src}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.photoWrapper}
+                data-photo
+              >
+                {itemType === 'video' ? (
+                  <OptimizedVideo src={src} className={styles.photo} autoPlayOnVisible={true} />
+                ) : (
+                  <Image
+                    src={src}
+                    alt={`Gallery item ${idx + 1}`}
+                    fill
+                    sizes="(max-width: 768px) 50vw, 300px"
+                    className={styles.photo}
+                  />
+                )}
+              </a>
+            ))}
+          </div>
+        ))}
       </div>
 
-      {/* Blur overlay bottom */}
+      {/* Blur overlay bottom/right */}
       <div className={styles.blurOverlayBottom} />
     </div>
   );
 }
-

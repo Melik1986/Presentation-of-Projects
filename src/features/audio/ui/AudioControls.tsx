@@ -34,10 +34,10 @@ export function AudioControls(): ReactElement {
     () => (displayMuted || displayVolume <= 0.001 ? MUTE_ICON : VOLUME_ICON),
     [displayMuted, displayVolume]
   );
-  const percent = useMemo(() => (displayMuted ? 0 : formatVolume(displayVolume)), [
-    displayMuted,
-    displayVolume,
-  ]);
+  const percent = useMemo(
+    () => (displayMuted ? 0 : formatVolume(displayVolume)),
+    [displayMuted, displayVolume]
+  );
 
   const handleToggle = useCallback(() => {
     void toggleMute();
