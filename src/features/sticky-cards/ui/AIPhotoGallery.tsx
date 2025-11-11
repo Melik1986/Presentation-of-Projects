@@ -3,8 +3,8 @@
 import Image from 'next/image';
 import { useRef } from 'react';
 
-import { useAIPhotoGalleryAnimation } from '../model/hooks/useAIPhotoGalleryAnimation';
 import styles from './AIPhotoGallery.module.css';
+import { useAIPhotoGalleryAnimation } from '../model/hooks/useAIPhotoGalleryAnimation';
 
 interface AIPhotoGalleryProps {
   images: string[]; // 8 images total

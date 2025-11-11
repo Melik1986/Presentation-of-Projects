@@ -3,8 +3,8 @@
 import Image from 'next/image';
 import { useRef } from 'react';
 
-import { useDeviceGalleryAnimation } from '../model/hooks/useDeviceGalleryAnimation';
 import styles from './DeviceGallery.module.css';
+import { useDeviceGalleryAnimation } from '../model/hooks/useDeviceGalleryAnimation';
 
 interface DeviceGalleryProps {
   images: [string, string, string, string];

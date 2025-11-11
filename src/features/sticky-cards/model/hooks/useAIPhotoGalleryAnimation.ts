@@ -35,7 +35,7 @@ export function useAIPhotoGalleryAnimation(
           { y: 0 },
           {
             y: -halfHeight,
-            duration: 18,
+            duration: 20,
             ease: 'none',
             repeat: -1,
             delay: columnIndex * 1,
