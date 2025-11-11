@@ -90,6 +90,32 @@
   font-weight: 650;
 }
 
+.viewLiveLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1.25rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--accent-color, #3b82f6);
+  text-decoration: none;
+  border: 1px solid var(--accent-color, #3b82f6);
+  border-radius: 0.375rem;
+  transition: all 0.2s ease;
+}
+
+.viewLiveLink:hover {
+  background-color: var(--accent-color, #3b82f6);
+  color: var(--card-bg, #1a1a1a);
+  transform: translateX(4px);
+}
+
+.viewLiveLink:active {
+  transform: translateX(2px);
+}
+
 @media (max-width: 1000px) {
   .stickyCard {
     flex-direction: column;

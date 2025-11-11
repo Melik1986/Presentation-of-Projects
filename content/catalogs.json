@@ -35,27 +35,31 @@
         "cards": [
           {
             "index": "01",
-            "title": "E-commerce Platform",
-            "image": "/img/catalog-1/card-1.jpg",
-            "description": "Full-featured online store with shopping cart, secure checkout, and payment integration. Product catalog management, inventory tracking, and order processing system."
+            "title": "AutoService",
+            "image": "",
+            "description": "Full-stack car service management platform with online booking, real-time availability, admin dashboard, and automated email notifications. Built with React, NestJS, and Supabase.",
+            "link": "https://www.carservicenl.eu/"
           },
           {
             "index": "02",
-            "title": "Analytics Dashboard",
-            "image": "/img/catalog-1/card-2.jpg",
-            "description": "Real-time business intelligence platform with interactive charts and data visualization. Custom metrics, filtering, and export capabilities for data-driven decisions."
+            "title": "3D AI Produkt-Konfigurator",
+            "image": "/img/catalog-1/card-5.png",
+            "description": "Interactive 3D product configurator built with Three.js and WebGL. Real-time customization of colors, materials, and variants with optimized performance. Scalable architecture for retail, automotive, and manufacturing applications.",
+            "link": "https://threejs-ai-client.vercel.app/"
           },
           {
             "index": "03",
-            "title": "CRM System",
-            "image": "/img/catalog-1/card-3.jpg",
-            "description": "Customer relationship management with lead tracking and sales funnel visualization. Contact management, activity timeline, and pipeline automation tools."
+            "title": "Houzzy — Furniture E-Commerce",
+            "image": "/img/catalog-1/card-6.png",
+            "description": "Modern furniture e-commerce prototype with product catalog, category navigation, and responsive design. Clean structure optimized for showrooms, interior shops, and custom furniture businesses. Built with modern e-commerce standards.",
+            "link": "https://houzzy-furniture-store.vercel.app/"
           },
           {
             "index": "04",
-            "title": "Landing Pages",
-            "image": "/img/catalog-1/card-4.jpg",
-            "description": "High-conversion landing pages with A/B testing and analytics integration. Responsive design, form validation, and lead capture optimization."
+            "title": "Movie Explorer — Film Discovery",
+            "image": "/img/catalog-1/card-7.png",
+            "description": "Film discovery web application with search functionality, detailed movie information, and personal favorites management. Responsive UI with clean navigation. Demonstrates API integration, component architecture, and state management for media platforms.",
+            "link": "https://my-projects-vk-kino.vercel.app/"
           }
         ]
       },
@@ -152,26 +156,30 @@
           {
             "index": "01",
             "title": "AI Photography",
-            "image": "/img/catalog-3/card-1.jpg",
-            "description": "Photorealistic images generated with Midjourney and DALL-E. Creative concepts, product photography, and artistic compositions powered by artificial intelligence."
+            "image": "",
+            "description": "Photorealistic images generated with Weavy ai and Krea.ai. Creative concepts, product photography, and artistic compositions powered by artificial intelligence.",
+            "link": "#"
           },
           {
             "index": "02",
             "title": "Video Generation",
             "image": "/img/catalog-3/card-2.jpg",
-            "description": "AI-powered video content creation with RunwayML and Pika. Motion graphics, video transitions, and cinematic effects generated through neural networks."
+            "description": "AI-powered video content creation with RunwayML and Pika. Motion graphics, video transitions, and cinematic effects generated through neural networks.",
+            "link": "#"
           },
           {
             "index": "03",
             "title": "Design Assets",
             "image": "/img/catalog-3/card-3.jpg",
-            "description": "AI-generated logos, icons, and illustrations for branding projects. Scalable vector graphics and unique design elements created with generative AI tools."
+            "description": "AI-generated logos, icons, and illustrations for branding projects. Scalable vector graphics and unique design elements created with generative AI tools.",
+            "link": "#"
           },
           {
             "index": "04",
             "title": "Code Generation",
             "image": "/img/catalog-3/card-4.jpg",
-            "description": "AI-assisted development with code completion, refactoring, and documentation. Automation of repetitive tasks and intelligent code suggestions."
+            "description": "AI-assisted development with code completion, refactoring, and documentation. Automation of repetitive tasks and intelligent code suggestions.",
+            "link": "#"
           }
         ]
       },

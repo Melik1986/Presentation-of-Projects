@@ -7,9 +7,11 @@ export type StickyCardData = {
   title: string;
   image: string;
   description: string;
+  link: string;
 };
 
 export type StickyCardsProps = {
   cards?: StickyCardData[];
   className?: string;
+  catalogId?: string;
 };

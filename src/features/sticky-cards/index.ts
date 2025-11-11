@@ -4,8 +4,12 @@
  */
 
 export { StickyCards } from './ui/StickyCards';
+export { DeviceGallery } from './ui/DeviceGallery';
+export { AIPhotoGallery } from './ui/AIPhotoGallery';
 export { useStickyCardsAnimation } from './model/hooks/useStickyCardsAnimation';
 export { useCatalogTitleAnimation } from './model/hooks/useCatalogTitleAnimation';
 export { useFirstCardAnimation } from './model/hooks/useFirstCardAnimation';
+export { useDeviceGalleryAnimation } from './model/hooks/useDeviceGalleryAnimation';
+export { useAIPhotoGalleryAnimation } from './model/hooks/useAIPhotoGalleryAnimation';
 export type { StickyCardData, StickyCardsProps } from './model/types';
 export { defaultStickyCardsData } from './model/data';

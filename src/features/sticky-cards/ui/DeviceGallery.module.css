@@ -1,0 +1,62 @@
+.deviceGallery {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-auto-rows: 1fr;
+  gap: 80px; /* Large gap - scattered in corners */
+  width: 100%;
+  max-width: 700px;
+  margin: 2rem auto;
+  padding: 40px;
+  min-height: 500px;
+  transition: gap 0.3s ease;
+  contain: layout; /* Isolate layout from surrounding content */
+  isolation: isolate; /* Create new stacking context */
+  overflow: visible;
+}
+
+/* Gathered state (hover) */
+.deviceGallery:global(.gathered) {
+  gap: 10px; /* Small gap - gathered in center */
+}
+
+.deviceItem {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1;
+  cursor: grab;
+  touch-action: none;
+  will-change: transform, filter;
+}
+
+.deviceItem:active {
+  cursor: grabbing;
+}
+
+.deviceImage {
+  object-fit: contain;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Mobile: disable draggable, smaller gap */
+@media (max-width: 768px) {
+  .deviceGallery {
+    gap: 40px;
+    padding: 20px;
+    min-height: 400px;
+  }
+
+  .deviceGallery:global(.gathered) {
+    gap: 5px;
+  }
+
+  .deviceItem {
+    touch-action: auto;
+    cursor: default;
+  }
+
+  .deviceItem:active {
+    cursor: default;
+  }
+}

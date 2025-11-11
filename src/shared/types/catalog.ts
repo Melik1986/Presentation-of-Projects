@@ -24,6 +24,7 @@ export interface CatalogCard {
   title: string;
   image: string;
   description: string;
+  link: string;
 }
 
 export interface CatalogContent {

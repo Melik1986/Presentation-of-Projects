@@ -1,0 +1,95 @@
+.aiPhotoGallery {
+  position: relative;
+  width: 100%;
+  max-width: 700px;
+  height: 600px; /* Fixed height for scrolling */
+  margin: 2rem auto;
+  overflow: hidden; /* Hide overflow for infinite scroll */
+  border-radius: 0.5rem;
+}
+
+.columnsWrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  height: 100%;
+  padding: 0 20px;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  will-change: transform;
+}
+
+.photoWrapper {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 2; /* Vertical photos */
+  border-radius: 0.5rem;
+  overflow: hidden;
+  flex-shrink: 0;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.photoWrapper:hover {
+  transform: scale(1.02);
+}
+
+.photo {
+  object-fit: cover;
+}
+
+/* Blur overlays (fog effect) */
+.blurOverlayTop,
+.blurOverlayBottom {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 100px;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.blurOverlayTop {
+  top: 0;
+  background: linear-gradient(
+    to bottom,
+    var(--card-bg, #1a1a1a) 0%,
+    transparent 100%
+  );
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.blurOverlayBottom {
+  bottom: 0;
+  background: linear-gradient(
+    to top,
+    var(--card-bg, #1a1a1a) 0%,
+    transparent 100%
+  );
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .aiPhotoGallery {
+    height: 500px;
+    max-width: 100%;
+  }
+
+  .columnsWrapper {
+    gap: 15px;
+    padding: 0 15px;
+  }
+
+  .column {
+    gap: 15px;
+  }
+}
+

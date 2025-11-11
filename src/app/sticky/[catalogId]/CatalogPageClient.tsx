@@ -56,7 +56,7 @@ export function CatalogPageClient({ catalog, catalogId }: CatalogPageClientProps
           </h1>
         </section>
 
-        <StickyCards cards={catalog.content.cards} />
+        <StickyCards cards={catalog.content.cards} catalogId={catalog.id} />
       </div>
 
       <AudioUIPanel className="audio-panel-fixed" />
