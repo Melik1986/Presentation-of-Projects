@@ -2,6 +2,21 @@
 
 Modern portfolio website built with Next.js 15, React 19, and TypeScript.
 
+---
+
+## ⚠️ ВАЖНО: Branch Strategy
+
+**Этот репозиторий использует две ветки:**
+
+- 🟢 **`main`** - Чистый шаблон для покупателей (НЕ ТРОГАТЬ после релиза)
+- 🟣 **`portfolio`** - Твоя кастомная версия с реальными проектами
+
+**🚫 НИКОГДА не делай `git merge portfolio` в ветке `main`!**
+
+📖 Подробнее: [BRANCH_STRATEGY.md](./BRANCH_STRATEGY.md)
+
+---
+
 ## 🚀 Tech Stack
 
 - **Framework:** Next.js 15 (App Router)
