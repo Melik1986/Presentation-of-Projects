@@ -1,0 +1,83 @@
+.animatedImageContainer {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 5/3;
+  overflow: hidden;
+  z-index: 1;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.animatedImageContainer:hover {
+  transform: scale(1.01);
+}
+
+.imageWrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.image {
+  object-fit: cover;
+  will-change: clip-path;
+  transition: transform 0.3s ease;
+}
+
+.animatedImageContainer:hover .image {
+  transform: scale(1.05);
+}
+
+/* Dynamic blur overlays */
+.blurOverlay {
+  position: absolute;
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0;
+  will-change: opacity;
+}
+
+/* Right-to-left reveal: blur on right edge */
+.blurOverlay.right-to-left {
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 100px;
+  background: linear-gradient(
+    to left,
+    rgba(26, 26, 46, 0.9) 0%,
+    rgba(26, 26, 46, 0.7) 30%,
+    transparent 100%
+  );
+}
+
+/* Left-to-right reveal: blur on left edge */
+.blurOverlay.left-to-right {
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 100px;
+  background: linear-gradient(
+    to right,
+    rgba(26, 26, 46, 0.9) 0%,
+    rgba(26, 26, 46, 0.7) 30%,
+    transparent 100%
+  );
+}
+
+/* Top-to-bottom reveal: blur on bottom edge */
+.blurOverlay.top-to-bottom {
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 80px;
+  background: linear-gradient(
+    to top,
+    rgba(26, 26, 46, 0.9) 0%,
+    rgba(26, 26, 46, 0.7) 30%,
+    transparent 100%
+  );
+}
+

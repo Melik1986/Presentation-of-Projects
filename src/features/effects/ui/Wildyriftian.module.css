@@ -43,7 +43,7 @@
 .wildyriftian img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
 }
 
 .wildyriftian h1 {

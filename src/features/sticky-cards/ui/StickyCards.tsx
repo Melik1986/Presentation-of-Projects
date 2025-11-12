@@ -3,12 +3,13 @@
 import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
 
-import { ScrollingBadge } from '@/shared/ui';
+import { AnimatedImage, MobileMockup, ScrollingBadge } from '@/shared/ui';
 
 import { AIPhotoGallery } from './AIPhotoGallery';
 import { DeviceGallery } from './DeviceGallery';
 import styles from './StickyCards.module.css';
 import { defaultStickyCardsData } from '../model/data';
+import { useFigmaImageAnimation } from '../model/hooks/useFigmaImageAnimation';
 import { useFirstCardAnimation } from '../model/hooks/useFirstCardAnimation';
 import { useStickyCardsAnimation } from '../model/hooks/useStickyCardsAnimation';
 
@@ -52,6 +53,9 @@ export function StickyCards({
   useStickyCardsAnimation(containerRef);
   useFirstCardAnimation(containerRef);
 
+  // Figma image animation for figma-design catalog (variant 2: Scale + Blur + Y-Movement)
+  useFigmaImageAnimation(containerRef, catalogId, 2);
+
   // AI Tools list for scrolling badges
   const aiTools = [
     'SORA AI',
@@ -69,7 +73,11 @@ export function StickyCards({
   return (
     <div className={`${styles.stickyCards} ${className || ''}`} ref={containerRef}>
       {cards.map((cardData) => (
-        <div className={`sticky-card ${styles.stickyCard}`} key={cardData.index}>
+        <div
+          className={`sticky-card ${styles.stickyCard}`}
+          key={cardData.index}
+          data-card-index={cardData.index}
+        >
           <div className={styles.stickyCardIndex}>
             <h1>{cardData.index}</h1>
 
@@ -108,6 +116,32 @@ export function StickyCards({
                 />
               </div>
             )}
+
+            {/* Mobile mockup for figma-design catalog, card 02 */}
+            {catalogId === 'figma-design' && cardData.index === '02' && (
+              <div className={styles.mobileMockupWrapper}>
+                <MobileMockup
+                  src={cardData.image}
+                  alt={cardData.title}
+                  catalogId={catalogId}
+                  cardIndex={cardData.index}
+                  enableAnimation={true}
+                />
+              </div>
+            )}
+
+            {/* Mobile mockup for figma-design catalog, card 03 */}
+            {catalogId === 'figma-design' && cardData.index === '03' && (
+              <div className={styles.mobileMockupWrapper}>
+                <MobileMockup
+                  src={cardData.image}
+                  alt={cardData.title}
+                  catalogId={catalogId}
+                  cardIndex={cardData.index}
+                  enableAnimation={true}
+                />
+              </div>
+            )}
           </div>
 
           <div className={styles.stickyCardContent}>
@@ -137,6 +171,18 @@ export function StickyCards({
                       '/img/catalog-2/ai-photo-8.webp',
                     ]}
                   />
+                ) : catalogId === 'figma-design' ? (
+                  <div className={styles.stickyCardImg} data-figma-image-container>
+                    <a href={cardData.image} target="_blank" rel="noopener noreferrer">
+                      <Image
+                        src={cardData.image}
+                        alt={cardData.title}
+                        fill
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                        data-figma-image
+                      />
+                    </a>
+                  </div>
                 ) : (
                   <div className={styles.stickyCardImg}>
                     <Image
@@ -147,38 +193,104 @@ export function StickyCards({
                     />
                   </div>
                 )
-              ) : cardData.index === '02' && catalogId === 'ai-tools' ? (
-                <AIPhotoGallery
-                  items={[
-                    '/img/catalog-2/video-1.mp4',
-                    '/img/catalog-2/video-2.MP4',
-                    '/img/catalog-2/video-3.mp4',
-                    '/img/catalog-2/video-4.mp4',
-                    '/img/catalog-2/video-5.MP4',
-                    '/img/catalog-2/video-6.MP4',
-                    '/img/catalog-2/video-7.MP4',
-                    '/img/catalog-2/video-8.MP4',
-                  ]}
-                  layout="vertical"
-                  aspectRatio="landscape"
-                  animationDirection="horizontal"
-                  columns={2}
-                  itemType="video"
-                />
+              ) : cardData.index === '02' ? (
+                catalogId === 'ai-tools' ? (
+                  <AIPhotoGallery
+                    items={[
+                      '/img/catalog-2/video-1.mp4',
+                      '/img/catalog-2/video-2.MP4',
+                      '/img/catalog-2/video-3.mp4',
+                      '/img/catalog-2/video-4.mp4',
+                      '/img/catalog-2/video-5.MP4',
+                      '/img/catalog-2/video-6.MP4',
+                      '/img/catalog-2/video-7.MP4',
+                      '/img/catalog-2/video-8.MP4',
+                    ]}
+                    layout="vertical"
+                    aspectRatio="landscape"
+                    animationDirection="horizontal"
+                    columns={2}
+                    itemType="video"
+                  />
+                ) : catalogId === 'figma-design' ? (
+                  <AnimatedImage
+                    src="/img/catalog-3/card-2.2.png"
+                    alt={cardData.title}
+                    direction="right-to-left"
+                    duration={1.2}
+                    delay={0.5}
+                    catalogId={catalogId}
+                    cardIndex={cardData.index}
+                    enableAnimation={true}
+                  />
+                ) : (
+                  <a
+                    href={cardData.image}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.stickyCardImg}
+                  >
+                    <Image
+                      src={cardData.image}
+                      alt={cardData.title}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                    />
+                  </a>
+                )
+              ) : cardData.index === '03' ? (
+                catalogId === 'figma-design' ? (
+                  <AnimatedImage
+                    src="/img/catalog-3/card-3.2.png"
+                    alt={cardData.title}
+                    direction="right-to-left"
+                    duration={1.2}
+                    delay={0.5}
+                    catalogId={catalogId}
+                    cardIndex={cardData.index}
+                    enableAnimation={true}
+                  />
+                ) : (
+                  <a
+                    href={cardData.image}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.stickyCardImg}
+                  >
+                    <Image
+                      src={cardData.image}
+                      alt={cardData.title}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                    />
+                  </a>
+                )
+              ) : catalogId === 'figma-design' ? (
+                <div className={styles.stickyCardImg} data-figma-image-container>
+                  <a href={cardData.image} target="_blank" rel="noopener noreferrer">
+                    <Image
+                      src={cardData.image}
+                      alt={cardData.title}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                      data-figma-image
+                    />
+                  </a>
+                </div>
               ) : (
-              <a
-                href={cardData.image}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.stickyCardImg}
-              >
-                <Image
-                  src={cardData.image}
-                  alt={cardData.title}
-                  fill
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                />
-              </a>
+                <a
+                  href={cardData.image}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.stickyCardImg}
+                >
+                  <Image
+                    src={cardData.image}
+                    alt={cardData.title}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                  />
+                </a>
               )}
 
               <div className={styles.stickyCardCopy}>

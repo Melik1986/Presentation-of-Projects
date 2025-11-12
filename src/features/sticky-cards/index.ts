@@ -11,5 +11,6 @@ export { useCatalogTitleAnimation } from './model/hooks/useCatalogTitleAnimation
 export { useFirstCardAnimation } from './model/hooks/useFirstCardAnimation';
 export { useDeviceGalleryAnimation } from './model/hooks/useDeviceGalleryAnimation';
 export { useAIPhotoGalleryAnimation } from './model/hooks/useAIPhotoGalleryAnimation';
+export { useFigmaImageAnimation } from './model/hooks/useFigmaImageAnimation';
 export type { StickyCardData, StickyCardsProps } from './model/types';
 export { defaultStickyCardsData } from './model/data';

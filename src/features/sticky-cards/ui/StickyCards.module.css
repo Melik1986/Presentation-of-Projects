@@ -83,6 +83,44 @@
   transform: scale(1.05);
 }
 
+/* Figma image animation initial state */
+.stickyCardImg[data-figma-image-container] {
+  perspective: 1000px;
+}
+
+.stickyCardImg[data-figma-image-container] img {
+  will-change: transform, opacity, filter;
+}
+
+/* Vertical layout for figma-design card 02 (desktop only) */
+.stickyCard[data-card-index='02'] .stickyCardIndex {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  height: 100%;
+}
+
+/* Vertical layout for figma-design card 03 (desktop only) */
+.stickyCard[data-card-index='03'] .stickyCardIndex {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  height: 100%;
+}
+
+/* Mobile mockup takes remaining height (desktop only) */
+.mobileMockupWrapper {
+  flex: 1;
+  min-height: 0;
+}
+
+/* Hide mobile mockup on mobile devices (up to 1024px) */
+@media (max-width: 1024px) {
+  .mobileMockupWrapper {
+    display: none;
+  }
+}
+
 .stickyCardCopy {
   display: flex;
   gap: 1.5rem;
@@ -178,5 +216,35 @@
 
   .stickyCardIndex {
     flex: 1;
+  }
+}
+
+/* Mobile adjustments for figma-design card 02 */
+@media (max-width: 1024px) {
+  /* Reset vertical layout on mobile */
+  .stickyCard[data-card-index='02'] .stickyCardIndex {
+    display: block;
+    height: auto;
+    gap: 0;
+  }
+
+  /* Adjust content wrapper for mobile */
+  .stickyCard[data-card-index='02'] .stickyCardContentWrapper {
+    width: 100%;
+  }
+}
+
+/* Mobile adjustments for figma-design card 03 */
+@media (max-width: 1024px) {
+  /* Reset vertical layout on mobile */
+  .stickyCard[data-card-index='03'] .stickyCardIndex {
+    display: block;
+    height: auto;
+    gap: 0;
+  }
+
+  /* Adjust content wrapper for mobile */
+  .stickyCard[data-card-index='03'] .stickyCardContentWrapper {
+    width: 100%;
   }
 }
