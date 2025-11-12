@@ -61,14 +61,26 @@
 
 .stickyCardImg {
   position: relative;
+  display: block;
   width: 100%;
   aspect-ratio: 5/3;
   overflow: hidden;
   z-index: 1;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.stickyCardImg:hover {
+  transform: scale(1.01);
 }
 
 .stickyCardImg img {
   object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.stickyCardImg:hover img {
+  transform: scale(1.05);
 }
 
 .stickyCardCopy {

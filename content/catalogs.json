@@ -135,9 +135,9 @@
         "displayName": "form",
         "variant": "variant-2",
         "previewImages": [
-          "/img/catalog-3/preview-1.jpg",
-          "/img/catalog-3/preview-2.jpg",
-          "/img/catalog-3/preview-3.jpg"
+          "/img/catalog-2/preview-1.webp",
+          "/img/catalog-2/preview-2.webp",
+          "/img/catalog-2/preview-3.webp"
         ]
       },
       "theme": {
@@ -163,22 +163,22 @@
           {
             "index": "02",
             "title": "Video Generation",
-            "image": "/img/catalog-3/card-2.jpg",
+            "image": "",
             "description": "AI-powered video content creation with RunwayML and Pika. Motion graphics, video transitions, and cinematic effects generated through neural networks.",
             "link": "#"
           },
           {
             "index": "03",
-            "title": "Design Assets",
-            "image": "/img/catalog-3/card-3.jpg",
-            "description": "AI-generated logos, icons, and illustrations for branding projects. Scalable vector graphics and unique design elements created with generative AI tools.",
+            "title": "AI Video Advertising",
+            "image": "/img/catalog-2/card-1.png",
+            "description": "Node-based workflow for generating video advertisements with text and scenario control in Weavy AI neural network. Advanced prompting and composition techniques for marketing content.",
             "link": "#"
           },
           {
             "index": "04",
-            "title": "Code Generation",
-            "image": "/img/catalog-3/card-4.jpg",
-            "description": "AI-assisted development with code completion, refactoring, and documentation. Automation of repetitive tasks and intelligent code suggestions.",
+            "title": "AI Interior Design",
+            "image": "/img/catalog-2/card-2.png",
+            "description": "Node-based system for generating designer interiors for architecture and real estate market. Photorealistic renderings and spatial planning with AI-powered visualization tools.",
             "link": "#"
           }
         ]

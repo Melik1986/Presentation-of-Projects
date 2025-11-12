@@ -184,7 +184,7 @@
 }
 
 .folderPreviewImg:nth-child(1) {
-  left: 20%;
+  left: 10%;
   transform-origin: top left;
 }
 
@@ -194,7 +194,7 @@
 }
 
 .folderPreviewImg:nth-child(3) {
-  left: 80%;
+  left: 90%;
   transform-origin: top right;
 }
 

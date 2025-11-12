@@ -166,14 +166,19 @@ export function StickyCards({
                   itemType="video"
                 />
               ) : (
-                <div className={styles.stickyCardImg}>
-                  <Image
-                    src={cardData.image}
-                    alt={cardData.title}
-                    fill
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                  />
-                </div>
+              <a
+                href={cardData.image}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.stickyCardImg}
+              >
+                <Image
+                  src={cardData.image}
+                  alt={cardData.title}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
+              </a>
               )}
 
               <div className={styles.stickyCardCopy}>
