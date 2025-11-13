@@ -15,3 +15,5 @@ export { SpiralAnimation } from './SpiralAnimation';
 export type { SpiralConfig, IconData } from './SpiralAnimation';
 export { SkillsCharts } from './SkillsCharts';
 export type { BackendSkill, InfrastructureSkill, SkillsData } from './SkillsCharts';
+export { MicroservicesChart } from './MicroservicesChart';
+export type { MicroserviceNode, NodePosition, ServiceStatus } from './MicroservicesChart';

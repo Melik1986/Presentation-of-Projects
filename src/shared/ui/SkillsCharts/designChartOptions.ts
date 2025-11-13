@@ -16,7 +16,7 @@ export const getDesignChartOptions = (designWidth: number, designHeight: number)
   const isSmallMobile = viewportWidth < 480;
   const isMobile = viewportWidth < 768;
   const isTablet = viewportWidth < 1024;
-  
+
   // Адаптивный радиус: меньше на мобильных для высоты 220px
   const radius = isSmallMobile
     ? Math.max(60, minDimension * 0.22)
@@ -25,7 +25,7 @@ export const getDesignChartOptions = (designWidth: number, designHeight: number)
       : isTablet
         ? Math.max(90, minDimension * 0.28)
         : Math.max(100, minDimension * 0.33);
-  
+
   /** Center position - оптимизировано для компактных высот */
   const centerY = isSmallMobile ? '42%' : isMobile ? '44%' : isTablet ? '40%' : '38%';
 

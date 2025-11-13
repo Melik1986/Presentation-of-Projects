@@ -47,4 +47,3 @@ export function ChartIcons({ type }: ChartIconsProps) {
     </div>
   );
 }
-

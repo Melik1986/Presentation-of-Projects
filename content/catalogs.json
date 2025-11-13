@@ -235,7 +235,8 @@
             "index": "03",
             "title": "Microservices Architecture",
             "image": "/img/catalog-4/card-3.jpg",
-            "description": "Docker containerization and Kubernetes orchestration. Service-oriented architecture with message queues, event-driven communication, and service mesh."
+            "link": "https://github.com/Melik-Musinian",
+            "description": "Real-time service orchestration with Docker and Kubernetes. API Gateway routing, distributed messaging, health monitoring, and fault-tolerant architecture visualization."
           },
           {
             "index": "04",
