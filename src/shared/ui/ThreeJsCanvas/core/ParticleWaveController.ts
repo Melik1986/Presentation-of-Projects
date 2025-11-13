@@ -12,7 +12,7 @@ import {
 import { CameraController } from './CameraController';
 import { ShaderAnimationModule } from './ShaderAnimationModule';
 
-import type { AuroraConfig } from './types';
+import type { AuroraConfig } from '../types';
 
 // Background for canvas is now controlled purely by CSS variables.
 

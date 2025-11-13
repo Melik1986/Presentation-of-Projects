@@ -3,8 +3,8 @@
 import Image from 'next/image';
 import { useRef } from 'react';
 
+import { useMobileMockupAnimation } from './hooks/useMobileMockupAnimation';
 import styles from './MobileMockup.module.css';
-import { useMobileMockupAnimation } from './useMobileMockupAnimation';
 
 interface MobileMockupProps {
   src: string;

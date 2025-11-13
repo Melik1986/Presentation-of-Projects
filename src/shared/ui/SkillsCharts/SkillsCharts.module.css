@@ -1,0 +1,159 @@
+/* Skills Charts Container */
+.skillsCharts {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 500px;
+}
+
+.chartsContainer {
+  width: 100%;
+  max-width: 100%;
+  height: 100%;
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 20px;
+  min-height: 500px;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: space-between;
+  touch-action: pan-y;
+  will-change: transform;
+}
+
+/* Chart Wrapper */
+.chartWrapper {
+  flex: 1 1 50%;
+  min-height: 520px;
+  height: 520px;
+  padding: 24px;
+  background: var(--section-bg-left, rgba(255, 255, 255, 0.05));
+  border-radius: 16px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
+  position: relative;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  touch-action: pan-y;
+  will-change: transform;
+  opacity: 1;
+}
+
+/* Backend and Infrastructure Charts */
+.backendChart,
+.infrastructureChart {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  position: relative;
+  background: transparent;
+  font-family: 'Poppins', sans-serif;
+  color: var(--charts-text-color, #333);
+  font-size: 0.875rem;
+  box-sizing: border-box;
+  touch-action: pan-y;
+  will-change: transform;
+}
+
+/* ECharts Canvas */
+.backendChart canvas,
+.infrastructureChart canvas {
+  touch-action: pan-y;
+  will-change: transform;
+  pointer-events: auto;
+  margin-bottom: 20px;
+  background: transparent !important;
+}
+
+/* Tablet: Column layout */
+@media (max-width: 1024px) {
+  .skillsCharts {
+    min-height: 460px;
+  }
+
+  .chartsContainer {
+    flex-direction: column;
+    gap: 16px;
+    min-height: 460px;
+  }
+
+  .chartWrapper {
+    width: 100%;
+    flex: 1 1 auto;
+    min-height: 420px;
+    height: 420px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .skillsCharts {
+    min-height: 420px;
+  }
+
+  .chartsContainer {
+    gap: 14px;
+    flex-direction: column;
+    min-height: unset;
+    height: 100%;
+  }
+
+  .chartWrapper {
+    width: 100%;
+    min-height: 360px;
+    height: 360px;
+  }
+}
+
+/* Small Mobile */
+@media (max-width: 480px) {
+  .skillsCharts {
+    min-height: 380px;
+  }
+
+  .chartsContainer {
+    gap: 40px;
+  }
+
+  .chartWrapper {
+    min-height: 300px;
+    height: 300px;
+    max-height: 300px;
+    min-width: 280px;
+    padding: 10px;
+  }
+
+  .backendChart,
+  .infrastructureChart {
+    height: 100%;
+    min-width: 250px;
+  }
+}
+
+/* Extra Small Mobile */
+@media (max-width: 375px) {
+  .chartWrapper {
+    min-height: 260px;
+    height: 260px;
+  }
+}
+
+/* Desktop: Side by side */
+@media (min-width: 1025px) {
+  .chartsContainer {
+    flex-direction: row;
+  }
+
+  .chartWrapper {
+    width: calc(50% - 10px);
+  }
+}

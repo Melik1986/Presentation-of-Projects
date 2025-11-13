@@ -13,3 +13,5 @@ export { AnimatedImage } from './AnimatedImage';
 export { ThreeJsCanvas } from './ThreeJsCanvas';
 export { SpiralAnimation } from './SpiralAnimation';
 export type { SpiralConfig, IconData } from './SpiralAnimation';
+export { SkillsCharts } from './SkillsCharts';
+export type { BackendSkill, InfrastructureSkill, SkillsData } from './SkillsCharts';

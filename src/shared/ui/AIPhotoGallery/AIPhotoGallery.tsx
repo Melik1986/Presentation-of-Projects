@@ -6,7 +6,7 @@ import { useRef } from 'react';
 import { OptimizedVideo } from '@/shared/ui';
 
 import styles from './AIPhotoGallery.module.css';
-import { useAIPhotoGalleryAnimation } from '../model/hooks/useAIPhotoGalleryAnimation';
+import { useAIPhotoGalleryAnimation } from '../../../features/sticky-cards/model/hooks/useAIPhotoGalleryAnimation';
 
 interface AIPhotoGalleryProps {
   items: string[];

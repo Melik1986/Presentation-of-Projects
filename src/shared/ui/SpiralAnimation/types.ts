@@ -42,4 +42,3 @@ export interface SpiralState {
   isAnimating: boolean;
   icons: SpiralIcon[];
 }
-

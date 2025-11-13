@@ -3,11 +3,17 @@
 import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
 
-import { AnimatedImage, ScrollingBadge, SpiralAnimation, ThreeJsCanvas } from '@/shared/ui';
+import {
+  AnimatedImage,
+  ScrollingBadge,
+  SkillsCharts,
+  SpiralAnimation,
+  ThreeJsCanvas,
+} from '@/shared/ui';
 
-import { AIPhotoGallery } from './AIPhotoGallery';
-import { DeviceGallery } from './DeviceGallery';
 import styles from './StickyCards.module.css';
+import { AIPhotoGallery } from '../../../shared/ui/AIPhotoGallery/AIPhotoGallery';
+import { DeviceGallery } from '../../../shared/ui/DeviceGallery/DeviceGallery';
 import { defaultStickyCardsData } from '../model/data';
 import { useFigmaImageAnimation } from '../model/hooks/useFigmaImageAnimation';
 import { useFirstCardAnimation } from '../model/hooks/useFirstCardAnimation';
@@ -178,7 +184,9 @@ export function StickyCards({
                   </div>
                 )
               ) : cardData.index === '02' ? (
-                catalogId === 'ai-tools' ? (
+                catalogId === 'advanced-tech' ? (
+                  <SkillsCharts />
+                ) : catalogId === 'ai-tools' ? (
                   <AIPhotoGallery
                     items={[
                       '/img/catalog-2/video-1.mp4',

@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { useRef } from 'react';
 
 import styles from './DeviceGallery.module.css';
-import { useDeviceGalleryAnimation } from '../model/hooks/useDeviceGalleryAnimation';
+import { useDeviceGalleryAnimation } from '../../../features/sticky-cards/model/hooks/useDeviceGalleryAnimation';
 
 interface DeviceGalleryProps {
   images: [string, string, string, string];

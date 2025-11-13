@@ -4,8 +4,8 @@
  */
 
 export { StickyCards } from './ui/StickyCards';
-export { DeviceGallery } from './ui/DeviceGallery';
-export { AIPhotoGallery } from './ui/AIPhotoGallery';
+export { DeviceGallery } from '../../shared/ui/DeviceGallery/DeviceGallery';
+export { AIPhotoGallery } from '../../shared/ui/AIPhotoGallery/AIPhotoGallery';
 export { useStickyCardsAnimation } from './model/hooks/useStickyCardsAnimation';
 export { useCatalogTitleAnimation } from './model/hooks/useCatalogTitleAnimation';
 export { useFirstCardAnimation } from './model/hooks/useFirstCardAnimation';

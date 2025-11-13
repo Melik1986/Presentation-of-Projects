@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 
-import { ParticleWaveController } from './ParticleWaveController';
+import { ParticleWaveController } from './core/ParticleWaveController';
 import styles from './ThreeJsCanvas.module.css';
 
 import type { AuroraConfig } from './types';
@@ -71,8 +71,18 @@ export function ThreeJsCanvas({ className = '' }: ThreeJsCanvasProps) {
         resizeObserver.observe(container);
 
         // Store for cleanup
-        (controller as unknown as { _resizeObserver: ResizeObserver; _mouseHandler: (e: MouseEvent) => void })._resizeObserver = resizeObserver;
-        (controller as unknown as { _resizeObserver: ResizeObserver; _mouseHandler: (e: MouseEvent) => void })._mouseHandler = handleMouseMove;
+        (
+          controller as unknown as {
+            _resizeObserver: ResizeObserver;
+            _mouseHandler: (e: MouseEvent) => void;
+          }
+        )._resizeObserver = resizeObserver;
+        (
+          controller as unknown as {
+            _resizeObserver: ResizeObserver;
+            _mouseHandler: (e: MouseEvent) => void;
+          }
+        )._mouseHandler = handleMouseMove;
       }
     });
 
@@ -83,17 +93,17 @@ export function ThreeJsCanvas({ className = '' }: ThreeJsCanvasProps) {
           _resizeObserver?: ResizeObserver;
           dispose: () => void;
         };
-        
+
         // Remove event listeners
         if (ctrl._mouseHandler) {
           container.removeEventListener('mousemove', ctrl._mouseHandler);
         }
-        
+
         // Disconnect observer
         if (ctrl._resizeObserver) {
           ctrl._resizeObserver.disconnect();
         }
-        
+
         // Dispose controller
         controllerRef.current.dispose();
         controllerRef.current = null;
@@ -101,7 +111,5 @@ export function ThreeJsCanvas({ className = '' }: ThreeJsCanvasProps) {
     };
   }, []);
 
-  return (
-    <div ref={containerRef} className={`${styles.canvasContainer} ${className}`} />
-  );
+  return <div ref={containerRef} className={`${styles.canvasContainer} ${className}`} />;
 }

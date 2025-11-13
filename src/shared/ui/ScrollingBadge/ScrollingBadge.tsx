@@ -2,8 +2,8 @@
 
 import { useRef } from 'react';
 
+import { useScrollingBadgeAnimation } from './hooks/useScrollingBadgeAnimation';
 import styles from './ScrollingBadge.module.css';
-import { useScrollingBadgeAnimation } from './useScrollingBadgeAnimation';
 
 export interface ScrollingBadgeProps {
   items: string[];

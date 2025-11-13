@@ -36,6 +36,7 @@
 .deviceImage {
   object-fit: contain;
   pointer-events: none;
+  -webkit-user-select: none;
   user-select: none;
 }
 

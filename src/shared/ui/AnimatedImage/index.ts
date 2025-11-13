@@ -1,2 +1,2 @@
 export { AnimatedImage } from './AnimatedImage';
-export { useAnimatedImageReveal } from './useAnimatedImageReveal';
+export { useAnimatedImageReveal } from './hooks/useAnimatedImageReveal';

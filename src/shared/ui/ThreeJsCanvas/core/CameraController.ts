@@ -1,6 +1,6 @@
 import { Vector2, type PerspectiveCamera } from 'three';
 
-import type { AuroraConfig } from './types';
+import type { AuroraConfig } from '../types';
 
 interface MouseState {
   target: Vector2;

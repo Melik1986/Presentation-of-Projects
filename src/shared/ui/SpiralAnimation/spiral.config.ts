@@ -38,4 +38,3 @@ export const TECH_ICONS: IconData[] = [
   { name: 'webgl', icon: SiOpengl, color: '#5586A4' },
   { name: 'git', icon: SiGit, color: '#F05032' },
 ];
-

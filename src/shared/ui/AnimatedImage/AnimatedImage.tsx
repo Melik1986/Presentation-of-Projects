@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { useRef } from 'react';
 
 import styles from './AnimatedImage.module.css';
-import { useAnimatedImageReveal } from './useAnimatedImageReveal';
+import { useAnimatedImageReveal } from './hooks/useAnimatedImageReveal';
 
 interface AnimatedImageProps {
   src: string;

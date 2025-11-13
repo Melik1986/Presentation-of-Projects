@@ -2,9 +2,9 @@
 
 import React, { useRef } from 'react';
 
+import { useSpiralAnimation } from './hooks/useSpiralAnimation';
 import { TECH_ICONS, DEFAULT_SPIRAL_CONFIG } from './spiral.config';
 import styles from './SpiralAnimation.module.css';
-import { useSpiralAnimation } from './useSpiralAnimation';
 
 /**
  * Spiral animation component for technology icons
@@ -18,7 +18,7 @@ export function SpiralAnimation() {
   const icons = Array.from({ length: DEFAULT_SPIRAL_CONFIG.numIcons }, (_, i) => {
     const iconData = TECH_ICONS[i % TECH_ICONS.length]!;
     const IconComponent = iconData.icon;
-    
+
     return {
       id: i,
       name: iconData.name,

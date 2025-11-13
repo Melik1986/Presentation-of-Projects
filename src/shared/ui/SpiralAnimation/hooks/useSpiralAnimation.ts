@@ -1,6 +1,6 @@
 import { useRef, useEffect, type RefObject } from 'react';
 
-import { DEFAULT_SPIRAL_CONFIG } from './spiral.config';
+import { DEFAULT_SPIRAL_CONFIG } from '../spiral.config';
 
 /**
  * Hook for managing spiral animation of technology icons
@@ -16,7 +16,9 @@ export const useSpiralAnimation = (containerRef: RefObject<HTMLDivElement | null
     const animate = () => {
       angleRef.current += DEFAULT_SPIRAL_CONFIG.speed;
 
-      const icons = containerRef.current?.querySelectorAll('.spiral-icon') as NodeListOf<HTMLElement>;
+      const icons = containerRef.current?.querySelectorAll(
+        '.spiral-icon'
+      ) as NodeListOf<HTMLElement>;
 
       icons.forEach((icon, i) => {
         const phase = i * ((Math.PI * 2) / DEFAULT_SPIRAL_CONFIG.numIcons);
@@ -42,4 +44,3 @@ export const useSpiralAnimation = (containerRef: RefObject<HTMLDivElement | null
 
   return null;
 };
-

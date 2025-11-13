@@ -1,6 +1,6 @@
 import { ShaderMaterial, Vector2, Color, type IUniform } from 'three';
 
-import type { AuroraConfig } from './types';
+import type { AuroraConfig } from '../types';
 
 /**
  * Модуль для создания и обновления шейдерного материала частиц.
