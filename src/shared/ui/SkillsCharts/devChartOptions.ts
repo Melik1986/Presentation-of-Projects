@@ -62,18 +62,14 @@ const getTooltipConfig = () => ({
 
 /**
  * Creates X axis configuration for bar chart
- * @param config - object with font size and rotation settings
  * @returns X axis configuration object
  */
-const getXAxisConfig = (config: { fontSize: number; labelRotation: number }) => ({
+const getXAxisConfig = () => ({
   type: 'category',
   data: SKILLS_DATA.backend.map((item) => item.skill),
   ...getAxisStyle(),
   axisLabel: {
-    ...getAxisStyle().axisLabel,
-    rotate: config.labelRotation,
-    fontSize: config.fontSize,
-    interval: 0,
+    show: false, // Hide text labels, icons will be displayed via React component
   },
 });
 
@@ -125,7 +121,7 @@ export const getDevChartOptions = (containerWidth: number) => {
   return {
     ...getBaseChartStyles(),
     tooltip: getTooltipConfig(),
-    xAxis: getXAxisConfig(config),
+    xAxis: getXAxisConfig(),
     yAxis: getYAxisConfig(),
     series: getSeriesConfig(config.barWidth, config.barGap),
   } as EChartsCoreOption;

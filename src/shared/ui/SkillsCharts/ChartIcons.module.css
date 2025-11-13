@@ -1,0 +1,159 @@
+/* Backend Icons (Bar Chart) */
+.backendIcons {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 10%;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.iconWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  min-width: 0;
+}
+
+.iconWrapper .icon {
+  width: 24px;
+  height: 24px;
+  color: var(--charts-text-color, #ffffff);
+  opacity: 0.8;
+  transition: all 0.3s ease;
+}
+
+.iconWrapper .icon:hover {
+  opacity: 1;
+  transform: scale(1.1);
+  color: var(--color-accent, #10b981);
+}
+
+/* Infrastructure Icons (Pie Chart Legend) */
+.infrastructureIcons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.legendItem:hover {
+  transform: translateY(-2px);
+}
+
+.legendItem .icon {
+  width: 20px;
+  height: 20px;
+  color: var(--charts-text-color, #ffffff);
+  flex-shrink: 0;
+}
+
+.legendItem:hover .icon {
+  color: var(--color-accent, #10b981);
+}
+
+.legendText {
+  font-size: 12px;
+  color: var(--charts-text-color, #ffffff);
+  white-space: nowrap;
+}
+
+/* Mobile Adjustments: до 768px, компактные отступы */
+@media (max-width: 767px) {
+  .backendIcons {
+    gap: 3px;
+    padding: 8px 4%;
+  }
+
+  .iconWrapper .icon {
+    width: 18px;
+    height: 18px;
+  }
+
+  .infrastructureIcons {
+    gap: 10px;
+    padding: 8px;
+  }
+
+  .legendItem .icon {
+    width: 16px;
+    height: 16px;
+  }
+
+  .legendText {
+    font-size: 10px;
+  }
+}
+
+/* Small Mobile: extra compact */
+@media (max-width: 480px) {
+  .backendIcons {
+    gap: 2px;
+    padding: 6px 2%;
+  }
+
+  .iconWrapper .icon {
+    width: 16px;
+    height: 16px;
+  }
+
+  .infrastructureIcons {
+    gap: 8px;
+    padding: 6px;
+  }
+
+  .legendItem {
+    gap: 3px;
+  }
+
+  .legendItem .icon {
+    width: 14px;
+    height: 14px;
+  }
+
+  .legendText {
+    font-size: 9px;
+  }
+}
+
+/* Extra Small Mobile */
+@media (max-width: 375px) {
+  .backendIcons {
+    gap: 1px;
+    padding: 4px 1%;
+  }
+
+  .iconWrapper .icon {
+    width: 14px;
+    height: 14px;
+  }
+
+  .infrastructureIcons {
+    gap: 6px;
+    padding: 4px;
+  }
+
+  .legendItem .icon {
+    width: 12px;
+    height: 12px;
+  }
+
+  .legendText {
+    font-size: 8px;
+  }
+}
+

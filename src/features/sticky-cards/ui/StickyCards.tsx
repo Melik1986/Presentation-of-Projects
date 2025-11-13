@@ -86,7 +86,7 @@ export function StickyCards({
         >
           <div className={styles.stickyCardIndex}>
             <h1>{cardData.index}</h1>
-
+            
             {/* AI Tools badges for ai-tools catalog, card 01 */}
             {catalogId === 'ai-tools' && cardData.index === '01' && (
               <div className={styles.aiToolsBadges}>
@@ -284,12 +284,12 @@ export function StickyCards({
                   className={styles.stickyCardImg}
                   title={`View ${cardData.title} in full size`}
                 >
-                  <Image
-                    src={cardData.image}
-                    alt={cardData.title}
-                    fill
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                  />
+                <Image
+                  src={cardData.image}
+                  alt={cardData.title}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
                 </a>
               )}
 

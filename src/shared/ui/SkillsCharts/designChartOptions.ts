@@ -1,17 +1,7 @@
 import { getBaseChartStyles, getTooltipStyle } from './chartStyles';
-import { COLOR_PALETTE, RESPONSIVE_BREAKPOINTS, SKILLS_DATA } from './skillsCharts.config';
+import { COLOR_PALETTE, SKILLS_DATA } from './skillsCharts.config';
 
 import type { CallbackDataParams, EChartsOption } from 'echarts/types/dist/shared';
-
-/**
- * Utility function to read CSS variables (fallback implementation)
- */
-const readCssVar = (varName: string, fallback: string): string => {
-  if (typeof window === 'undefined') return fallback;
-
-  const value = getComputedStyle(document.documentElement).getPropertyValue(varName).trim();
-  return value || fallback;
-};
 
 /**
  * Creates configuration for infrastructure skills pie chart
@@ -23,38 +13,33 @@ export const getDesignChartOptions = (designWidth: number, designHeight: number)
   /** Adaptive radius calculation */
   const minDimension = Math.min(designWidth, designHeight);
   const viewportWidth = typeof window === 'undefined' ? designWidth : window.innerWidth;
-  const isSmallTablet = viewportWidth < 800;
-  const isTablet = viewportWidth < RESPONSIVE_BREAKPOINTS.tablet;
-  const radius = isSmallTablet
-    ? Math.max(80, minDimension * 0.26)
-    : isTablet
-      ? Math.max(90, minDimension * 0.28)
-      : Math.max(100, minDimension * 0.33);
-  /** Adaptive legend font size based on screen width */
-  const legendFontSize = viewportWidth < RESPONSIVE_BREAKPOINTS.mobile ? 9 : isTablet ? 10 : 12;
-
-  const legendTextColor = readCssVar('--charts-text-color', '#333333');
+  const isSmallMobile = viewportWidth < 480;
+  const isMobile = viewportWidth < 768;
+  const isTablet = viewportWidth < 1024;
+  
+  // Адаптивный радиус: меньше на мобильных для высоты 220px
+  const radius = isSmallMobile
+    ? Math.max(60, minDimension * 0.22)
+    : isMobile
+      ? Math.max(70, minDimension * 0.24)
+      : isTablet
+        ? Math.max(90, minDimension * 0.28)
+        : Math.max(100, minDimension * 0.33);
+  
+  /** Center position - оптимизировано для компактных высот */
+  const centerY = isSmallMobile ? '42%' : isMobile ? '44%' : isTablet ? '40%' : '38%';
 
   return {
     ...getBaseChartStyles(),
-    /** Legend configuration: enabled only on screens >= 480px */
-    legend:
-      viewportWidth >= RESPONSIVE_BREAKPOINTS.mobile
-        ? {
-            orient: 'horizontal',
-            bottom: '0%',
-            left: 'center',
-            textStyle: { color: legendTextColor, fontSize: legendFontSize },
-            data: SKILLS_DATA.infrastructure.map((item) => item.name),
-          }
-        : { show: false },
+    /** Legend configuration: disabled, icons will be displayed via React component */
+    legend: { show: false },
     /** Series data configuration for pie chart */
     series: [
       {
         name: 'Infrastructure Skills',
         type: 'pie',
         radius: [0, radius],
-        center: ['50%', isTablet ? (isSmallTablet ? '40%' : '38%') : '35%'],
+        center: ['50%', centerY],
         roseType: 'area',
         itemStyle: { borderRadius: 8 },
         label: { show: false },
