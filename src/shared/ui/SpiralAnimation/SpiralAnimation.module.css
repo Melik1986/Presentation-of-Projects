@@ -1,0 +1,125 @@
+/* Spiral Animation Container */
+.spiralContainer {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: visible;
+  z-index: 10;
+  margin: 20px 0;
+}
+
+/* Desktop: Vertical orientation */
+@media (min-width: 1025px) {
+  .spiralContainer {
+    height: 300px;
+    transform: rotate(90deg);
+  }
+
+  .spiral {
+    position: relative;
+    max-width: 600px;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+/* Mobile: Horizontal orientation */
+@media (max-width: 1024px) {
+  .spiralContainer {
+    height: 150px;
+    transform: none;
+  }
+
+  .spiral {
+    position: relative;
+    max-width: 100%;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+/* Spiral Icon Base Styles */
+.spiralContainer :global(.spiral-icon) {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  transition: transform 0.1s linear;
+  will-change: transform;
+  pointer-events: none;
+}
+
+/* Icon Wrapper */
+.spiralContainer :global(.icon-wrapper) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+/* Responsive Icon Sizes */
+@media (max-width: 768px) {
+  .spiralContainer :global(.spiral-icon) {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+@media (max-width: 480px) {
+  .spiralContainer :global(.spiral-icon) {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+/* Technology Icon Colors */
+.spiralContainer :global(.spiral-icon--threejs) {
+  color: #000000;
+}
+
+.spiralContainer :global(.spiral-icon--vercel) {
+  color: #000000;
+}
+
+.spiralContainer :global(.spiral-icon--supabase) {
+  color: #3ecf8e;
+}
+
+.spiralContainer :global(.spiral-icon--nextjs) {
+  color: #000000;
+}
+
+.spiralContainer :global(.spiral-icon--typescript) {
+  color: #3178c6;
+}
+
+.spiralContainer :global(.spiral-icon--tailwindcss) {
+  color: #06b6d4;
+}
+
+.spiralContainer :global(.spiral-icon--webgl) {
+  color: #5586a4;
+}
+
+.spiralContainer :global(.spiral-icon--git) {
+  color: #f05032;
+}
+
+/* Accessibility and Performance */
+@media (prefers-reduced-motion: reduce) {
+  .spiralContainer :global(.spiral-icon) {
+    transition: none;
+    animation: none;
+  }
+}
+

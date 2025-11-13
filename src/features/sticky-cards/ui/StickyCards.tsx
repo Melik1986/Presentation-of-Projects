@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
 
-import { AnimatedImage, MobileMockup, ScrollingBadge, ThreeJsCanvas } from '@/shared/ui';
+import { AnimatedImage, ScrollingBadge, SpiralAnimation, ThreeJsCanvas } from '@/shared/ui';
 
 import { AIPhotoGallery } from './AIPhotoGallery';
 import { DeviceGallery } from './DeviceGallery';
@@ -117,31 +117,8 @@ export function StickyCards({
               </div>
             )}
 
-            {/* Mobile mockup for figma-design catalog, card 02 */}
-            {catalogId === 'figma-design' && cardData.index === '02' && (
-              <div className={styles.mobileMockupWrapper}>
-                <MobileMockup
-                  src={cardData.image}
-                  alt={cardData.title}
-                  catalogId={catalogId}
-                  cardIndex={cardData.index}
-                  enableAnimation={true}
-                />
-              </div>
-            )}
-
-            {/* Mobile mockup for figma-design catalog, card 03 */}
-            {catalogId === 'figma-design' && cardData.index === '03' && (
-              <div className={styles.mobileMockupWrapper}>
-                <MobileMockup
-                  src={cardData.image}
-                  alt={cardData.title}
-                  catalogId={catalogId}
-                  cardIndex={cardData.index}
-                  enableAnimation={true}
-                />
-              </div>
-            )}
+            {/* Spiral animation for advanced-tech catalog, card 01 */}
+            {catalogId === 'advanced-tech' && cardData.index === '01' && <SpiralAnimation />}
           </div>
 
           <div className={styles.stickyCardContent}>
@@ -173,7 +150,12 @@ export function StickyCards({
                   />
                 ) : catalogId === 'figma-design' ? (
                   <div className={styles.stickyCardImg} data-figma-image-container>
-                    <a href={cardData.image} target="_blank" rel="noopener noreferrer">
+                    <a
+                      href={cardData.image}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      title={`View ${cardData.title} in full size`}
+                    >
                       <Image
                         src={cardData.image}
                         alt={cardData.title}
@@ -231,6 +213,7 @@ export function StickyCards({
                     target="_blank"
                     rel="noopener noreferrer"
                     className={styles.stickyCardImg}
+                    title={`View ${cardData.title} in full size`}
                   >
                     <Image
                       src={cardData.image}
@@ -258,6 +241,7 @@ export function StickyCards({
                     target="_blank"
                     rel="noopener noreferrer"
                     className={styles.stickyCardImg}
+                    title={`View ${cardData.title} in full size`}
                   >
                     <Image
                       src={cardData.image}
@@ -269,7 +253,12 @@ export function StickyCards({
                 )
               ) : catalogId === 'figma-design' ? (
                 <div className={styles.stickyCardImg} data-figma-image-container>
-                  <a href={cardData.image} target="_blank" rel="noopener noreferrer">
+                  <a
+                    href={cardData.image}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    title={`View ${cardData.title} in full size`}
+                  >
                     <Image
                       src={cardData.image}
                       alt={cardData.title}
@@ -285,6 +274,7 @@ export function StickyCards({
                   target="_blank"
                   rel="noopener noreferrer"
                   className={styles.stickyCardImg}
+                  title={`View ${cardData.title} in full size`}
                 >
                   <Image
                     src={cardData.image}
