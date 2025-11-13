@@ -17,3 +17,5 @@ export { SkillsCharts } from './SkillsCharts';
 export type { BackendSkill, InfrastructureSkill, SkillsData } from './SkillsCharts';
 export { MicroservicesChart } from './MicroservicesChart';
 export type { MicroserviceNode, NodePosition, ServiceStatus } from './MicroservicesChart';
+export { DatabaseCRUD } from './DatabaseCRUD';
+export type { DatabaseUser, CRUDFilters, UserRole, UserStatus } from './DatabaseCRUD';

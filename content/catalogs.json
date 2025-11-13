@@ -229,20 +229,22 @@
             "index": "02",
             "title": "GraphQL Services",
             "image": "/img/catalog-4/card-2.jpg",
+            "link": "https://github.com/Melik-Musinian",
             "description": "Scalable GraphQL APIs with schema design and resolvers. Apollo Server implementation with type-safe queries, mutations, and subscriptions."
           },
           {
             "index": "03",
             "title": "Microservices Architecture",
             "image": "/img/catalog-4/card-3.jpg",
-            "link": "https://github.com/Melik-Musinian",
+            "link": "https://supabase.com/dashboard/org/hajxutxgogskkjwhfsdf",
             "description": "Real-time service orchestration with Docker and Kubernetes. API Gateway routing, distributed messaging, health monitoring, and fault-tolerant architecture visualization."
           },
           {
             "index": "04",
-            "title": "Database Design",
+            "title": "Database Admin Panel",
             "image": "/img/catalog-4/card-4.jpg",
-            "description": "PostgreSQL and MongoDB schema optimization. Query performance tuning, indexing strategies, replication, and backup solutions for high availability."
+            "link": "https://github.com/Melik-Musinian",
+            "description": "Interactive CRUD system for database user management. Real-time filtering, search, role-based access control, and glassmorphism UI with smooth GSAP animations."
           }
         ]
       },

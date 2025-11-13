@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from 'react';
 
 import {
   AnimatedImage,
+  DatabaseCRUD,
   MicroservicesChart,
   ScrollingBadge,
   SkillsCharts,
@@ -129,7 +130,9 @@ export function StickyCards({
           </div>
 
           <div className={styles.stickyCardContent}>
-            <div className={styles.stickyCardContentWrapper}>
+            <div
+              className={`${styles.stickyCardContentWrapper} ${catalogId === 'advanced-tech' && cardData.index === '04' ? styles.wideContentWrapper : ''}`}
+            >
               <h1 className={styles.stickyCardHeader}>{cardData.title}</h1>
 
               {cardData.index === '01' ? (
@@ -190,14 +193,14 @@ export function StickyCards({
                 ) : catalogId === 'ai-tools' ? (
                   <AIPhotoGallery
                     items={[
-                      '/img/catalog-2/video-1.mp4',
-                      '/img/catalog-2/video-2.MP4',
-                      '/img/catalog-2/video-3.mp4',
-                      '/img/catalog-2/video-4.mp4',
-                      '/img/catalog-2/video-5.MP4',
-                      '/img/catalog-2/video-6.MP4',
-                      '/img/catalog-2/video-7.MP4',
-                      '/img/catalog-2/video-8.MP4',
+                      '/videos/video-1.mp4',
+                      '/videos/video-2.MP4',
+                      '/videos/video-3.mp4',
+                      '/videos/video-4.mp4',
+                      '/videos/video-5.MP4',
+                      '/videos/video-6.MP4',
+                      '/videos/video-7.MP4',
+                      '/videos/video-8.MP4',
                     ]}
                     layout="vertical"
                     aspectRatio="landscape"
@@ -262,6 +265,8 @@ export function StickyCards({
                     />
                   </a>
                 )
+              ) : catalogId === 'advanced-tech' && cardData.index === '04' ? (
+                <DatabaseCRUD />
               ) : catalogId === 'figma-design' ? (
                 <div className={styles.stickyCardImg} data-figma-image-container>
                   <a

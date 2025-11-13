@@ -52,6 +52,23 @@
   gap: 1.5rem;
 }
 
+/* Wider content wrapper for Database CRUD card on medium-large screens */
+.wideContentWrapper {
+  width: 75%;
+}
+
+@media (min-width: 1024px) and (max-width: 1439px) {
+  .wideContentWrapper {
+    width: 92%;
+  }
+}
+
+@media (min-width: 1440px) {
+  .wideContentWrapper {
+    width: 85%;
+  }
+}
+
 .stickyCardHeader {
   width: 75%;
   color: var(--accent-color, inherit);

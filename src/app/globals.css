@@ -2,6 +2,9 @@
    🎨 Global Styles - Starlight
    =========================== */
 
+@tailwind base;
+@tailwind utilities;
+
 /* CSS Reset & Base */
 *,
 *::before,

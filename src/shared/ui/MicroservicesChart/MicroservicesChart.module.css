@@ -258,27 +258,27 @@
 
 /* Node Positioning - Desktop 536x280 */
 @media (min-width: 992px) {
-  .node[data-position="top-left"] {
+  .node[data-position='top-left'] {
     top: 37%;
     left: 0%;
   }
 
-  .node[data-position="top-right"] {
+  .node[data-position='top-right'] {
     top: 37%;
     left: 100%;
   }
 
-  .node[data-position="bottom-left"] {
+  .node[data-position='bottom-left'] {
     top: calc(210 / 280 * 100%);
     left: 0%;
   }
 
-  .node[data-position="bottom-right"] {
+  .node[data-position='bottom-right'] {
     top: calc(210 / 280 * 100%);
     left: 100%;
   }
 
-  .node[data-position="center"] {
+  .node[data-position='center'] {
     top: 37%;
     left: 50%;
   }
@@ -286,59 +286,59 @@
 
 /* Tablet 512x260 */
 @media (min-width: 544px) and (max-width: 991px) {
-  .node[data-position="top-left"] {
+  .node[data-position='top-left'] {
     top: 37%;
     left: 0%;
   }
 
-  .node[data-position="top-right"] {
+  .node[data-position='top-right'] {
     top: 37%;
     left: 100%;
   }
 
-  .node[data-position="bottom-left"] {
+  .node[data-position='bottom-left'] {
     top: calc(200 / 260 * 100%);
     left: 0%;
   }
 
-  .node[data-position="bottom-right"] {
+  .node[data-position='bottom-right'] {
     top: calc(200 / 260 * 100%);
     left: 100%;
   }
 
-  .node[data-position="center"] {
+  .node[data-position='center'] {
     top: 37%;
     left: 50%;
   }
-  
-  .node[data-position="center"] .nodeContent {
+
+  .node[data-position='center'] .nodeContent {
     width: 110px;
   }
 }
 
 /* Mobile 320x240 */
 @media (max-width: 543px) {
-  .node[data-position="top-left"] {
+  .node[data-position='top-left'] {
     top: 37%;
     left: 0%;
   }
 
-  .node[data-position="top-right"] {
+  .node[data-position='top-right'] {
     top: 37%;
     left: 100%;
   }
 
-  .node[data-position="bottom-left"] {
+  .node[data-position='bottom-left'] {
     top: calc(190 / 240 * 100%);
     left: 0%;
   }
 
-  .node[data-position="bottom-right"] {
+  .node[data-position='bottom-right'] {
     top: calc(190 / 240 * 100%);
     left: 100%;
   }
 
-  .node[data-position="center"] {
+  .node[data-position='center'] {
     top: 37%;
     left: 50%;
   }
@@ -359,16 +359,16 @@
   .nodeContent {
     width: 100px;
   }
-  
-  .node[data-position="center"] .nodeContent {
+
+  .node[data-position='center'] .nodeContent {
     width: 120px;
   }
 }
 
 /* SVG Paths and Animations */
-:global(.microservices-path-desktop),
-:global(.microservices-path-tablet),
-:global(.microservices-path-mobile) {
+.wrapper :global(.microservices-path-desktop),
+.wrapper :global(.microservices-path-tablet),
+.wrapper :global(.microservices-path-mobile) {
   position: absolute;
   top: 0;
   left: 0;
@@ -380,25 +380,25 @@
 }
 
 @media (max-width: 543px) {
-  :global(.microservices-path-mobile) {
+  .wrapper :global(.microservices-path-mobile) {
     display: block;
   }
 }
 
 @media (min-width: 544px) and (max-width: 991px) {
-  :global(.microservices-path-tablet) {
+  .wrapper :global(.microservices-path-tablet) {
     display: block;
   }
 }
 
 @media (min-width: 992px) {
-  :global(.microservices-path-desktop) {
+  .wrapper :global(.microservices-path-desktop) {
     display: block;
   }
 }
 
 /* Animated Dots */
-:global(.microservices-dot-glow) {
+.wrapper :global(.microservices-dot-glow) {
   position: absolute;
   z-index: 15;
   visibility: hidden;
@@ -408,19 +408,19 @@
   overflow: visible;
 }
 
-:global(.microservices-dot-glow.is-show) {
+.wrapper :global(.microservices-dot-glow.is-show) {
   visibility: visible;
 }
 
 /* Line Accent */
-:global(.microservices-line-accent) {
+.wrapper :global(.microservices-line-accent) {
   transform-box: fill-box;
   transform-origin: center;
   will-change: transform;
 }
 
 /* SVG Filters and Masks */
-:global(.microservices-filters-hidden) {
+.microservicesChart :global(.microservices-filters-hidden) {
   position: absolute;
   opacity: 0;
   pointer-events: none;
@@ -429,15 +429,13 @@
   height: 0;
 }
 
-:global(.microservices-mask-alpha) {
+.microservicesChart :global(.microservices-mask-alpha) {
   mask-type: alpha;
 }
 
 /* Performance Optimizations */
 .wrapper,
 .node,
-.nodeIcon,
-:global(.microservices-line-accent),
-:global(.microservices-dot-glow) {
+.nodeIcon {
   will-change: transform;
 }

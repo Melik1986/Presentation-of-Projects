@@ -102,7 +102,12 @@ export function MicroservicesChart() {
 
         {/* Corner Nodes with Animated Paths */}
         {cornerNodes.map((node) => (
-          <div key={node.id} className={styles.nodeItem} data-node-id={node.id} data-status={node.status}>
+          <div
+            key={node.id}
+            className={styles.nodeItem}
+            data-node-id={node.id}
+            data-status={node.status}
+          >
             <MicroserviceNode
               name={node.name}
               icon={node.icon}
@@ -120,7 +125,11 @@ export function MicroservicesChart() {
 
         {/* Center Node - API Gateway */}
         {centerNode && (
-          <div className={styles.nodeItem} data-node-id={centerNode.id} data-status={centerNode.status}>
+          <div
+            className={styles.nodeItem}
+            data-node-id={centerNode.id}
+            data-status={centerNode.status}
+          >
             <MicroserviceNode
               name={centerNode.name}
               icon={centerNode.icon}
