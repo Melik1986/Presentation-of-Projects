@@ -124,4 +124,3 @@ export function useFigmaImageAnimation(
     { scope: containerRef, dependencies: [catalogId, variant] }
   );
 }
-

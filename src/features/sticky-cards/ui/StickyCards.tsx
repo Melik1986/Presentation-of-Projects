@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
 
-import { AnimatedImage, MobileMockup, ScrollingBadge } from '@/shared/ui';
+import { AnimatedImage, MobileMockup, ScrollingBadge, ThreeJsCanvas } from '@/shared/ui';
 
 import { AIPhotoGallery } from './AIPhotoGallery';
 import { DeviceGallery } from './DeviceGallery';
@@ -183,6 +183,8 @@ export function StickyCards({
                       />
                     </a>
                   </div>
+                ) : catalogId === 'advanced-tech' ? (
+                  <ThreeJsCanvas className={styles.stickyCardImg} />
                 ) : (
                   <div className={styles.stickyCardImg}>
                     <Image

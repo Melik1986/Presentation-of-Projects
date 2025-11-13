@@ -108,7 +108,9 @@ export function useAnimatedImageReveal(
         );
       }
     },
-    { scope: containerRef, dependencies: [enableAnimation, direction, duration, delay, catalogId, cardIndex] }
+    {
+      scope: containerRef,
+      dependencies: [enableAnimation, direction, duration, delay, catalogId, cardIndex],
+    }
   );
 }
-

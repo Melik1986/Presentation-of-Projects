@@ -30,7 +30,15 @@ export function AnimatedImage({
   const containerRef = useRef<HTMLAnchorElement>(null);
 
   // Animation hook
-  useAnimatedImageReveal(containerRef, enableAnimation, direction, duration, delay, catalogId, cardIndex);
+  useAnimatedImageReveal(
+    containerRef,
+    enableAnimation,
+    direction,
+    duration,
+    delay,
+    catalogId,
+    cardIndex
+  );
 
   return (
     <a
@@ -56,4 +64,3 @@ export function AnimatedImage({
     </a>
   );
 }
-

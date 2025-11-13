@@ -193,16 +193,16 @@
       }
     },
     {
-      "id": "backend-api",
-      "name": "Backend & API",
+      "id": "advanced-tech",
+      "name": "Advanced Web Technologies",
       "track": "https://soundcloud.com/cerclelive/solomun-theatre-antique-dorange-for-cercle",
       "folder": {
         "displayName": "chromatic",
         "variant": "variant-3",
         "previewImages": [
-          "/img/catalog-4/preview-1.jpg",
-          "/img/catalog-4/preview-2.jpg",
-          "/img/catalog-4/preview-3.jpg"
+          "/img/catalog-4/react.png",
+          "/img/catalog-4/next.png",
+          "/img/catalog-4/nest.png"
         ]
       },
       "theme": {
@@ -216,13 +216,14 @@
         "pageBackground": "radial-gradient(circle 800px at 0% 0%, rgba(10,24,32,0.9) 0%, transparent 50%), radial-gradient(circle 800px at 100% 0%, rgba(26,40,48,0.9) 0%, transparent 50%), radial-gradient(circle 800px at 0% 100%, rgba(42,56,64,0.9) 0%, transparent 50%), radial-gradient(circle 800px at 100% 100%, rgba(58,72,80,0.9) 0%, transparent 50%)"
       },
       "content": {
-        "introTitle": "Server Architecture",
+        "introTitle": "Interactive 3D & Libraries",
         "cards": [
           {
             "index": "01",
-            "title": "REST API Design",
+            "title": "Three.js Particle Animations",
             "image": "/img/catalog-4/card-1.jpg",
-            "description": "RESTful endpoint architecture with OpenAPI/Swagger documentation. Versioning, authentication, rate limiting, and proper HTTP status code implementation."
+            "link": "https://codepen.io/Melik-Musinian",
+            "description": "Custom WebGL particle systems with shader optimizations. Wave animations, camera controls, and performance-tuned rendering for interactive 3D experiences."
           },
           {
             "index": "02",
@@ -245,9 +246,9 @@
         ]
       },
       "seo": {
-        "title": "Backend & API Portfolio | Server Architecture Projects",
-        "description": "Backend development expertise including REST APIs, GraphQL services, microservices architecture, and optimized database design.",
-        "keywords": "backend, rest api, graphql, microservices, docker, kubernetes, postgresql, mongodb"
+        "title": "Advanced Web Technologies | Three.js, Spline, Supabase",
+        "description": "Expertise in modern web libraries: Three.js 3D animations, WebGL shaders, Spline integrations, Supabase backend, and Vercel deployment.",
+        "keywords": "three.js, webgl, 3d animation, particles, shaders, spline, supabase, vercel"
       }
     }
   ]

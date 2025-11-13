@@ -22,7 +22,11 @@ export function useMobileMockupAnimation(
   useGSAP(
     () => {
       // Only apply animation if conditions are met
-      if (!enableAnimation || catalogId !== 'figma-design' || (cardIndex !== '02' && cardIndex !== '03')) {
+      if (
+        !enableAnimation ||
+        catalogId !== 'figma-design' ||
+        (cardIndex !== '02' && cardIndex !== '03')
+      ) {
         return;
       }
 
@@ -84,4 +88,3 @@ export function useMobileMockupAnimation(
     { scope: containerRef, dependencies: [enableAnimation, catalogId, cardIndex] }
   );
 }
-
