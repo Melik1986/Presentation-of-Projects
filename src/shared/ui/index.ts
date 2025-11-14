@@ -21,3 +21,5 @@ export { DatabaseCRUD } from './DatabaseCRUD';
 export type { DatabaseUser, CRUDFilters, UserRole, UserStatus } from './DatabaseCRUD';
 export { VideoGallery } from './VideoGallery';
 export type { VideoGalleryProps } from './VideoGallery';
+export { SocialIcons } from './SocialIcons';
+export type { SocialIconItem, SocialIconsProps } from './SocialIcons';

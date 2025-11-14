@@ -77,14 +77,14 @@ export function AIPhotoGallery({
                 aria-label={`View image ${idx + 1} in full size`}
               >
                 <span className="sr-only">View image {idx + 1} in full size</span>
-                <Image
-                  src={src}
-                  alt={`Gallery item ${idx + 1}`}
-                  fill
-                  sizes="(max-width: 768px) 50vw, 300px"
-                  className={styles.photo}
+                  <Image
+                    src={src}
+                    alt={`Gallery item ${idx + 1}`}
+                    fill
+                    sizes="(max-width: 768px) 50vw, 300px"
+                    className={styles.photo}
                   priority={rowIndex === 0 && idx === 0}
-                />
+                  />
               </a>
             ))}
           </div>
