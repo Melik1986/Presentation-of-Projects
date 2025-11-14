@@ -194,13 +194,13 @@ export function StickyCards({
                   <AIPhotoGallery
                     items={[
                       '/videos/video-1.mp4',
-                      '/videos/video-2.MP4',
+                      '/videos/video-2.mp4',
                       '/videos/video-3.mp4',
                       '/videos/video-4.mp4',
-                      '/videos/video-5.MP4',
-                      '/videos/video-6.MP4',
-                      '/videos/video-7.MP4',
-                      '/videos/video-8.MP4',
+                      '/videos/video-5.mp4',
+                      '/videos/video-6.mp4',
+                      '/videos/video-7.mp4',
+                      '/videos/video-8.mp4',
                     ]}
                     layout="vertical"
                     aspectRatio="landscape"

@@ -227,10 +227,10 @@
           },
           {
             "index": "02",
-            "title": "GraphQL Services",
+            "title": "Technology Stack Analytics",
             "image": "/img/catalog-4/card-2.jpg",
             "link": "https://github.com/Melik-Musinian",
-            "description": "Scalable GraphQL APIs with schema design and resolvers. Apollo Server implementation with type-safe queries, mutations, and subscriptions."
+            "description": "Interactive data visualization with ECharts. Backend skills bar chart and Infrastructure pie chart with animated icons. Real-time metrics display with GSAP animations."
           },
           {
             "index": "03",
