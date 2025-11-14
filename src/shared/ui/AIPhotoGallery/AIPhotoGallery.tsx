@@ -83,6 +83,7 @@ export function AIPhotoGallery({
                   fill
                   sizes="(max-width: 768px) 50vw, 300px"
                   className={styles.photo}
+                  priority={rowIndex === 0 && idx === 0}
                 />
               </a>
             ))}
