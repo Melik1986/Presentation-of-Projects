@@ -30,16 +30,6 @@
   gap: 20px;
 }
 
-/* Landscape videos with horizontal animation - rows layout */
-.aiPhotoGallery.landscape:not(.horizontal) .columnsWrapper {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 20px;
-  padding: 20px;
-  min-height: 400px;
-}
-
 .column {
   display: flex;
   flex-direction: column;
@@ -51,15 +41,6 @@
 .aiPhotoGallery.horizontal .column {
   flex-direction: row;
   width: 100%;
-}
-
-/* Landscape videos with horizontal animation - rows with horizontal items */
-.aiPhotoGallery.landscape:not(.horizontal) .column {
-  flex-direction: row;
-  width: 100%;
-  height: 170px;
-  min-height: 170px;
-  overflow: hidden;
 }
 
 .photoWrapper {
@@ -74,30 +55,9 @@
   transition: transform 0.2s ease;
 }
 
-.aiPhotoGallery.landscape .photoWrapper {
-  aspect-ratio: 2 / 1; /* Horizontal videos */
-  width: 100%;
-  max-width: 100%;
-}
-
-/* Landscape videos in rows layout - limit size */
-.aiPhotoGallery.landscape:not(.horizontal) .photoWrapper {
-  width: 300px;
-  max-width: 300px;
-  min-width: 300px;
-  height: 150px;
-  flex-shrink: 0;
-}
-
 .aiPhotoGallery.horizontal .photoWrapper {
   height: 100%;
   width: auto;
-}
-
-.aiPhotoGallery.horizontal.landscape .photoWrapper {
-  aspect-ratio: 2 / 1;
-  width: 100%;
-  height: auto;
 }
 
 .photoWrapper:hover {
@@ -106,23 +66,6 @@
 
 .photo {
   object-fit: cover;
-  width: 100%;
-  height: 100%;
-}
-
-.photoWrapper video {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-/* Ensure video visibility in landscape rows */
-.aiPhotoGallery.landscape:not(.horizontal) .photoWrapper video {
-  position: absolute;
   width: 100%;
   height: 100%;
 }
@@ -167,34 +110,6 @@
   width: 100px;
   height: 100%;
   background: linear-gradient(to left, var(--card-bg, #1a1a1a) 0%, transparent 100%);
-}
-
-/* Horizontal animation in rows layout (landscape videos) - blur overlays on rows */
-.aiPhotoGallery.landscape:not(.horizontal) .column::before,
-.aiPhotoGallery.landscape:not(.horizontal) .column::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 100px;
-  pointer-events: none;
-  z-index: 3;
-}
-
-.aiPhotoGallery.landscape:not(.horizontal) .column::before {
-  left: 0;
-  background: linear-gradient(to right, var(--card-bg, #1a1a1a) 0%, transparent 100%);
-}
-
-.aiPhotoGallery.landscape:not(.horizontal) .column::after {
-  right: 0;
-  background: linear-gradient(to left, var(--card-bg, #1a1a1a) 0%, transparent 100%);
-}
-
-/* Hide top/bottom blur overlays for landscape rows layout */
-.aiPhotoGallery.landscape:not(.horizontal) .blurOverlayTop,
-.aiPhotoGallery.landscape:not(.horizontal) .blurOverlayBottom {
-  display: none;
 }
 
 /* Mobile adjustments */

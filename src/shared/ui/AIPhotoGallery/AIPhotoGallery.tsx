@@ -3,8 +3,6 @@
 import Image from 'next/image';
 import { useRef } from 'react';
 
-import { OptimizedVideo } from '@/shared/ui';
-
 import styles from './AIPhotoGallery.module.css';
 import { useAIPhotoGalleryAnimation } from '../../../features/sticky-cards/model/hooks/useAIPhotoGalleryAnimation';
 
@@ -14,7 +12,6 @@ interface AIPhotoGalleryProps {
   aspectRatio?: 'portrait' | 'landscape';
   animationDirection?: 'vertical' | 'horizontal';
   columns?: number;
-  itemType?: 'image' | 'video';
   images?: string[];
 }
 
@@ -24,7 +21,6 @@ export function AIPhotoGallery({
   aspectRatio = 'portrait',
   animationDirection = 'vertical',
   columns = 2,
-  itemType = 'image',
   images,
 }: AIPhotoGalleryProps) {
   const galleryRef = useRef<HTMLDivElement>(null);
@@ -69,7 +65,7 @@ export function AIPhotoGallery({
       <div className={styles.columnsWrapper}>
         {rowsArray.map((rowItems, rowIndex) => (
           <div key={rowIndex} className={styles.column} data-column={rowIndex + 1}>
-            {(itemType === 'video' ? rowItems : [...rowItems, ...rowItems]).map((src, idx) => (
+            {[...rowItems, ...rowItems].map((src, idx) => (
               <a
                 key={idx}
                 href={src}
@@ -77,18 +73,17 @@ export function AIPhotoGallery({
                 rel="noopener noreferrer"
                 className={styles.photoWrapper}
                 data-photo
+                title={`View image ${idx + 1} in full size`}
+                aria-label={`View image ${idx + 1} in full size`}
               >
-                {itemType === 'video' ? (
-                  <OptimizedVideo src={src} className={styles.photo} autoPlayOnVisible={true} />
-                ) : (
-                  <Image
-                    src={src}
-                    alt={`Gallery item ${idx + 1}`}
-                    fill
-                    sizes="(max-width: 768px) 50vw, 300px"
-                    className={styles.photo}
-                  />
-                )}
+                <span className="sr-only">View image {idx + 1} in full size</span>
+                <Image
+                  src={src}
+                  alt={`Gallery item ${idx + 1}`}
+                  fill
+                  sizes="(max-width: 768px) 50vw, 300px"
+                  className={styles.photo}
+                />
               </a>
             ))}
           </div>

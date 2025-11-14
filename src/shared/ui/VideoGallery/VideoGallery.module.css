@@ -1,0 +1,245 @@
+.videoGallery {
+  position: relative;
+  width: 100%;
+  max-width: 700px;
+  height: 600px;
+  margin: 2rem auto;
+  overflow: hidden;
+  border-radius: 0.5rem;
+}
+
+.videoGallery.horizontal {
+  max-width: 100%;
+  height: 400px;
+}
+
+.columnsContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  height: 100%;
+  padding: 0 20px;
+}
+
+.videoGallery.horizontal .columnsContainer {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  padding: 20px 0;
+  gap: 20px;
+}
+
+.videoGallery.landscape:not(.horizontal) .columnsContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px;
+  min-height: 400px;
+}
+
+.column {
+  position: relative;
+  overflow: hidden;
+}
+
+.videoGallery.landscape:not(.horizontal) .column {
+  height: 170px;
+  min-height: 170px;
+}
+
+.track {
+  display: flex;
+  will-change: transform;
+}
+
+.videoGallery.landscape:not(.horizontal) .track {
+  flex-direction: row;
+  gap: 20px;
+  height: 100%;
+}
+
+.videoGallery:not(.landscape) .track {
+  flex-direction: column;
+  gap: 20px;
+}
+
+.videoGallery.horizontal .track {
+  flex-direction: row;
+  gap: 20px;
+  height: 100%;
+}
+
+.videoItem {
+  flex-shrink: 0;
+  position: relative;
+}
+
+.videoGallery.landscape:not(.horizontal) .videoItem {
+  width: 300px;
+  height: 150px;
+}
+
+.videoGallery:not(.landscape):not(.horizontal) .videoItem {
+  width: 100%;
+  aspect-ratio: 2 / 1;
+}
+
+.videoGallery.horizontal .videoItem {
+  height: 100%;
+  width: auto;
+  aspect-ratio: 2 / 1;
+}
+
+.videoLink {
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.videoLink:hover {
+  transform: scale(1.02);
+}
+
+.video {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.videoItem video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.fadeTop,
+.fadeBottom {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 100px;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.fadeTop {
+  top: 0;
+  background: linear-gradient(to bottom, var(--card-bg, #1a1a1a) 0%, transparent 100%);
+}
+
+.fadeBottom {
+  bottom: 0;
+  background: linear-gradient(to top, var(--card-bg, #1a1a1a) 0%, transparent 100%);
+}
+
+.videoGallery.horizontal .fadeTop {
+  width: 100px;
+  height: 100%;
+  left: 0;
+  right: auto;
+  top: 0;
+  bottom: 0;
+  background: linear-gradient(to right, var(--card-bg, #1a1a1a) 0%, transparent 100%);
+}
+
+.videoGallery.horizontal .fadeBottom {
+  width: 100px;
+  height: 100%;
+  left: auto;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: linear-gradient(to left, var(--card-bg, #1a1a1a) 0%, transparent 100%);
+}
+
+.videoGallery.landscape:not(.horizontal) .column::before,
+.videoGallery.landscape:not(.horizontal) .column::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100px;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.videoGallery.landscape:not(.horizontal) .column::before {
+  left: 0;
+  background: linear-gradient(to right, var(--card-bg, #1a1a1a) 0%, transparent 100%);
+}
+
+.videoGallery.landscape:not(.horizontal) .column::after {
+  right: 0;
+  background: linear-gradient(to left, var(--card-bg, #1a1a1a) 0%, transparent 100%);
+}
+
+.videoGallery.landscape:not(.horizontal) .fadeTop,
+.videoGallery.landscape:not(.horizontal) .fadeBottom {
+  display: none;
+}
+
+@media (max-width: 1024px) {
+  .videoGallery {
+    height: 480px;
+    max-width: 100%;
+    margin: 1rem auto;
+  }
+
+  .videoGallery.horizontal {
+    height: 300px;
+  }
+
+  .columnsContainer {
+    gap: 8px;
+    padding: 0 8px;
+  }
+
+  .videoGallery.horizontal .columnsContainer {
+    padding: 8px 0;
+  }
+
+  .track {
+    gap: 8px;
+  }
+
+  .videoGallery.landscape:not(.horizontal) .videoItem {
+    width: 250px;
+    height: 125px;
+  }
+
+  .fadeTop,
+  .fadeBottom {
+    height: 60px;
+  }
+
+  .videoGallery.horizontal .fadeTop,
+  .videoGallery.horizontal .fadeBottom {
+    width: 60px;
+    height: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .videoGallery {
+    height: 400px;
+  }
+
+  .videoGallery.horizontal {
+    height: 250px;
+  }
+
+  .videoGallery.landscape:not(.horizontal) .videoItem {
+    width: 200px;
+    height: 100px;
+  }
+}

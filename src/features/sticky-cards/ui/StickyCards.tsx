@@ -11,6 +11,7 @@ import {
   SkillsCharts,
   SpiralAnimation,
   ThreeJsCanvas,
+  VideoGallery,
 } from '@/shared/ui';
 
 import styles from './StickyCards.module.css';
@@ -191,7 +192,7 @@ export function StickyCards({
                 catalogId === 'advanced-tech' ? (
                   <SkillsCharts />
                 ) : catalogId === 'ai-tools' ? (
-                  <AIPhotoGallery
+                  <VideoGallery
                     items={[
                       '/videos/video-1.mp4',
                       '/videos/video-2.mp4',
@@ -206,7 +207,6 @@ export function StickyCards({
                     aspectRatio="landscape"
                     animationDirection="horizontal"
                     columns={2}
-                    itemType="video"
                   />
                 ) : catalogId === 'figma-design' ? (
                   <AnimatedImage
