@@ -17,7 +17,10 @@ interface ErrorBoundaryState {
   hasError: boolean;
 }
 
-class SplineErrorBoundary extends Component<{ children: ReactNode; fallback: ReactNode }, ErrorBoundaryState> {
+class SplineErrorBoundary extends Component<
+  { children: ReactNode; fallback: ReactNode },
+  ErrorBoundaryState
+> {
   constructor(props: { children: ReactNode; fallback: ReactNode }) {
     super(props);
     this.state = { hasError: false };
@@ -85,7 +88,9 @@ export function SplineModel({ scene, className = '', zoom = 0.8 }: SplineModelPr
 
   return (
     <div ref={containerRef} className={`${styles.splineContainer} ${className}`}>
-      <SplineErrorBoundary fallback={<div className={styles.loadingPlaceholder}>Failed to load 3D model</div>}>
+      <SplineErrorBoundary
+        fallback={<div className={styles.loadingPlaceholder}>Failed to load 3D model</div>}
+      >
         <Suspense fallback={<div className={styles.loadingPlaceholder}>Loading 3D model...</div>}>
           <Spline scene={scene} className={styles.splineCanvas} onLoad={handleLoad} />
         </Suspense>
@@ -93,4 +98,3 @@ export function SplineModel({ scene, className = '', zoom = 0.8 }: SplineModelPr
     </div>
   );
 }
-

@@ -97,9 +97,9 @@
         "cards": [
           {
             "index": "01",
-            "title": "VK-Marusya Movie Trailers",
+            "title": "Typographic Glass Reflection",
             "image": "/img/catalog-3/card-1.png",
-            "description": "UI Kit for VK-Marusya website built with React. Features movie trailer browsing and catalog search functionality with modern interface components.",
+            "description": "Experimental 3D typography design exploring glass distortion effects and reflective surfaces. Interactive visualization breaking traditional typographic boundaries through spherical lens distortions and iridescent reflections.",
             "link": "https://my-projects-vk-kino.vercel.app/"
           },
           {

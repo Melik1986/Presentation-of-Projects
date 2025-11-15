@@ -9,10 +9,14 @@ import {
   type Material,
 } from 'three';
 
+import { createLogger } from '@/shared/lib';
+
 import { CameraController } from './CameraController';
 import { ShaderAnimationModule } from './ShaderAnimationModule';
 
 import type { AuroraConfig } from '../types';
+
+const logger = createLogger().child({ module: 'ParticleWaveController' });
 
 // Background for canvas is now controlled purely by CSS variables.
 
@@ -79,7 +83,7 @@ export class ParticleWaveController {
 
       this.state.isInitialized = true;
     } catch (error) {
-      console.error('Ошибка инициализации анимации частиц:', error);
+      logger.error(error, 'Ошибка инициализации анимации частиц');
       throw error;
     }
   }
@@ -191,7 +195,7 @@ export class ParticleWaveController {
       // Рендерим сцену
       this.renderer.render(this.scene, this.camera);
     } catch (error) {
-      console.warn('Ошибка в цикле анимации:', error);
+      logger.warn(error, 'Ошибка в цикле анимации');
     }
 
     this.frameId = requestAnimationFrame(this.animate);

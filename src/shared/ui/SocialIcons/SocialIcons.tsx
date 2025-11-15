@@ -7,7 +7,6 @@ import styles from './SocialIcons.module.css';
 
 import type { ReactNode } from 'react';
 
-
 export interface SocialIconItem {
   name: string;
   url: string;

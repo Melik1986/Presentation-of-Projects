@@ -93,10 +93,7 @@ export function StickyCards({
 
             {/* Spline 3D model for web-apps catalog, card 02 */}
             {catalogId === 'web-apps' && cardData.index === '02' && (
-              <SplineModel
-                scene="/spline/scene.splinecode"
-                className={styles.splineModel}
-              />
+              <SplineModel scene="/spline/scene.splinecode" className={styles.splineModel} />
             )}
 
             {/* AI Tools badges for ai-tools catalog, card 01 */}
@@ -169,22 +166,11 @@ export function StickyCards({
                     ]}
                   />
                 ) : catalogId === 'figma-design' ? (
-                  <div className={styles.stickyCardImg} data-figma-image-container>
-                    <a
-                      href={cardData.image}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      title={`View ${cardData.title} in full size`}
-                    >
-                      <Image
-                        src={cardData.image}
-                        alt={cardData.title}
-                        fill
-                        sizes="(max-width: 768px) 100vw, 50vw"
-                        data-figma-image
-                      />
-                    </a>
-                  </div>
+                  <SplineModel
+                    scene="/spline/scene.design.splinecode"
+                    className={styles.stickyCardImg}
+                    zoom={0.8}
+                  />
                 ) : catalogId === 'advanced-tech' ? (
                   <ThreeJsCanvas className={styles.stickyCardImg} />
                 ) : (

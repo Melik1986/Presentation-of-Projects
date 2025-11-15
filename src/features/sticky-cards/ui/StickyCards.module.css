@@ -100,6 +100,13 @@
   transform: scale(1.05);
 }
 
+/* Override SplineModel default sizes when used in stickyCardImg */
+.stickyCardImg :global(.splineContainer) {
+  width: 100%;
+  aspect-ratio: 5/3;
+  max-width: none;
+}
+
 /* Figma image animation initial state */
 .stickyCardImg[data-figma-image-container] {
   perspective: 1000px;
