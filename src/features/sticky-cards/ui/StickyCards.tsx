@@ -10,6 +10,7 @@ import {
   ScrollingBadge,
   SkillsCharts,
   SpiralAnimation,
+  SplineModel,
   ThreeJsCanvas,
   VideoGallery,
 } from '@/shared/ui';
@@ -89,6 +90,14 @@ export function StickyCards({
         >
           <div className={styles.stickyCardIndex}>
             <h1>{cardData.index}</h1>
+
+            {/* Spline 3D model for web-apps catalog, card 02 */}
+            {catalogId === 'web-apps' && cardData.index === '02' && (
+              <SplineModel
+                scene="/spline/scene.splinecode"
+                className={styles.splineModel}
+              />
+            )}
 
             {/* AI Tools badges for ai-tools catalog, card 01 */}
             {catalogId === 'ai-tools' && cardData.index === '01' && (

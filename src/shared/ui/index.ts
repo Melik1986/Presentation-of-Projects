@@ -23,3 +23,5 @@ export { VideoGallery } from './VideoGallery';
 export type { VideoGalleryProps } from './VideoGallery';
 export { SocialIcons } from './SocialIcons';
 export type { SocialIconItem, SocialIconsProps } from './SocialIcons';
+export { SplineModel } from './SplineModel';
+export type { SplineModelProps } from './SplineModel';
