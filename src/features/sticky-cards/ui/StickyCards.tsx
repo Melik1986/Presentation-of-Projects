@@ -134,6 +134,17 @@ export function StickyCards({
 
             {/* Spiral animation for advanced-tech catalog, card 01 */}
             {catalogId === 'advanced-tech' && cardData.index === '01' && <SpiralAnimation />}
+
+            {/* 3D Sneakers Model for figma-design catalog, card 02 */}
+            {catalogId === 'figma-design' && cardData.index === '02' && (
+              <div className={styles.stickyCardIndexImage}>
+                <SplineModel
+                  scene="/spline/scene.sneaker.splinecode"
+                  className={styles.stickyCardImg}
+                  zoom={1.2}
+                />
+              </div>
+            )}
           </div>
 
           <div className={styles.stickyCardContent}>
@@ -205,7 +216,7 @@ export function StickyCards({
                   />
                 ) : catalogId === 'figma-design' ? (
                   <AnimatedImage
-                    src="/img/catalog-3/card-2.2.png"
+                    src="/img/catalog-3/card-2.png"
                     alt={cardData.title}
                     direction="right-to-left"
                     duration={1.2}
@@ -235,7 +246,7 @@ export function StickyCards({
                   <MicroservicesChart />
                 ) : catalogId === 'figma-design' ? (
                   <AnimatedImage
-                    src="/img/catalog-3/card-3.2.png"
+                    src="/img/placeholder.png"
                     alt={cardData.title}
                     direction="right-to-left"
                     duration={1.2}

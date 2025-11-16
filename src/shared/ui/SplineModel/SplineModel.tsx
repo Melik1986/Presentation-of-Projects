@@ -3,6 +3,7 @@
 import { Component, lazy, Suspense, useRef, useEffect, type ReactNode } from 'react';
 
 import { createLogger } from '@/shared/lib';
+import { SmileyLoader } from '@/shared/ui';
 
 import styles from './SplineModel.module.css';
 
@@ -57,9 +58,11 @@ export function SplineModel({ scene, className = '', zoom = 0.8 }: SplineModelPr
     appRef.current = application;
     application.setZoom(zoom);
 
-    if (!containerRef.current) return;
+    const canvas = application.canvas;
+    if (!canvas || !canvas.parentElement) return;
 
-    const container = containerRef.current;
+    const container = canvas.parentElement;
+    containerRef.current = container as HTMLDivElement;
     const { width, height } = container.getBoundingClientRect();
     application.setSize(width, height);
 
@@ -87,14 +90,22 @@ export function SplineModel({ scene, className = '', zoom = 0.8 }: SplineModelPr
   }, []);
 
   return (
-    <div ref={containerRef} className={`${styles.splineContainer} ${className}`}>
-      <SplineErrorBoundary
-        fallback={<div className={styles.loadingPlaceholder}>Failed to load 3D model</div>}
+    <SplineErrorBoundary
+      fallback={<div className={styles.loadingPlaceholder}>Failed to load 3D model</div>}
+    >
+      <Suspense
+        fallback={
+          <div className={styles.loadingPlaceholder}>
+            <SmileyLoader size={64} />
+          </div>
+        }
       >
-        <Suspense fallback={<div className={styles.loadingPlaceholder}>Loading 3D model...</div>}>
-          <Spline scene={scene} className={styles.splineCanvas} onLoad={handleLoad} />
-        </Suspense>
-      </SplineErrorBoundary>
-    </div>
+        <Spline
+          scene={scene}
+          className={`${styles.splineCanvas} ${className}`}
+          onLoad={handleLoad}
+        />
+      </Suspense>
+    </SplineErrorBoundary>
   );
 }

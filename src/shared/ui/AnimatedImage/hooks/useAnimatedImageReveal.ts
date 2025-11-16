@@ -52,7 +52,7 @@ export function useAnimatedImageReveal(
           to: 'inset(0% 0% 0% 0%)', // Fully visible
         },
         'top-to-bottom': {
-          from: 'inset(0% 0% 100% 0%)', // Hidden from bottom
+          from: 'inset(0% 0% 100% 0%)', // Hidden from bottom (reveals from top)
           to: 'inset(0% 0% 0% 0%)', // Fully visible
         },
       };

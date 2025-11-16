@@ -49,18 +49,16 @@ export function AnimatedImage({
       className={styles.animatedImageContainer}
       data-animated-image-container
     >
-      <div className={styles.imageWrapper}>
-        <Image
-          src={src}
-          alt={alt}
-          fill
-          sizes="(max-width: 1024px) 100vw, 50vw"
-          className={styles.image}
-          data-animated-image
-        />
-        {/* Dynamic blur overlay */}
-        <div className={`${styles.blurOverlay} ${styles[direction]}`} data-blur-overlay />
-      </div>
+      <Image
+        src={src}
+        alt={alt}
+        fill
+        sizes="(max-width: 1024px) 100vw, 50vw"
+        className={styles.image}
+        data-animated-image
+      />
+      {/* Dynamic blur overlay */}
+      <div className={`${styles.blurOverlay} ${styles[direction]}`} data-blur-overlay />
     </a>
   );
 }

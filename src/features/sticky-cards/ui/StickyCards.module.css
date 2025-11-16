@@ -36,6 +36,54 @@
   flex: 2;
   position: relative;
   z-index: 3;
+  display: flex;
+  flex-direction: column;
+}
+
+.stickyCardIndexImage {
+  position: relative;
+  width: 100%;
+  flex: 1;
+  margin-top: 1rem;
+  min-height: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Override AnimatedImage styles when inside stickyCardIndexImage */
+.stickyCardIndexImage :global([data-animated-image-container]) {
+  width: 100%;
+  height: 100%;
+  flex: 1;
+  min-height: 0;
+  aspect-ratio: unset;
+}
+
+.stickyCardIndexImage :global(.image) {
+  object-fit: cover;
+}
+
+/* Override SplineModel default sizes when used in stickyCardIndexImage */
+.stickyCardIndexImage :global(.splineCanvas) {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: unset;
+  max-width: none;
+}
+
+/* Increase sneaker model size and add shadow */
+.stickyCard[data-card-index='02'] .stickyCardIndexImage :global(.splineCanvas) {
+  transform: scale(1);
+  transform-origin: center center;
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.3));
+}
+
+/* Hide sneaker model container on screens wider than 1000px */
+@media (max-width: 1000px) {
+  .stickyCard[data-card-index='02'] .stickyCardIndexImage {
+    display: none;
+  }
 }
 
 .stickyCardContent {
