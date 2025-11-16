@@ -57,6 +57,14 @@ export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en" data-scroll-behavior="smooth">
       <body>
+        <noscript>
+          <div className="noscript-message">
+            <div className="noscript-content">
+              <h1>JavaScript is required</h1>
+              <p>Please enable JavaScript in your browser to view this website.</p>
+            </div>
+          </div>
+        </noscript>
         <Providers>
           <GlobalPreloader />
           {children}
