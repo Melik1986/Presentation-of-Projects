@@ -53,6 +53,17 @@ const nextConfig: NextConfig = {
     ignoreDuringBuilds: false,
   },
 
+  // Webpack configuration
+  webpack: (config) => {
+    // Resolve Three.js to single instance to avoid duplicate imports
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      three: require.resolve('three'),
+    };
+
+    return config;
+  },
+
   // Security headers
   async headers() {
     return [
@@ -91,12 +102,12 @@ const nextConfig: NextConfig = {
             key: 'Content-Security-Policy',
             value: [
               "default-src 'self'",
-              "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://www.youtube.com https://w.soundcloud.com https://prod.spline.design",
+              "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://www.youtube.com https://w.soundcloud.com https://prod.spline.design https://vercel.live",
               "style-src 'self' 'unsafe-inline'",
               "img-src 'self' data: https: blob:",
               "font-src 'self' data:",
-              "connect-src 'self' https://www.youtube.com https://api.soundcloud.com https://w.soundcloud.com https://my.spline.design https://spline.design https://prod.spline.design https://unpkg.com https://www.gstatic.com",
-              "frame-src 'self' https://www.youtube.com https://w.soundcloud.com https://my.spline.design https://prod.spline.design",
+              "connect-src 'self' https://www.youtube.com https://api.soundcloud.com https://w.soundcloud.com https://my.spline.design https://spline.design https://prod.spline.design https://unpkg.com https://www.gstatic.com https://vercel.live wss://ws-us3.pusher.com",
+              "frame-src 'self' https://www.youtube.com https://w.soundcloud.com https://my.spline.design https://prod.spline.design https://vercel.live",
               "worker-src 'self' blob: https://prod.spline.design",
               "media-src 'self' https: blob:",
               "object-src 'none'",
