@@ -1,7 +1,6 @@
-import { FaDocker, FaServer } from 'react-icons/fa';
+import { FaAws, FaDocker, FaServer } from 'react-icons/fa';
 import { MdApi } from 'react-icons/md';
 import {
-  SiAmazon,
   SiAuth0,
   SiGithubactions,
   SiGraphql,
@@ -54,7 +53,7 @@ export const BACKEND_ICONS: Record<string, IconType> = {
 export const INFRASTRUCTURE_ICONS: Record<string, IconType> = {
   Vercel: SiVercel,
   Supabase: SiSupabase,
-  AWS: SiAmazon,
+  AWS: FaAws,
   'CI/CD': SiGithubactions,
   Monitoring: SiPrometheus,
   Security: SiAuth0,

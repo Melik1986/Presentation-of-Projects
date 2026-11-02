@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useRef } from 'react';
+import { useRef } from 'react';
 
 import { useSpiralAnimation } from './hooks/useSpiralAnimation';
 import { TECH_ICONS, DEFAULT_SPIRAL_CONFIG } from './spiral.config';

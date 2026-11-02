@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useRef, useState, useMemo } from 'react';
+import { useMemo, useRef, useState } from 'react';
 
 import { cn } from '@/shared/lib/utils';
 

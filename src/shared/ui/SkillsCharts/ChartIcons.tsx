@@ -1,7 +1,5 @@
 'use client';
 
-import React from 'react';
-
 import styles from './ChartIcons.module.css';
 import { BACKEND_ICONS, INFRASTRUCTURE_ICONS, SKILLS_DATA } from './skillsCharts.config';
 

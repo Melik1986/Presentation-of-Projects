@@ -1,7 +1,6 @@
 'use client';
 
 import { AlertTriangle, Trash2, X } from 'lucide-react';
-import React from 'react';
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/shared/lib/ui/avatar';
 import { Button } from '@/shared/lib/ui/button';

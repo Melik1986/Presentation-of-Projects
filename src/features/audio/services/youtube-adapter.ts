@@ -1,3 +1,5 @@
+/// <reference types="youtube" />
+
 /**
  * YouTube IFrame API Adapter (Audio Only)
  * Manages YouTube player for background audio playback

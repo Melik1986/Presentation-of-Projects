@@ -48,11 +48,6 @@ const nextConfig: NextConfig = {
     ignoreBuildErrors: false,
   },
 
-  // ESLint
-  eslint: {
-    ignoreDuringBuilds: false,
-  },
-
   // Webpack configuration
   webpack: (config) => {
     // Resolve Three.js to single instance to avoid duplicate imports

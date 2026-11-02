@@ -1,7 +1,6 @@
 'use client';
 
 import { Search, UserPlus } from 'lucide-react';
-import React from 'react';
 
 import { Button } from '@/shared/lib/ui/button';
 import { Card } from '@/shared/lib/ui/card';

@@ -1,7 +1,6 @@
 'use client';
 
 import { Edit, Trash2, MoreVertical } from 'lucide-react';
-import React from 'react';
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/shared/lib/ui/avatar';
 import { Badge } from '@/shared/lib/ui/badge';
