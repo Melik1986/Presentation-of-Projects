@@ -15,19 +15,9 @@ const nextConfig: NextConfig = {
     removeConsole: process.env.NODE_ENV === 'production' ? { exclude: ['error', 'warn'] } : false,
   },
 
-  // Experimental features (Next.js 15)
+  // Experimental features
   experimental: {
     optimizePackageImports: ['gsap', '@gsap/react', 'lenis'],
-  },
-
-  // Turbopack configuration
-  turbopack: {
-    rules: {
-      '*.svg': {
-        loaders: ['@svgr/webpack'],
-        as: '*.js',
-      },
-    },
   },
 
   // Image optimization
@@ -46,17 +36,6 @@ const nextConfig: NextConfig = {
   // TypeScript
   typescript: {
     ignoreBuildErrors: false,
-  },
-
-  // Webpack configuration
-  webpack: (config) => {
-    // Resolve Three.js to single instance to avoid duplicate imports
-    config.resolve.alias = {
-      ...config.resolve.alias,
-      three: require.resolve('three'),
-    };
-
-    return config;
   },
 
   // Security headers

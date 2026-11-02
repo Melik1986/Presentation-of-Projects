@@ -20,7 +20,7 @@ export default function StickyPage({ params }: StickyPageProps) {
 
   const catalog = getCatalogById(catalogId);
 
-  // Логирование после отправки ответа (Next.js 15.1 after() API)
+  // Log after the response is sent.
   after(async () => {
     logger.info('Catalog page rendered', { catalogId, found: !!catalog });
   });

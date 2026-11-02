@@ -1,6 +1,6 @@
 # Starlight Portfolio
 
-Modern portfolio website built with Next.js 15, React 19, and TypeScript.
+Modern portfolio website built with Next.js 16, React 19, and TypeScript 7.
 
 ---
 
@@ -19,9 +19,9 @@ Modern portfolio website built with Next.js 15, React 19, and TypeScript.
 
 ## 🚀 Tech Stack
 
-- **Framework:** Next.js 15 (App Router)
+- **Framework:** Next.js 16 (App Router, Turbopack)
 - **UI Library:** React 19
-- **Language:** TypeScript (Strict Mode)
+- **Language:** TypeScript 7 (Strict Mode)
 - **Styling:** CSS Modules
 - **Animations:** GSAP, Lenis
 - **Architecture:** Feature-Sliced Design

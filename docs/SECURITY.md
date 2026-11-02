@@ -144,4 +144,4 @@ This document is updated whenever security measures are modified or enhanced.
 
 ---
 
-_This security policy covers the Starlight portfolio project built with React 19, Next.js 15, and TypeScript._
+_This security policy covers the Starlight portfolio project built with React 19, Next.js 16, and TypeScript 7._

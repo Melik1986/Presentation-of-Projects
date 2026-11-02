@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "next dev",
-    "build": "next build --webpack",
+    "build": "next build",
     "start": "next start",
     "lint": "eslint .",
     "format": "prettier --write .",
@@ -48,6 +48,7 @@
     "typescript": "^7.0.2"
   },
   "engines": {
+    "node": ">=26.13.0",
     "bun": ">=1.0.0"
   },
   "trustedDependencies": [
