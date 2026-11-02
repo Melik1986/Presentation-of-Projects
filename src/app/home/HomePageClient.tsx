@@ -1,7 +1,7 @@
 'use client';
 
 import { useLayoutEffect } from 'react';
-import { FaShoppingBag, FaBehance, FaLinkedin, FaCodepen } from 'react-icons/fa';
+import { FaShoppingBag, FaInstagram, FaLinkedin, FaCodepen } from 'react-icons/fa';
 
 import { AudioUIPanel, useAudioDirector } from '@/features/audio';
 import { Wildyriftian } from '@/features/effects';
@@ -26,9 +26,9 @@ export function HomePageClient() {
       icon: <FaShoppingBag />,
     },
     {
-      name: 'Behance',
-      url: siteConfig.social.behance,
-      icon: <FaBehance />,
+      name: 'Instagram',
+      url: siteConfig.social.instagram,
+      icon: <FaInstagram />,
     },
     {
       name: 'LinkedIn',

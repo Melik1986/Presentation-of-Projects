@@ -14,7 +14,7 @@ export const siteConfig = {
   social: {
     gumroad:
       'https://melikmusinian.gumroad.com/?_gl=1*1g9q4j7*_ga*NTUwNTc3Mzg0LjE3NjI3ODE1NjE.*_ga_6LJN6D94N6*czE3NjMxNDQ4OTkkbzE0JGcwJHQxNzYzMTQ0ODk5JGo2MCRsMCRoMA..',
-    behance: 'https://www.behance.net/melikmusiniandev',
+    instagram: 'https://www.instagram.com/flowbrief.studio/',
     linkedin: 'https://www.linkedin.com/in/melik-musinian/',
     codepen: 'https://codepen.io/Melik-Musinian',
   },
