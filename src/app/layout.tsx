@@ -1,3 +1,5 @@
+import { SpeedInsights } from '@vercel/speed-insights/next';
+
 import { GlobalPreloader } from '@/features/preloader';
 
 import { Providers } from './providers';
@@ -69,6 +71,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
           <GlobalPreloader />
           {children}
         </Providers>
+        <SpeedInsights />
       </body>
     </html>
   );
