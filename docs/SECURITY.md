@@ -126,6 +126,41 @@ This is a public portfolio website with specific security considerations:
 - [x] HTTPS enforced via HSTS
 - [x] Security utilities documented
 
+## Automated Repository Security
+
+The GitHub repository uses secret-scanning push protection, Dependabot alerts and
+security updates, and CodeQL default setup. `.github/dependabot.yml` also schedules
+monthly npm and GitHub Actions updates. The Secret Scanning workflow runs Gitleaks
+on pushes and pull requests, scanning the repository history.
+
+The repository-level GitHub settings were enabled with
+[GitHub Security Lab's `gh-secure`](https://github.com/GitHubSecurityLab/gh-secure).
+Install it from the official source with
+`gh extension install GitHubSecurityLab/gh-secure`, then inspect its help and
+current settings with `gh secure --help` and `gh secure status`. Enabling
+features requires an authenticated GitHub CLI session with repository admin
+access.
+
+## Accepted Dependency Risk
+
+As of 2026-11-02, `npm audit` reports nine moderate advisory paths for
+`minimatch` (`GHSA-g3hv-75wg-m249`, fixed upstream in `11.0.1`). These paths
+come from development-only lint dependencies; `npm audit --omit=dev` reports
+zero vulnerabilities. The advisory describes excessive CPU and memory use
+when processing specially crafted glob patterns. The package is not part of
+the production dependency tree, so this issue does not affect requests handled
+by the deployed site; it may affect local linting or CI if an attacker can
+cause an untrusted pattern to be processed.
+
+No safe automatic fix is currently available. `npm audit fix` requires
+`--force` and proposes a breaking downgrade of `@next/eslint-plugin-next`.
+The lint dependencies declare `minimatch` 3.x ranges, so forcing the patched
+11.x major through a root override would exceed their declared compatibility
+and is not considered safe without updating and testing those consumers.
+Dependabot remains enabled to notify maintainers when compatible upstream
+fixes become available. Reassess this accepted risk by 2027-02-02 or sooner if
+the lint toolchain changes.
+
 ## Reporting Security Issues
 
 If you discover a security vulnerability, please report it responsibly:

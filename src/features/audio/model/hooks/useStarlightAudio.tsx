@@ -17,7 +17,14 @@ import { useMockAnalyser } from '@/shared/lib/mock-analyser';
 
 import AudioDirector from '../AudioDirector';
 
-import type { AudioConfig, AudioDirectorContextValue, CatalogConfig } from '../types';
+import type {
+  AudioConfig,
+  AudioDirectorActions,
+  AudioDirectorContextValue,
+  CatalogConfig,
+  DirectorSettings,
+  DirectorStateSnapshot,
+} from '../types';
 import type { ReactElement, ReactNode } from 'react';
 
 const logger = createLogger().child({ hook: 'useStarlightAudio' });
@@ -47,30 +54,40 @@ type AudioProviderProps = {
   config?: AudioConfig | null;
 };
 
-export function AudioProvider({ children, config }: AudioProviderProps): ReactElement {
+function useAudioConfig(config?: AudioConfig | null): AudioConfig {
   const [audioConfig, setAudioConfig] = useState<AudioConfig>(() =>
     normalizeConfig(config ?? (fallbackConfig as AudioConfig))
   );
-  const [isReady, setIsReady] = useState(false);
-  const [stateSnapshot, setStateSnapshot] = useState(AudioDirector.getCurrentState());
-  const [settingsSnapshot, setSettingsSnapshot] = useState(AudioDirector.getSettings());
-  const mountedRef = useRef(true);
-  const syncSnapshotsRef = useRef(() => {
-    setStateSnapshot(AudioDirector.getCurrentState());
-    setSettingsSnapshot(AudioDirector.getSettings());
-  });
 
-  const syncSnapshots = useCallback(() => {
-    syncSnapshotsRef.current();
+  useLayoutEffect(() => {
+    setAudioConfig(normalizeConfig(config ?? (fallbackConfig as AudioConfig)));
+  }, [config]);
+
+  return audioConfig;
+}
+
+function useAudioSnapshots(): {
+  state: DirectorStateSnapshot;
+  settings: DirectorSettings;
+  sync: () => void;
+} {
+  const [state, setState] = useState(AudioDirector.getCurrentState());
+  const [settings, setSettings] = useState(AudioDirector.getSettings());
+
+  const sync = useCallback(() => {
+    setState(AudioDirector.getCurrentState());
+    setSettings(AudioDirector.getSettings());
   }, []);
 
-  // Обновляем ref при изменении функции
-  useLayoutEffect(() => {
-    syncSnapshotsRef.current = () => {
-      setStateSnapshot(AudioDirector.getCurrentState());
-      setSettingsSnapshot(AudioDirector.getSettings());
-    };
-  });
+  return { state, settings, sync };
+}
+
+function useAudioInitialization(
+  audioConfig: AudioConfig,
+  syncSnapshots: () => void
+): boolean {
+  const [isReady, setIsReady] = useState(false);
+  const mountedRef = useRef(true);
 
   useLayoutEffect(() => {
     mountedRef.current = true;
@@ -81,19 +98,18 @@ export function AudioProvider({ children, config }: AudioProviderProps): ReactEl
   }, []);
 
   useLayoutEffect(() => {
-    const nextConfig = normalizeConfig(config ?? (fallbackConfig as AudioConfig));
-    setAudioConfig(nextConfig);
-  }, [config]);
-
-  useLayoutEffect(() => {
     let cancelled = false;
 
     const bootstrap = async () => {
       try {
         await AudioDirector.setConfig(audioConfig);
+        if (cancelled || !mountedRef.current) {
+          return;
+        }
+
         await AudioDirector.setHome();
         if (!cancelled && mountedRef.current) {
-          syncSnapshotsRef.current();
+          syncSnapshots();
           setIsReady(true);
         }
       } catch (error) {
@@ -107,13 +123,14 @@ export function AudioProvider({ children, config }: AudioProviderProps): ReactEl
     return () => {
       cancelled = true;
     };
-  }, [audioConfig]);
+  }, [audioConfig, syncSnapshots]);
 
+  return isReady;
+}
+
+function useAudioUserGesture(isReady: boolean, syncSnapshots: () => void): void {
   useEffect(() => {
-    if (!isReady) {
-      return undefined;
-    }
-
+    if (!isReady) return undefined;
     let isResumed = false;
     const abortController = new AbortController();
     const { signal } = abortController;
@@ -125,13 +142,10 @@ export function AudioProvider({ children, config }: AudioProviderProps): ReactEl
 
       isResumed = true;
       await AudioDirector.resumeContextOnUserGesture();
-      syncSnapshotsRef.current();
-
-      // Автоматически удалятся через AbortController
+      syncSnapshots();
       abortController.abort();
     };
 
-    // Все слушатели используют один signal для группового управления
     document.addEventListener('click', handleUserGesture, {
       once: true,
       signal,
@@ -146,11 +160,12 @@ export function AudioProvider({ children, config }: AudioProviderProps): ReactEl
     });
 
     return () => {
-      // Один вызов abort() удалит все слушатели автоматически
       abortController.abort();
     };
-  }, [isReady]);
+  }, [isReady, syncSnapshots]);
+}
 
+function useAudioActions(syncSnapshots: () => void): AudioDirectorActions {
   const setHome = useCallback(async () => {
     await AudioDirector.setHome();
     syncSnapshots();
@@ -194,30 +209,9 @@ export function AudioProvider({ children, config }: AudioProviderProps): ReactEl
   );
 
   const resume = useCallback(() => AudioDirector.resumeContext(), []);
-  const getAnalyserData = useCallback(() => AudioDirector.getAnalyserFrequencies(), []);
 
-  const value = useMemo<AudioDirectorContextValue>(
+  return useMemo(
     () => ({
-      isReady,
-      config: audioConfig,
-      state: stateSnapshot,
-      settings: settingsSnapshot,
-      actions: {
-        setHome,
-        previewCatalog,
-        enterCatalog,
-        leaveCatalog,
-        toggleMute,
-        setVolume,
-        resume,
-      },
-      getAnalyserData,
-    }),
-    [
-      isReady,
-      audioConfig,
-      stateSnapshot,
-      settingsSnapshot,
       setHome,
       previewCatalog,
       enterCatalog,
@@ -225,9 +219,46 @@ export function AudioProvider({ children, config }: AudioProviderProps): ReactEl
       toggleMute,
       setVolume,
       resume,
-      getAnalyserData,
-    ]
+    }),
+    [setHome, previewCatalog, enterCatalog, leaveCatalog, toggleMute, setVolume, resume]
   );
+}
+
+function useAudioContextValue({
+  isReady,
+  config,
+  state,
+  settings,
+  actions,
+}: {
+  isReady: boolean;
+  config: AudioConfig;
+  state: DirectorStateSnapshot;
+  settings: DirectorSettings;
+  actions: AudioDirectorActions;
+}): AudioDirectorContextValue {
+  const getAnalyserData = useCallback(() => AudioDirector.getAnalyserFrequencies(), []);
+
+  return useMemo(
+    () => ({ isReady, config, state, settings, actions, getAnalyserData }),
+    [isReady, config, state, settings, actions, getAnalyserData]
+  );
+}
+
+export function AudioProvider({ children, config }: AudioProviderProps): ReactElement {
+  const audioConfig = useAudioConfig(config);
+  const snapshots = useAudioSnapshots();
+  const isReady = useAudioInitialization(audioConfig, snapshots.sync);
+  useAudioUserGesture(isReady, snapshots.sync);
+
+  const actions = useAudioActions(snapshots.sync);
+  const value = useAudioContextValue({
+    isReady,
+    config: audioConfig,
+    state: snapshots.state,
+    settings: snapshots.settings,
+    actions,
+  });
 
   return <StarlightAudioContext.Provider value={value}>{children}</StarlightAudioContext.Provider>;
 }

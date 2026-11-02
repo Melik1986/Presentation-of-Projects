@@ -31,6 +31,15 @@ const logger = createLogger().child({ module: 'AudioDirector' });
 
 const EMPTY_BYTE_ARRAY = new Uint8Array(0);
 
+type TrackSetup = {
+  id: string;
+  url: string;
+  platform: Platform;
+  adapter: PlatformAdapter;
+  context: AudioContext;
+  generation: number;
+};
+
 class AudioDirector {
   private readonly isBrowser: boolean;
   private context: AudioContext | null = null;
@@ -44,6 +53,10 @@ class AudioDirector {
   private settings: DirectorSettings = { ...DEFAULT_SETTINGS };
   private visibilityAbortController: AbortController | null = null;
   private createdContainers = new Set<HTMLElement>();
+  private pendingContainers = new Set<HTMLElement>();
+  private pendingTracks = new Map<string, Promise<TrackBundle | null>>();
+  private initializationGeneration = 0;
+  private containerSequence = 0;
 
   constructor() {
     this.isBrowser = typeof window !== 'undefined';
@@ -67,6 +80,9 @@ class AudioDirector {
       return;
     }
 
+    this.initializationGeneration += 1;
+    this.pendingTracks.clear();
+
     // Автоматическое удаление слушателя через AbortController
     if (this.visibilityAbortController) {
       this.visibilityAbortController.abort();
@@ -75,13 +91,18 @@ class AudioDirector {
 
     // Удаление всех созданных контейнеров
     this.createdContainers.forEach((container) => {
+      if (this.pendingContainers.has(container)) {
+        return;
+      }
+
       try {
         container.remove();
       } catch (error) {
         logger.warn('Failed to remove container:', error);
+      } finally {
+        this.createdContainers.delete(container);
       }
     });
-    this.createdContainers.clear();
 
     this.tracks.forEach((track) => {
       this.detachTrack(track);
@@ -135,6 +156,18 @@ class AudioDirector {
     }
 
     return this.context;
+  }
+
+  private isCurrentInitialization(
+    context: AudioContext,
+    masterGain: GainNode,
+    generation: number
+  ): boolean {
+    return (
+      generation === this.initializationGeneration &&
+      this.context === context &&
+      this.masterGain === masterGain
+    );
   }
 
   async resumeContext(): Promise<void> {
@@ -214,19 +247,25 @@ class AudioDirector {
       return;
     }
 
+    const generation = ++this.initializationGeneration;
+    this.pendingTracks.clear();
     this.config = {
       homeTrack: config.homeTrack ?? null,
       catalogs: Array.isArray(config.catalogs) ? config.catalogs : [],
     };
 
     if (this.config.homeTrack) {
-      await this.prepareTrack('home', this.config.homeTrack);
+      await this.prepareTrack('home', this.config.homeTrack, generation);
+    }
+
+    if (generation !== this.initializationGeneration) {
+      return;
     }
 
     await Promise.all(
       this.config.catalogs.map(async (catalog) => {
         if (catalog?.id && catalog.track) {
-          await this.prepareTrack(catalog.id, catalog.track);
+          await this.prepareTrack(catalog.id, catalog.track, generation);
         }
       })
     );
@@ -254,19 +293,13 @@ class AudioDirector {
    * @returns Container ID
    */
   private createHiddenContainer(id: string): string {
-    const containerId = `audio-player-${id}`;
-    let container = document.getElementById(containerId) as HTMLElement | null;
-
-    if (!container) {
-      container = document.createElement('div');
-      container.id = containerId;
-      container.style.cssText =
-        'position:fixed;top:-9999px;left:-9999px;width:0;height:0;opacity:0;pointer-events:none;overflow:hidden;';
-      document.body.appendChild(container);
-
-      // Сохраняем ссылку для последующего удаления
-      this.createdContainers.add(container);
-    }
+    const containerId = `audio-player-${id}-${++this.containerSequence}`;
+    const container = document.createElement('div');
+    container.id = containerId;
+    container.style.cssText =
+      'position:fixed;top:-9999px;left:-9999px;width:0;height:0;opacity:0;pointer-events:none;overflow:hidden;';
+    document.body.appendChild(container);
+    this.createdContainers.add(container);
 
     return containerId;
   }
@@ -277,8 +310,16 @@ class AudioDirector {
    * @param trackUrl - Track URL
    * @returns Track bundle or null
    */
-  private async prepareTrack(id: string, trackUrl: string | null): Promise<TrackBundle | null> {
+  private async prepareTrack(
+    id: string,
+    trackUrl: string | null,
+    generation = this.initializationGeneration
+  ): Promise<TrackBundle | null> {
     if (!this.isBrowser || !trackUrl) {
+      return null;
+    }
+
+    if (generation !== this.initializationGeneration) {
       return null;
     }
 
@@ -287,7 +328,20 @@ class AudioDirector {
       return existing;
     }
 
-    return await this.initializeTrack(id, trackUrl);
+    const pending = this.pendingTracks.get(id);
+    if (pending) {
+      return await pending;
+    }
+
+    const initialization = this.initializeTrack(id, trackUrl, generation);
+    this.pendingTracks.set(id, initialization);
+    try {
+      return await initialization;
+    } finally {
+      if (this.pendingTracks.get(id) === initialization) {
+        this.pendingTracks.delete(id);
+      }
+    }
   }
 
   /**
@@ -295,9 +349,13 @@ class AudioDirector {
    * @param id - Track ID
    * @param trackUrl - Track URL
    */
-  private async initializeTrack(id: string, trackUrl: string): Promise<TrackBundle | null> {
+  private async initializeTrack(
+    id: string,
+    trackUrl: string,
+    generation: number
+  ): Promise<TrackBundle | null> {
     const context = this.ensureContext();
-    if (!context) {
+    if (!context || generation !== this.initializationGeneration) {
       return null;
     }
 
@@ -309,35 +367,52 @@ class AudioDirector {
       return null;
     }
 
-    return await this.setupTrackBundle(id, trackUrl, platform, adapter, context);
+    return await this.setupTrackBundle({
+      id,
+      url: trackUrl,
+      platform,
+      adapter,
+      context,
+      generation,
+    });
   }
 
   /**
    * Sets up track bundle with adapter
    */
-  private async setupTrackBundle(
-    id: string,
-    url: string,
-    platform: Platform,
-    adapter: PlatformAdapter,
-    context: AudioContext
-  ): Promise<TrackBundle | null> {
-    try {
-      if (context.state === 'closed') {
-        throw new Error('AudioContext is closed');
-      }
+  private async setupTrackBundle({
+    id,
+    url,
+    platform,
+    adapter,
+    context,
+    generation,
+  }: TrackSetup): Promise<TrackBundle | null> {
+    let container: HTMLElement | null = null;
 
-      // Ensure masterGain is from the same context
-      if (!this.masterGain || this.masterGain.context !== context) {
+    try {
+      const masterGain = this.masterGain;
+      if (!masterGain || masterGain.context !== context) {
         throw new Error('Audio graph context mismatch');
       }
 
       const containerId = this.createHiddenContainer(id);
+      container = document.getElementById(containerId);
+      if (!container) {
+        throw new Error('Audio player container was not created');
+      }
+      this.pendingContainers.add(container);
+
       await adapter.initialize(containerId, url);
+
+      if (!this.isCurrentInitialization(context, masterGain, generation)) {
+        adapter.destroy();
+        return null;
+      }
 
       const gain = context.createGain();
       gain.gain.value = 0;
-      gain.connect(this.masterGain);
+      gain.connect(masterGain);
 
       const bundle: TrackBundle = {
         id,
@@ -356,6 +431,14 @@ class AudioDirector {
       this.handleTrackError(id, url, error);
       adapter.destroy();
       return null;
+    } finally {
+      if (container) {
+        this.pendingContainers.delete(container);
+        if (this.tracks.get(id)?.adapter !== adapter) {
+          container.remove();
+          this.createdContainers.delete(container);
+        }
+      }
     }
   }
 
