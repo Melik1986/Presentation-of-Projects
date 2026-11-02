@@ -380,65 +380,74 @@ class AudioDirector {
   /**
    * Sets up track bundle with adapter
    */
-  private async setupTrackBundle({
-    id,
-    url,
-    platform,
-    adapter,
-    context,
-    generation,
-  }: TrackSetup): Promise<TrackBundle | null> {
+  private async setupTrackBundle(setup: TrackSetup): Promise<TrackBundle | null> {
     let container: HTMLElement | null = null;
 
     try {
-      const masterGain = this.masterGain;
-      if (!masterGain || masterGain.context !== context) {
-        throw new Error('Audio graph context mismatch');
-      }
+      const masterGain = this.getTrackMasterGain(setup.context);
 
-      const containerId = this.createHiddenContainer(id);
+      const containerId = this.createHiddenContainer(setup.id);
       container = document.getElementById(containerId);
       if (!container) {
         throw new Error('Audio player container was not created');
       }
       this.pendingContainers.add(container);
 
-      await adapter.initialize(containerId, url);
+      await setup.adapter.initialize(containerId, setup.url);
 
-      if (!this.isCurrentInitialization(context, masterGain, generation)) {
-        adapter.destroy();
+      if (!this.isCurrentInitialization(setup.context, masterGain, setup.generation)) {
+        setup.adapter.destroy();
         return null;
       }
 
-      const gain = context.createGain();
-      gain.gain.value = 0;
-      gain.connect(masterGain);
-
-      const bundle: TrackBundle = {
-        id,
-        url,
-        platform,
-        adapter,
-        element: adapter.getElement(),
-        source: null,
-        gain,
-        level: 0,
-      };
-
-      this.tracks.set(id, bundle);
-      return bundle;
+      return this.registerTrackBundle(setup, masterGain);
     } catch (error) {
-      this.handleTrackError(id, url, error);
-      adapter.destroy();
+      this.handleTrackError(setup.id, setup.url, error);
+      setup.adapter.destroy();
       return null;
     } finally {
-      if (container) {
-        this.pendingContainers.delete(container);
-        if (this.tracks.get(id)?.adapter !== adapter) {
-          container.remove();
-          this.createdContainers.delete(container);
-        }
-      }
+      this.cleanupTrackContainer(setup, container);
+    }
+  }
+
+  private getTrackMasterGain(context: AudioContext): GainNode {
+    const masterGain = this.masterGain;
+    if (!masterGain || masterGain.context !== context) {
+      throw new Error('Audio graph context mismatch');
+    }
+
+    return masterGain;
+  }
+
+  private registerTrackBundle(setup: TrackSetup, masterGain: GainNode): TrackBundle {
+    const gain = setup.context.createGain();
+    gain.gain.value = 0;
+    gain.connect(masterGain);
+
+    const bundle: TrackBundle = {
+      id: setup.id,
+      url: setup.url,
+      platform: setup.platform,
+      adapter: setup.adapter,
+      element: setup.adapter.getElement(),
+      source: null,
+      gain,
+      level: 0,
+    };
+
+    this.tracks.set(setup.id, bundle);
+    return bundle;
+  }
+
+  private cleanupTrackContainer(setup: TrackSetup, container: HTMLElement | null): void {
+    if (!container) {
+      return;
+    }
+
+    this.pendingContainers.delete(container);
+    if (this.tracks.get(setup.id)?.adapter !== setup.adapter) {
+      container.remove();
+      this.createdContainers.delete(container);
     }
   }
 
