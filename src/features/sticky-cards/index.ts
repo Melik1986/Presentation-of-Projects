@@ -3,7 +3,7 @@
  * Public API exports
  */
 
-export { StickyCards } from './ui/StickyCards';
+export { StickyCards } from './ui/StickyCards/StickyCards';
 export { DeviceGallery } from '../../shared/ui/DeviceGallery/DeviceGallery';
 export { AIPhotoGallery } from '../../shared/ui/AIPhotoGallery/AIPhotoGallery';
 export { useStickyCardsAnimation } from './model/hooks/useStickyCardsAnimation';

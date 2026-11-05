@@ -1,6 +1,8 @@
 import { SpeedInsights } from '@vercel/speed-insights/next';
+import { Geist } from 'next/font/google';
 
 import { GlobalPreloader } from '@/features/preloader';
+import { cn } from '@/lib/utils';
 
 import { Providers } from './providers';
 
@@ -8,6 +10,8 @@ import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
 
 import './globals.css';
+
+const geist = Geist({ subsets: ['latin'], variable: '--font-sans' });
 
 export const metadata: Metadata = {
   title: {
@@ -57,7 +61,7 @@ type RootLayoutProps = {
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html lang="en" data-scroll-behavior="smooth">
+    <html lang="en" data-scroll-behavior="smooth" className={cn('font-sans', geist.variable)}>
       <body>
         <noscript>
           <div className="noscript-message">

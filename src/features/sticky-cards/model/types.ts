@@ -8,6 +8,7 @@ export type StickyCardData = {
   image: string;
   description: string;
   link: string;
+  repository?: string;
 };
 
 export type StickyCardsProps = {

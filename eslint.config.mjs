@@ -6,7 +6,7 @@ import next from '@next/eslint-plugin-next';
 
 const eslintConfig = [
   {
-    ignores: ['.next/**', 'out/**', 'build/**', 'node_modules/**'],
+    ignores: ['.agents/skills/**', '.next/**', 'out/**', 'build/**', 'node_modules/**'],
   },
   {
     files: ['**/*.{js,jsx,ts,tsx}'],

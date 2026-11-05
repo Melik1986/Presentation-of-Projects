@@ -38,6 +38,8 @@ next-env.d.ts
 
 # IDE
 .vscode
+.agent/
+.agents
 .idea
 *.swp
 *.swo

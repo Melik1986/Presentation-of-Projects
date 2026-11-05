@@ -1,0 +1,217 @@
+.desktopCarousel {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  align-items: center;
+  gap: 2rem;
+  min-width: 0;
+}
+
+.desktopText {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2rem;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.desktopText > div:first-child {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  width: 100%;
+}
+
+.slideCounter {
+  display: block;
+}
+
+.galleryFrame {
+  position: relative;
+  min-width: 0;
+  overflow: hidden;
+  aspect-ratio: 1.15;
+  background-color: #172b3b;
+}
+
+.desktopCarousel .galleryFrame,
+.mobileViewport {
+  cursor: grab;
+  touch-action: pan-y;
+}
+
+.desktopCarousel .galleryFrame:active,
+.mobileViewport:active {
+  cursor: grabbing;
+}
+
+.imageEntrance {
+  position: absolute;
+  inset: 0;
+  transform-origin: center;
+}
+
+.galleryImage {
+  object-fit: cover;
+}
+
+.imagePlaceholder {
+  position: relative;
+  display: grid;
+  width: 100%;
+  height: 100%;
+  place-items: center;
+  overflow: hidden;
+  background: linear-gradient(135deg, #172b3b 0%, #47778a 52%, #d6a17f 100%);
+  color: #fff;
+  font-size: clamp(0.75rem, 1.2vw, 1rem);
+  letter-spacing: 0.12em;
+  isolation: isolate;
+}
+
+.imagePlaceholder::before {
+  position: absolute;
+  z-index: -1;
+  inset: -35%;
+  background:
+    radial-gradient(ellipse at 30% 30%, rgb(255 255 255 / 28%), transparent 42%),
+    radial-gradient(ellipse at 72% 68%, rgb(14 28 43 / 35%), transparent 48%);
+  content: '';
+}
+
+.navigation {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+.navigation button {
+  display: grid;
+  width: 2.5rem;
+  height: 2.5rem;
+  place-items: center;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  background-color: transparent;
+  color: inherit;
+  transition:
+    background-color 240ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 240ms cubic-bezier(0.22, 1, 0.36, 1),
+    color 240ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.navigation button:not(:disabled):hover,
+.navigation button:not(:disabled):focus-visible {
+  border-color: #fff;
+  background-color: #fff;
+  color: #111;
+}
+
+.navigation button:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+
+.navigation button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.navigation svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+}
+
+.progressTrack {
+  display: block;
+  grid-column: 1 / -1;
+  width: 100%;
+  height: 3px;
+  overflow: hidden;
+  background: rgb(255 255 255 / 18%);
+}
+
+.progressFill {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, #8ba7b8 0%, #c4956a 52%, #d4a955 100%);
+  transform-origin: left center;
+  transition: transform 32ms linear;
+  will-change: transform;
+}
+
+.mobileCarousel {
+  height: auto;
+}
+
+.mobileViewport {
+  display: flex;
+  height: auto;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2rem;
+  padding-block: 0 3rem;
+}
+
+.mobileTrack {
+  display: flex;
+  width: max-content;
+  gap: 2rem;
+  padding-inline: 1rem;
+}
+
+.mobileSlide {
+  position: relative;
+  flex: 0 0 70vw;
+  overflow: hidden;
+  border: 1px solid currentColor;
+  border-radius: 0.75rem;
+}
+
+.mobileImage {
+  width: 100%;
+  height: min(calc(70vw + 22svh), max(6rem, calc(100svh - 360px)));
+}
+
+.mobileImage .galleryFrame {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: auto;
+}
+
+.mobileSlideContent {
+  border-radius: 1rem;
+  background: rgb(0 0 0 / 50%);
+  color: white;
+  backdrop-filter: blur(2rem);
+}
+
+.mobileSlideContent p {
+  margin-top: 0.5rem;
+}
+
+.mobileProgress {
+  height: 0.25rem;
+  margin-inline: 1rem;
+}
+
+.mobileProgressFill {
+  width: 100%;
+  height: 100%;
+  background: currentColor;
+}
+
+@media (max-width: 1000px) {
+  .desktopCarousel {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .desktopCarousel .progressTrack {
+    grid-column: 1;
+  }
+}

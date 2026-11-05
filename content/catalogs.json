@@ -38,7 +38,8 @@
             "title": "AutoService",
             "image": "",
             "description": "Full-stack car service management platform with online booking, real-time availability, admin dashboard, and automated email notifications. Built with React, NestJS, and Supabase.",
-            "link": "https://www.carservicenl.eu/"
+            "link": "https://www.carservicenl.eu/",
+            "repository": "https://github.com/Melik1986/AutoService"
           },
           {
             "index": "02",
@@ -52,7 +53,8 @@
             "title": "Houzzy — Furniture E-Commerce",
             "image": "/img/catalog-1/card-6.png",
             "description": "Modern furniture e-commerce prototype with product catalog, category navigation, and responsive design. Clean structure optimized for showrooms, interior shops, and custom furniture businesses. Built with modern e-commerce standards.",
-            "link": "https://houzzy-furniture-store.vercel.app/"
+            "link": "https://houzzy-furniture-store.vercel.app/",
+            "repository": "https://github.com/Melik1986/houzzy-furniture-store"
           },
           {
             "index": "04",

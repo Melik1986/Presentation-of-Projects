@@ -100,6 +100,24 @@
   gap: 1.5rem;
 }
 
+.webAppsContentWrapper {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+}
+
+.webAppsContentWrapper > section[data-project-gallery-desktop] {
+  flex: 1;
+  min-height: 0;
+  grid-template-rows: minmax(0, 1fr) auto;
+  align-items: stretch;
+}
+
+.webAppsContentWrapper > section[data-project-gallery-desktop] > [data-project-gallery-frame] {
+  height: 100%;
+  aspect-ratio: auto;
+}
+
 /* Wider content wrapper for Database CRUD card on medium-large screens */
 .wideContentWrapper {
   width: 75%;
@@ -213,6 +231,12 @@
   font-weight: 650;
 }
 
+.projectLinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
 .viewLiveLink {
   display: inline-flex;
   align-items: center;
@@ -277,8 +301,25 @@
     gap: 0;
   }
 
+  .stickyCard.webAppsCard > .stickyCardIndex {
+    flex: 0 0 auto;
+  }
+
   .stickyCardContentWrapper {
     width: 100%;
+  }
+
+  .webAppsContentWrapper {
+    height: auto;
+  }
+
+  .webAppsContentWrapper > section[data-project-gallery-desktop] {
+    flex: none;
+  }
+
+  .webAppsContentWrapper > section[data-project-gallery-desktop] > [data-project-gallery-frame] {
+    height: auto;
+    aspect-ratio: 1.15;
   }
 
   .stickyCardCopy {
@@ -318,5 +359,20 @@
   /* Adjust content wrapper for mobile */
   .stickyCard[data-card-index='03'] .stickyCardContentWrapper {
     width: 100%;
+  }
+}
+
+@media (min-width: 1001px) {
+  .stickyCard.webAppsCard {
+    gap: 0;
+  }
+
+  .stickyCard.webAppsCard > .stickyCardIndex {
+    display: none;
+  }
+
+  .stickyCard.webAppsCard > .stickyCardContent {
+    flex: 1;
+    min-width: 0;
   }
 }

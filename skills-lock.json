@@ -1,0 +1,83 @@
+{
+  "version": 1,
+  "skills": {
+    "anatomy": {
+      "source": "wheresryan22/anatomy",
+      "sourceType": "github",
+      "skillPath": "SKILL.md",
+      "computedHash": "b8ced09c690eb178684c27d02d0d8aaa48b28d5ce5b0bb9ea3addf2187ffd8a6"
+    },
+    "feedback-states": {
+      "source": "60fps-Design/plugin",
+      "sourceType": "github",
+      "skillPath": "skills/feedback-states/SKILL.md",
+      "computedHash": "24d4c5ce1941e2f6a479b5d9a4983267d42120eb85bddcd8c04adf12fd37e16b"
+    },
+    "find-animation-opportunities": {
+      "source": "60fps-Design/plugin",
+      "sourceType": "github",
+      "skillPath": "skills/find-animation-opportunities/SKILL.md",
+      "computedHash": "5d7e84b1474fbe7858d8a941af660b5872809b137e8073b3aa7085be6571451f"
+    },
+    "libraries-dev": {
+      "source": "Jakubantalik/Libraries.dev",
+      "sourceType": "github",
+      "skillPath": "skills/libraries-dev/SKILL.md",
+      "computedHash": "122cf598efd945b5d2dffcd61079101059ad4ef813f1feb8563b48e0e6f90964"
+    },
+    "motion-reference": {
+      "source": "60fps-Design/plugin",
+      "sourceType": "github",
+      "skillPath": "skills/motion-reference/SKILL.md",
+      "computedHash": "003d2409e7adb334abc1f4b16e026e852b25ecab8c6829c36254145e24ecb7fc"
+    },
+    "motion-spec": {
+      "source": "60fps-Design/plugin",
+      "sourceType": "github",
+      "skillPath": "skills/motion-spec/SKILL.md",
+      "computedHash": "81b6d6dd7643a96929e902ca4844997e1ad4e0137d443060d1357e979c883174"
+    },
+    "motion-system": {
+      "source": "60fps-Design/plugin",
+      "sourceType": "github",
+      "skillPath": "skills/motion-system/SKILL.md",
+      "computedHash": "1435df9493105326b1bc033a5b3ff2a5ade4385f53388f89631c69716a4807db"
+    },
+    "neon": {
+      "source": "neondatabase/agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/neon/SKILL.md",
+      "computedHash": "72813af523242dc39715b225fb3b37d255e3dbf4ea276e7f01ef6064b53b47af"
+    },
+    "neon-postgres": {
+      "source": "neondatabase/agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/neon-postgres/SKILL.md",
+      "computedHash": "346d6b69e4097402ee4c7719d68a5329463b0f8b6ebd2d8034f36a1769ff7fcd"
+    },
+    "nestjs-best-practices": {
+      "source": "kadajett/agent-nestjs-skills",
+      "sourceType": "github",
+      "skillPath": "skills/nestjs-best-practices/SKILL.md",
+      "computedHash": "58f8a630637be3acce1f118c747d68160346ada8a43d76cb52a5b4c4edaa2d37"
+    },
+    "stageshow": {
+      "source": "benjitaylor/skills",
+      "sourceType": "github",
+      "skillPath": "stageshow/SKILL.md",
+      "computedHash": "bf9f07985a62882deae7935b5b1162fb5bf66b248930bb14a75dcaf9d67291b7"
+    },
+    "vercel-react-best-practices": {
+      "source": "vercel-labs/agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/react-best-practices/SKILL.md",
+      "computedHash": "3219a1944e404ffc14d1d9d6aef6dd2e3855b81387ee0a044ccbfe14d34c2357"
+    },
+    "vite": {
+      "source": "antfu/skills",
+      "sourceType": "github",
+      "skillPath": "skills/vite/SKILL.md",
+      "computedHash": "88ee465fd10f711efecc76e91e96accae2b229dda371614dcf219099c264a486"
+    }
+  }
+}

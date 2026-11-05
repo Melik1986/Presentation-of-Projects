@@ -25,6 +25,7 @@ export interface CatalogCard {
   image: string;
   description: string;
   link: string;
+  repository?: string;
 }
 
 export interface CatalogContent {
