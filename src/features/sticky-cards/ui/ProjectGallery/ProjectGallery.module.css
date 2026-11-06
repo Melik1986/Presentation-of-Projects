@@ -53,7 +53,13 @@
 }
 
 .galleryImage {
-  object-fit: cover;
+  object-fit: contain;
+}
+
+.galleryPicture {
+  position: absolute;
+  display: block;
+  inset: 0;
 }
 
 .imagePlaceholder {

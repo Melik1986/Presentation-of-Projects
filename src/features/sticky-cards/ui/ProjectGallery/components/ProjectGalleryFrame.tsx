@@ -12,13 +12,24 @@ function ProjectGalleryMedia({
   sizes,
 }: Pick<ProjectGalleryFrameProps, 'slide' | 'label' | 'sizes'>) {
   return slide.image ? (
-    <Image
-      src={slide.image}
-      alt={`${slide.title} — ${label}`}
-      fill
-      sizes={sizes}
-      className={styles.galleryImage}
-    />
+    <picture className={styles.galleryPicture}>
+      {slide.mobileImage && (
+        <source
+          media="(max-width: 1000px)"
+          srcSet={slide.mobileImageSrcSet || slide.mobileImage}
+        />
+      )}
+      {slide.imageSrcSet && (
+        <source media="(min-width: 1001px)" srcSet={slide.imageSrcSet} />
+      )}
+      <Image
+        src={slide.image}
+        alt={`${slide.title} — ${label}`}
+        fill
+        sizes={sizes}
+        className={styles.galleryImage}
+      />
+    </picture>
   ) : (
     <div className={styles.imagePlaceholder} role="img" aria-label={`${slide.title}, ${label}`}>
       <span>{label}</span>

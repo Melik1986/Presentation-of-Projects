@@ -36,32 +36,188 @@
           {
             "index": "01",
             "title": "AutoService",
-            "image": "",
+            "image": "/img/catalog-1/card-1/AutoService.l.png",
             "description": "Full-stack car service management platform with online booking, real-time availability, admin dashboard, and automated email notifications. Built with React, NestJS, and Supabase.",
-            "link": "https://www.carservicenl.eu/",
-            "repository": "https://github.com/Melik1986/AutoService"
+            "link": "https://autoservice-landing-preview.vercel.app/",
+            "repository": "https://github.com/Melik1986/AutoService.git",
+            "slides": [
+              {
+                "title": "E&D CarService — Modern Showcase",
+                "description": "Full-featured digital platform for a Rotterdam auto repair center: responsive high-performance UI with GSAP animations, transparent service catalog, and interactive Google Maps integration.",
+                "image": "/img/catalog-1/card-1/AutoService.l.png",
+                "srcSet": "/img/catalog-1/card-1/AutoService.l.png 1x, /img/catalog-1/card-1/AutoService.l@2x.png 2x",
+                "mobileImage": "/img/catalog-1/card-1/AutoService.s.png",
+                "mobileImageSrcSet": "/img/catalog-1/card-1/AutoService.s.png 1x, /img/catalog-1/card-1/AutoService.s@2x.png 2x"
+              },
+              {
+                "title": "Cloud Ecosystem & Security",
+                "description": "Production-grade full-stack architecture: React 19 and Vite on Vercel, modular NestJS 11 and Fastify on Railway, Supabase PostgreSQL with Row Level Security (RLS), and Sentry observability.",
+                "image": "/img/catalog-1/card-1/card-1.png"
+              },
+              {
+                "title": "Admin Dashboard & Schedule Control",
+                "description": "Comprehensive administrative dashboard featuring an interactive booking calendar, full appointment CRUD, maintenance day and slot blocking, and JWT-secured route guards.",
+                "image": "/img/catalog-1/card-1/card-3.png"
+              },
+              {
+                "title": "Smart Booking & Real-Time Slots",
+                "description": "Step-by-step booking workflow with real-time slot availability, robust schema validation via Zod and React Hook Form, and automated booking confirmations delivered via Resend API.",
+                "image": "/img/catalog-1/card-1/AutoService.png"
+              }
+            ]
           },
           {
             "index": "02",
-            "title": "3D AI Produkt-Konfigurator",
-            "image": "/img/catalog-1/card-5.png",
-            "description": "Interactive 3D product configurator built with Three.js and WebGL. Real-time customization of colors, materials, and variants with optimized performance. Scalable architecture for retail, automotive, and manufacturing applications.",
-            "link": "https://threejs-ai-client.vercel.app/"
+            "title": "Vstah AI",
+            "image": "/img/catalog-1/card-2/vstah.ai.png",
+            "description": "Mobile-first AI ERP OS with Zero-Knowledge privacy architecture. Bridges voice commands, computer vision, and structured ERP systems like 1C:Enterprise, SAP, and Odoo.",
+            "link": "https://vstah-ai-staging.up.railway.app",
+            "repository": "https://github.com/Melik1986/Vstah-AI-App.git",
+            "slides": [
+              {
+                "title": "Voice-First ERP Operations",
+                "description": "Hands-free inventory checks, order creation, and stock queries powered by Whisper audio transcription and LLM function calling.",
+                "image": "/img/catalog-1/card-2/vstah.ai-3.png"
+              },
+              {
+                "title": "Real-Time Analytics & Vision AI",
+                "description": "Automated document processing via GPT-4o Vision for price tags and invoices, paired with real-time revenue and sales performance metrics.",
+                "image": "/img/catalog-1/card-2/vstah.ai-1.png"
+              },
+              {
+                "title": "Zero-Knowledge Privacy & Connectors",
+                "description": "On-device JWE encryption, Qdrant vector RAG knowledge base, and universal connectors for 1C:Enterprise, SAP, and Odoo via OpenAPI and OData.",
+                "image": "/img/catalog-1/card-2/vstah.ai-2.png"
+              },
+              {
+                "title": "Secure Auth & Offline-First Core",
+                "description": "Local SQLite storage ensuring uninterrupted offline operations, Supabase social authentication, and Guardian Guard pre-execution verification.",
+                "image": "/img/catalog-1/card-2/vstah.ai-4.png"
+              }
+            ]
           },
           {
             "index": "03",
-            "title": "Houzzy — Furniture E-Commerce",
-            "image": "/img/catalog-1/card-6.png",
-            "description": "Modern furniture e-commerce prototype with product catalog, category navigation, and responsive design. Clean structure optimized for showrooms, interior shops, and custom furniture businesses. Built with modern e-commerce standards.",
-            "link": "https://houzzy-furniture-store.vercel.app/",
-            "repository": "https://github.com/Melik1986/houzzy-furniture-store"
+            "title": "FlowBrief-Power",
+            "image": "/img/catalog-1/card-3/FlowBrief-Power.l@2x.png",
+            "description": "B2B industrial procurement platform for complex machinery from China with DDP delivery, multilingual i18n, custom RFQ workflow, and interactive 3D visualizations.",
+            "link": "https://power.flowbrief.cloud/",
+            "repository": "https://github.com/Melik1986/FlowBrief-Power.git",
+            "slides": [
+              {
+                "title": "FlowBrief-Power — Direct B2B Sourcing",
+                "description": "Direct procurement platform connecting buyers with verified Chinese manufacturers. Turnkey DDP (Delivered Duty Paid) logistics with integrated customs clearance, certification, and transparent factory pricing.",
+                "image": "/img/catalog-1/card-3/FlowBrief-Power.l@2x.png",
+                "srcSet": "/img/catalog-1/card-3/FlowBrief-Power.l@2x.png 1x, /img/catalog-1/card-3/FlowBrief-Power.l@2x.png 2x",
+                "mobileImage": "/img/catalog-1/card-3/FlowBrief-Power.s@2x.png",
+                "mobileImageSrcSet": "/img/catalog-1/card-3/FlowBrief-Power.s@2x.png 1x, /img/catalog-1/card-3/FlowBrief-Power.s@2x.png 2x"
+              },
+              {
+                "title": "Custom RFQ Flow & Specification Engine",
+                "description": "Replaces standard retail carts with an enterprise Request-for-Quote (RFQ) pipeline, enabling engineering teams to specify technical parameters, custom configurations, and factory tooling requirements.",
+                "image": ""
+              },
+              {
+                "title": "Interactive 3D Machinery & SEO Catalog",
+                "description": "Interactive 3D equipment inspection powered by React Three Fiber, high-performance server-side parametric filtering, and automated SEO-first JSON-LD metadata generation.",
+                "image": ""
+              },
+              {
+                "title": "Next.js 16 Architecture & Multilingual i18n",
+                "description": "High-performance stack built with Next.js 16 App Router, Bun runtime, Tailwind CSS 4, and TypeScript. Full trilingual localization (EN, UK, RU) via next-intl, TanStack Query v5, and Zustand.",
+                "image": ""
+              }
+            ]
           },
           {
             "index": "04",
-            "title": "Movie Explorer — Film Discovery",
-            "image": "/img/catalog-1/card-7.png",
-            "description": "Film discovery web application with search functionality, detailed movie information, and personal favorites management. Responsive UI with clean navigation. Demonstrates API integration, component architecture, and state management for media platforms.",
-            "link": "https://my-projects-vk-kino.vercel.app/"
+            "title": "FlowBrief",
+            "image": "",
+            "description": "Modern business survey platform built on Next.js 15, TypeScript, and Supabase. Streamlines client onboarding and requirements gathering through step-by-step questionnaires, personal dashboards, and AI assistance.",
+            "link": "https://flowbrief.cloud/",
+            "repository": "https://github.com/Melik1986/flowbrief.git",
+            "slides": [
+              {
+                "title": "FlowBrief — Business Survey System",
+                "description": "Modern web platform designed to streamline client requirements gathering, accelerate information intake, and enhance collaboration through guided, step-by-step interactive surveys with real-time progress tracking.",
+                "image": ""
+              },
+              {
+                "title": "Client Dashboards & AI-Assisted Responses",
+                "description": "Dedicated personal dashboards for survey authors and respondents with real-time response analytics, plus integrated OpenAI-powered assistant capabilities to help clients articulate detailed project requirements.",
+                "image": ""
+              },
+              {
+                "title": "Supabase Backend & Cloudflare Protection",
+                "description": "Robust backend powered by Supabase PostgreSQL and Supabase Auth, protected against automated abuse via Cloudflare Turnstile CAPTCHA, with transactional email delivery integrated through Resend API.",
+                "image": ""
+              },
+              {
+                "title": "Next.js 15 Architecture & Strict DX Pipeline",
+                "description": "Engineered with Next.js 15 App Router, TypeScript, TailwindCSS, and Radix UI. Features strict Node 22 NVM locking, Zod validation, next-intl i18n, Husky pre-commit hooks, and Lighthouse CI performance auditing.",
+                "image": ""
+              }
+            ]
+          },
+          {
+            "index": "05",
+            "title": "Church Voskresenie",
+            "image": "",
+            "description": "Modern multilingual community platform built with Astro, TypeScript, and Tailwind CSS v4. Features GDPR-compliant 2-Click embeds, self-hosted typography, Lenis and GSAP smooth interactions, and Sonar-grade code quality.",
+            "link": "https://church-voskresenie.vercel.app/",
+            "repository": "https://github.com/Melik1986/church-voskresenie.git",
+            "slides": [
+              {
+                "title": "Church Voskresenie — Community Hub",
+                "description": "Modern multilingual platform for the Duisburg church community, engineered with Astro, TypeScript, and Tailwind CSS v4 for ultra-fast static performance, minimal JavaScript payload, and seamless content delivery.",
+                "image": ""
+              },
+              {
+                "title": "Zero-Tracking Privacy & 2-Click Embeds",
+                "description": "Rigorous privacy compliance: custom 2-Click facades for YouTube videos and Google Maps that block third-party trackers until user interaction, paired with 100% self-hosted local fonts without external CDNs.",
+                "image": ""
+              },
+              {
+                "title": "Bilingual Routing & Type-Safe Content",
+                "description": "Comprehensive information architecture with parallel RU and DE routes, structured markdown pages, type-safe i18n dictionaries, and automated JSON-LD schema generation for search engine optimization.",
+                "image": ""
+              },
+              {
+                "title": "Sonar-Grade Quality & Modern DX",
+                "description": "Strict engineering standards: ESLint with eslint-plugin-sonarjs enforcing max 20-line functions, Lefthook pre-commit hooks (lint, format, astro check), Lenis smooth scrolling, and GSAP micro-animations.",
+                "image": ""
+              }
+            ]
+          },
+          {
+            "index": "06",
+            "title": "Sweet Tooth",
+            "image": "",
+            "description": "Interactive pastry and confectionery web application built with Vue 3, TypeScript, and Vite. Features high-performance GSAP ScrollTrigger timeline animations, 3D canvas frame sequences, and responsive Tailwind styling.",
+            "link": "https://restouarand.vercel.app/",
+            "repository": "https://github.com/Melik1986/Restouarand.git",
+            "slides": [
+              {
+                "title": "Sweet Tooth — Interactive Confectionery",
+                "description": "Modern culinary showcase engineered with Vue 3 Composition API, TypeScript, and Vite. Delivers a tactile digital storefront featuring smooth scroll choreography and custom branding aesthetics.",
+                "image": ""
+              },
+              {
+                "title": "Canvas Frame Sequences & 3D Scroll Scrubbing",
+                "description": "Hero section powered by HTML5 Canvas and transparent PNG frame sequences, smoothly scrubbed via GSAP ScrollTrigger to produce interactive 3D product rotations synchronized with user scrolling.",
+                "image": ""
+              },
+              {
+                "title": "Pinned Product Showcase & Stagger Effects",
+                "description": "Section pinning mechanisms for product discovery with synchronized 360-degree item rotation, cascaded stagger entrances, and performance-tuned lazy loading for multi-frame animation assets.",
+                "image": ""
+              },
+              {
+                "title": "High-Performance Vite & Bun Pipeline",
+                "description": "High-speed developer experience using Bun runtime, Tailwind CSS typography tokens, Husky git pre-commit automation, strict TypeScript typing, and optimized production builds deployed on Vercel.",
+                "image": ""
+              }
+            ]
           }
         ]
       },

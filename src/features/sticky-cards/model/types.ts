@@ -1,3 +1,5 @@
+import type { CatalogCardSlide } from '@/shared/types/catalog';
+
 /**
  * Sticky Cards types
  */
@@ -9,6 +11,7 @@ export type StickyCardData = {
   description: string;
   link: string;
   repository?: string;
+  slides?: CatalogCardSlide[];
 };
 
 export type StickyCardsProps = {

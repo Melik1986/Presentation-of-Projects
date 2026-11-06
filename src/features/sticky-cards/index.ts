@@ -13,4 +13,5 @@ export { useDeviceGalleryAnimation } from './model/hooks/useDeviceGalleryAnimati
 export { useAIPhotoGalleryAnimation } from './model/hooks/useAIPhotoGalleryAnimation';
 export { useFigmaImageAnimation } from './model/hooks/useFigmaImageAnimation';
 export type { StickyCardData, StickyCardsProps } from './model/types';
+export type { ProjectGalleryCustomSlide, ProjectGallerySlide } from './model/projectGallery';
 export { defaultStickyCardsData } from './model/data';

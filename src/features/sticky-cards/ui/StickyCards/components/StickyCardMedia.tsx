@@ -88,7 +88,13 @@ function FigmaImage({ cardData }: StickyCardMediaProps) {
 
 function renderFirstCardMedia({ cardData, catalogId }: StickyCardMediaProps) {
   if (catalogId === 'web-apps') {
-    return <ProjectGallery title={cardData.title} description={cardData.description} />;
+    return (
+      <ProjectGallery
+        title={cardData.title}
+        description={cardData.description}
+        slidesData={cardData.slides}
+      />
+    );
   }
   if (catalogId === 'ai-tools') {
     return <AIPhotoGallery items={AI_PHOTO_ITEMS} />;
@@ -111,7 +117,13 @@ function renderFirstCardMedia({ cardData, catalogId }: StickyCardMediaProps) {
 
 function renderSecondCardMedia({ cardData, catalogId }: StickyCardMediaProps) {
   if (catalogId === 'web-apps') {
-    return <ProjectGallery title={cardData.title} description={cardData.description} />;
+    return (
+      <ProjectGallery
+        title={cardData.title}
+        description={cardData.description}
+        slidesData={cardData.slides}
+      />
+    );
   }
   if (catalogId === 'advanced-tech') {
     return <SkillsCharts />;
@@ -150,7 +162,13 @@ function renderWebAppsGallery({ cardData, catalogId }: StickyCardMediaProps) {
     return null;
   }
 
-  return <ProjectGallery title={cardData.title} description={cardData.description} />;
+  return (
+    <ProjectGallery
+      title={cardData.title}
+      description={cardData.description}
+      slidesData={cardData.slides}
+    />
+  );
 }
 
 function renderLinkedProjectImage(cardData: StickyCardMediaProps['cardData']) {

@@ -20,7 +20,7 @@ export function DesktopProjectGallery({ title, description, slides }: DesktopPro
   return (
     <section
       className={styles.desktopCarousel}
-      aria-label={`${title} image gallery`}
+      aria-label={`${currentSlide.title || title} image gallery`}
       aria-roledescription="carousel"
       data-project-gallery-desktop
       onMouseEnter={() => gallery.setIsPaused(true)}
@@ -37,8 +37,8 @@ export function DesktopProjectGallery({ title, description, slides }: DesktopPro
     >
       <div className={styles.desktopText}>
         <DesktopGalleryText
-          title={title}
-          description={description}
+          title={currentSlide.title || title}
+          description={currentSlide.description || description}
           slideId={currentSlide.id}
           currentIndex={gallery.currentIndex}
           slideCount={slides.length}

@@ -19,6 +19,15 @@ export interface CatalogTheme {
   pageBackground?: string;
 }
 
+export interface CatalogCardSlide {
+  title: string;
+  description: string;
+  image: string;
+  srcSet?: string;
+  mobileImage?: string;
+  mobileImageSrcSet?: string;
+}
+
 export interface CatalogCard {
   index: string;
   title: string;
@@ -26,6 +35,7 @@ export interface CatalogCard {
   description: string;
   link: string;
   repository?: string;
+  slides?: CatalogCardSlide[];
 }
 
 export interface CatalogContent {

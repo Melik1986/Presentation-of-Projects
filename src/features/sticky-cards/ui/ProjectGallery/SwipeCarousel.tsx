@@ -28,11 +28,16 @@ function useSwipeCarouselContext() {
   return context;
 }
 
+export interface SwipeCarouselProps extends React.HTMLAttributes<HTMLDivElement> {
+  onSlideChange?: (index: number) => void;
+}
+
 export function SwipeCarousel({
   children,
   className,
+  onSlideChange,
   ...props
-}: React.HTMLAttributes<HTMLDivElement>) {
+}: SwipeCarouselProps) {
   const x = useMotionValue(0);
   const progress = useMotionValue(0);
   const trackRef = React.useRef<HTMLDivElement>(null);
@@ -139,7 +144,8 @@ export function SwipeCarousel({
     }
 
     const deltaX = event.clientX - start.x;
-    let nextIndex = currentIndexRef.current;
+    const prevIndex = currentIndexRef.current;
+    let nextIndex = prevIndex;
     if (gestureDirectionRef.current === 'horizontal') {
       if (Math.abs(deltaX) > 48) {
         const direction = deltaX < 0 ? 1 : -1;
@@ -151,6 +157,9 @@ export function SwipeCarousel({
     }
 
     currentIndexRef.current = nextIndex;
+    if (nextIndex !== prevIndex) {
+      onSlideChange?.(nextIndex);
+    }
     progress.set(track.children.length > 1 ? nextIndex / (track.children.length - 1) : 0);
     animate(x, getSlideOffset(nextIndex), {
       duration: 0.36,

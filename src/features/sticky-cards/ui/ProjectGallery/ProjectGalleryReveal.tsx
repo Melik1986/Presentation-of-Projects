@@ -6,6 +6,7 @@ import { cn } from '@/shared/lib/utils';
 
 interface ProjectGalleryRevealContextValue {
   isHovered: boolean;
+  isActive?: boolean;
 }
 
 const ProjectGalleryRevealContext = React.createContext<ProjectGalleryRevealContextValue | null>(
@@ -21,14 +22,18 @@ function useProjectGalleryReveal() {
   return context;
 }
 
+export interface ProjectGalleryRevealProps extends React.HTMLAttributes<HTMLDivElement> {
+  isActive?: boolean;
+}
+
 export const ProjectGalleryReveal = React.forwardRef<
   HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => {
+  ProjectGalleryRevealProps
+>(({ className, isActive, ...props }, ref) => {
   const [isHovered, setIsHovered] = React.useState(false);
 
   return (
-    <ProjectGalleryRevealContext.Provider value={{ isHovered }}>
+    <ProjectGalleryRevealContext.Provider value={{ isHovered, isActive }}>
       <div
         ref={ref}
         className={cn('relative overflow-hidden', className)}
@@ -56,13 +61,14 @@ export const ProjectGalleryRevealMain = React.forwardRef<
   HTMLDivElement,
   ProjectGalleryRevealMainProps
 >(({ className, initialScale = 1, hoverScale = 1.05, style, ...props }, ref) => {
-  const { isHovered } = useProjectGalleryReveal();
+  const { isHovered, isActive } = useProjectGalleryReveal();
+  const shouldScale = typeof isActive === 'boolean' ? isActive : isHovered;
 
   return (
     <div
       ref={ref}
       className={cn('size-full transition-transform duration-300', className)}
-      style={{ transform: `scale(${isHovered ? hoverScale : initialScale})`, ...style }}
+      style={{ transform: `scale(${shouldScale ? hoverScale : initialScale})`, ...style }}
       {...props}
     />
   );
@@ -73,7 +79,8 @@ export const ProjectGalleryRevealContent = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, style, ...props }, ref) => {
-  const { isHovered } = useProjectGalleryReveal();
+  const { isHovered, isActive } = useProjectGalleryReveal();
+  const isVisible = typeof isActive === 'boolean' ? isActive : isHovered;
 
   return (
     <div
@@ -83,8 +90,8 @@ export const ProjectGalleryRevealContent = React.forwardRef<
         className
       )}
       style={{
-        translate: isHovered ? '0%' : '0% 120%',
-        opacity: isHovered ? 1 : 0,
+        translate: isVisible ? '0%' : '0% 120%',
+        opacity: isVisible ? 1 : 0,
         ...style,
       }}
       {...props}

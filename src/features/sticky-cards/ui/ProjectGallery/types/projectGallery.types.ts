@@ -1,10 +1,15 @@
-import type { ProjectGallerySlide } from '../../../model/projectGallery';
+import type {
+  ProjectGalleryCustomSlide,
+  ProjectGalleryImageSource,
+  ProjectGallerySlide,
+} from '../../../model/projectGallery';
 import type { Dispatch, PointerEventHandler, SetStateAction } from 'react';
 
 export interface ProjectGalleryProps {
   title: string;
   description: string;
-  images?: string[];
+  images?: ProjectGalleryImageSource[];
+  slidesData?: ProjectGalleryCustomSlide[];
 }
 
 export interface ProjectGalleryFrameProps {

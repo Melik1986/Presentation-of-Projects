@@ -26,27 +26,35 @@ function MobileProjectGallery({
   title,
   description,
   slides,
-}: Omit<ProjectGalleryProps, 'images'> & { slides: ProjectGallerySlide[] }) {
+}: Omit<ProjectGalleryProps, 'images' | 'slidesData'> & { slides: ProjectGallerySlide[] }) {
+  const [activeSlideIndex, setActiveSlideIndex] = useState(0);
+
   return (
     <SwipeCarousel
       className={styles.mobileCarousel}
       aria-label={`${title} image gallery`}
       data-project-gallery-mobile
+      onSlideChange={setActiveSlideIndex}
     >
       <SwipeCarouselContainer className={styles.mobileViewport}>
         <SwipeCarouselTrack className={styles.mobileTrack}>
           {slides.map((slide, index) => {
             const imageLabel = `Image ${String(index + 1).padStart(2, '0')} / ${slides.length}`;
+            const isActive = index === activeSlideIndex;
 
             return (
-              <ProjectGalleryReveal className={styles.mobileSlide} key={slide.id}>
+              <ProjectGalleryReveal
+                className={styles.mobileSlide}
+                key={slide.id}
+                isActive={isActive}
+              >
                 <ProjectGalleryRevealMain className={styles.mobileImage}>
                   <ProjectGalleryFrame slide={slide} label={imageLabel} sizes="70vw" />
                 </ProjectGalleryRevealMain>
                 <ProjectGalleryRevealContent className={styles.mobileSlideContent}>
                   <span>{imageLabel}</span>
-                  <h3>{title}</h3>
-                  <p>{description}</p>
+                  <h3>{slide.title || title}</h3>
+                  <p>{slide.description || description}</p>
                 </ProjectGalleryRevealContent>
               </ProjectGalleryReveal>
             );
@@ -62,9 +70,9 @@ function MobileProjectGallery({
   );
 }
 
-export function ProjectGallery({ title, description, images }: ProjectGalleryProps) {
+export function ProjectGallery({ title, description, images, slidesData }: ProjectGalleryProps) {
   const [isMobile, setIsMobile] = useState(false);
-  const slides = createProjectGallerySlides(title, images);
+  const slides = createProjectGallerySlides(title, images, description, slidesData);
 
   useEffect(() => {
     const mediaQuery = window.matchMedia(MOBILE_BREAKPOINT);
