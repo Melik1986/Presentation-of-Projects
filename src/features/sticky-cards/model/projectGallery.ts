@@ -18,9 +18,9 @@ export interface ProjectGallerySlide {
 }
 
 export interface ProjectGalleryCustomSlide {
-  title?: string;
+  title: string;
   description?: string;
-  image?: ProjectGalleryImageSource;
+  image?: string;
   srcSet?: string;
   mobileImage?: string | null;
   mobileImageSrcSet?: string;
@@ -32,28 +32,29 @@ export function shouldShowCardCopyDescription(catalogId: string | undefined): bo
   return catalogId !== 'web-apps';
 }
 
+function toNullableSrc(value?: string | null): string | null {
+  return value?.trim() || null;
+}
+
 export function createProjectGallerySlides(
   title: string,
-  images: ProjectGalleryImageSource[] = [],
+  _images: ProjectGalleryImageSource[] = [],
   description?: string,
-  slidesData?: ProjectGalleryCustomSlide[]
+  slidesData: ProjectGalleryCustomSlide[] = []
 ): ProjectGallerySlide[] {
-  const slideCount =
-    slidesData && slidesData.length > 0 ? slidesData.length : PROJECT_GALLERY_SLIDE_COUNT;
-  return Array.from({ length: slideCount }, (_, index) => {
-    const customSlide = slidesData?.[index];
-    const source = customSlide?.image ?? images[index];
-    const imageSource = typeof source === 'string' ? { src: source } : source;
-    const image = imageSource?.src.trim() || null;
+  const length = slidesData.length || PROJECT_GALLERY_SLIDE_COUNT;
+
+  return Array.from({ length }, (_, index) => {
+    const raw = { title, description, ...slidesData[index] };
 
     return {
       id: `project-gallery-slide-${index + 1}`,
-      title: customSlide?.title || title,
-      description: customSlide?.description || description,
-      image,
-      imageSrcSet: customSlide?.srcSet || imageSource?.srcSet,
-      mobileImage: customSlide?.mobileImage?.trim() || imageSource?.mobileSrc?.trim() || null,
-      mobileImageSrcSet: customSlide?.mobileImageSrcSet || imageSource?.mobileSrcSet,
+      title: raw.title,
+      description: raw.description,
+      image: toNullableSrc(raw.image),
+      imageSrcSet: raw.srcSet,
+      mobileImage: toNullableSrc(raw.mobileImage),
+      mobileImageSrcSet: raw.mobileImageSrcSet,
     };
   });
 }
