@@ -107,32 +107,41 @@
               {
                 "title": "FlowBrief-Power — Direct B2B Sourcing",
                 "description": "Direct procurement platform connecting buyers with verified Chinese manufacturers. Turnkey DDP (Delivered Duty Paid) logistics with integrated customs clearance, certification, and transparent factory pricing.",
-                "image": "/img/catalog-1/card-3/FlowBrief-Power.l@2x.png",
-                "srcSet": "/img/catalog-1/card-3/FlowBrief-Power.l@2x.png 1x, /img/catalog-1/card-3/FlowBrief-Power.l@2x.png 2x",
-                "mobileImage": "/img/catalog-1/card-3/FlowBrief-Power.s@2x.png",
-                "mobileImageSrcSet": "/img/catalog-1/card-3/FlowBrief-Power.s@2x.png 1x, /img/catalog-1/card-3/FlowBrief-Power.s@2x.png 2x"
+                "image": "/img/catalog-1/card-3/FlowBrief-Power.l.png",
+                "srcSet": "/img/catalog-1/card-3/FlowBrief-Power.l.png 1x, /img/catalog-1/card-3/FlowBrief-Power.l@2x.png 2x",
+                "mobileImage": "/img/catalog-1/card-3/FlowBrief-Power.s.png",
+                "mobileImageSrcSet": "/img/catalog-1/card-3/FlowBrief-Power.s.png 1x, /img/catalog-1/card-3/FlowBrief-Power.s@2x.png 2x"
               },
               {
                 "title": "Custom RFQ Flow & Specification Engine",
                 "description": "Replaces standard retail carts with an enterprise Request-for-Quote (RFQ) pipeline, enabling engineering teams to specify technical parameters, custom configurations, and factory tooling requirements.",
-                "image": ""
+                "image": "/img/catalog-1/card-3/FlowBrief-Power.l-1.png",
+                "srcSet": "/img/catalog-1/card-3/FlowBrief-Power.l-1.png 1x, /img/catalog-1/card-3/FlowBrief-Power.l@2x-1.png 2x",
+                "mobileImage": "/img/catalog-1/card-3/FlowBrief-Power.s-1.png",
+                "mobileImageSrcSet": "/img/catalog-1/card-3/FlowBrief-Power.s-1.png 1x, /img/catalog-1/card-3/FlowBrief-Power.s@2x-1.png 2x"
               },
               {
                 "title": "Interactive 3D Machinery & SEO Catalog",
                 "description": "Interactive 3D equipment inspection powered by React Three Fiber, high-performance server-side parametric filtering, and automated SEO-first JSON-LD metadata generation.",
-                "image": ""
+                "image": "/img/catalog-1/card-3/FlowBrief-Power.l-2.png",
+                "srcSet": "/img/catalog-1/card-3/FlowBrief-Power.l-2.png 1x, /img/catalog-1/card-3/FlowBrief-Power.l@2x-2.png 2x",
+                "mobileImage": "/img/catalog-1/card-3/FlowBrief-Power.s-2.png",
+                "mobileImageSrcSet": "/img/catalog-1/card-3/FlowBrief-Power.s-2.png 1x, /img/catalog-1/card-3/FlowBrief-Power.s@2x-2.png 2x"
               },
               {
                 "title": "Next.js 16 Architecture & Multilingual i18n",
                 "description": "High-performance stack built with Next.js 16 App Router, Bun runtime, Tailwind CSS 4, and TypeScript. Full trilingual localization (EN, UK, RU) via next-intl, TanStack Query v5, and Zustand.",
-                "image": ""
+                "image": "/img/catalog-1/card-3/FlowBrief-Power.l-3.png",
+                "srcSet": "/img/catalog-1/card-3/FlowBrief-Power.l-3.png 1x, /img/catalog-1/card-3/FlowBrief-Power.l@2x-3.png 2x",
+                "mobileImage": "/img/catalog-1/card-3/FlowBrief-Power.s-3.png",
+                "mobileImageSrcSet": "/img/catalog-1/card-3/FlowBrief-Power.s-3.png 1x, /img/catalog-1/card-3/FlowBrief-Power.s@2x-3.png 2x"
               }
             ]
           },
           {
             "index": "04",
             "title": "FlowBrief",
-            "image": "",
+            "image": "/img/catalog-1/card-4/FlowBrief.l@2x.png",
             "description": "Modern business survey platform built on Next.js 15, TypeScript, and Supabase. Streamlines client onboarding and requirements gathering through step-by-step questionnaires, personal dashboards, and AI assistance.",
             "link": "https://flowbrief.cloud/",
             "repository": "https://github.com/Melik1986/flowbrief.git",
@@ -140,29 +149,41 @@
               {
                 "title": "FlowBrief — Business Survey System",
                 "description": "Modern web platform designed to streamline client requirements gathering, accelerate information intake, and enhance collaboration through guided, step-by-step interactive surveys with real-time progress tracking.",
-                "image": ""
+                "image": "/img/catalog-1/card-4/FlowBrief.l.png",
+                "srcSet": "/img/catalog-1/card-4/FlowBrief.l.png 1x, /img/catalog-1/card-4/FlowBrief.l@2x.png 2x",
+                "mobileImage": "/img/catalog-1/card-4/FlowBrief.s.png",
+                "mobileImageSrcSet": "/img/catalog-1/card-4/FlowBrief.s.png 1x, /img/catalog-1/card-4/FlowBrief.s@2x.png 2x"
               },
               {
                 "title": "Client Dashboards & AI-Assisted Responses",
                 "description": "Dedicated personal dashboards for survey authors and respondents with real-time response analytics, plus integrated OpenAI-powered assistant capabilities to help clients articulate detailed project requirements.",
-                "image": ""
+                "image": "/img/catalog-1/card-4/FlowBrief.l-1.png",
+                "srcSet": "/img/catalog-1/card-4/FlowBrief.l-1.png 1x, /img/catalog-1/card-4/FlowBrief.l@2x-1.png 2x",
+                "mobileImage": "/img/catalog-1/card-4/FlowBrief.s-1.png",
+                "mobileImageSrcSet": "/img/catalog-1/card-4/FlowBrief.s-1.png 1x, /img/catalog-1/card-4/FlowBrief.s@2x-1.png 2x"
               },
               {
                 "title": "Supabase Backend & Cloudflare Protection",
                 "description": "Robust backend powered by Supabase PostgreSQL and Supabase Auth, protected against automated abuse via Cloudflare Turnstile CAPTCHA, with transactional email delivery integrated through Resend API.",
-                "image": ""
+                "image": "/img/catalog-1/card-4/FlowBrief.l-2.png",
+                "srcSet": "/img/catalog-1/card-4/FlowBrief.l-2.png 1x, /img/catalog-1/card-4/FlowBrief.l@2x-2.png 2x",
+                "mobileImage": "/img/catalog-1/card-4/FlowBrief.s-2.png",
+                "mobileImageSrcSet": "/img/catalog-1/card-4/FlowBrief.s-2.png 1x, /img/catalog-1/card-4/FlowBrief.s@2x-2.png 2x"
               },
               {
                 "title": "Next.js 15 Architecture & Strict DX Pipeline",
                 "description": "Engineered with Next.js 15 App Router, TypeScript, TailwindCSS, and Radix UI. Features strict Node 22 NVM locking, Zod validation, next-intl i18n, Husky pre-commit hooks, and Lighthouse CI performance auditing.",
-                "image": ""
+                "image": "/img/catalog-1/card-4/FlowBrief.l-3.png",
+                "srcSet": "/img/catalog-1/card-4/FlowBrief.l-3.png 1x, /img/catalog-1/card-4/FlowBrief.l@2x-3.png 2x",
+                "mobileImage": "/img/catalog-1/card-4/FlowBrief.s-3.png",
+                "mobileImageSrcSet": "/img/catalog-1/card-4/FlowBrief.s-3.png 1x, /img/catalog-1/card-4/FlowBrief.s@2x-3.png 2x"
               }
             ]
           },
           {
             "index": "05",
             "title": "Church Voskresenie",
-            "image": "",
+            "image": "/img/catalog-1/card-5/Church.l@2x.png",
             "description": "Modern multilingual community platform built with Astro, TypeScript, and Tailwind CSS v4. Features GDPR-compliant 2-Click embeds, self-hosted typography, Lenis and GSAP smooth interactions, and Sonar-grade code quality.",
             "link": "https://church-voskresenie.vercel.app/",
             "repository": "https://github.com/Melik1986/church-voskresenie.git",
@@ -170,29 +191,41 @@
               {
                 "title": "Church Voskresenie — Community Hub",
                 "description": "Modern multilingual platform for the Duisburg church community, engineered with Astro, TypeScript, and Tailwind CSS v4 for ultra-fast static performance, minimal JavaScript payload, and seamless content delivery.",
-                "image": ""
+                "image": "/img/catalog-1/card-5/Church.l.png",
+                "srcSet": "/img/catalog-1/card-5/Church.l.png 1x, /img/catalog-1/card-5/Church.l@2x.png 2x",
+                "mobileImage": "/img/catalog-1/card-5/Church.s.png",
+                "mobileImageSrcSet": "/img/catalog-1/card-5/Church.s.png 1x, /img/catalog-1/card-5/Church.s@2x.png 2x"
               },
               {
                 "title": "Zero-Tracking Privacy & 2-Click Embeds",
                 "description": "Rigorous privacy compliance: custom 2-Click facades for YouTube videos and Google Maps that block third-party trackers until user interaction, paired with 100% self-hosted local fonts without external CDNs.",
-                "image": ""
+                "image": "/img/catalog-1/card-5/Church.l-1.png",
+                "srcSet": "/img/catalog-1/card-5/Church.l-1.png 1x, /img/catalog-1/card-5/Church.l@2x-1.png 2x",
+                "mobileImage": "/img/catalog-1/card-5/Church.s-1.png",
+                "mobileImageSrcSet": "/img/catalog-1/card-5/Church.s-1.png 1x, /img/catalog-1/card-5/Church.s@2x-1.png 2x"
               },
               {
                 "title": "Bilingual Routing & Type-Safe Content",
                 "description": "Comprehensive information architecture with parallel RU and DE routes, structured markdown pages, type-safe i18n dictionaries, and automated JSON-LD schema generation for search engine optimization.",
-                "image": ""
+                "image": "/img/catalog-1/card-5/Church.l-2.png",
+                "srcSet": "/img/catalog-1/card-5/Church.l-2.png 1x, /img/catalog-1/card-5/Church.l@2x-2.png 2x",
+                "mobileImage": "/img/catalog-1/card-5/Church.s-2.png",
+                "mobileImageSrcSet": "/img/catalog-1/card-5/Church.s-2.png 1x, /img/catalog-1/card-5/Church.s@2x-2.png 2x"
               },
               {
                 "title": "Sonar-Grade Quality & Modern DX",
                 "description": "Strict engineering standards: ESLint with eslint-plugin-sonarjs enforcing max 20-line functions, Lefthook pre-commit hooks (lint, format, astro check), Lenis smooth scrolling, and GSAP micro-animations.",
-                "image": ""
+                "image": "/img/catalog-1/card-5/Church.l-3.png",
+                "srcSet": "/img/catalog-1/card-5/Church.l-3.png 1x, /img/catalog-1/card-5/Church.l@2x-3.png 2x",
+                "mobileImage": "/img/catalog-1/card-5/Church.s-3.png",
+                "mobileImageSrcSet": "/img/catalog-1/card-5/Church.s-3.png 1x, /img/catalog-1/card-5/Church.s@2x-3.png 2x"
               }
             ]
           },
           {
             "index": "06",
             "title": "Sweet Tooth",
-            "image": "",
+            "image": "/img/catalog-1/card-6/Sweet-Tooth.l@2x.png",
             "description": "Interactive pastry and confectionery web application built with Vue 3, TypeScript, and Vite. Features high-performance GSAP ScrollTrigger timeline animations, 3D canvas frame sequences, and responsive Tailwind styling.",
             "link": "https://restouarand.vercel.app/",
             "repository": "https://github.com/Melik1986/Restouarand.git",
@@ -200,22 +233,34 @@
               {
                 "title": "Sweet Tooth — Interactive Confectionery",
                 "description": "Modern culinary showcase engineered with Vue 3 Composition API, TypeScript, and Vite. Delivers a tactile digital storefront featuring smooth scroll choreography and custom branding aesthetics.",
-                "image": ""
+                "image": "/img/catalog-1/card-6/Sweet-Tooth.l.png",
+                "srcSet": "/img/catalog-1/card-6/Sweet-Tooth.l.png 1x, /img/catalog-1/card-6/Sweet-Tooth.l@2x.png 2x",
+                "mobileImage": "/img/catalog-1/card-6/Sweet-Tooth.s.png",
+                "mobileImageSrcSet": "/img/catalog-1/card-6/Sweet-Tooth.s.png 1x, /img/catalog-1/card-6/Sweet-Tooth.s@2x.png 2x"
               },
               {
                 "title": "Canvas Frame Sequences & 3D Scroll Scrubbing",
                 "description": "Hero section powered by HTML5 Canvas and transparent PNG frame sequences, smoothly scrubbed via GSAP ScrollTrigger to produce interactive 3D product rotations synchronized with user scrolling.",
-                "image": ""
+                "image": "/img/catalog-1/card-6/Sweet-Tooth.l-1.png",
+                "srcSet": "/img/catalog-1/card-6/Sweet-Tooth.l-1.png 1x, /img/catalog-1/card-6/Sweet-Tooth.l@2x-1.png 2x",
+                "mobileImage": "/img/catalog-1/card-6/Sweet-Tooth.s-1.png",
+                "mobileImageSrcSet": "/img/catalog-1/card-6/Sweet-Tooth.s-1.png 1x, /img/catalog-1/card-6/Sweet-Tooth.s@2x-1.png 2x"
               },
               {
                 "title": "Pinned Product Showcase & Stagger Effects",
                 "description": "Section pinning mechanisms for product discovery with synchronized 360-degree item rotation, cascaded stagger entrances, and performance-tuned lazy loading for multi-frame animation assets.",
-                "image": ""
+                "image": "/img/catalog-1/card-6/Sweet-Tooth.l-2.png",
+                "srcSet": "/img/catalog-1/card-6/Sweet-Tooth.l-2.png 1x, /img/catalog-1/card-6/Sweet-Tooth.l@2x-2.png 2x",
+                "mobileImage": "/img/catalog-1/card-6/Sweet-Tooth.s-2.png",
+                "mobileImageSrcSet": "/img/catalog-1/card-6/Sweet-Tooth.s-2.png 1x, /img/catalog-1/card-6/Sweet-Tooth.s@2x-2.png 2x"
               },
               {
                 "title": "High-Performance Vite & Bun Pipeline",
                 "description": "High-speed developer experience using Bun runtime, Tailwind CSS typography tokens, Husky git pre-commit automation, strict TypeScript typing, and optimized production builds deployed on Vercel.",
-                "image": ""
+                "image": "/img/catalog-1/card-6/Sweet-Tooth.l-3.png",
+                "srcSet": "/img/catalog-1/card-6/Sweet-Tooth.l-3.png 1x, /img/catalog-1/card-6/Sweet-Tooth.l@2x-3.png 2x",
+                "mobileImage": "/img/catalog-1/card-6/Sweet-Tooth.s-3.png",
+                "mobileImageSrcSet": "/img/catalog-1/card-6/Sweet-Tooth.s-3.png 1x, /img/catalog-1/card-6/Sweet-Tooth.s@2x-3.png 2x"
               }
             ]
           }
