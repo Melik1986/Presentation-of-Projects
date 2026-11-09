@@ -1,16 +1,15 @@
 import Image from 'next/image';
 
 import {
-  AnimatedImage,
   DatabaseCRUD,
   MicroservicesChart,
   SkillsCharts,
-  SplineModel,
   ThreeJsCanvas,
   VideoGallery,
 } from '@/shared/ui';
 import { AIPhotoGallery } from '@/shared/ui/AIPhotoGallery/AIPhotoGallery';
 
+import { isProjectGalleryCard } from '../../../model/projectGallery';
 import { ProjectGallery } from '../../ProjectGallery/ProjectGallery';
 import styles from '../StickyCards.module.css';
 
@@ -71,42 +70,9 @@ function ProjectCardImageLink({ cardData }: StickyCardMediaProps) {
   );
 }
 
-function FigmaImage({ cardData }: StickyCardMediaProps) {
-  return (
-    <AnimatedImage
-      src="/img/placeholder.png"
-      alt={cardData.title}
-      direction="right-to-left"
-      duration={1.2}
-      delay={0.5}
-      catalogId="figma-design"
-      cardIndex={cardData.index}
-      enableAnimation
-    />
-  );
-}
-
 function renderFirstCardMedia({ cardData, catalogId }: StickyCardMediaProps) {
-  if (catalogId === 'web-apps') {
-    return (
-      <ProjectGallery
-        title={cardData.title}
-        description={cardData.description}
-        slidesData={cardData.slides}
-      />
-    );
-  }
   if (catalogId === 'ai-tools') {
     return <AIPhotoGallery items={AI_PHOTO_ITEMS} />;
-  }
-  if (catalogId === 'figma-design') {
-    return (
-      <SplineModel
-        scene="/spline/scene.design.splinecode"
-        className={styles.stickyCardImg}
-        zoom={0.8}
-      />
-    );
   }
   if (catalogId === 'advanced-tech') {
     return <ThreeJsCanvas className={styles.stickyCardImg} />;
@@ -116,15 +82,6 @@ function renderFirstCardMedia({ cardData, catalogId }: StickyCardMediaProps) {
 }
 
 function renderSecondCardMedia({ cardData, catalogId }: StickyCardMediaProps) {
-  if (catalogId === 'web-apps') {
-    return (
-      <ProjectGallery
-        title={cardData.title}
-        description={cardData.description}
-        slidesData={cardData.slides}
-      />
-    );
-  }
   if (catalogId === 'advanced-tech') {
     return <SkillsCharts />;
   }
@@ -139,89 +96,36 @@ function renderSecondCardMedia({ cardData, catalogId }: StickyCardMediaProps) {
       />
     );
   }
-  if (catalogId === 'figma-design') {
-    return (
-      <AnimatedImage
-        src="/img/catalog-3/card-2.png"
-        alt={cardData.title}
-        direction="right-to-left"
-        duration={1.2}
-        delay={0.5}
-        catalogId={catalogId}
-        cardIndex={cardData.index}
-        enableAnimation
-      />
-    );
-  }
 
-  return <ProjectCardImageLink cardData={cardData} />;
-}
-
-function renderWebAppsGallery({ cardData, catalogId }: StickyCardMediaProps) {
-  if (catalogId !== 'web-apps') {
-    return null;
-  }
-
-  return (
-    <ProjectGallery
-      title={cardData.title}
-      description={cardData.description}
-      slidesData={cardData.slides}
-    />
-  );
-}
-
-function renderLinkedProjectImage(cardData: StickyCardMediaProps['cardData']) {
   return <ProjectCardImageLink cardData={cardData} />;
 }
 
 interface StandardCardMediaProps extends StickyCardMediaProps {
   advancedTechMedia?: ReactNode;
-  figmaMedia?: ReactNode;
 }
 
 function renderStandardCardMedia({
   cardData,
   catalogId,
   advancedTechMedia,
-  figmaMedia,
 }: StandardCardMediaProps) {
-  const webAppsGallery = renderWebAppsGallery({ cardData, catalogId });
-  if (webAppsGallery) {
-    return webAppsGallery;
-  }
   if (catalogId === 'advanced-tech' && advancedTechMedia) {
     return advancedTechMedia;
   }
-  if (catalogId === 'figma-design' && figmaMedia) {
-    return figmaMedia;
-  }
 
-  return renderLinkedProjectImage(cardData);
-}
-
-function FigmaCardImageLink({ cardData }: Pick<StickyCardMediaProps, 'cardData'>) {
-  return (
-    <div className={styles.stickyCardImg} data-figma-image-container>
-      <a
-        href={cardData.image}
-        target="_blank"
-        rel="noopener noreferrer"
-        title={`View ${cardData.title} in full size`}
-      >
-        <Image
-          src={cardData.image}
-          alt={cardData.title}
-          fill
-          sizes="(max-width: 768px) 100vw, 50vw"
-          data-figma-image
-        />
-      </a>
-    </div>
-  );
+  return <ProjectCardImageLink cardData={cardData} />;
 }
 
 export function StickyCardMedia({ cardData, catalogId }: StickyCardMediaProps) {
+  if (isProjectGalleryCard(catalogId, cardData.index)) {
+    return (
+      <ProjectGallery
+        title={cardData.title}
+        description={cardData.description}
+        slidesData={cardData.slides}
+      />
+    );
+  }
   if (cardData.index === '01') {
     return renderFirstCardMedia({ cardData, catalogId });
   }
@@ -233,7 +137,6 @@ export function StickyCardMedia({ cardData, catalogId }: StickyCardMediaProps) {
       cardData,
       catalogId,
       advancedTechMedia: <MicroservicesChart />,
-      figmaMedia: <FigmaImage cardData={cardData} catalogId={catalogId} />,
     });
   }
 
@@ -241,6 +144,5 @@ export function StickyCardMedia({ cardData, catalogId }: StickyCardMediaProps) {
     cardData,
     catalogId,
     advancedTechMedia: cardData.index === '04' ? <DatabaseCRUD /> : undefined,
-    figmaMedia: <FigmaCardImageLink cardData={cardData} />,
   });
 }

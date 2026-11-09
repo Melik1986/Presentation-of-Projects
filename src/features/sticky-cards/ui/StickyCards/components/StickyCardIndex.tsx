@@ -1,6 +1,5 @@
 import {
   ScrollingBadge,
-  SplineModel,
   SpiralAnimation,
 } from '@/shared/ui';
 
@@ -50,16 +49,6 @@ export function StickyCardIndex({ index, catalogId, isMobile }: StickyCardIndexP
       )}
 
       {catalogId === 'advanced-tech' && index === '01' && <SpiralAnimation />}
-
-      {catalogId === 'figma-design' && index === '02' && (
-        <div className={styles.stickyCardIndexImage}>
-          <SplineModel
-            scene="/spline/scene.sneaker.splinecode"
-            className={styles.stickyCardImg}
-            zoom={1.2}
-          />
-        </div>
-      )}
     </div>
   );
 }

@@ -1,4 +1,7 @@
-import { shouldShowCardCopyDescription } from '../../../model/projectGallery';
+import {
+  isProjectGalleryCard,
+  shouldShowCardCopyDescription,
+} from '../../../model/projectGallery';
 import styles from '../StickyCards.module.css';
 import { StickyCardIndex } from './StickyCardIndex';
 import { StickyCardLinks } from './StickyCardLinks';
@@ -7,10 +10,12 @@ import { StickyCardMedia } from './StickyCardMedia';
 import type { StickyCardComponentProps } from '../types/stickyCard.types';
 
 export function StickyCard({ cardData, catalogId, isMobile }: StickyCardComponentProps) {
+  const hasProjectGallery = isProjectGalleryCard(catalogId, cardData.index);
+
   const contentWrapperClassName = [
     styles.stickyCardContentWrapper,
     catalogId === 'advanced-tech' && cardData.index === '04' && styles.wideContentWrapper,
-    catalogId === 'web-apps' && styles.webAppsContentWrapper,
+    hasProjectGallery && styles.webAppsContentWrapper,
   ]
     .filter(Boolean)
     .join(' ');
@@ -18,7 +23,7 @@ export function StickyCard({ cardData, catalogId, isMobile }: StickyCardComponen
   const cardClassName = [
     'sticky-card',
     styles.stickyCard,
-    catalogId === 'web-apps' && styles.webAppsCard,
+    hasProjectGallery && styles.webAppsCard,
   ]
     .filter(Boolean)
     .join(' ');
@@ -36,7 +41,7 @@ export function StickyCard({ cardData, catalogId, isMobile }: StickyCardComponen
             <div className={styles.stickyCardCopyTitle}>
               <StickyCardLinks cardData={cardData} />
             </div>
-            {shouldShowCardCopyDescription(catalogId) && (
+            {shouldShowCardCopyDescription(catalogId, cardData.index) && (
               <div className={styles.stickyCardCopyDescription}>
                 <p>{cardData.description}</p>
               </div>

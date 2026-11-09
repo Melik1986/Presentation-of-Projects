@@ -300,30 +300,68 @@
         "cards": [
           {
             "index": "01",
-            "title": "Typographic Glass Reflection",
-            "image": "/img/catalog-3/card-1.png",
-            "description": "Experimental 3D typography design exploring glass distortion effects and reflective surfaces. Interactive visualization breaking traditional typographic boundaries through spherical lens distortions and iridescent reflections.",
-            "link": "https://my-projects-vk-kino.vercel.app/"
-          },
-          {
-            "index": "02",
-            "title": "Branded Footwear Store App",
-            "image": "/img/catalog-3/card-2.png",
-            "description": "Mobile application for commercial branded footwear store. Complete e-commerce solution with product catalog, shopping cart, and seamless checkout experience.",
-            "link": "https://www.figma.com/@melikmusinian1"
-          },
-          {
-            "index": "03",
-            "title": "Freelance Market Analytics",
-            "image": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600'%3E%3Crect width='800' height='600' fill='%231a1a2e'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dominant-baseline='middle' font-family='Arial' font-size='24' fill='%23e0e0ff'%3ENo Image%3C/text%3E%3C/svg%3E",
-            "description": "Interactive digital analytics dashboard for freelance market. Features animated charts, diagrams, and real-time data visualization for market insights.",
-            "link": "https://freelance-market-analysis.vercel.app/"
-          },
-          {
-            "index": "04",
-            "title": "Design System Documentation",
-            "image": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600'%3E%3Crect width='800' height='600' fill='%231a1a2e'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dominant-baseline='middle' font-family='Arial' font-size='24' fill='%23e0e0ff'%3ENo Image%3C/text%3E%3C/svg%3E",
-            "description": "Complete design system with style guides, component documentation, and usage guidelines. Design tokens, accessibility standards, and best practices."
+            "title": "UI/UX & Product Design Portfolio",
+            "image": "/img/catalog-3/figma-design.l@2x.png",
+            "description": "Production-ready interfaces, mobile applications, investor pitch decks, and comprehensive design systems crafted in Figma.",
+            "link": "https://www.figma.com/@melikmusinian1",
+            "slides": [
+              {
+                "title": "InvestMinds — Mobile Trading & Traction",
+                "description": "Interactive fintech trading prototype and investor validation suite for InvestMinds. Features real-time stock market watchlists (NVDA, AAPL, PLTR), portfolio net-worth tracking, and onboarding flows tested across beginner and pro investor segments.",
+                "image": "/img/catalog-3/figma-design.l.png",
+                "srcSet": "/img/catalog-3/figma-design.l.png 1x, /img/catalog-3/figma-design.l@2x.png 2x",
+                "mobileImage": "/img/catalog-3/figma-design.s-1.png",
+                "mobileImageSrcSet": "/img/catalog-3/figma-design.s-1.png 1x, /img/catalog-3/figma-design.s@2x-1.png 2x"
+              },
+              {
+                "title": "InvestMinds — 16-Slide Pitch Deck System",
+                "description": "Investor-ready 16-slide presentation system designed in Figma for Fintech and Edtech startups. Covers user personas, go-to-market strategy, product traction metrics, unit economics, and multi-year financial projections.",
+                "image": "/img/catalog-3/figma-design.l-1.png",
+                "srcSet": "/img/catalog-3/figma-design.l-1.png 1x, /img/catalog-3/figma-design.l@2x-1.png 2x",
+                "mobileImage": "/img/catalog-3/figma-design.s-1.png",
+                "mobileImageSrcSet": "/img/catalog-3/figma-design.s-1.png 1x, /img/catalog-3/figma-design.s@2x-1.png 2x"
+              },
+              {
+                "title": "Vstah AI — Voice-First ERP Mobile UI",
+                "description": "Mobile UI/UX design system for Vstah AI, a voice-first execution assistant for SAP, 1C, and Odoo ERP workflows. Combines conversational voice controls, real-time revenue and margin analytics, and OData/LLM provider configuration screens.",
+                "image": "/img/catalog-3/figma-design.l-2.png",
+                "srcSet": "/img/catalog-3/figma-design.l-2.png 1x, /img/catalog-3/figma-design.l@2x-2.png 2x",
+                "mobileImage": "/img/catalog-3/figma-design.s-2.png",
+                "mobileImageSrcSet": "/img/catalog-3/figma-design.s-2.png 1x, /img/catalog-3/figma-design.s@2x.png 2x"
+              },
+              {
+                "title": "Framer Event — Dark Spotlight Web UI",
+                "description": "High-contrast event launch landing page featuring volumetric top-left spotlight shaders, dot-matrix grid textures, geometric 3D brand iconography, and pill-shaped glassmorphic navigation.",
+                "image": "/img/catalog-3/figma-design.l-3.png",
+                "srcSet": "/img/catalog-3/figma-design.l-3.png 1x, /img/catalog-3/figma-design.l@2x-3.png 2x",
+                "mobileImage": "/img/catalog-3/figma-design.l-3.png",
+                "mobileImageSrcSet": "/img/catalog-3/figma-design.l-3.png 1x, /img/catalog-3/figma-design.l@2x-3.png 2x"
+              },
+              {
+                "title": "Nike Air Jordan — 2023 E-Commerce Concept",
+                "description": "Editorial e-commerce storefront concept for the Air Jordan collection. Pairs oversized outline-and-gradient hero typography with high-resolution footwear photography and curated category cards for Men, Women, Kids, and Newcomers.",
+                "image": "/img/catalog-3/figma-design.l-4.png",
+                "srcSet": "/img/catalog-3/figma-design.l-4.png 1x, /img/catalog-3/figma-design.l@2x-4.png 2x",
+                "mobileImage": "/img/catalog-3/figma-design.s-3.png",
+                "mobileImageSrcSet": "/img/catalog-3/figma-design.s-3.png 1x, /img/catalog-3/figma-design.s-3.png 2x"
+              },
+              {
+                "title": "Air Jordan 1 Retro High OG — Dark Edition",
+                "description": "Dark-mode interactive sneaker showcase for Air Jordan 1 Retro High OG with radial colorway selection, hotspot callouts, 360-degree product inspection, and related sneaker release carousels.",
+                "image": "/img/catalog-3/figma-design.l-6.png",
+                "srcSet": "/img/catalog-3/figma-design.l-6.png 1x, /img/catalog-3/figma-design.l-6.png 2x",
+                "mobileImage": "/img/catalog-3/figma-design.s.png",
+                "mobileImageSrcSet": "/img/catalog-3/figma-design.s.png 1x, /img/catalog-3/figma-design.s@2x-2.png 2x"
+              },
+              {
+                "title": "Cinema Streaming Platform & UI-Kit",
+                "description": "Comprehensive Figma design system and multi-screen UI architecture for a video streaming service, covering genre catalogs, film detail pages, authentication modals, responsive video players, and reusable UI-Kit components.",
+                "image": "/img/catalog-3/figma-design.l-5.png",
+                "srcSet": "/img/catalog-3/figma-design.l-5.png 1x, /img/catalog-3/figma-design.l-5.png 2x",
+                "mobileImage": "/img/catalog-3/figma-design.l-5.png",
+                "mobileImageSrcSet": "/img/catalog-3/figma-design.l-5.png 1x, /img/catalog-3/figma-design.l-5.png 2x"
+              }
+            ]
           }
         ]
       },
@@ -376,16 +414,43 @@
           {
             "index": "03",
             "title": "AI Video Advertising",
-            "image": "/img/catalog-2/card-1.png",
-            "description": "Node-based workflow for generating video advertisements with text and scenario control in Weavy AI neural network. Advanced prompting and composition techniques for marketing content.",
-            "link": "#"
-          },
-          {
-            "index": "04",
-            "title": "AI Interior Design",
-            "image": "/img/catalog-2/card-2.png",
-            "description": "Node-based system for generating designer interiors for architecture and real estate market. Photorealistic renderings and spatial planning with AI-powered visualization tools.",
-            "link": "#"
+            "image": "/img/catalog-2/AI-Advertising.l@2x.png",
+            "description": "Node-based AI production pipelines for commercial video advertising, architectural interior visualization, automated product variations, and multi-channel brand campaigns.",
+            "link": "#",
+            "slides": [
+              {
+                "title": "AI Video Advertising",
+                "description": "Multi-layer commercial video workflow in Weavy AI combining Flux Pro 1.1, Gemini 2.0 Flash scene variations, and Kling Video 1.6 with Luma alpha-masking, GPT Image typography, and real-time node compositing.",
+                "image": "/img/catalog-2/AI-Advertising.l.png",
+                "srcSet": "/img/catalog-2/AI-Advertising.l.png 1x, /img/catalog-2/AI-Advertising.l@2x.png 2x",
+                "mobileImage": "/img/catalog-2/AI-Advertising.s.png",
+                "mobileImageSrcSet": "/img/catalog-2/AI-Advertising.s.png 1x, /img/catalog-2/AI-Advertising.s@2x.png 2x"
+              },
+              {
+                "title": "AI Interior Design",
+                "description": "Node-based architectural visualization system powered by Google Imagen 4, Seedream V4 Edit for multi-angle camera direction and close-ups, and Kling 2.1 First & Last Frame for seamless room-to-room dolly transitions.",
+                "image": "/img/catalog-2/AI-Advertising.l-1.png",
+                "srcSet": "/img/catalog-2/AI-Advertising.l-1.png 1x, /img/catalog-2/AI-Advertising.l@2x-1.png 2x",
+                "mobileImage": "/img/catalog-2/AI-Advertising.s-1.png",
+                "mobileImageSrcSet": "/img/catalog-2/AI-Advertising.s-1.png 1x, /img/catalog-2/AI-Advertising.s@2x-1.png 2x"
+              },
+              {
+                "title": "Ad Creative Builder & Product Variants",
+                "description": "Automated e-commerce campaign engine that transforms a single footwear shot and brand copy into upscaled colorway matrices, clean background cutouts, and ready-to-publish ad deliverables via Designer Nodes.",
+                "image": "/img/catalog-2/AI-Advertising.l-2.png",
+                "srcSet": "/img/catalog-2/AI-Advertising.l-2.png 1x, /img/catalog-2/AI-Advertising.l@2x-2.png 2x",
+                "mobileImage": "/img/catalog-2/AI-Advertising.s-2.png",
+                "mobileImageSrcSet": "/img/catalog-2/AI-Advertising.s-2.png 1x, /img/catalog-2/AI-Advertising.s@2x-2.png 2x"
+              },
+              {
+                "title": "Multi-Channel Sportswear Campaign",
+                "description": "End-to-end creative production graph branching from moodboard references and a hero product into editorial action shots, vertical motion reels, and typographic poster series in a single unified run.",
+                "image": "/img/catalog-2/AI-Advertising.l-3.png",
+                "srcSet": "/img/catalog-2/AI-Advertising.l-3.png 1x, /img/catalog-2/AI-Advertising.l@2x-3.png 2x",
+                "mobileImage": "/img/catalog-2/AI-Advertising.s-3.png",
+                "mobileImageSrcSet": "/img/catalog-2/AI-Advertising.s-3.png 1x, /img/catalog-2/AI-Advertising.s@2x-3.png 2x"
+              }
+            ]
           }
         ]
       },

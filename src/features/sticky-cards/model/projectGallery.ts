@@ -27,9 +27,20 @@ export interface ProjectGalleryCustomSlide {
 }
 
 const PROJECT_GALLERY_SLIDE_COUNT = 4;
+const FULL_GALLERY_CATALOGS = new Set<string | undefined>(['web-apps', 'figma-design']);
 
-export function shouldShowCardCopyDescription(catalogId: string | undefined): boolean {
-  return catalogId !== 'web-apps';
+export function isProjectGalleryCard(
+  catalogId: string | undefined,
+  cardIndex?: string
+): boolean {
+  return FULL_GALLERY_CATALOGS.has(catalogId) || (catalogId === 'ai-tools' && cardIndex === '03');
+}
+
+export function shouldShowCardCopyDescription(
+  catalogId: string | undefined,
+  cardIndex?: string
+): boolean {
+  return !isProjectGalleryCard(catalogId, cardIndex);
 }
 
 function toNullableSrc(value?: string | null): string | null {
