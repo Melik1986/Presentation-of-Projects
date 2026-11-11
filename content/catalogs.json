@@ -622,8 +622,8 @@
             "index": "04",
             "title": "Performance, Core Web Vitals & CI/CD Delivery",
             "image": "/img/catalog-4/cod-3.png",
-            "description": "High-speed delivery and automation through monorepo verification pipelines, Knip dead-code elimination, multi-environment EAS staging, and automated Android releases.",
-            "link": "https://github.com/Melik1986",
+            "description": "High-speed delivery and cloud deployments on Vercel Edge Network, monorepo verification pipelines, Knip dead-code elimination, and multi-environment EAS staging.",
+            "link": "https://vercel.com/melikmusinian-8372",
             "repository": "https://github.com/Melik1986",
             "slides": [
               {
