@@ -363,16 +363,20 @@
 }
 
 @media (min-width: 1001px) {
-  .stickyCard.webAppsCard {
+  .stickyCard.webAppsCard:not(.withIndexColumn) {
     gap: 0;
   }
 
-  .stickyCard.webAppsCard > .stickyCardIndex {
+  .stickyCard.webAppsCard:not(.withIndexColumn) > .stickyCardIndex {
     display: none;
   }
 
-  .stickyCard.webAppsCard > .stickyCardContent {
+  .stickyCard.webAppsCard:not(.withIndexColumn) > .stickyCardContent {
     flex: 1;
+    min-width: 0;
+  }
+
+  .stickyCard.withIndexColumn > .stickyCardContent {
     min-width: 0;
   }
 }

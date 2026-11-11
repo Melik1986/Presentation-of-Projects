@@ -35,6 +35,48 @@
         "cards": [
           {
             "index": "01",
+            "title": "Telegram Knowledge Agent",
+            "image": "/img/catalog-1/card-7/Telegramm-Agent.l.png",
+            "description": "Telegram Mini App for saving and retrieving materials via bot intake. Features a personal library with collection stacks, hybrid PostgreSQL FTS & pgvector search, voice queries, and optional grounded AI answers — all inside Telegram.",
+            "link": "https://github.com/Melik1986",
+            "repository": "https://github.com/Melik1986",
+            "slides": [
+              {
+                "title": "Personal Knowledge Library",
+                "description": "Every message, link, or file sent to the bot appears instantly in the library. Full-text search with filters, language toggle (RU / EN), and type icons keep hundreds of items navigable.",
+                "image": "/img/catalog-1/card-7/Telegramm-Agent.l-1.png",
+                "srcSet": "/img/catalog-1/card-7/Telegramm-Agent.l-1.png 1x, /img/catalog-1/card-7/Telegramm-Agent.l@2x-1.png 2x",
+                "mobileImage": "/img/catalog-1/card-7/Telegramm-Agent.s-2.png",
+                "mobileImageSrcSet": "/img/catalog-1/card-7/Telegramm-Agent.s-2.png 1x, /img/catalog-1/card-7/Telegramm-Agent.s@2x-2.png 2x"
+              },
+              {
+                "title": "Collection Stacks",
+                "description": "Group saved items into named stacks for focused review sessions. Each card shows the source, media preview, tags, and provenance link — swipe through the whole collection without leaving Telegram.",
+                "image": "/img/catalog-1/card-7/Telegramm-Agent.l-2.png",
+                "srcSet": "/img/catalog-1/card-7/Telegramm-Agent.l-2.png 1x, /img/catalog-1/card-7/Telegramm-Agent.l@2x-2.png 2x",
+                "mobileImage": "/img/catalog-1/card-7/Telegramm-Agent.s-1.png",
+                "mobileImageSrcSet": "/img/catalog-1/card-7/Telegramm-Agent.s-1.png 1x, /img/catalog-1/card-7/Telegramm-Agent.s@2x-1.png 2x"
+              },
+              {
+                "title": "Voice Search",
+                "description": "Tap the mic, speak a query — Whisper transcribes it on the server and runs a hybrid FTS & pgvector search. The recording is a query only; it is never stored as a library item.",
+                "image": "/img/catalog-1/card-7/Telegramm-Agent.l.png",
+                "srcSet": "/img/catalog-1/card-7/Telegramm-Agent.l.png 1x, /img/catalog-1/card-7/Telegramm-Agent.l@2x.png 2x",
+                "mobileImage": "/img/catalog-1/card-7/Telegramm-Agent.s-3.png",
+                "mobileImageSrcSet": "/img/catalog-1/card-7/Telegramm-Agent.s-3.png 1x, /img/catalog-1/card-7/Telegramm-Agent.s@2x-3.png 2x"
+              },
+              {
+                "title": "Per-User AI Connections",
+                "description": "Users bring their own OpenRouter key via PKCE OAuth — no shared model budget. Keys are encrypted at rest. Local FTS search keeps working with zero AI budget; grounded answers are opt-in.",
+                "image": "/img/catalog-1/card-7/Telegramm-Agent.l-3.png",
+                "srcSet": "/img/catalog-1/card-7/Telegramm-Agent.l-3.png 1x, /img/catalog-1/card-7/Telegramm-Agent.l@2x-3.png 2x",
+                "mobileImage": "/img/catalog-1/card-7/Telegramm-Agent.s.png",
+                "mobileImageSrcSet": "/img/catalog-1/card-7/Telegramm-Agent.s.png 1x, /img/catalog-1/card-7/Telegramm-Agent.s@2x.png 2x"
+              }
+            ]
+          },
+          {
+            "index": "02",
             "title": "AutoService",
             "image": "/img/catalog-1/card-1/AutoService.l.png",
             "description": "Full-stack car service management platform with online booking, real-time availability, admin dashboard, and automated email notifications. Built with React, NestJS, and Supabase.",
@@ -67,7 +109,7 @@
             ]
           },
           {
-            "index": "02",
+            "index": "03",
             "title": "Vstah AI",
             "image": "/img/catalog-1/card-2/vstah.ai.png",
             "description": "Mobile-first AI ERP OS with Zero-Knowledge privacy architecture. Bridges voice commands, computer vision, and structured ERP systems like 1C:Enterprise, SAP, and Odoo.",
@@ -97,7 +139,7 @@
             ]
           },
           {
-            "index": "03",
+            "index": "04",
             "title": "FlowBrief-Power",
             "image": "/img/catalog-1/card-3/FlowBrief-Power.l@2x.png",
             "description": "B2B industrial procurement platform for complex machinery from China with DDP delivery, multilingual i18n, custom RFQ workflow, and interactive 3D visualizations.",
@@ -139,7 +181,7 @@
             ]
           },
           {
-            "index": "04",
+            "index": "05",
             "title": "FlowBrief",
             "image": "/img/catalog-1/card-4/FlowBrief.l@2x.png",
             "description": "Modern business survey platform built on Next.js 15, TypeScript, and Supabase. Streamlines client onboarding and requirements gathering through step-by-step questionnaires, personal dashboards, and AI assistance.",
@@ -181,7 +223,7 @@
             ]
           },
           {
-            "index": "05",
+            "index": "06",
             "title": "Church Voskresenie",
             "image": "/img/catalog-1/card-5/Church.l@2x.png",
             "description": "Modern multilingual community platform built with Astro, TypeScript, and Tailwind CSS v4. Features GDPR-compliant 2-Click embeds, self-hosted typography, Lenis and GSAP smooth interactions, and Sonar-grade code quality.",
@@ -223,7 +265,7 @@
             ]
           },
           {
-            "index": "06",
+            "index": "07",
             "title": "Sweet Tooth",
             "image": "/img/catalog-1/card-6/Sweet-Tooth.l@2x.png",
             "description": "Interactive pastry and confectionery web application built with Vue 3, TypeScript, and Vite. Features high-performance GSAP ScrollTrigger timeline animations, 3D canvas frame sequences, and responsive Tailwind styling.",
@@ -484,42 +526,126 @@
         "pageBackground": "radial-gradient(circle 800px at 0% 0%, rgba(10,24,32,0.9) 0%, transparent 50%), radial-gradient(circle 800px at 100% 0%, rgba(26,40,48,0.9) 0%, transparent 50%), radial-gradient(circle 800px at 0% 100%, rgba(42,56,64,0.9) 0%, transparent 50%), radial-gradient(circle 800px at 100% 100%, rgba(58,72,80,0.9) 0%, transparent 50%)"
       },
       "content": {
-        "introTitle": "Interactive 3D & Libraries",
+        "introTitle": "System Architecture & Engineering",
         "cards": [
           {
             "index": "01",
-            "title": "Three.js Particle Animations",
-            "image": "/img/catalog-4/card-1.jpg",
-            "link": "https://codepen.io/Melik-Musinian",
-            "description": "Custom WebGL particle systems with shader optimizations. Wave animations, camera controls, and performance-tuned rendering for interactive 3D experiences."
+            "title": "Frontend Architecture & Feature-Sliced Design",
+            "image": "/img/catalog-4/Architecture.png",
+            "description": "Modular frontend architecture built on Feature-Sliced Design (FSD), strict TypeScript, and Next.js App Router. Clean component hierarchies, server/client boundary enforcement, and maintainable state flows.",
+            "link": "https://github.com/Melik1986",
+            "repository": "https://github.com/Melik1986",
+            "slides": [
+              {
+                "title": "Client Component Hierarchy & Domain Slices",
+                "description": "Clean React component architecture in apps/client/src/components, modularized into domain units (app, items, library, notes, settings, spectrumui, ui) with clear separation of concerns.",
+                "image": "/img/catalog-4/Architecture.png",
+                "srcSet": "/img/catalog-4/Architecture.png 1x, /img/catalog-4/Architecture@2x.png 2x"
+              },
+              {
+                "title": "Feature Screens & RAG/Agent Workflows",
+                "description": "Client screen routing hierarchy under client/screens covering AI chat, local RAG document processing, MCP servers management, ERP settings, analytics, and authentication flows.",
+                "image": "/img/catalog-4/Architecture-3.png",
+                "srcSet": "/img/catalog-4/Architecture-3.png 1x, /img/catalog-4/Architecture-3@2x.png 2x"
+              },
+              {
+                "title": "Type-Safe Multilingual Navigation",
+                "description": "Declarative internationalization and routing built on next-intl with defineRouting, strict typed locales, and unified navigation abstractions (Link, redirect, usePathname, useRouter).",
+                "image": "/img/catalog-4/cod-5.png",
+                "srcSet": "/img/catalog-4/cod-5.png 1x, /img/catalog-4/cod-5@2x.png 2x"
+              }
+            ]
           },
           {
             "index": "02",
-            "title": "Technology Stack Analytics",
-            "image": "/img/catalog-4/card-2.jpg",
-            "link": "https://github.com/Melik-Musinian",
-            "description": "Interactive data visualization with ECharts. Backend skills bar chart and Infrastructure pie chart with animated icons. Real-time metrics display with GSAP animations."
+            "title": "Code Quality, Static Analysis & Security Gates",
+            "image": "/img/catalog-4/Architecture-1.png",
+            "description": "Enterprise-grade engineering discipline with CodeScene health metrics, SonarLint zero-debt targets, Lefthook pre-commit hooks, and automated security gates (Snyk, Aikido).",
+            "link": "https://github.com/Melik1986",
+            "repository": "https://github.com/Melik1986",
+            "slides": [
+              {
+                "title": "Monorepo Root Ecosystem & Tooling",
+                "description": "Comprehensive monorepo root structure configuring CodeScene, SonarLint, Lefthook, Snyk, Typo-checkers, dependency rules, and autonomous AI coding agent guidelines (AGENTS.md).",
+                "image": "/img/catalog-4/Architecture-1.png",
+                "srcSet": "/img/catalog-4/Architecture-1.png 1x, /img/catalog-4/Architecture-1@2x.png 2x"
+              },
+              {
+                "title": "Oxlint Engine & Custom Anti-Slop AST Rules",
+                "description": "High-performance Rust-based Oxlint integration with custom AST-level anti-slop rules guarding against AI hallucinations, unused abstractions, and redundant array chains.",
+                "image": "/img/catalog-4/oxlint.png",
+                "srcSet": "/img/catalog-4/oxlint.png 1x, /img/catalog-4/oxlint@2x.png 2x"
+              },
+              {
+                "title": "ESLint Flat Config, SonarJS & Security Hardening",
+                "description": "Modular ESLint flat configuration incorporating eslint-plugin-security, SonarJS cognitive complexity metrics, and TypeScript naming convention enforcement.",
+                "image": "/img/catalog-4/ESLint.png",
+                "srcSet": "/img/catalog-4/ESLint.png 1x, /img/catalog-4/ESLint@2x.png 2x"
+              },
+              {
+                "title": "Automated Pre-Commit Gates & Secret Auditing",
+                "description": "Zero-friction pre-commit orchestration using Lefthook: Aikido local secret scanning, parallelized typechecking, vitest execution, and Conventional Commits enforcement.",
+                "image": "/img/catalog-4/cod.png",
+                "srcSet": "/img/catalog-4/cod.png 1x, /img/catalog-4/cod@2x.png 2x"
+              }
+            ]
           },
           {
             "index": "03",
-            "title": "Microservices Architecture",
-            "image": "/img/catalog-4/card-3.jpg",
-            "link": "https://supabase.com/dashboard/org/hajxutxgogskkjwhfsdf",
-            "description": "Real-time service orchestration with Docker and Kubernetes. API Gateway routing, distributed messaging, health monitoring, and fault-tolerant architecture visualization."
+            "title": "Backend, Database Schemas & AI/ERP Integrations",
+            "image": "/img/catalog-4/Architecture-2.png",
+            "description": "Scalable backend systems combining PostgreSQL and NestJS modular architecture with AI-driven voice pipelines, autonomous agent skills, and enterprise ERP integrations.",
+            "link": "https://github.com/Melik1986",
+            "repository": "https://github.com/Melik1986",
+            "slides": [
+              {
+                "title": "NestJS Modular Server & Enterprise Services",
+                "description": "Production-ready NestJS server layout with SAP OData fixtures, autonomous voice agent pipeline, custom guards, interceptors, and typed shared libraries.",
+                "image": "/img/catalog-4/Architecture-2.png",
+                "srcSet": "/img/catalog-4/Architecture-2.png 1x, /img/catalog-4/Architecture-2@2x.png 2x"
+              },
+              {
+                "title": "Autonomous AI Agent Skills Ecosystem",
+                "description": "Declarative agent manifest defining specialized domain skills: Neon Serverless PostgreSQL, NestJS best practices, Vercel React standards, and interactive UI motion engines.",
+                "image": "/img/catalog-4/Skills.png",
+                "srcSet": "/img/catalog-4/Skills.png 1x, /img/catalog-4/Skills@2x.png 2x"
+              },
+              {
+                "title": "Client Security & Biometric Session Governance",
+                "description": "Robust client-side authentication and session lifecycle: configurable timeouts, biometric lockout thresholds, background auto-lock, and persistent device trust.",
+                "image": "/img/catalog-4/cod-4.png",
+                "srcSet": "/img/catalog-4/cod-4.png 1x, /img/catalog-4/cod-4@2x.png 2x"
+              }
+            ]
           },
           {
             "index": "04",
-            "title": "Database Admin Panel",
-            "image": "/img/catalog-4/card-4.jpg",
-            "link": "https://github.com/Melik-Musinian",
-            "description": "Interactive CRUD system for database user management. Real-time filtering, search, role-based access control, and glassmorphism UI with smooth GSAP animations."
+            "title": "Performance, Core Web Vitals & CI/CD Delivery",
+            "image": "/img/catalog-4/cod-3.png",
+            "description": "High-speed delivery and automation through monorepo verification pipelines, Knip dead-code elimination, multi-environment EAS staging, and automated Android releases.",
+            "link": "https://github.com/Melik1986",
+            "repository": "https://github.com/Melik1986",
+            "slides": [
+              {
+                "title": "High-Performance Monorepo Tooling & Auditing",
+                "description": "Fast automated monorepo scripts utilizing Knip dead-code pruning, Dependency Cruiser circular dependency checks, Syncpack version alignment, and Vitest database contract tests.",
+                "image": "/img/catalog-4/cod-3.png",
+                "srcSet": "/img/catalog-4/cod-3.png 1x, /img/catalog-4/cod-3@2x.png 2x"
+              },
+              {
+                "title": "Multi-Environment CI/CD & Mobile Release Pipeline",
+                "description": "Multi-stage deployment matrix via EAS and Railway: isolated staging and production environments, automated APK assembly, and reproducible release channels.",
+                "image": "/img/catalog-4/cod-2.png",
+                "srcSet": "/img/catalog-4/cod-2.png 1x, /img/catalog-4/cod-2@2x.png 2x"
+              }
+            ]
           }
         ]
       },
       "seo": {
-        "title": "Advanced Web Technologies | Three.js, Spline, Supabase",
-        "description": "Expertise in modern web libraries: Three.js 3D animations, WebGL shaders, Spline integrations, Supabase backend, and Vercel deployment.",
-        "keywords": "three.js, webgl, 3d animation, particles, shaders, spline, supabase, vercel"
+        "title": "System Architecture & Engineering | FSD, TypeScript, Backend & Performance",
+        "description": "Software architecture portfolio showcasing Feature-Sliced Design, CodeScene 10/10 code quality, PostgreSQL/Supabase backends, AI/ERP integrations, and Core Web Vitals optimization.",
+        "keywords": "software architecture, feature-sliced design, typescript, codescene, nextjs, supabase, erp integration, web performance"
       }
     }
   ]

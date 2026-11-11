@@ -1,5 +1,6 @@
 import {
   isProjectGalleryCard,
+  shouldKeepIndexColumn,
   shouldShowCardCopyDescription,
 } from '../../../model/projectGallery';
 import styles from '../StickyCards.module.css';
@@ -11,10 +12,10 @@ import type { StickyCardComponentProps } from '../types/stickyCard.types';
 
 export function StickyCard({ cardData, catalogId, isMobile }: StickyCardComponentProps) {
   const hasProjectGallery = isProjectGalleryCard(catalogId, cardData.index);
+  const keepIndexColumn = shouldKeepIndexColumn(catalogId, cardData.index);
 
   const contentWrapperClassName = [
     styles.stickyCardContentWrapper,
-    catalogId === 'advanced-tech' && cardData.index === '04' && styles.wideContentWrapper,
     hasProjectGallery && styles.webAppsContentWrapper,
   ]
     .filter(Boolean)
@@ -24,6 +25,7 @@ export function StickyCard({ cardData, catalogId, isMobile }: StickyCardComponen
     'sticky-card',
     styles.stickyCard,
     hasProjectGallery && styles.webAppsCard,
+    keepIndexColumn && styles.withIndexColumn,
   ]
     .filter(Boolean)
     .join(' ');
