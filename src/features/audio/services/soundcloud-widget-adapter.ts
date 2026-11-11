@@ -134,7 +134,7 @@ export class SoundCloudAdapter implements PlatformAdapter {
     this.iframe.style.left = '-9999px';
     this.iframe.style.opacity = '0';
     this.iframe.style.pointerEvents = 'none';
-    this.iframe.allow = 'autoplay';
+    this.iframe.allow = 'autoplay; encrypted-media';
 
     container.appendChild(this.iframe);
 
