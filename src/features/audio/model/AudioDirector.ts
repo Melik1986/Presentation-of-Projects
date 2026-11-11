@@ -57,6 +57,7 @@ class AudioDirector {
   private pendingTracks = new Map<string, Promise<TrackBundle | null>>();
   private initializationGeneration = 0;
   private containerSequence = 0;
+  private hasUserGesture = false;
 
   constructor() {
     this.isBrowser = typeof window !== 'undefined';
@@ -171,6 +172,16 @@ class AudioDirector {
   }
 
   async resumeContext(): Promise<void> {
+    const hasActiveGesture =
+      this.hasUserGesture ||
+      (typeof navigator !== 'undefined' &&
+        Boolean((navigator as unknown as { userActivation?: { hasBeenActive: boolean } }).userActivation?.hasBeenActive));
+
+    // Do not attempt to resume before user interaction to avoid Chrome Autoplay Policy rejections
+    if (!hasActiveGesture) {
+      return;
+    }
+
     const ctx = this.ensureContext();
     if (!ctx) {
       return;
@@ -190,6 +201,7 @@ class AudioDirector {
       return;
     }
 
+    this.hasUserGesture = true;
     const ctx = this.ensureContext();
     if (!ctx) {
       return;
@@ -297,7 +309,7 @@ class AudioDirector {
     const container = document.createElement('div');
     container.id = containerId;
     container.style.cssText =
-      'position:fixed;top:-9999px;left:-9999px;width:0;height:0;opacity:0;pointer-events:none;overflow:hidden;';
+      'position:fixed;top:-9999px;left:-9999px;width:300px;height:166px;opacity:0;pointer-events:none;overflow:hidden;';
     document.body.appendChild(container);
     this.createdContainers.add(container);
 

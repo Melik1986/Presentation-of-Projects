@@ -19,7 +19,7 @@ export function CatalogPageClient({ catalog, catalogId }: CatalogPageClientProps
   const catalogPageRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
   const {
-    actions: { enterCatalog, resume },
+    actions: { enterCatalog },
   } = useAudioDirector();
 
   // Apply theme CSS variables
@@ -40,7 +40,7 @@ export function CatalogPageClient({ catalog, catalogId }: CatalogPageClientProps
 
   // Manage audio scene (only depend on catalogId to avoid infinite loop)
   useLayoutEffect(() => {
-    void resume().then(() => enterCatalog(catalogId));
+    void enterCatalog(catalogId);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [catalogId]);
 

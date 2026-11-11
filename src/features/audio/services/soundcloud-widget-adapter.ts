@@ -120,15 +120,18 @@ export class SoundCloudAdapter implements PlatformAdapter {
       throw new Error(`Container not found: ${containerId}`);
     }
 
-    // Create hidden iframe
+    // Create hidden iframe with standard dimensions to prevent internal 0x0 canvas errors in SoundCloud waveform
     this.iframe = document.createElement('iframe');
     this.iframe.id = `${containerId}-iframe`;
+    this.iframe.title = 'SoundCloud Audio Player';
     this.iframe.src = `https://w.soundcloud.com/player/?url=${encodeURIComponent(
       this.trackUrl
     )}&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false&visual=false`;
-    this.iframe.width = '0';
-    this.iframe.height = '0';
-    this.iframe.style.position = 'absolute';
+    this.iframe.width = '300';
+    this.iframe.height = '166';
+    this.iframe.style.position = 'fixed';
+    this.iframe.style.top = '-9999px';
+    this.iframe.style.left = '-9999px';
     this.iframe.style.opacity = '0';
     this.iframe.style.pointerEvents = 'none';
     this.iframe.allow = 'autoplay';
@@ -174,64 +177,73 @@ export class SoundCloudAdapter implements PlatformAdapter {
     await this.readyPromise;
   }
 
-  async play(): Promise<void> {
+  private async executeWidgetAction(
+    action: (widget: SCWidget) => void,
+    delayMs = 50
+  ): Promise<void> {
     if (!this.widget || !this.isReady) {
-      throw new Error('SoundCloud widget not ready');
+      return;
     }
 
     return new Promise((resolve) => {
-      this.widget?.play();
-      setTimeout(resolve, 100);
+      try {
+        action(this.widget!);
+      } catch {
+        // Ignore widget communication errors
+      }
+      setTimeout(resolve, delayMs);
     });
   }
 
-  async pause(): Promise<void> {
+  private getWidgetMetric(
+    getter: (widget: SCWidget, callback: (value: number) => void) => void
+  ): number {
     if (!this.widget || !this.isReady) {
-      throw new Error('SoundCloud widget not ready');
+      return 0;
     }
 
-    return new Promise((resolve) => {
-      this.widget?.pause();
-      setTimeout(resolve, 50);
-    });
+    let result = 0;
+    try {
+      getter(this.widget, (val) => {
+        result = val / 1000;
+      });
+    } catch {
+      return 0;
+    }
+
+    return result;
+  }
+
+  async play(): Promise<void> {
+    return this.executeWidgetAction((w) => w.play(), 100);
+  }
+
+  async pause(): Promise<void> {
+    return this.executeWidgetAction((w) => w.pause(), 50);
   }
 
   async setVolume(volume: number): Promise<void> {
     if (!this.widget || !this.isReady) {
-      throw new Error('SoundCloud widget not ready');
+      return Promise.resolve();
     }
 
     // SoundCloud volume is 0-100
     const scVolume = Math.max(0, Math.min(100, volume * 100));
-    this.widget.setVolume(scVolume);
+    try {
+      this.widget.setVolume(scVolume);
+    } catch {
+      // Ignore widget volume communication errors
+    }
 
     return Promise.resolve();
   }
 
   getCurrentTime(): number {
-    if (!this.widget || !this.isReady) {
-      return 0;
-    }
-
-    let currentTime = 0;
-    this.widget.getPosition((position) => {
-      currentTime = position / 1000; // Convert ms to seconds
-    });
-
-    return currentTime;
+    return this.getWidgetMetric((w, cb) => w.getPosition(cb));
   }
 
   getDuration(): number {
-    if (!this.widget || !this.isReady) {
-      return 0;
-    }
-
-    let duration = 0;
-    this.widget.getDuration((dur) => {
-      duration = dur / 1000; // Convert ms to seconds
-    });
-
-    return duration;
+    return this.getWidgetMetric((w, cb) => w.getDuration(cb));
   }
 
   async seekTo(seconds: number): Promise<void> {

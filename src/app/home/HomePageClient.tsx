@@ -10,12 +10,12 @@ import { SocialIcons } from '@/shared/ui';
 
 export function HomePageClient() {
   const {
-    actions: { setHome, resume },
+    actions: { setHome },
   } = useAudioDirector();
 
   // Return to home audio scene when mounting
   useLayoutEffect(() => {
-    void resume().then(() => setHome());
+    void setHome();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
