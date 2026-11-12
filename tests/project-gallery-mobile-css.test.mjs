@@ -7,6 +7,10 @@ const styles = readFileSync(
 );
 
 describe('Project gallery mobile sizing', () => {
+  it('gives the mobile image height rule precedence over the size-full utility', () => {
+    expect(styles).toContain('.mobileSlide > .mobileImage {');
+  });
+
   it('keeps a viewport-height fallback when svh is unavailable', () => {
     expect(styles).toContain('height: min(calc(70vw + 22vh), max(6rem, calc(100vh - 360px)));');
     expect(styles).toContain('@supports (height: 100svh)');

@@ -179,13 +179,13 @@
   border-radius: 0.75rem;
 }
 
-.mobileImage {
+.mobileSlide > .mobileImage {
   width: 100%;
   height: min(calc(70vw + 22vh), max(6rem, calc(100vh - 360px)));
 }
 
 @supports (height: 100svh) {
-  .mobileImage {
+  .mobileSlide > .mobileImage {
     height: min(calc(70vw + 22svh), max(6rem, calc(100svh - 360px)));
   }
 }
