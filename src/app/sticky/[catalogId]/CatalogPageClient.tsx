@@ -15,11 +15,16 @@ interface CatalogPageClientProps {
   catalogId: string;
 }
 
-export function CatalogPageClient({ catalog, catalogId }: CatalogPageClientProps) {
+export function shouldEnterCatalog(isReady: boolean, catalogId: string): boolean {
+  return isReady && Boolean(catalogId);
+}
+
+export function CatalogPageClient({ catalog, catalogId }: Readonly<CatalogPageClientProps>) {
   const catalogPageRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
   const {
     actions: { enterCatalog },
+    isReady,
   } = useAudioDirector();
 
   // Apply theme CSS variables
@@ -40,9 +45,12 @@ export function CatalogPageClient({ catalog, catalogId }: CatalogPageClientProps
 
   // Manage audio scene (only depend on catalogId to avoid infinite loop)
   useLayoutEffect(() => {
+    if (!shouldEnterCatalog(isReady, catalogId)) {
+      return;
+    }
+
     void enterCatalog(catalogId);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [catalogId]);
+  }, [catalogId, enterCatalog, isReady]);
 
   useCatalogTitleAnimation(titleRef, catalogPageRef);
 
