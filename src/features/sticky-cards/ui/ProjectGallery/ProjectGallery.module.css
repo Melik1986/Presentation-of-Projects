@@ -181,7 +181,13 @@
 
 .mobileImage {
   width: 100%;
-  height: min(calc(70vw + 22svh), max(6rem, calc(100svh - 360px)));
+  height: min(calc(70vw + 22vh), max(6rem, calc(100vh - 360px)));
+}
+
+@supports (height: 100svh) {
+  .mobileImage {
+    height: min(calc(70vw + 22svh), max(6rem, calc(100svh - 360px)));
+  }
 }
 
 .mobileImage .galleryFrame {

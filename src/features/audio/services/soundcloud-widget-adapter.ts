@@ -64,7 +64,7 @@ export class SoundCloudAdapter implements PlatformAdapter {
     }
 
     // Already loaded
-    if (window.SC && window.SC.Widget) {
+    if (window.SC?.Widget) {
       return Promise.resolve();
     }
 
@@ -72,7 +72,7 @@ export class SoundCloudAdapter implements PlatformAdapter {
     if (window.SC_LOADING) {
       return new Promise((resolve) => {
         const checkInterval = setInterval(() => {
-          if (window.SC && window.SC.Widget) {
+          if (window.SC?.Widget) {
             clearInterval(checkInterval);
             resolve();
           }
@@ -224,7 +224,7 @@ export class SoundCloudAdapter implements PlatformAdapter {
 
   async setVolume(volume: number): Promise<void> {
     if (!this.widget || !this.isReady) {
-      return Promise.resolve();
+      return;
     }
 
     // SoundCloud volume is 0-100
@@ -234,8 +234,6 @@ export class SoundCloudAdapter implements PlatformAdapter {
     } catch {
       // Ignore widget volume communication errors
     }
-
-    return Promise.resolve();
   }
 
   getCurrentTime(): number {
@@ -252,7 +250,6 @@ export class SoundCloudAdapter implements PlatformAdapter {
     }
 
     this.widget.seekTo(seconds * 1000); // Convert seconds to ms
-    return Promise.resolve();
   }
 
   destroy(): void {

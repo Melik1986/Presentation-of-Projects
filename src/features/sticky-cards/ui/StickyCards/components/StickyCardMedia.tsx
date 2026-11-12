@@ -31,7 +31,7 @@ const AI_VIDEO_ITEMS = [
   '/videos/video-8.mp4',
 ];
 
-function ProjectCardImageLink({ cardData }: StickyCardMediaProps) {
+function ProjectCardImageLink({ cardData }: Readonly<StickyCardMediaProps>) {
   return (
     <a
       href={cardData.image}
@@ -50,7 +50,7 @@ function ProjectCardImageLink({ cardData }: StickyCardMediaProps) {
   );
 }
 
-export function StickyCardMedia({ cardData, catalogId }: StickyCardMediaProps) {
+export function StickyCardMedia({ cardData, catalogId }: Readonly<StickyCardMediaProps>) {
   if (isProjectGalleryCard(catalogId, cardData.index)) {
     return (
       <ProjectGallery

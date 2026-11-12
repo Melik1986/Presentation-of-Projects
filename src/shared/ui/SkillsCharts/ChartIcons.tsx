@@ -11,7 +11,7 @@ interface ChartIconsProps {
  * Component for rendering icons overlay for charts
  * Displays technology icons below bar chart or alongside pie chart legend
  */
-export function ChartIcons({ type }: ChartIconsProps) {
+export function ChartIcons({ type }: Readonly<ChartIconsProps>) {
   if (type === 'backend') {
     return (
       <div className={styles.backendIcons}>

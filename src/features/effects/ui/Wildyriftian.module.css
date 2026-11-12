@@ -47,7 +47,7 @@
 }
 
 .wildyriftian h1 {
-  font-family: 'DM Sans';
+  font-family: 'DM Sans', sans-serif;
   font-size: 2.75rem;
   font-weight: 400;
   transition: color 250ms ease;
@@ -57,7 +57,7 @@
 
 .wildyriftian p {
   text-transform: uppercase;
-  font-family: 'DM Mono';
+  font-family: 'DM Mono', monospace;
   font-size: 0.8rem;
   font-weight: 600;
   transition: color 250ms ease;
@@ -106,6 +106,7 @@
   font-weight: 600;
   margin-bottom: 1rem;
   line-height: 1.2;
+  white-space: normal;
 }
 
 .heroDescription {
@@ -114,6 +115,7 @@
   text-transform: none;
   line-height: 1.6;
   opacity: 0.85;
+  white-space: normal;
 }
 
 /* GSAP SplitText chars */
@@ -121,15 +123,6 @@
 .heroDescription :global(.char) {
   display: inline-block;
   will-change: transform, opacity;
-}
-
-/* Preserve whitespace */
-.heroTitle {
-  white-space: normal;
-}
-
-.heroDescription {
-  white-space: normal;
 }
 
 .folders {
@@ -305,18 +298,18 @@
   .wildyriftian {
     display: flex;
     flex-direction: column;
-    overflow-y: auto !important;
-    overflow-x: hidden !important;
-    height: auto !important;
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: auto;
     min-height: 100svh;
   }
 
   .hero {
-    position: relative !important;
-    top: auto !important;
-    left: auto !important;
-    transform: none !important;
-    margin: 5rem auto 1rem !important;
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    margin: 5rem auto 1rem;
     padding: 0 1rem;
   }
 
@@ -333,7 +326,7 @@
   }
 
   .desktopFolders {
-    display: none !important;
+    display: none;
   }
 
   .mobileFolders {
@@ -351,7 +344,7 @@
 
   .row {
     flex-direction: column;
-    bottom: 0 !important;
+    bottom: 0;
   }
 
   .folder {
