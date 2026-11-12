@@ -26,30 +26,29 @@ export interface ProjectGalleryRevealProps extends React.HTMLAttributes<HTMLDivE
   isActive?: boolean;
 }
 
-export const ProjectGalleryReveal = React.forwardRef<
-  HTMLDivElement,
-  ProjectGalleryRevealProps
->(({ className, isActive, ...props }, ref) => {
-  const [isHovered, setIsHovered] = React.useState(false);
+export const ProjectGalleryReveal = React.forwardRef<HTMLDivElement, ProjectGalleryRevealProps>(
+  ({ className, isActive, ...props }, ref) => {
+    const [isHovered, setIsHovered] = React.useState(false);
 
-  return (
-    <ProjectGalleryRevealContext.Provider value={{ isHovered, isActive }}>
-      <div
-        ref={ref}
-        className={cn('relative overflow-hidden', className)}
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-        onFocusCapture={() => setIsHovered(true)}
-        onBlurCapture={(event) => {
-          if (!event.currentTarget.contains(event.relatedTarget)) {
-            setIsHovered(false);
-          }
-        }}
-        {...props}
-      />
-    </ProjectGalleryRevealContext.Provider>
-  );
-});
+    return (
+      <ProjectGalleryRevealContext.Provider value={{ isHovered, isActive }}>
+        <div
+          ref={ref}
+          className={cn('relative overflow-hidden', className)}
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+          onFocusCapture={() => setIsHovered(true)}
+          onBlurCapture={(event) => {
+            if (!event.currentTarget.contains(event.relatedTarget)) {
+              setIsHovered(false);
+            }
+          }}
+          {...props}
+        />
+      </ProjectGalleryRevealContext.Provider>
+    );
+  }
+);
 ProjectGalleryReveal.displayName = 'ProjectGalleryReveal';
 
 interface ProjectGalleryRevealMainProps extends React.HTMLAttributes<HTMLDivElement> {

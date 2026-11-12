@@ -14,14 +14,9 @@ function ProjectGalleryMedia({
   return slide.image ? (
     <picture className={styles.galleryPicture}>
       {slide.mobileImage && (
-        <source
-          media="(max-width: 1000px)"
-          srcSet={slide.mobileImageSrcSet || slide.mobileImage}
-        />
+        <source media="(max-width: 1000px)" srcSet={slide.mobileImageSrcSet || slide.mobileImage} />
       )}
-      {slide.imageSrcSet && (
-        <source media="(min-width: 1001px)" srcSet={slide.imageSrcSet} />
-      )}
+      {slide.imageSrcSet && <source media="(min-width: 1001px)" srcSet={slide.imageSrcSet} />}
       <Image
         src={slide.image}
         alt={`${slide.title} — ${label}`}

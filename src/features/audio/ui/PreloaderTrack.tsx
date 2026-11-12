@@ -23,13 +23,14 @@ export function PreloaderTrack({
     if (catalogId === 'home') {
       void resume().then(() => setHome());
       return () => {
-        void leaveCatalog();
+        leaveCatalog();
       };
     }
 
     void resume().then(() => enterCatalog(catalogId));
     return () => {
-      void leaveCatalog().then(() => setHome());
+      leaveCatalog();
+      void setHome();
     };
   }, [catalogId, resume, setHome, enterCatalog, leaveCatalog]);
 

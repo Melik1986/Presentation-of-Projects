@@ -4,22 +4,21 @@ import { gsap } from 'gsap';
 
 import { createLogger } from '@/shared/lib';
 
+import { runEnterCatalog, runPreviewCatalog } from './audio-catalog-transitions';
 import {
-  ANALYSER_FFT_SIZE,
-  ANALYSER_RESOLUTION,
-  ANALYSER_SMOOTHING,
-  CROSSFADE_SECONDS,
-  DEFAULT_SETTINGS,
-  LEVELS,
-  SETTINGS_STORAGE_KEY,
-} from './constants';
+  ensureAudioGraph,
+  hasBrowserUserActivation,
+  resumeAudioContext,
+} from './audio-context-factory';
+import { createEqBuffer, EMPTY_EQ_BYTE_ARRAY } from './audio-eq-buffer';
+import { fadeTrackLevel, stopAllTracksExcept, syncActiveTracksVolume } from './audio-track-fader';
+import { DEFAULT_SETTINGS, LEVELS, SETTINGS_STORAGE_KEY } from './constants';
 import { detectPlatform } from '../services/platform-detector';
 import { SoundCloudAdapter } from '../services/soundcloud-widget-adapter';
 import { YouTubeAdapter } from '../services/youtube-adapter';
 
 import type {
   AudioConfig,
-  CatalogConfig,
   DirectorSettings,
   DirectorStateSnapshot,
   Platform,
@@ -28,8 +27,6 @@ import type {
 } from './types';
 
 const logger = createLogger().child({ module: 'AudioDirector' });
-
-const EMPTY_BYTE_ARRAY = new Uint8Array(0);
 
 type TrackSetup = {
   id: string;
@@ -45,22 +42,23 @@ class AudioDirector {
   private context: AudioContext | null = null;
   private masterGain: GainNode | null = null;
   private analyser: AnalyserNode | null = null;
-  private eqData: Uint8Array<ArrayBuffer> = new Uint8Array(new ArrayBuffer(ANALYSER_RESOLUTION));
-  private tracks = new Map<string, TrackBundle>();
+  private readonly eqData: Uint8Array<ArrayBuffer>;
+  private readonly tracks = new Map<string, TrackBundle>();
   private config: AudioConfig = { homeTrack: null, catalogs: [] };
   private currentCatalogId: string | null = null;
   private previewCatalogId: string | null = null;
   private settings: DirectorSettings = { ...DEFAULT_SETTINGS };
   private visibilityAbortController: AbortController | null = null;
-  private createdContainers = new Set<HTMLElement>();
-  private pendingContainers = new Set<HTMLElement>();
-  private pendingTracks = new Map<string, Promise<TrackBundle | null>>();
+  private readonly createdContainers = new Set<HTMLElement>();
+  private readonly pendingContainers = new Set<HTMLElement>();
+  private readonly pendingTracks = new Map<string, Promise<TrackBundle | null>>();
   private initializationGeneration = 0;
   private containerSequence = 0;
   private hasUserGesture = false;
 
   constructor() {
     this.isBrowser = typeof window !== 'undefined';
+    this.eqData = createEqBuffer();
 
     if (this.isBrowser) {
       this.loadSettings();
@@ -120,42 +118,16 @@ class AudioDirector {
     if (!this.isBrowser) {
       return null;
     }
-
-    // Check if context is closed or needs recreation
-    const needsRecreation = !this.context || this.context.state === 'closed';
-
-    if (needsRecreation) {
-      const extendedWindow = window as typeof window & {
-        webkitAudioContext?: typeof AudioContext;
-      };
-      const AudioContextCtor = window.AudioContext ?? extendedWindow.webkitAudioContext;
-      if (!AudioContextCtor) {
-        logger.warn('AudioContext is not supported in this environment');
-        return null;
-      }
-
-      // Clean up old context if it exists
-      if (this.context && this.context.state !== 'closed') {
-        try {
-          void this.context.close();
-        } catch {
-          // Ignore close errors
-        }
-      }
-
-      // Create new context and audio graph
-      this.context = new AudioContextCtor();
-      this.masterGain = this.context.createGain();
-      this.masterGain.gain.value = this.settings.muted ? 0 : this.settings.volume;
-
-      this.analyser = this.context.createAnalyser();
-      this.analyser.fftSize = ANALYSER_FFT_SIZE;
-      this.analyser.smoothingTimeConstant = ANALYSER_SMOOTHING;
-
-      this.masterGain.connect(this.analyser);
-      this.analyser.connect(this.context.destination);
+    if (this.context && this.context.state !== 'closed') {
+      return this.context;
     }
-
+    const graph = ensureAudioGraph(this.context, this.settings);
+    if (!graph) {
+      return null;
+    }
+    this.context = graph.context;
+    this.masterGain = graph.masterGain;
+    this.analyser = graph.analyser;
     return this.context;
   }
 
@@ -172,51 +144,22 @@ class AudioDirector {
   }
 
   async resumeContext(): Promise<void> {
-    const hasActiveGesture =
-      this.hasUserGesture ||
-      (typeof navigator !== 'undefined' &&
-        Boolean((navigator as unknown as { userActivation?: { hasBeenActive: boolean } }).userActivation?.hasBeenActive));
-
-    // Do not attempt to resume before user interaction to avoid Chrome Autoplay Policy rejections
-    if (!hasActiveGesture) {
+    // Do not attempt to resume before user interaction (Chrome Autoplay Policy)
+    if (!hasBrowserUserActivation(this.hasUserGesture)) {
       return;
     }
-
-    const ctx = this.ensureContext();
-    if (!ctx) {
-      return;
-    }
-
-    if (ctx.state === 'suspended') {
-      try {
-        await ctx.resume();
-      } catch (error) {
-        logger.warn('Failed to resume AudioContext:', error);
-      }
-    }
+    await resumeAudioContext(this.ensureContext(), '');
   }
 
   async resumeContextOnUserGesture(): Promise<void> {
     if (!this.isBrowser) {
       return;
     }
-
     this.hasUserGesture = true;
-    const ctx = this.ensureContext();
-    if (!ctx) {
-      return;
-    }
-
-    if (ctx.state === 'suspended') {
-      try {
-        await ctx.resume();
-      } catch (error) {
-        logger.warn('Failed to resume AudioContext on user gesture:', error);
-      }
-    }
+    await resumeAudioContext(this.ensureContext(), ' on user gesture');
   }
 
-  private handleVisibilityChange = (): void => {
+  private readonly handleVisibilityChange = (): void => {
     if (!this.context) {
       return;
     }
@@ -424,7 +367,7 @@ class AudioDirector {
 
   private getTrackMasterGain(context: AudioContext): GainNode {
     const masterGain = this.masterGain;
-    if (!masterGain || masterGain.context !== context) {
+    if (masterGain?.context !== context) {
       throw new Error('Audio graph context mismatch');
     }
 
@@ -533,78 +476,26 @@ class AudioDirector {
     }
   }
 
-  /**
-   * Stops all tracks except specified one
-   * @param keepTrackId - Track ID to keep playing
-   */
-  private stopAllExcept(keepTrackId: string | null): void {
-    this.tracks.forEach((track) => {
-      if (track.id !== keepTrackId) {
-        gsap.killTweensOf(track);
-        track.level = 0;
-
-        if (track.adapter) {
-          void this.pauseTrack(track);
-          void track.adapter.setVolume(0).catch(() => {
-            // Ignore volume errors
-          });
-        }
-      }
-    });
+  private fadeCallbacks() {
+    return {
+      playTrack: (track: TrackBundle) => this.playTrack(track),
+      pauseTrack: (track: TrackBundle) => this.pauseTrack(track),
+    };
   }
 
-  /**
-   * Fades track volume with crossfade using GSAP
-   * @param track - Track bundle to fade
-   * @param targetVolume - Target volume (0-1)
-   */
-  private fadeTrack(track: TrackBundle | null, targetVolume: number): void {
-    if (!track?.adapter) {
-      return;
-    }
-
-    gsap.killTweensOf(track);
-
-    gsap.to(track, {
-      level: targetVolume,
-      duration: CROSSFADE_SECONDS,
-      ease: 'sine.inOut',
-      onUpdate: () => {
-        if (track.adapter) {
-          const effectiveVolume = this.settings.muted ? 0 : this.settings.volume;
-          const finalVolume = track.level * effectiveVolume;
-          void track.adapter.setVolume(finalVolume).catch(() => {
-            // Ignore volume errors
-          });
-        }
+  private catalogDeps() {
+    return {
+      resumeContext: () => this.resumeContext(),
+      prepareTrack: (id: string, url: string | null) => this.prepareTrack(id, url),
+      fadeTrack: (track: TrackBundle | null, level: number) => {
+        fadeTrackLevel(track, level, this.settings, this.fadeCallbacks());
       },
-      onStart: () => {
-        if (targetVolume > 0) {
-          void this.playTrack(track);
-        }
+      stopAllExcept: (keepId: string | null) => {
+        stopAllTracksExcept(this.tracks, keepId, (track) => this.pauseTrack(track));
       },
-      onComplete: () => {
-        if (targetVolume <= 0.001) {
-          void this.pauseTrack(track);
-        }
-      },
-    });
-  }
-
-  /**
-   * Updates volume for all active tracks based on master volume
-   */
-  private updateAllTracksVolume(): void {
-    const effectiveVolume = this.settings.muted ? 0 : this.settings.volume;
-
-    this.tracks.forEach((track) => {
-      if (track.adapter && track.level > 0) {
-        const finalVolume = track.level * effectiveVolume;
-        void track.adapter.setVolume(finalVolume).catch(() => {
-          // Ignore volume errors
-        });
-      }
-    });
+      getTracks: () => this.tracks,
+      forceResumeContext: () => resumeAudioContext(this.context, ' force'),
+    };
   }
 
   /**
@@ -612,14 +503,14 @@ class AudioDirector {
    */
   async setHome(): Promise<void> {
     await this.resumeContext();
-    this.stopAllExcept('home');
+    stopAllTracksExcept(this.tracks, 'home', (track) => this.pauseTrack(track));
 
     const homeTrack = await this.prepareTrack('home', this.config.homeTrack);
     if (!homeTrack) {
       return;
     }
 
-    this.fadeTrack(homeTrack, LEVELS.home);
+    fadeTrackLevel(homeTrack, LEVELS.home, this.settings, this.fadeCallbacks());
     this.currentCatalogId = null;
     this.previewCatalogId = null;
   }
@@ -629,32 +520,15 @@ class AudioDirector {
    * @param catalogId - Catalog ID to preview
    */
   async previewCatalog(catalogId: string | null): Promise<void> {
-    if (!catalogId || catalogId === this.currentCatalogId) {
-      return;
+    const previewId = await runPreviewCatalog(
+      catalogId,
+      this.currentCatalogId,
+      this.config.catalogs,
+      this.catalogDeps()
+    );
+    if (previewId) {
+      this.previewCatalogId = previewId;
     }
-
-    await this.resumeContext();
-    const catalog = this.config.catalogs.find((item) => item.id === catalogId);
-    if (!catalog) {
-      return;
-    }
-
-    const homeTrack = this.tracks.get('home') ?? null;
-    const track = await this.prepareTrack(catalog.id, catalog.track);
-
-    if (!track || !homeTrack) {
-      return;
-    }
-
-    this.tracks.forEach((t) => {
-      if (t.id !== 'home' && t.id !== catalogId) {
-        this.fadeTrack(t, 0);
-      }
-    });
-
-    this.previewCatalogId = catalogId;
-    this.fadeTrack(homeTrack, LEVELS.homeHover);
-    this.fadeTrack(track, LEVELS.preview);
   }
 
   /**
@@ -662,49 +536,22 @@ class AudioDirector {
    * @param catalogId - Catalog ID to enter
    */
   async enterCatalog(catalogId: string | null): Promise<void> {
-    if (!catalogId) {
-      return;
+    const nextId = await runEnterCatalog(
+      catalogId,
+      this.currentCatalogId,
+      this.config.catalogs,
+      this.catalogDeps()
+    );
+    if (nextId && nextId !== this.currentCatalogId) {
+      this.currentCatalogId = nextId;
+      this.previewCatalogId = null;
     }
-
-    // Skip if already on this catalog
-    if (this.currentCatalogId === catalogId) {
-      return;
-    }
-
-    await this.resumeContext();
-
-    // Force resume if still suspended
-    if (this.context?.state === 'suspended') {
-      try {
-        await this.context.resume();
-      } catch (error) {
-        logger.error('Failed to force-resume AudioContext', error);
-      }
-    }
-
-    this.stopAllExcept(catalogId);
-
-    const catalog = this.config.catalogs.find((item) => item.id === catalogId);
-    if (!catalog) {
-      logger.error('enterCatalog: catalog not found', { catalogId });
-      return;
-    }
-
-    const track = await this.prepareTrack(catalog.id, catalog.track);
-    if (!track) {
-      logger.error('enterCatalog: track preparation failed', { catalogId, url: catalog.track });
-      return;
-    }
-
-    this.currentCatalogId = catalogId;
-    this.previewCatalogId = null;
-    this.fadeTrack(track, LEVELS.active);
   }
 
   /**
    * Leaves current catalog (stops catalog tracks, does NOT start home)
    */
-  async leaveCatalog(): Promise<void> {
+  leaveCatalog(): void {
     this.currentCatalogId = null;
     this.previewCatalogId = null;
   }
@@ -727,7 +574,7 @@ class AudioDirector {
       });
     }
 
-    this.updateAllTracksVolume();
+    syncActiveTracksVolume(this.tracks, this.settings);
     this.persistSettings();
   }
 
@@ -747,7 +594,7 @@ class AudioDirector {
         ease: 'sine.inOut',
       });
     }
-    this.updateAllTracksVolume();
+    syncActiveTracksVolume(this.tracks, this.settings);
     this.persistSettings();
   }
 
@@ -778,7 +625,7 @@ class AudioDirector {
    */
   getAnalyserFrequencies(): Uint8Array {
     if (!this.analyser) {
-      return EMPTY_BYTE_ARRAY;
+      return EMPTY_EQ_BYTE_ARRAY;
     }
 
     this.analyser.getByteFrequencyData(this.eqData);
@@ -788,5 +635,6 @@ class AudioDirector {
 
 const director = new AudioDirector();
 
-export type { AudioConfig, CatalogConfig, DirectorSettings, DirectorStateSnapshot, TrackBundle };
+export type { CatalogConfig } from './types';
+export type { AudioConfig, DirectorSettings, DirectorStateSnapshot, TrackBundle };
 export default director;

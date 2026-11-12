@@ -33,17 +33,11 @@ const FULL_GALLERY_CATALOGS = new Set<string | undefined>([
   'advanced-tech',
 ]);
 
-export function isProjectGalleryCard(
-  catalogId: string | undefined,
-  cardIndex?: string
-): boolean {
+export function isProjectGalleryCard(catalogId: string | undefined, cardIndex?: string): boolean {
   return FULL_GALLERY_CATALOGS.has(catalogId) || (catalogId === 'ai-tools' && cardIndex === '03');
 }
 
-export function shouldKeepIndexColumn(
-  catalogId: string | undefined,
-  cardIndex?: string
-): boolean {
+export function shouldKeepIndexColumn(catalogId: string | undefined, cardIndex?: string): boolean {
   return catalogId === 'advanced-tech' && cardIndex === '01';
 }
 

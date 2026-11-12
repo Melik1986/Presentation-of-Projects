@@ -1,7 +1,4 @@
-import {
-  ScrollingBadge,
-  SpiralAnimation,
-} from '@/shared/ui';
+import { ScrollingBadge, SpiralAnimation } from '@/shared/ui';
 
 import styles from '../StickyCards.module.css';
 

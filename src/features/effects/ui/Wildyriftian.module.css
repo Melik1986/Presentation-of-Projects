@@ -141,6 +141,14 @@
   overflow: hidden;
 }
 
+.desktopFolders {
+  display: flex;
+}
+
+.mobileFolders {
+  display: none;
+}
+
 .row {
   position: relative;
   width: 100%;
@@ -293,7 +301,25 @@
   bottom: -9rem;
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 1024px) {
+  .wildyriftian {
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    height: auto !important;
+    min-height: 100svh;
+  }
+
+  .hero {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    transform: none !important;
+    margin: 5rem auto 1rem !important;
+    padding: 0 1rem;
+  }
+
   .wildyriftian h1 {
     font-size: 2rem;
   }
@@ -306,6 +332,23 @@
     font-size: 0.95rem;
   }
 
+  .desktopFolders {
+    display: none !important;
+  }
+
+  .mobileFolders {
+    display: flex;
+    flex: 1 0 auto;
+    width: 100%;
+    position: relative;
+    z-index: 5;
+    align-items: stretch;
+  }
+
+  .mobileFolders > * {
+    flex: 1;
+  }
+
   .row {
     flex-direction: column;
     bottom: 0 !important;
@@ -315,8 +358,6 @@
     margin-bottom: -0.5rem;
   }
 
-  /* Mobile: GSAP handles ALL animations (opacity, transform) */
-  /* Only pointer-events in CSS, animations via GSAP */
   .folderPreview {
     pointer-events: none;
   }

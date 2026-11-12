@@ -82,10 +82,7 @@ function useAudioSnapshots(): {
   return { state, settings, sync };
 }
 
-function useAudioInitialization(
-  audioConfig: AudioConfig,
-  syncSnapshots: () => void
-): boolean {
+function useAudioInitialization(audioConfig: AudioConfig, syncSnapshots: () => void): boolean {
   const [isReady, setIsReady] = useState(false);
   const mountedRef = useRef(true);
 
@@ -187,8 +184,8 @@ function useAudioActions(syncSnapshots: () => void): AudioDirectorActions {
     [syncSnapshots]
   );
 
-  const leaveCatalog = useCallback(async () => {
-    await AudioDirector.leaveCatalog();
+  const leaveCatalog = useCallback(() => {
+    AudioDirector.leaveCatalog();
     syncSnapshots();
   }, [syncSnapshots]);
 
@@ -245,7 +242,7 @@ function useAudioContextValue({
   );
 }
 
-export function AudioProvider({ children, config }: AudioProviderProps): ReactElement {
+export function AudioProvider({ children, config }: Readonly<AudioProviderProps>): ReactElement {
   const audioConfig = useAudioConfig(config);
   const snapshots = useAudioSnapshots();
   const isReady = useAudioInitialization(audioConfig, snapshots.sync);

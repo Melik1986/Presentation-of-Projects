@@ -21,15 +21,13 @@ const ICON_STYLES = {
 
 export default function Icon() {
   return new ImageResponse(
-    (
-      <div
-        {...{
-          style: ICON_STYLES,
-        }}
-      >
-        S
-      </div>
-    ),
+    <div
+      {...{
+        style: ICON_STYLES,
+      }}
+    >
+      S
+    </div>,
     {
       ...size,
     }

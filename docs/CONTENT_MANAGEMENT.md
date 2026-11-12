@@ -236,18 +236,12 @@ public/
       "/img/catalog-5/preview-3.jpg"
     ]
   },
-  "theme": {
-    /* ... */
-  },
+  "theme": {/* ... */},
   "content": {
     "introTitle": "Your SEO Title",
-    "cards": [
-      /* 4 карточки */
-    ]
+    "cards": [/* 4 карточки */]
   },
-  "seo": {
-    /* ... */
-  }
+  "seo": {/* ... */}
 }
 ```
 

@@ -511,9 +511,7 @@ const rotation = -5 * progress;
 // BAD - сломает measurements
 gsap.to(card, {
   x: 100,
-  scrollTrigger: {
-    /* ... */
-  },
+  scrollTrigger: {/* ... */},
 });
 ```
 

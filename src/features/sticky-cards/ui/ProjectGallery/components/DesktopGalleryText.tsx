@@ -72,9 +72,7 @@ export function DesktopGalleryText({
         <motion.span className={styles.slideCounter} variants={getCounterVariants(reduceMotion)}>
           {String(currentIndex + 1).padStart(2, '0')} / {String(slideCount).padStart(2, '0')}
         </motion.span>
-        <motion.h2 variants={getTextVariants(reduceMotion)}>
-          {title}
-        </motion.h2>
+        <motion.h2 variants={getTextVariants(reduceMotion)}>{title}</motion.h2>
         <motion.p
           onAnimationComplete={(definition) => {
             if (definition === 'visible') {

@@ -113,7 +113,9 @@ interface GalleryPointerStart {
   pointerId: number;
 }
 
-function getGalleryPointerStart(event: React.PointerEvent<HTMLElement>): GalleryPointerStart | null {
+function getGalleryPointerStart(
+  event: React.PointerEvent<HTMLElement>
+): GalleryPointerStart | null {
   if (!event.isPrimary) {
     return null;
   }
@@ -155,21 +157,18 @@ function getGallerySwipeDirection(
 function useDesktopGalleryPointerNavigation(goNext: () => void, goPrev: () => void) {
   const pointerStartRef = useRef<GalleryPointerStart | null>(null);
 
-  const handlePointerDown = useCallback(
-    (event: React.PointerEvent<HTMLElement>) => {
-      const start = getGalleryPointerStart(event);
-      if (!start) {
-        return;
-      }
+  const handlePointerDown = useCallback((event: React.PointerEvent<HTMLElement>) => {
+    const start = getGalleryPointerStart(event);
+    if (!start) {
+      return;
+    }
 
-      if (event.pointerType === 'mouse') {
-        event.preventDefault();
-      }
-      pointerStartRef.current = start;
-      event.currentTarget.setPointerCapture(event.pointerId);
-    },
-    []
-  );
+    if (event.pointerType === 'mouse') {
+      event.preventDefault();
+    }
+    pointerStartRef.current = start;
+    event.currentTarget.setPointerCapture(event.pointerId);
+  }, []);
 
   const handlePointerUp = useCallback(
     (event: React.PointerEvent<HTMLElement>) => {
