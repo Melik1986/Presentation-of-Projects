@@ -1,9 +1,11 @@
 'use client';
 
-import { animate, motion, useMotionValue } from 'motion/react';
+import { motion } from 'motion/react';
 import * as React from 'react';
 
 import { cn } from '@/shared/lib/utils';
+
+import { useSwipeCarouselGestures } from './hooks/useSwipeCarouselGestures';
 
 import type { HTMLMotionProps, MotionValue } from 'motion/react';
 
@@ -28,31 +30,6 @@ function useSwipeCarouselContext() {
   return context;
 }
 
-function isMatchingPointerSession(
-  start: { pointerId: number } | null,
-  eventPointerId: number,
-  track: HTMLElement | null
-): boolean {
-  return Boolean(start && start.pointerId === eventPointerId && track);
-}
-
-function calculateSwipeTargetIndex(
-  deltaX: number,
-  isDirectionHorizontal: boolean,
-  currentIndex: number,
-  totalSlides: number
-): number {
-  if (!isDirectionHorizontal || Math.abs(deltaX) <= 48) {
-    return currentIndex;
-  }
-  const direction = deltaX < 0 ? 1 : -1;
-  return Math.max(0, Math.min(currentIndex + direction, totalSlides - 1));
-}
-
-function calculateCarouselProgress(nextIndex: number, totalSlides: number): number {
-  return totalSlides > 1 ? nextIndex / (totalSlides - 1) : 0;
-}
-
 export interface SwipeCarouselProps extends React.HTMLAttributes<HTMLDivElement> {
   onSlideChange?: (index: number) => void;
 }
@@ -62,134 +39,11 @@ export function SwipeCarousel({
   className,
   onSlideChange,
   ...props
-}: SwipeCarouselProps) {
-  const x = useMotionValue(0);
-  const progress = useMotionValue(0);
-  const trackRef = React.useRef<HTMLDivElement>(null);
-  const currentIndexRef = React.useRef(0);
-  const pointerStartRef = React.useRef<{
-    x: number;
-    y: number;
-    offset: number;
-    pointerId: number;
-  } | null>(null);
-  const gestureDirectionRef = React.useRef<'horizontal' | 'vertical' | null>(null);
-
-  const getSlideOffset = (index: number) => {
-    const track = trackRef.current;
-    const firstSlide = track?.children[0] as HTMLElement | undefined;
-    const slide = track?.children[index] as HTMLElement | undefined;
-    if (!firstSlide) {
-      return 0;
-    }
-    if (!slide) {
-      return 0;
-    }
-    return firstSlide.getBoundingClientRect().left - slide.getBoundingClientRect().left;
-  };
-
-  const onPointerDown = (event: React.PointerEvent<HTMLDivElement>) => {
-    if (!event.isPrimary) {
-      return;
-    }
-
-    if (event.pointerType === 'mouse') {
-      if (event.button !== 0) {
-        return;
-      }
-
-      event.preventDefault();
-    }
-
-    pointerStartRef.current = {
-      x: event.clientX,
-      y: event.clientY,
-      offset: x.get(),
-      pointerId: event.pointerId,
-    };
-    gestureDirectionRef.current = null;
-    event.currentTarget.setPointerCapture(event.pointerId);
-  };
-
-  const onPointerMove = (event: React.PointerEvent<HTMLDivElement>) => {
-    const start = pointerStartRef.current;
-    const track = trackRef.current;
-    if (!isMatchingPointerSession(start, event.pointerId, track)) {
-      return;
-    }
-
-    const deltaX = event.clientX - start!.x;
-    const deltaY = event.clientY - start!.y;
-    if (gestureDirectionRef.current === null) {
-      const hasMoved = Math.max(Math.abs(deltaX), Math.abs(deltaY)) > 8;
-      if (!hasMoved) {
-        return;
-      }
-
-      gestureDirectionRef.current = Math.abs(deltaX) > Math.abs(deltaY) ? 'horizontal' : 'vertical';
-    }
-    if (gestureDirectionRef.current !== 'horizontal') {
-      return;
-    }
-
-    event.preventDefault();
-    const nextIndex = Math.max(
-      0,
-      Math.min(currentIndexRef.current + (deltaX < 0 ? 1 : -1), track!.children.length - 1)
-    );
-    const currentOffset = getSlideOffset(currentIndexRef.current);
-    const adjacentOffset = getSlideOffset(nextIndex);
-    const minOffset = Math.min(currentOffset, adjacentOffset);
-    const maxOffset = Math.max(currentOffset, adjacentOffset);
-    x.set(Math.max(minOffset, Math.min(start!.offset + deltaX, maxOffset)));
-  };
-
-  const onPointerUp = (event: React.PointerEvent<HTMLDivElement>) => {
-    const start = pointerStartRef.current;
-    const track = trackRef.current;
-    pointerStartRef.current = null;
-
-    if (!isMatchingPointerSession(start, event.pointerId, track)) {
-      gestureDirectionRef.current = null;
-      return;
-    }
-
-    const deltaX = event.clientX - start!.x;
-    const prevIndex = currentIndexRef.current;
-    const totalSlides = track!.children.length;
-    const nextIndex = calculateSwipeTargetIndex(
-      deltaX,
-      gestureDirectionRef.current === 'horizontal',
-      prevIndex,
-      totalSlides
-    );
-
-    currentIndexRef.current = nextIndex;
-    if (nextIndex !== prevIndex) {
-      onSlideChange?.(nextIndex);
-    }
-    progress.set(calculateCarouselProgress(nextIndex, totalSlides));
-    animate(x, getSlideOffset(nextIndex), {
-      duration: 0.36,
-      ease: [0.22, 1, 0.36, 1],
-    });
-    gestureDirectionRef.current = null;
-  };
-
-  const onPointerCancel = () => {
-    pointerStartRef.current = null;
-    gestureDirectionRef.current = null;
-    const currentIndex = currentIndexRef.current;
-    animate(x, getSlideOffset(currentIndex), {
-      duration: 0.36,
-      ease: [0.22, 1, 0.36, 1],
-    });
-  };
+}: Readonly<SwipeCarouselProps>) {
+  const contextValue = useSwipeCarouselGestures(onSlideChange);
 
   return (
-    <SwipeCarouselContext.Provider
-      value={{ x, progress, trackRef, onPointerDown, onPointerMove, onPointerUp, onPointerCancel }}
-    >
+    <SwipeCarouselContext.Provider value={contextValue}>
       <div className={cn('relative w-screen max-w-full', className)} {...props}>
         {children}
       </div>
@@ -200,7 +54,7 @@ export function SwipeCarousel({
 export function SwipeCarouselContainer({
   className,
   ...props
-}: React.HTMLAttributes<HTMLDivElement>) {
+}: Readonly<React.HTMLAttributes<HTMLDivElement>>) {
   const { onPointerDown, onPointerMove, onPointerUp, onPointerCancel } = useSwipeCarouselContext();
 
   return (

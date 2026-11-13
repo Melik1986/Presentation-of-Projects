@@ -15,7 +15,7 @@ export function StickyCards({
   cards = defaultStickyCardsData,
   className,
   catalogId,
-}: StickyCardsProps) {
+}: Readonly<StickyCardsProps>) {
   const containerRef = useRef<HTMLDivElement>(null);
   const isMobile = useIsMobile();
 

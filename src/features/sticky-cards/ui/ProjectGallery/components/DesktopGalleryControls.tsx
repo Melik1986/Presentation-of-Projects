@@ -2,7 +2,7 @@ import styles from '../ProjectGallery.module.css';
 
 import type { DesktopGalleryControlsProps } from '../types/projectGallery.types';
 
-export function DesktopGalleryControls({ goPrev, goNext, disabled }: DesktopGalleryControlsProps) {
+export function DesktopGalleryControls({ goPrev, goNext, disabled }: Readonly<DesktopGalleryControlsProps>) {
   return (
     <div className={styles.navigation} aria-label="Gallery navigation">
       <button type="button" onClick={goPrev} aria-label="Previous image" disabled={disabled}>

@@ -2,13 +2,24 @@
 
 import { FILTER_IDS } from './microservices.config';
 
+const GLOW_MASK_PATH =
+  'M120 0L120 240C53.7258 240 2.89694e-06 186.274 0 120C-2.89694e-06 53.7258 53.7258 2.89694e-06 120 0Z';
+const GLOW_BLOB_PATH =
+  'M120 75C144.853 75 165 95.1472 165 120C165 144.853 144.853 165 120 165C95.1472 165 75 144.853 75 120C75 95.1472 95.1472 75 120 75Z';
+
+type PathBreakpoint = 'desktop' | 'tablet' | 'mobile';
+
 /**
  * SVG Filters Component
  * Provides glow effects for dots and lines
  */
 export function SvgFilters() {
   return (
-    <svg className="microservices-svg-filters microservices-filters-hidden">
+    <svg
+      className="microservices-svg-filters microservices-filters-hidden"
+      aria-hidden="true"
+      focusable="false"
+    >
       <defs>
         <filter
           id={FILTER_IDS.DOT_GLOW}
@@ -64,159 +75,170 @@ interface PathSvgProps {
   lineColor: string;
 }
 
+interface ConnectionPathSvgProps {
+  nodeId: string;
+  breakpoint: PathBreakpoint;
+  className: string;
+  width: number;
+  height: number;
+  viewBox: string;
+  pathD: string;
+  lineColor: string;
+  strokeWidth?: number;
+}
+
+/**
+ * Traveling glow accent clipped to a connection path.
+ */
+function PathGlowAccent({
+  nodeId,
+  breakpoint,
+  lineColor,
+}: Readonly<{
+  nodeId: string;
+  breakpoint: PathBreakpoint;
+  lineColor: string;
+}>) {
+  const glowMaskId = `${nodeId}-glow-mask-${breakpoint}`;
+
+  return (
+    <g className="microservices-line-accent">
+      <mask
+        id={glowMaskId}
+        className="microservices-mask-alpha"
+        maskUnits="userSpaceOnUse"
+        x="0"
+        y="0"
+        width="120"
+        height="240"
+      >
+        <path d={GLOW_MASK_PATH} fill="white" />
+      </mask>
+      <g mask={`url(#${glowMaskId})`}>
+        <g filter={`url(#${FILTER_IDS.BLUR_GLOW})`}>
+          <path d={GLOW_BLOB_PATH} fill={lineColor} />
+        </g>
+      </g>
+    </g>
+  );
+}
+
+/**
+ * Responsive connection path SVG for one breakpoint.
+ */
+function ConnectionPathSvg({
+  nodeId,
+  breakpoint,
+  className,
+  width,
+  height,
+  viewBox,
+  pathD,
+  lineColor,
+  strokeWidth,
+}: Readonly<ConnectionPathSvgProps>) {
+  const pathMaskId = `${nodeId}-path-mask-${breakpoint}`;
+
+  return (
+    <svg
+      className={className}
+      width={width}
+      height={height}
+      viewBox={viewBox}
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <path d={pathD} stroke="#E8E8E8" strokeWidth={strokeWidth} fill="none" />
+      <mask id={pathMaskId}>
+        <path d={pathD} stroke={lineColor} strokeWidth={strokeWidth} fill="none" />
+      </mask>
+      <g mask={`url(#${pathMaskId})`}>
+        <PathGlowAccent nodeId={nodeId} breakpoint={breakpoint} lineColor={lineColor} />
+      </g>
+    </svg>
+  );
+}
+
+/**
+ * Animated dot with glow trail along a connection.
+ */
+function AnimatedDot({
+  nodeId,
+  lineColor,
+}: Readonly<{ nodeId: string; lineColor: string }>) {
+  const gradientId = `gradient-${nodeId}`;
+
+  return (
+    <svg
+      className={`microservices-dot-glow microservices-dot-${nodeId}`}
+      width="5"
+      height="5"
+      viewBox="0 0 5 5"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <circle cx="2.5" cy="2.5" r="2.5" fill={lineColor} />
+      <g filter={`url(#${FILTER_IDS.DOT_GLOW})`}>
+        <circle cx="2.5" cy="2.5" r="2.5" fill={lineColor} />
+      </g>
+      <g filter={`url(#${FILTER_IDS.LINE_GLOW})`}>
+        <rect x="-40" width="40" height="4" rx="2" fill={`url(#${gradientId})`} />
+      </g>
+      <linearGradient
+        id={gradientId}
+        x1="-40"
+        y1="2.5"
+        x2="0"
+        y2="2.5"
+        gradientUnits="userSpaceOnUse"
+      >
+        <stop stopColor={lineColor} stopOpacity="0" />
+        <stop offset="1" stopColor={lineColor} stopOpacity="0.8" />
+      </linearGradient>
+    </svg>
+  );
+}
+
 /**
  * Animated SVG Path for connection lines
  */
-export function AnimatedPath({ nodeId, pathData, lineColor }: PathSvgProps) {
+export function AnimatedPath({ nodeId, pathData, lineColor }: Readonly<PathSvgProps>) {
   return (
     <>
-      {/* Desktop Path */}
-      <svg
+      <ConnectionPathSvg
+        nodeId={nodeId}
+        breakpoint="desktop"
         className="microservices-path-desktop"
-        width="536"
-        height="280"
+        width={536}
+        height={280}
         viewBox="0 0 536 280"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path d={pathData.desktop} stroke="#E8E8E8" strokeWidth="1.4" fill="none" />
-        <mask id={`${nodeId}-path-mask-desktop`}>
-          <path d={pathData.desktop} stroke={lineColor} strokeWidth="1.4" fill="none" />
-        </mask>
-        <g mask={`url(#${nodeId}-path-mask-desktop)`}>
-          <g className="microservices-line-accent">
-            <mask
-              id={`${nodeId}-glow-mask-desktop`}
-              className="microservices-mask-alpha"
-              maskUnits="userSpaceOnUse"
-              x="0"
-              y="0"
-              width="120"
-              height="240"
-            >
-              <path
-                d="M120 0L120 240C53.7258 240 2.89694e-06 186.274 0 120C-2.89694e-06 53.7258 53.7258 2.89694e-06 120 0Z"
-                fill="white"
-              />
-            </mask>
-            <g mask={`url(#${nodeId}-glow-mask-desktop)`}>
-              <g filter={`url(#${FILTER_IDS.BLUR_GLOW})`}>
-                <path
-                  d="M120 75C144.853 75 165 95.1472 165 120C165 144.853 144.853 165 120 165C95.1472 165 75 144.853 75 120C75 95.1472 95.1472 75 120 75Z"
-                  fill={lineColor}
-                />
-              </g>
-            </g>
-          </g>
-        </g>
-      </svg>
-
-      {/* Tablet Path */}
-      <svg
+        pathD={pathData.desktop}
+        lineColor={lineColor}
+        strokeWidth={1.4}
+      />
+      <ConnectionPathSvg
+        nodeId={nodeId}
+        breakpoint="tablet"
         className="microservices-path-tablet"
-        width="512"
-        height="260"
+        width={512}
+        height={260}
         viewBox="0 0 512 260"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path d={pathData.tablet} stroke="#E8E8E8" fill="none" />
-        <mask id={`${nodeId}-path-mask-tablet`}>
-          <path d={pathData.tablet} stroke={lineColor} fill="none" />
-        </mask>
-        <g mask={`url(#${nodeId}-path-mask-tablet)`}>
-          <g className="microservices-line-accent">
-            <mask
-              id={`${nodeId}-glow-mask-tablet`}
-              className="microservices-mask-alpha"
-              maskUnits="userSpaceOnUse"
-              x="0"
-              y="0"
-              width="120"
-              height="240"
-            >
-              <path
-                d="M120 0L120 240C53.7258 240 2.89694e-06 186.274 0 120C-2.89694e-06 53.7258 53.7258 2.89694e-06 120 0Z"
-                fill="white"
-              />
-            </mask>
-            <g mask={`url(#${nodeId}-glow-mask-tablet)`}>
-              <g filter={`url(#${FILTER_IDS.BLUR_GLOW})`}>
-                <path
-                  d="M120 75C144.853 75 165 95.1472 165 120C165 144.853 144.853 165 120 165C95.1472 165 75 144.853 75 120C75 95.1472 95.1472 75 120 75Z"
-                  fill={lineColor}
-                />
-              </g>
-            </g>
-          </g>
-        </g>
-      </svg>
-
-      {/* Mobile Path */}
-      <svg
+        pathD={pathData.tablet}
+        lineColor={lineColor}
+      />
+      <ConnectionPathSvg
+        nodeId={nodeId}
+        breakpoint="mobile"
         className="microservices-path-mobile"
-        width="320"
-        height="240"
+        width={320}
+        height={240}
         viewBox="0 0 320 240"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path d={pathData.mobile} stroke="#E8E8E8" fill="none" />
-        <mask id={`${nodeId}-path-mask-mobile`}>
-          <path d={pathData.mobile} stroke={lineColor} fill="none" />
-        </mask>
-        <g mask={`url(#${nodeId}-path-mask-mobile)`}>
-          <g className="microservices-line-accent">
-            <mask
-              id={`${nodeId}-glow-mask-mobile`}
-              className="microservices-mask-alpha"
-              maskUnits="userSpaceOnUse"
-              x="0"
-              y="0"
-              width="120"
-              height="240"
-            >
-              <path
-                d="M120 0L120 240C53.7258 240 2.89694e-06 186.274 0 120C-2.89694e-06 53.7258 53.7258 2.89694e-06 120 0Z"
-                fill="white"
-              />
-            </mask>
-            <g mask={`url(#${nodeId}-glow-mask-mobile)`}>
-              <g filter={`url(#${FILTER_IDS.BLUR_GLOW})`}>
-                <path
-                  d="M120 75C144.853 75 165 95.1472 165 120C165 144.853 144.853 165 120 165C95.1472 165 75 144.853 75 120C75 95.1472 95.1472 75 120 75Z"
-                  fill={lineColor}
-                />
-              </g>
-            </g>
-          </g>
-        </g>
-      </svg>
-
-      {/* Animated Dot with Glow */}
-      <svg
-        className={`microservices-dot-glow microservices-dot-${nodeId}`}
-        width="5"
-        height="5"
-        viewBox="0 0 5 5"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <circle cx="2.5" cy="2.5" r="2.5" fill={lineColor} />
-        <g filter={`url(#${FILTER_IDS.DOT_GLOW})`}>
-          <circle cx="2.5" cy="2.5" r="2.5" fill={lineColor} />
-        </g>
-        <g filter={`url(#${FILTER_IDS.LINE_GLOW})`}>
-          <rect x="-40" width="40" height="4" rx="2" fill={`url(#gradient-${nodeId})`} />
-        </g>
-        <linearGradient
-          id={`gradient-${nodeId}`}
-          x1="-40"
-          y1="2.5"
-          x2="0"
-          y2="2.5"
-          gradientUnits="userSpaceOnUse"
-        >
-          <stop stopColor={lineColor} stopOpacity="0" />
-          <stop offset="1" stopColor={lineColor} stopOpacity="0.8" />
-        </linearGradient>
-      </svg>
+        pathD={pathData.mobile}
+        lineColor={lineColor}
+      />
+      <AnimatedDot nodeId={nodeId} lineColor={lineColor} />
     </>
   );
 }

@@ -13,7 +13,7 @@ import {
   SelectValue,
 } from '@/shared/lib/ui/select';
 
-import type { UserFiltersProps, UserRole } from './types';
+import type { UserFiltersProps, UserRoleFilter, UserSortBy } from './types';
 
 /**
  * Role Filter Select
@@ -21,12 +21,12 @@ import type { UserFiltersProps, UserRole } from './types';
 function RoleSelect({
   value,
   onChange,
-}: {
-  value: UserRole | 'all';
-  onChange: (v: UserRole | 'all') => void;
-}) {
+}: Readonly<{
+  value: UserRoleFilter;
+  onChange: (v: UserRoleFilter) => void;
+}>) {
   return (
-    <Select value={value} onValueChange={(v) => onChange(v as UserRole | 'all')}>
+    <Select value={value} onValueChange={(v) => onChange(v as UserRoleFilter)}>
       <SelectTrigger className="w-[140px] bg-white/10 border-white/10 text-white text-xs">
         <SelectValue placeholder="Role" />
       </SelectTrigger>
@@ -46,18 +46,18 @@ function RoleSelect({
 function SortDropdown({
   value,
   onChange,
-}: {
-  value: 'recent' | 'name' | 'email';
-  onChange: (v: 'recent' | 'name' | 'email') => void;
-}) {
-  const sortOptions = [
-    { value: 'recent' as const, label: 'Recent' },
-    { value: 'name' as const, label: 'Name' },
-    { value: 'email' as const, label: 'Email' },
+}: Readonly<{
+  value: UserSortBy;
+  onChange: (v: UserSortBy) => void;
+}>) {
+  const sortOptions: ReadonlyArray<{ value: UserSortBy; label: string }> = [
+    { value: 'recent', label: 'Recent' },
+    { value: 'name', label: 'Name' },
+    { value: 'email', label: 'Email' },
   ];
 
   return (
-    <Select value={value} onValueChange={(v) => onChange(v as 'recent' | 'name' | 'email')}>
+    <Select value={value} onValueChange={(v) => onChange(v as UserSortBy)}>
       <SelectTrigger className="w-[110px] bg-white/10 border-white/10 text-white text-xs">
         <SelectValue placeholder="Sort" />
       </SelectTrigger>
@@ -75,7 +75,7 @@ function SortDropdown({
 /**
  * Search Input
  */
-function SearchInput({ value, onChange }: { value: string; onChange: (v: string) => void }) {
+function SearchInput({ value, onChange }: Readonly<{ value: string; onChange: (v: string) => void }>) {
   return (
     <div className="flex-1 relative h-10">
       <Search className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-slate-400 pointer-events-none z-10" />
@@ -94,7 +94,7 @@ function SearchInput({ value, onChange }: { value: string; onChange: (v: string)
  * User Filters Component
  * Adapted from ProjectsFilter with Role filters, Search, Sort, and Create button
  */
-export function UserFilters({ filters, onFilterChange, onCreateNew }: UserFiltersProps) {
+export function UserFilters({ filters, onFilterChange, onCreateNew }: Readonly<UserFiltersProps>) {
   return (
     <Card className="rounded-xl p-3 bg-white/5 backdrop-blur-xl border-white/10">
       <div className="flex flex-col sm:flex-row gap-3">

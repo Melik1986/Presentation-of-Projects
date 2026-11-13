@@ -23,9 +23,27 @@ const LEVELS: Record<LogLevel, number> = {
   fatal: 60,
 };
 
+const CONSOLE_METHODS: Record<LogLevel, 'error' | 'warn' | 'log'> = {
+  trace: 'log',
+  debug: 'log',
+  info: 'log',
+  warn: 'warn',
+  error: 'error',
+  fatal: 'error',
+};
+
+const LEVEL_EMOJI: Record<LogLevel, string> = {
+  trace: '🔍',
+  debug: '🐛',
+  info: 'ℹ️',
+  warn: '⚠️',
+  error: '❌',
+  fatal: '💀',
+};
+
 class Logger {
-  private minLevel: number;
-  private enabled: boolean;
+  private readonly minLevel: number;
+  private readonly enabled: boolean;
   private context: string;
 
   constructor(options: LoggerOptions = {}, context = '') {
@@ -63,17 +81,27 @@ class Logger {
     return this.enabled && level >= this.minLevel;
   }
 
+  private formatContextSuffix(): string {
+    if (!this.context) {
+      return '';
+    }
+    return ` [${this.context}]`;
+  }
+
+  private formatTimerLabel(label: string): string {
+    if (!this.context) {
+      return label;
+    }
+    return `[${this.context}] ${label}`;
+  }
+
   private log(level: LogLevel, ...parts: unknown[]): void {
     if (!this.shouldLog(LEVELS[level])) return;
 
-    const consoleMethod =
-      level === 'fatal' || level === 'error' ? 'error' : level === 'warn' ? 'warn' : 'log';
-    const emoji = { trace: '🔍', debug: '🐛', info: 'ℹ️', warn: '⚠️', error: '❌', fatal: '💀' }[
-      level
-    ];
+    const consoleMethod = CONSOLE_METHODS[level];
+    const emoji = LEVEL_EMOJI[level];
     const timeStr = new Date().toISOString().split('T')[1]?.slice(0, -1);
-
-    const prefix = `${emoji} [${timeStr}]${this.context ? ` [${this.context}]` : ''}`;
+    const prefix = `${emoji} [${timeStr}]${this.formatContextSuffix()}`;
 
     console[consoleMethod](prefix, ...parts);
   }
@@ -104,13 +132,13 @@ class Logger {
 
   time(label: string): void {
     if (this.enabled) {
-      console.time(`${this.context ? `[${this.context}] ` : ''}${label}`);
+      console.time(this.formatTimerLabel(label));
     }
   }
 
   timeEnd(label: string): void {
     if (this.enabled) {
-      console.timeEnd(`${this.context ? `[${this.context}] ` : ''}${label}`);
+      console.timeEnd(this.formatTimerLabel(label));
     }
   }
 }

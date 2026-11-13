@@ -31,13 +31,13 @@ export function useFolderInteraction({
 
   const handleFolderHover = useCallback(
     (catalogId: string) => {
-      void previewCatalog(catalogId);
+      previewCatalog(catalogId);
     },
     [previewCatalog]
   );
 
   const handleFolderLeave = useCallback(() => {
-    void setHome();
+    setHome();
   }, [setHome]);
 
   const handleFolderClick = useCallback(
@@ -51,14 +51,14 @@ export function useFolderInteraction({
       }
       e.preventDefault();
       setActiveFolderId(catalogId);
-      void previewCatalog(catalogId);
+      previewCatalog(catalogId);
     },
     [activeFolderId, previewCatalog]
   );
 
   const resetActiveFolder = useCallback(() => {
     setActiveFolderId(null);
-    void setHome();
+    setHome();
   }, [setHome]);
 
   return {

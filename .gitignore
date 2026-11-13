@@ -48,6 +48,9 @@ next-env.d.ts
 # Cursor
 .cursor
 
+# Local tooling binaries (e.g. repaired Aikido SCA)
+.tools/
+
 # OS
 Thumbs.db
 

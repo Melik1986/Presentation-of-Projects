@@ -20,13 +20,15 @@ export interface SelectProps {
   children: React.ReactNode;
 }
 
-export function Select({ value, onValueChange, children }: SelectProps) {
+export function Select({ value, onValueChange, children }: Readonly<SelectProps>) {
   const [open, setOpen] = React.useState(false);
+  const contextValue = React.useMemo(
+    () => ({ value, onValueChange, open, setOpen }),
+    [value, onValueChange, open]
+  );
 
   return (
-    <SelectContext.Provider value={{ value, onValueChange, open, setOpen }}>
-      {children}
-    </SelectContext.Provider>
+    <SelectContext.Provider value={contextValue}>{children}</SelectContext.Provider>
   );
 }
 
@@ -40,6 +42,8 @@ export const SelectTrigger = React.forwardRef<
     <button
       ref={ref}
       type="button"
+      aria-expanded={context?.open}
+      aria-haspopup="menu"
       className={cn(
         'flex h-9 w-full items-center justify-between rounded-md border border-white/10 bg-white/5 px-3 py-2 text-sm text-white',
         'focus:outline-none focus:ring-2 focus:ring-primary/50',
@@ -69,9 +73,15 @@ export const SelectContent = React.forwardRef<HTMLDivElement, React.HTMLAttribut
 
     return (
       <>
-        <div className="fixed inset-0 z-40" onClick={() => context.setOpen(false)} />
+        <button
+          type="button"
+          aria-label="Close select"
+          className="fixed inset-0 z-40 cursor-default"
+          onClick={() => context.setOpen(false)}
+        />
         <div
           ref={ref}
+          role="menu"
           className={cn(
             'absolute z-50 mt-1 min-w-[8rem] overflow-hidden rounded-md border border-white/10 bg-slate-900 p-1 shadow-md',
             'animate-in fade-in-0 zoom-in-95',
@@ -89,16 +99,18 @@ export const SelectContent = React.forwardRef<HTMLDivElement, React.HTMLAttribut
 SelectContent.displayName = 'SelectContent';
 
 export const SelectItem = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement> & { value: string }
+  HTMLButtonElement,
+  React.ButtonHTMLAttributes<HTMLButtonElement> & { value: string }
 >(({ className, children, value, ...props }, ref) => {
   const context = React.useContext(SelectContext);
 
   return (
-    <div
+    <button
+      type="button"
       ref={ref}
+      role="menuitem"
       className={cn(
-        'relative flex cursor-pointer select-none items-center rounded-sm px-2 py-1.5 text-sm text-slate-300',
+        'relative flex w-full cursor-pointer select-none items-center rounded-sm px-2 py-1.5 text-left text-sm text-slate-300',
         'hover:bg-emerald-500/10 hover:text-emerald-400 focus:bg-emerald-500/10 focus:text-emerald-400',
         'transition-colors duration-200',
         'outline-none',
@@ -111,7 +123,7 @@ export const SelectItem = React.forwardRef<
       {...props}
     >
       {children}
-    </div>
+    </button>
   );
 });
 

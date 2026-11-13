@@ -28,6 +28,23 @@ import type {
 
 const logger = createLogger().child({ module: 'AudioDirector' });
 
+/**
+ * Converts unknown throwables into a readable message (avoids "[object Object]").
+ */
+function formatUnknownError(error: unknown): string {
+  if (error instanceof Error) {
+    return error.message;
+  }
+  if (typeof error === 'string') {
+    return error;
+  }
+  try {
+    return JSON.stringify(error) ?? 'Unknown error';
+  } catch {
+    return 'Unknown error';
+  }
+}
+
 type TrackSetup = {
   id: string;
   url: string;
@@ -410,7 +427,7 @@ class AudioDirector {
    * Handles track loading error
    */
   private handleTrackError(id: string, url: string, error: unknown): void {
-    const errorMsg = error instanceof Error ? error.message : String(error);
+    const errorMsg = formatUnknownError(error);
 
     // Silent fail for SoundCloud timeout in dev (CORS/localhost issues)
     if (errorMsg.includes('SoundCloud') && errorMsg.includes('timeout')) {

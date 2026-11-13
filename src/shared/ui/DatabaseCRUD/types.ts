@@ -13,6 +13,16 @@ export type UserRole = 'admin' | 'user' | 'guest';
 export type UserStatus = 'active' | 'inactive' | 'pending';
 
 /**
+ * Sort options for the user table
+ */
+export type UserSortBy = 'recent' | 'name' | 'email';
+
+/**
+ * Role filter including the "all" sentinel
+ */
+export type UserRoleFilter = UserRole | 'all';
+
+/**
  * Database User Interface
  */
 export interface DatabaseUser {
@@ -31,10 +41,10 @@ export interface DatabaseUser {
  * CRUD Filters
  */
 export interface CRUDFilters {
-  role?: UserRole | 'all';
+  role?: UserRoleFilter;
   status?: UserStatus | 'all';
   searchQuery?: string;
-  sortBy?: 'recent' | 'name' | 'email';
+  sortBy?: UserSortBy;
 }
 
 /**

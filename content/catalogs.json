@@ -43,7 +43,7 @@
             "slides": [
               {
                 "title": "Personal Knowledge Library",
-                "description": "Every message, link, or file sent to the bot appears instantly in the library. Full-text search with filters, language toggle (RU / EN), and type icons keep hundreds of items navigable.",
+                "description": "Any message, link, or file sent to the bot appears instantly in the library. Full-text search with filters, multilingual support, and type-specific icons make it easy to navigate through hundreds of saved items.",
                 "image": "/img/catalog-1/card-7/Telegramm-Agent.l-1.png",
                 "srcSet": "/img/catalog-1/card-7/Telegramm-Agent.l-1.png 1x, /img/catalog-1/card-7/Telegramm-Agent.l@2x-1.png 2x",
                 "mobileImage": "/img/catalog-1/card-7/Telegramm-Agent.s-2.png",
@@ -59,7 +59,7 @@
               },
               {
                 "title": "Voice Search",
-                "description": "Tap the mic, speak a query — Whisper transcribes it on the server and runs a hybrid FTS & pgvector search. The recording is a query only; it is never stored as a library item.",
+                "description": "Tap the mic, speak a query — Whisper transcribes it on the server and runs a hybrid FTS & pgvector search.",
                 "image": "/img/catalog-1/card-7/Telegramm-Agent.l.png",
                 "srcSet": "/img/catalog-1/card-7/Telegramm-Agent.l.png 1x, /img/catalog-1/card-7/Telegramm-Agent.l@2x.png 2x",
                 "mobileImage": "/img/catalog-1/card-7/Telegramm-Agent.s-3.png",
@@ -85,7 +85,7 @@
             "slides": [
               {
                 "title": "E&D CarService — Modern Showcase",
-                "description": "Full-featured digital platform for a Rotterdam auto repair center: responsive high-performance UI with GSAP animations, transparent service catalog, and interactive Google Maps integration.",
+                "description": "Full-featured digital platform auto repair center: responsive high-performance UI with GSAP animations, service catalog, and interactive Google Maps integration.",
                 "image": "/img/catalog-1/card-1/AutoService.l.png",
                 "srcSet": "/img/catalog-1/card-1/AutoService.l.png 1x, /img/catalog-1/card-1/AutoService.l@2x.png 2x",
                 "mobileImage": "/img/catalog-1/card-1/AutoService.s.png",
@@ -93,7 +93,7 @@
               },
               {
                 "title": "Cloud Ecosystem & Security",
-                "description": "Production-grade full-stack architecture: React 19 and Vite on Vercel, modular NestJS 11 and Fastify on Railway, Supabase PostgreSQL with Row Level Security (RLS), and Sentry observability.",
+                "description": "Production-grade full-stack architecture: React 19 and Vite, modular NestJS 11 and Fastify, Supabase PostgreSQL with Row Level Security (RLS), and Sentry observability.",
                 "image": "/img/catalog-1/card-1/card-1.png"
               },
               {
@@ -118,17 +118,17 @@
             "slides": [
               {
                 "title": "Voice-First ERP Operations",
-                "description": "Hands-free inventory checks, order creation, and stock queries powered by Whisper audio transcription and LLM function calling.",
+                "description": "Voice-controlled inventory checks, order creation, and stock queries powered by Whisper audio transcription and LLM function calling.",
                 "image": "/img/catalog-1/card-2/vstah.ai-3.png"
               },
               {
                 "title": "Real-Time Analytics & Vision AI",
-                "description": "Automated document processing via GPT-4o Vision for price tags and invoices, paired with real-time revenue and sales performance metrics.",
+                "description": "Automated document processing via GPT Vision for price tags and invoices, paired with real-time revenue and sales performance metrics.",
                 "image": "/img/catalog-1/card-2/vstah.ai-1.png"
               },
               {
                 "title": "Zero-Knowledge Privacy & Connectors",
-                "description": "On-device JWE encryption, Qdrant vector RAG knowledge base, and universal connectors for 1C:Enterprise, SAP, and Odoo via OpenAPI and OData.",
+                "description": "On-device JWE encryption, Qdrant vector RAG knowledge base, and universal connectors for 1C:Enterprise, SAP, and Odoo via OpenAPI and OData protocols.",
                 "image": "/img/catalog-1/card-2/vstah.ai-2.png"
               },
               {
@@ -172,7 +172,7 @@
               },
               {
                 "title": "Next.js 16 Architecture & Multilingual i18n",
-                "description": "High-performance stack built with Next.js 16 App Router, Bun runtime, Tailwind CSS 4, and TypeScript. Full trilingual localization (EN, UK, RU) via next-intl, TanStack Query v5, and Zustand.",
+                "description": "A high-performance stack built using the Next.js 16 App Router, the Bun runtime, Tailwind CSS 4, and TypeScript. It features full multilingual support via `next-intl` and incorporates TanStack Query v5 and Zustand.",
                 "image": "/img/catalog-1/card-3/FlowBrief-Power.l-3.png",
                 "srcSet": "/img/catalog-1/card-3/FlowBrief-Power.l-3.png 1x, /img/catalog-1/card-3/FlowBrief-Power.l@2x-3.png 2x",
                 "mobileImage": "/img/catalog-1/card-3/FlowBrief-Power.s-3.png",
@@ -232,7 +232,7 @@
             "slides": [
               {
                 "title": "Church Voskresenie — Community Hub",
-                "description": "Modern multilingual platform for the Duisburg church community, engineered with Astro, TypeScript, and Tailwind CSS v4 for ultra-fast static performance, minimal JavaScript payload, and seamless content delivery.",
+                "description": "Modern multilingual platform church community, engineered with Astro, TypeScript, and Tailwind CSS v4 for ultra-fast static performance, minimal JavaScript payload, and seamless content delivery.",
                 "image": "/img/catalog-1/card-5/Church.l.png",
                 "srcSet": "/img/catalog-1/card-5/Church.l.png 1x, /img/catalog-1/card-5/Church.l@2x.png 2x",
                 "mobileImage": "/img/catalog-1/card-5/Church.s.png",

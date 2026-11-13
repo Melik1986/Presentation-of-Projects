@@ -18,7 +18,7 @@ export interface SocialIconsProps {
   className?: string;
 }
 
-export function SocialIcons({ items, className }: SocialIconsProps) {
+export function SocialIcons({ items, className }: Readonly<SocialIconsProps>) {
   const containerRef = useRef<HTMLUListElement>(null);
 
   useSocialIconsAnimation(containerRef);

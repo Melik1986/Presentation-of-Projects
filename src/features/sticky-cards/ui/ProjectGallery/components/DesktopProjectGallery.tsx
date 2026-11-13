@@ -8,7 +8,7 @@ import { ProjectGalleryFrame } from './ProjectGalleryFrame';
 
 import type { DesktopProjectGalleryProps } from '../types/projectGallery.types';
 
-export function DesktopProjectGallery({ title, description, slides }: DesktopProjectGalleryProps) {
+export function DesktopProjectGallery({ title, description, slides }: Readonly<DesktopProjectGalleryProps>) {
   const gallery = useDesktopProjectGallery(slides.length);
   const currentSlide = slides[gallery.currentIndex];
   if (!currentSlide) {
@@ -61,20 +61,13 @@ export function DesktopProjectGallery({ title, description, slides }: DesktopPro
         onEntranceComplete={gallery.completeEntrance}
       />
 
-      <div
+      <progress
         className={styles.progressTrack}
-        role="progressbar"
+        max={100}
+        value={gallery.progress}
         aria-label="Time until next gallery image"
-        aria-valuemin={0}
-        aria-valuemax={100}
-        aria-valuenow={Math.round(gallery.progress)}
         data-gallery-autoplay-progress
-      >
-        <div
-          className={styles.progressFill}
-          style={{ transform: `scaleX(${gallery.progress / 100})` }}
-        />
-      </div>
+      />
     </section>
   );
 }

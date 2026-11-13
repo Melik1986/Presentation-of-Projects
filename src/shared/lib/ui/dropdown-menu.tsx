@@ -15,19 +15,18 @@ export interface DropdownMenuProps {
   children: React.ReactNode;
 }
 
-export function DropdownMenu({ children }: DropdownMenuProps) {
+export function DropdownMenu({ children }: Readonly<DropdownMenuProps>) {
   const [open, setOpen] = React.useState(false);
+  const value = React.useMemo(() => ({ open, setOpen }), [open]);
 
   return (
-    <DropdownMenuContext.Provider value={{ open, setOpen }}>
-      {children}
-    </DropdownMenuContext.Provider>
+    <DropdownMenuContext.Provider value={value}>{children}</DropdownMenuContext.Provider>
   );
 }
 
 export const DropdownMenuTrigger = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement> & { asChild?: boolean }
+  HTMLButtonElement,
+  React.ButtonHTMLAttributes<HTMLButtonElement> & { asChild?: boolean }
 >(({ className, children, asChild, ...props }, ref) => {
   const context = React.useContext(DropdownMenuContext);
 
@@ -45,9 +44,17 @@ export const DropdownMenuTrigger = React.forwardRef<
   }
 
   return (
-    <div ref={ref} className={className} onClick={handleClick} {...props}>
+    <button
+      type="button"
+      ref={ref}
+      className={className}
+      onClick={handleClick}
+      aria-expanded={context?.open}
+      aria-haspopup="menu"
+      {...props}
+    >
       {children}
-    </div>
+    </button>
   );
 });
 
@@ -62,9 +69,15 @@ export const DropdownMenuContent = React.forwardRef<
 
   return (
     <>
-      <div className="fixed inset-0 z-40" onClick={() => context.setOpen(false)} />
+      <button
+        type="button"
+        aria-label="Close menu"
+        className="fixed inset-0 z-40 cursor-default"
+        onClick={() => context.setOpen(false)}
+      />
       <div
         ref={ref}
+        role="menu"
         className={cn(
           'absolute z-50 mt-2 min-w-[8rem] overflow-hidden rounded-md border border-white/10 bg-slate-900 p-1 shadow-md',
           'animate-in fade-in-0 zoom-in-95',
@@ -82,18 +95,20 @@ export const DropdownMenuContent = React.forwardRef<
 DropdownMenuContent.displayName = 'DropdownMenuContent';
 
 export const DropdownMenuItem = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement> & { asChild?: boolean }
+  HTMLButtonElement,
+  React.ButtonHTMLAttributes<HTMLButtonElement> & { asChild?: boolean }
 >(({ className, children, asChild, ...props }, ref) => {
   if (asChild && React.isValidElement(children)) {
     return children;
   }
 
   return (
-    <div
+    <button
+      type="button"
       ref={ref}
+      role="menuitem"
       className={cn(
-        'relative flex cursor-pointer select-none items-center rounded-sm px-2 py-1.5 text-sm',
+        'relative flex w-full cursor-pointer select-none items-center rounded-sm px-2 py-1.5 text-left text-sm',
         'hover:bg-white/5 focus:bg-white/5',
         'outline-none',
         className
@@ -101,7 +116,7 @@ export const DropdownMenuItem = React.forwardRef<
       {...props}
     >
       {children}
-    </div>
+    </button>
   );
 });
 

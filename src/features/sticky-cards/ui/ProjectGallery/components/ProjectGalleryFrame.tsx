@@ -39,7 +39,7 @@ export function ProjectGalleryFrame({
   animated = false,
   reduceMotion = false,
   onEntranceComplete,
-}: ProjectGalleryFrameProps) {
+}: Readonly<ProjectGalleryFrameProps>) {
   return (
     <div className={styles.galleryFrame} data-project-gallery-frame>
       {animated ? (

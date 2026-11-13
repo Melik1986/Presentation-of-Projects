@@ -11,49 +11,58 @@ interface DialogContextValue {
 
 const DialogContext = React.createContext<DialogContextValue | undefined>(undefined);
 
+const NOOP_OPEN_CHANGE = (_open: boolean): void => {
+  // controlled Dialog without onOpenChange — intentional no-op
+};
+
 export interface DialogProps {
   open?: boolean;
   onOpenChange?: (open: boolean) => void;
   children: React.ReactNode;
 }
 
-export function Dialog({ open, onOpenChange, children }: DialogProps) {
-  return (
-    <DialogContext.Provider
-      value={{ open: open || false, onOpenChange: onOpenChange || (() => {}) }}
-    >
-      {children}
-    </DialogContext.Provider>
+export function Dialog({ open, onOpenChange, children }: Readonly<DialogProps>) {
+  const value = React.useMemo(
+    () => ({
+      open: open ?? false,
+      onOpenChange: onOpenChange ?? NOOP_OPEN_CHANGE,
+    }),
+    [open, onOpenChange]
   );
+
+  return <DialogContext.Provider value={value}>{children}</DialogContext.Provider>;
 }
 
-export interface DialogContentProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface DialogContentProps extends React.DialogHTMLAttributes<HTMLDialogElement> {
   children: React.ReactNode;
 }
 
-export const DialogContent = React.forwardRef<HTMLDivElement, DialogContentProps>(
+export const DialogContent = React.forwardRef<HTMLDialogElement, DialogContentProps>(
   ({ className, children, ...props }, ref) => {
     const context = React.useContext(DialogContext);
     if (!context?.open) return null;
 
     return (
       <>
-        <div
-          className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm"
+        <button
+          type="button"
+          aria-label="Close dialog"
+          className="fixed inset-0 z-50 cursor-default bg-black/80 backdrop-blur-sm"
           onClick={() => context.onOpenChange(false)}
         />
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-          <div
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 pointer-events-none">
+          <dialog
             ref={ref}
+            open
             className={cn(
-              'relative w-full max-w-lg rounded-xl border border-white/10 bg-slate-900 p-6 shadow-lg',
+              'pointer-events-auto relative m-0 w-full max-w-lg rounded-xl border border-white/10 bg-slate-900 p-6 shadow-lg',
               'animate-in fade-in-0 zoom-in-95',
               className
             )}
             {...props}
           >
             {children}
-          </div>
+          </dialog>
         </div>
       </>
     );
@@ -84,9 +93,15 @@ export const DialogFooter = ({ className, ...props }: React.HTMLAttributes<HTMLD
 
 DialogFooter.displayName = 'DialogFooter';
 
-export const DialogTitle = ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => {
+export const DialogTitle = ({
+  className,
+  children,
+  ...props
+}: React.HTMLAttributes<HTMLHeadingElement>) => {
   return (
-    <h2 className={cn('text-lg font-semibold leading-none tracking-tight', className)} {...props} />
+    <h2 className={cn('text-lg font-semibold leading-none tracking-tight', className)} {...props}>
+      {children}
+    </h2>
   );
 };
 
