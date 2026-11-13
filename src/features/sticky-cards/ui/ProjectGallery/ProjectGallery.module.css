@@ -203,6 +203,28 @@
   backdrop-filter: blur(2rem);
 }
 
+.mobileDescriptionToggle {
+  display: inline-flex;
+  margin-top: 0.75rem;
+  padding: 0 0 0.15rem;
+  border: 0;
+  border-bottom: 1px dashed currentColor;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+.mobileDescriptionToggle:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 0.25rem;
+}
+
+.mobileDescriptionToggle:hover,
+.mobileDescriptionToggle:focus-visible {
+  color: var(--accent-color, #3b82f6);
+}
+
 .mobileSlideContent p {
   margin-top: 0.5rem;
 }

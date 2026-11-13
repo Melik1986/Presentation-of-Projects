@@ -309,7 +309,8 @@
     top: auto;
     left: auto;
     transform: none;
-    margin: 5rem auto 1rem;
+    /* Slightly above viewport mid; max() keeps clear of fixed social/audio chrome */
+    margin: max(6.5rem, calc(36svh - 3.5rem)) auto 2rem;
     padding: 0 1rem;
   }
 

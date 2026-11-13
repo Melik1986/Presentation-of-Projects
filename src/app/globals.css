@@ -144,8 +144,9 @@ html.preloader-ready {
 /* Audio UI Panel - Always top-right with slide-in animation */
 .audio-panel-fixed {
   position: fixed;
-  top: 2rem;
-  right: 2rem;
+  /* Match SocialIcons inset (desktop: 20px) */
+  top: 20px;
+  right: 20px;
   z-index: 10000;
   max-width: 200px;
   background: transparent;
@@ -170,6 +171,9 @@ html.preloader-ready {
 
 @media (max-width: 768px) {
   .audio-panel-fixed {
+    /* Match SocialIcons mobile inset (15px) */
+    top: 15px;
+    right: 15px;
     height: 80px;
     padding: 0.5rem;
     width: 180px;

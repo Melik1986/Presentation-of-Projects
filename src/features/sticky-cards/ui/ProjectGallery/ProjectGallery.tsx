@@ -17,6 +17,10 @@ import {
   SwipeCarouselProgress,
   SwipeCarouselTrack,
 } from './SwipeCarousel';
+import {
+  isMobileDescriptionExpanded,
+  toggleMobileDescription,
+} from '../../model/mobileGalleryDescription';
 import { createProjectGallerySlides } from '../../model/projectGallery';
 
 import type { ProjectGalleryProps } from './types/projectGallery.types';
@@ -28,19 +32,27 @@ function MobileProjectGallery({
   slides,
 }: Omit<ProjectGalleryProps, 'images' | 'slidesData'> & { slides: ProjectGallerySlide[] }) {
   const [activeSlideIndex, setActiveSlideIndex] = useState(0);
+  const [expandedSlideIndex, setExpandedSlideIndex] = useState<number | null>(null);
+
+  const handleSlideChange = (nextSlideIndex: number) => {
+    setActiveSlideIndex(nextSlideIndex);
+    setExpandedSlideIndex(null);
+  };
 
   return (
     <SwipeCarousel
       className={styles.mobileCarousel}
       aria-label={`${title} image gallery`}
       data-project-gallery-mobile
-      onSlideChange={setActiveSlideIndex}
+      onSlideChange={handleSlideChange}
     >
       <SwipeCarouselContainer className={styles.mobileViewport}>
         <SwipeCarouselTrack className={styles.mobileTrack}>
           {slides.map((slide, index) => {
             const imageLabel = `Image ${String(index + 1).padStart(2, '0')} / ${slides.length}`;
             const isActive = index === activeSlideIndex;
+            const isExpanded = isMobileDescriptionExpanded(expandedSlideIndex, index);
+            const descriptionId = `${slide.id}-description`;
 
             return (
               <ProjectGalleryReveal
@@ -54,7 +66,24 @@ function MobileProjectGallery({
                 <ProjectGalleryRevealContent className={styles.mobileSlideContent}>
                   <span>{imageLabel}</span>
                   <h3>{slide.title || title}</h3>
-                  <p>{slide.description || description}</p>
+                  <button
+                    type="button"
+                    className={styles.mobileDescriptionToggle}
+                    aria-expanded={isExpanded}
+                    aria-controls={descriptionId}
+                    onPointerDown={(event) => event.stopPropagation()}
+                    onClick={(event) => {
+                      event.stopPropagation();
+                      setExpandedSlideIndex((currentIndex) =>
+                        toggleMobileDescription(currentIndex, index)
+                      );
+                    }}
+                  >
+                    {isExpanded ? 'Collapse' : 'Next'}
+                  </button>
+                  <p id={descriptionId} hidden={!isExpanded}>
+                    {slide.description || description}
+                  </p>
                 </ProjectGalleryRevealContent>
               </ProjectGalleryReveal>
             );
