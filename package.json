@@ -54,10 +54,7 @@
     "typescript": "^7.0.2"
   },
   "overrides": {
-    "open": "11.0.4",
-    "@ts-morph/common": {
-      "minimatch": "11.0.1"
-    }
+    "open": "11.0.4"
   },
   "engines": {
     "node": "26.13.0"

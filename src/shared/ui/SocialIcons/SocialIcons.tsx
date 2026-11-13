@@ -32,7 +32,6 @@ export function SocialIcons({ items, className }: Readonly<SocialIconsProps>) {
             target="_blank"
             rel="noopener noreferrer"
             aria-label={`Visit ${item.name}`}
-            aria-expanded={index === 0 ? false : undefined}
             aria-haspopup={index === 0 ? 'true' : undefined}
           >
             <span className={styles.icon}>{item.icon}</span>

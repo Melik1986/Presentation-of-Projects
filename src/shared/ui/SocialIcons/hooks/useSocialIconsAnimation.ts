@@ -11,10 +11,14 @@ type IconTimelines = {
 };
 
 /**
- * True when primary input has no reliable hover (phones/tablets).
+ * Hover is trustworthy only when the primary input can hover.
  */
-function isTouchUi(): boolean {
-  return window.matchMedia('(hover: none), (pointer: coarse)').matches;
+function canHoverUi(): boolean {
+  return window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+}
+
+function isTouchPointer(event: PointerEvent): boolean {
+  return event.pointerType === 'touch' || event.pointerType === 'pen';
 }
 
 /**
@@ -67,8 +71,8 @@ function buildTimelines(items: HTMLElement[], offsets: number[]): IconTimelines 
 
 /**
  * GSAP animation for social icons reveal.
- * Desktop: hover expands / leave collapses.
- * Touch: first tap on the lead icon expands (no navigation); second tap follows the link.
+ * Desktop mouse: hover expands / leave collapses.
+ * Touch/pen: first tap on the lead icon expands (no navigation); second tap follows the link.
  */
 export function useSocialIconsAnimation(containerRef: RefObject<HTMLUListElement | null>): void {
   useGSAP(
@@ -84,15 +88,20 @@ export function useSocialIconsAnimation(containerRef: RefObject<HTMLUListElement
       const offsets = stackIconsBehindFirst(container, items);
       const { reveal, collapse } = buildTimelines(items, offsets);
       const firstLink = container.querySelector('li:first-child a');
+      if (!(firstLink instanceof HTMLAnchorElement)) return;
+
+      firstLink.setAttribute('aria-expanded', 'false');
 
       let expanded = false;
+      /** Blocks the click that follows a touch expand gesture (synthetic mouseenter race). */
+      let blockNextNavigation = false;
 
       const open = () => {
         collapse.pause();
         reveal.restart();
         expanded = true;
         container.dataset.expanded = 'true';
-        firstLink?.setAttribute('aria-expanded', 'true');
+        firstLink.setAttribute('aria-expanded', 'true');
       };
 
       const close = () => {
@@ -100,7 +109,8 @@ export function useSocialIconsAnimation(containerRef: RefObject<HTMLUListElement
         collapse.restart();
         expanded = false;
         delete container.dataset.expanded;
-        firstLink?.setAttribute('aria-expanded', 'false');
+        firstLink.setAttribute('aria-expanded', 'false');
+        blockNextNavigation = false;
       };
 
       const onMouseEnter = () => {
@@ -111,30 +121,45 @@ export function useSocialIconsAnimation(containerRef: RefObject<HTMLUListElement
         close();
       };
 
-      const onFirstClick = (event: Event) => {
-        if (!isTouchUi()) return;
+      const onFirstPointerDown = (event: PointerEvent) => {
+        if (!isTouchPointer(event)) return;
         if (expanded) return;
-        event.preventDefault();
+        // Expand on touchstart; suppress the forthcoming click navigation.
+        blockNextNavigation = true;
         open();
       };
 
-      const onDocumentPointer = (event: Event) => {
-        if (!expanded || !isTouchUi()) return;
-        const target = event.target;
-        if (!(target instanceof Node) || container.contains(target)) return;
+      const onFirstClick = (event: MouseEvent) => {
+        if (!blockNextNavigation) return;
+        event.preventDefault();
+        blockNextNavigation = false;
+      };
+
+      const onDocumentPointer = (event: PointerEvent) => {
+        if (!expanded) return;
+        if (!(event.target instanceof Node) || container.contains(event.target)) return;
+        // Outside tap/click collapses (touch + mouse).
         close();
       };
 
-      container.addEventListener('mouseenter', onMouseEnter);
-      container.addEventListener('mouseleave', onMouseLeave);
-      firstLink?.addEventListener('click', onFirstClick);
+      firstLink.addEventListener('pointerdown', onFirstPointerDown);
+      firstLink.addEventListener('click', onFirstClick);
       document.addEventListener('pointerdown', onDocumentPointer);
 
+      const hoverOk = canHoverUi();
+      if (hoverOk) {
+        container.addEventListener('mouseenter', onMouseEnter);
+        container.addEventListener('mouseleave', onMouseLeave);
+      }
+
       return () => {
-        container.removeEventListener('mouseenter', onMouseEnter);
-        container.removeEventListener('mouseleave', onMouseLeave);
-        firstLink?.removeEventListener('click', onFirstClick);
+        firstLink.removeEventListener('pointerdown', onFirstPointerDown);
+        firstLink.removeEventListener('click', onFirstClick);
         document.removeEventListener('pointerdown', onDocumentPointer);
+        if (hoverOk) {
+          container.removeEventListener('mouseenter', onMouseEnter);
+          container.removeEventListener('mouseleave', onMouseLeave);
+        }
         reveal.kill();
         collapse.kill();
       };
