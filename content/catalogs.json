@@ -349,7 +349,7 @@
             "slides": [
               {
                 "title": "InvestMinds — Mobile Trading & Traction",
-                "description": "Interactive fintech trading prototype and investor validation suite for InvestMinds. Features real-time stock market watchlists (NVDA, AAPL, PLTR), portfolio net-worth tracking, and onboarding flows tested across beginner and pro investor segments.",
+                "description": "Interactive fintech trading prototype and investor validation suite. Features real-time stock market watchlists (NVDA, AAPL, PLTR), portfolio net-worth tracking, and onboarding flows tested across beginner and pro investor segments.",
                 "image": "/img/catalog-3/figma-design.l.png",
                 "srcSet": "/img/catalog-3/figma-design.l.png 1x, /img/catalog-3/figma-design.l@2x.png 2x",
                 "mobileImage": "/img/catalog-3/figma-design.s-1.png",

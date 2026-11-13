@@ -76,11 +76,13 @@ const nextConfig: NextConfig = {
             key: 'Content-Security-Policy',
             value: [
               "default-src 'self'",
-              "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://www.youtube.com https://w.soundcloud.com https://vercel.live",
+              // va.vercel-scripts.com: Speed Insights debug script in local/dev
+              "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://www.youtube.com https://w.soundcloud.com https://vercel.live https://va.vercel-scripts.com",
               "style-src 'self' 'unsafe-inline'",
               "img-src 'self' data: https: blob:",
               "font-src 'self' data:",
-              "connect-src 'self' https://www.youtube.com https://api.soundcloud.com https://w.soundcloud.com https://unpkg.com https://www.gstatic.com https://vercel.live wss://ws-us3.pusher.com",
+              // vitals + va: Speed Insights ingest (dev uses third-party; prod is mostly 'self')
+              "connect-src 'self' https://www.youtube.com https://api.soundcloud.com https://w.soundcloud.com https://unpkg.com https://www.gstatic.com https://vercel.live https://va.vercel-scripts.com https://vitals.vercel-insights.com wss://ws-us3.pusher.com",
               "frame-src 'self' https://www.youtube.com https://w.soundcloud.com https://vercel.live",
               "worker-src 'self' blob:",
               "media-src 'self' https: blob:",
