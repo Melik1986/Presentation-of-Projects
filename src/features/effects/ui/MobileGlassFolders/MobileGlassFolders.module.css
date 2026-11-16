@@ -32,6 +32,21 @@
   margin-top: -1rem;
 }
 
+@media (min-width: 1025px) and (max-width: 1440px) {
+  .grid {
+    row-gap: 2rem;
+  }
+
+  .container {
+    padding: 0.5rem 1rem 3rem;
+  }
+
+  .cardItem :global(.gf-root) {
+    --gf-width-scale: 1.3;
+    zoom: 0.82;
+  }
+}
+
 @media (max-width: 1024px) {
   .cardItem :global(.gf-root) {
     --gf-width-scale: 1.2;
