@@ -284,7 +284,7 @@
                 "title": "Canvas Frame Sequences & 3D Scroll Scrubbing",
                 "description": "Hero section powered by HTML5 Canvas and transparent PNG frame sequences, smoothly scrubbed via GSAP ScrollTrigger to produce interactive 3D product rotations synchronized with user scrolling.",
                 "image": "/img/catalog-1/card-6/Sweet-Tooth.l-1.png",
-                "srcSet": "/img/catalog-1/card-6/Sweet-Tooth.l-1.png 1x, /img/catalog-1/card-6/Sweet-Tooth.l-1@2x.png 2x",
+                "srcSet": "/img/catalog-1/card-6/Sweet-Tooth.l-1.png 1x, /img/catalog-1/card-6/Sweet-Tooth.l@2x-1.png 2x",
                 "mobileImage": "/img/catalog-1/card-6/Sweet-Tooth.s-1.png",
                 "mobileImageSrcSet": "/img/catalog-1/card-6/Sweet-Tooth.s-1.png 1x, /img/catalog-1/card-6/Sweet-Tooth.s-1@2x.png 2x"
               },
@@ -292,7 +292,7 @@
                 "title": "Pinned Product Showcase & Stagger Effects",
                 "description": "Section pinning mechanisms for product discovery with synchronized 360-degree item rotation, cascaded stagger entrances, and performance-tuned lazy loading for multi-frame animation assets.",
                 "image": "/img/catalog-1/card-6/Sweet-Tooth.l-2.png",
-                "srcSet": "/img/catalog-1/card-6/Sweet-Tooth.l-2.png 1x, /img/catalog-1/card-6/Sweet-Tooth.l-2@2x.png 2x",
+                "srcSet": "/img/catalog-1/card-6/Sweet-Tooth.l-2.png 1x, /img/catalog-1/card-6/Sweet-Tooth.l@2x-2.png 2x",
                 "mobileImage": "/img/catalog-1/card-6/Sweet-Tooth.s-2.png",
                 "mobileImageSrcSet": "/img/catalog-1/card-6/Sweet-Tooth.s-2.png 1x, /img/catalog-1/card-6/Sweet-Tooth.s-2@2x.png 2x"
               },
