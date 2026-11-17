@@ -242,25 +242,25 @@
                 "title": "Zero-Tracking Privacy & 2-Click Embeds",
                 "description": "Rigorous privacy compliance: custom 2-Click facades for YouTube videos and Google Maps that block third-party trackers until user interaction, paired with 100% self-hosted local fonts without external CDNs.",
                 "image": "/img/catalog-1/card-5/Church.l-1.png",
-                "srcSet": "/img/catalog-1/card-5/Church.l-1.png 1x, /img/catalog-1/card-5/Church.l@2x-1.png 2x",
+                "srcSet": "/img/catalog-1/card-5/Church.l-1.png 1x, /img/catalog-1/card-5/Church.l-1@2x.png 2x",
                 "mobileImage": "/img/catalog-1/card-5/Church.s-1.png",
-                "mobileImageSrcSet": "/img/catalog-1/card-5/Church.s-1.png 1x, /img/catalog-1/card-5/Church.s@2x-1.png 2x"
+                "mobileImageSrcSet": "/img/catalog-1/card-5/Church.s-1.png 1x, /img/catalog-1/card-5/Church.s-1@2x.png 2x"
               },
               {
                 "title": "Bilingual Routing & Type-Safe Content",
                 "description": "Comprehensive information architecture with parallel RU and DE routes, structured markdown pages, type-safe i18n dictionaries, and automated JSON-LD schema generation for search engine optimization.",
                 "image": "/img/catalog-1/card-5/Church.l-2.png",
-                "srcSet": "/img/catalog-1/card-5/Church.l-2.png 1x, /img/catalog-1/card-5/Church.l@2x-2.png 2x",
+                "srcSet": "/img/catalog-1/card-5/Church.l-2.png 1x, /img/catalog-1/card-5/Church.l-2@2x.png 2x",
                 "mobileImage": "/img/catalog-1/card-5/Church.s-2.png",
-                "mobileImageSrcSet": "/img/catalog-1/card-5/Church.s-2.png 1x, /img/catalog-1/card-5/Church.s@2x-2.png 2x"
+                "mobileImageSrcSet": "/img/catalog-1/card-5/Church.s-2.png 1x, /img/catalog-1/card-5/Church.s-2@2x.png 2x"
               },
               {
                 "title": "Sonar-Grade Quality & Modern DX",
                 "description": "Strict engineering standards: ESLint with eslint-plugin-sonarjs enforcing max 20-line functions, Lefthook pre-commit hooks (lint, format, astro check), Lenis smooth scrolling, and GSAP micro-animations.",
                 "image": "/img/catalog-1/card-5/Church.l-3.png",
-                "srcSet": "/img/catalog-1/card-5/Church.l-3.png 1x, /img/catalog-1/card-5/Church.l@2x-3.png 2x",
+                "srcSet": "/img/catalog-1/card-5/Church.l-3.png 1x, /img/catalog-1/card-5/Church.l-3@2x.png 2x",
                 "mobileImage": "/img/catalog-1/card-5/Church.s-3.png",
-                "mobileImageSrcSet": "/img/catalog-1/card-5/Church.s-3.png 1x, /img/catalog-1/card-5/Church.s@2x-3.png 2x"
+                "mobileImageSrcSet": "/img/catalog-1/card-5/Church.s-3.png 1x, /img/catalog-1/card-5/Church.s-3@2x.png 2x"
               }
             ]
           },
@@ -284,25 +284,25 @@
                 "title": "Canvas Frame Sequences & 3D Scroll Scrubbing",
                 "description": "Hero section powered by HTML5 Canvas and transparent PNG frame sequences, smoothly scrubbed via GSAP ScrollTrigger to produce interactive 3D product rotations synchronized with user scrolling.",
                 "image": "/img/catalog-1/card-6/Sweet-Tooth.l-1.png",
-                "srcSet": "/img/catalog-1/card-6/Sweet-Tooth.l-1.png 1x, /img/catalog-1/card-6/Sweet-Tooth.l@2x-1.png 2x",
+                "srcSet": "/img/catalog-1/card-6/Sweet-Tooth.l-1.png 1x, /img/catalog-1/card-6/Sweet-Tooth.l-1@2x.png 2x",
                 "mobileImage": "/img/catalog-1/card-6/Sweet-Tooth.s-1.png",
-                "mobileImageSrcSet": "/img/catalog-1/card-6/Sweet-Tooth.s-1.png 1x, /img/catalog-1/card-6/Sweet-Tooth.s@2x-1.png 2x"
+                "mobileImageSrcSet": "/img/catalog-1/card-6/Sweet-Tooth.s-1.png 1x, /img/catalog-1/card-6/Sweet-Tooth.s-1@2x.png 2x"
               },
               {
                 "title": "Pinned Product Showcase & Stagger Effects",
                 "description": "Section pinning mechanisms for product discovery with synchronized 360-degree item rotation, cascaded stagger entrances, and performance-tuned lazy loading for multi-frame animation assets.",
                 "image": "/img/catalog-1/card-6/Sweet-Tooth.l-2.png",
-                "srcSet": "/img/catalog-1/card-6/Sweet-Tooth.l-2.png 1x, /img/catalog-1/card-6/Sweet-Tooth.l@2x-2.png 2x",
+                "srcSet": "/img/catalog-1/card-6/Sweet-Tooth.l-2.png 1x, /img/catalog-1/card-6/Sweet-Tooth.l-2@2x.png 2x",
                 "mobileImage": "/img/catalog-1/card-6/Sweet-Tooth.s-2.png",
-                "mobileImageSrcSet": "/img/catalog-1/card-6/Sweet-Tooth.s-2.png 1x, /img/catalog-1/card-6/Sweet-Tooth.s@2x-2.png 2x"
+                "mobileImageSrcSet": "/img/catalog-1/card-6/Sweet-Tooth.s-2.png 1x, /img/catalog-1/card-6/Sweet-Tooth.s-2@2x.png 2x"
               },
               {
                 "title": "High-Performance Vite & Bun Pipeline",
                 "description": "High-speed developer experience using Bun runtime, Tailwind CSS typography tokens, Husky git pre-commit automation, strict TypeScript typing, and optimized production builds deployed on Vercel.",
                 "image": "/img/catalog-1/card-6/Sweet-Tooth.l-3.png",
-                "srcSet": "/img/catalog-1/card-6/Sweet-Tooth.l-3.png 1x, /img/catalog-1/card-6/Sweet-Tooth.l@2x-3.png 2x",
+                "srcSet": "/img/catalog-1/card-6/Sweet-Tooth.l-3.png 1x, /img/catalog-1/card-6/Sweet-Tooth.l-3@2x.png 2x",
                 "mobileImage": "/img/catalog-1/card-6/Sweet-Tooth.s-3.png",
-                "mobileImageSrcSet": "/img/catalog-1/card-6/Sweet-Tooth.s-3.png 1x, /img/catalog-1/card-6/Sweet-Tooth.s@2x-3.png 2x"
+                "mobileImageSrcSet": "/img/catalog-1/card-6/Sweet-Tooth.s-3.png 1x, /img/catalog-1/card-6/Sweet-Tooth.s-3@2x.png 2x"
               }
             ]
           }
